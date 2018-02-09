@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "275738890217",
+    "firebase_url": "https://sanus-27.firebaseio.com",
+    "project_id": "sanus-27",
+    "storage_bucket": "sanus-27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275738890217:android:8167e72477508450",
+        "android_client_info": {
+          "package_name": "com.sanus.mireya.sanus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275738890217-9jlduo3d173a75v2pec4r21ho6fvr0tj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkG-fAZdARzDhJXlyWan3dCtRI0VaCYUg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
