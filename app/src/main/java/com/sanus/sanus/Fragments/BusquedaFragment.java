@@ -6,10 +6,15 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.DocumentChange;
@@ -60,6 +65,7 @@ public class BusquedaFragment extends Fragment {
         initializedData();
         adapter = new BusquedaDoctorAdapter(getActivity().getApplicationContext(), busquedaDoctors);
         recyclerView.setAdapter(adapter);
+
     }
 
     private void initializedData() {
@@ -84,5 +90,6 @@ public class BusquedaFragment extends Fragment {
            }
        });
     }
+
 }
 

@@ -31,7 +31,6 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
     Context context;
     List<BusquedaDoctor> busquedaDoctorList;
 
-
     public BusquedaDoctorAdapter(Context context, List<BusquedaDoctor> busquedaDoctorList){
         this.context = context;
         this.busquedaDoctorList = busquedaDoctorList;
@@ -40,15 +39,14 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.buscar_item, parent, false);
-        //ViewHolder viewHolder = new ViewHolder(view);
         return new ViewHolder(view);
+
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.nombre.setText(busquedaDoctorList.get(position).getNombre());
         holder.especialidad.setText(busquedaDoctorList.get(position).getEspecialidad());
-
     }
 
     @Override
@@ -75,6 +73,5 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
             imageView = (ImageView) itemView.findViewById(R.id.avatar);
         }
     }
-
 
 }

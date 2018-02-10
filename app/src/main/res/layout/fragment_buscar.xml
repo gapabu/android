@@ -38,18 +38,34 @@
                 android:id="@+id/lySearch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/transparent"
+                android:background="@drawable/btnredondo"
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-                <SearchView
-                    android:id="@+id/buscador"
-                    android:layout_width="300dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1">
+                <EditText
+                    android:id="@+id/edbuscador"
+                    android:hint="Busca a tu doctor"
+                    android:layout_width="250dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/btnredondo"
                     android:gravity="center"
-                    android:inputType="text"
-                    android:queryHint="Busca a tu doctor"></SearchView>
+                    android:layout_weight=".1">
+                </EditText>
+                </LinearLayout>
+                <LinearLayout
+                    android:weightSum="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imgBuscar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_search_black_48dp"/>
+                </LinearLayout>
+
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </RelativeLayout>
