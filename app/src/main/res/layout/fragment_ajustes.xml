@@ -29,7 +29,6 @@
         <android.support.v7.widget.CardView
             android:id="@+id/carPerfil"
             android:layout_width="300dp"
-            android:background="@color/btnCrea"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="180dp">

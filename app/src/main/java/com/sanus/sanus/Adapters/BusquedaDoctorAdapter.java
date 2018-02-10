@@ -30,10 +30,6 @@ import java.util.Map;
 public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAdapter.ViewHolder> {
     Context context;
     List<BusquedaDoctor> busquedaDoctorList;
-    public static final String NOMBRE_KEY = "nombre";
-    public static final String ESPECIALIDAD_KEY = "especialidad";
-
-    private DocumentReference mDocRef = FirebaseFirestore.getInstance().document("doctores");
 
 
     public BusquedaDoctorAdapter(Context context, List<BusquedaDoctor> busquedaDoctorList){
@@ -44,8 +40,8 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.buscar_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        //ViewHolder viewHolder = new ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -62,12 +58,17 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        View mView;
+
         TextView nombre, especialidad;
         CardView cardView;
         ImageView imageView;
+
         public ViewHolder(View itemView) {
 
             super(itemView);
+            mView = itemView;
+
             cardView = (CardView) itemView.findViewById(R.id.cardView);
             nombre = (TextView) itemView.findViewById(R.id.nombre);
             especialidad = (TextView) itemView.findViewById(R.id.especialidad);

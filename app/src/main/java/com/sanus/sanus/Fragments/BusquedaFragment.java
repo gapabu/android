@@ -12,8 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.sanus.sanus.Adapters.BusquedaDoctorAdapter;
 import com.sanus.sanus.Data.BusquedaDoctor;
@@ -32,6 +35,7 @@ public class BusquedaFragment extends Fragment {
     RecyclerView recyclerView;
     List<BusquedaDoctor> busquedaDoctors;
     BusquedaDoctorAdapter adapter;
+    private FirebaseFirestore mFirestore;
 
     @Nullable
     @Override
@@ -45,8 +49,13 @@ public class BusquedaFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
+
+        mFirestore = FirebaseFirestore.getInstance();
 
         initializedData();
         adapter = new BusquedaDoctorAdapter(getActivity().getApplicationContext(), busquedaDoctors);
@@ -55,15 +64,25 @@ public class BusquedaFragment extends Fragment {
 
     private void initializedData() {
         busquedaDoctors = new ArrayList<>();
-        busquedaDoctors.add(new BusquedaDoctor("nota 1", "Hola bb"));
-        busquedaDoctors.add(new BusquedaDoctor("nota 2", "Hola bb 2"));
-        busquedaDoctors.add(new BusquedaDoctor("dss", "sas"));
 
+       mFirestore.collection("doctores").addSnapshotListener(new EventListener<QuerySnapshot>() {
+           @Override
+           public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+               if (e!=null){
+                   Log.d(TAG, "Error: " + e.getMessage());
+               }
+               for(DocumentChange doc: documentSnapshots.getDocumentChanges()){
+                   if(doc.getType() == DocumentChange.Type.ADDED){
+                       String nombre = doc.getDocument().getString("nombre");
+                       String especialidad = doc.getDocument().getString("especialidad");
+
+                       busquedaDoctors.add(new BusquedaDoctor(nombre, especialidad));
+
+                       adapter.notifyDataSetChanged();
+                   }
+               }
+           }
+       });
     }
-
-    public void saveQuote(View view){
-
-    }
-
 }
 

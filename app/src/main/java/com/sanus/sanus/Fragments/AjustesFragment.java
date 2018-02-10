@@ -9,10 +9,14 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import com.sanus.sanus.R;
 
 
 public class AjustesFragment extends Fragment {
+
+    ImageView imageView;
 
     @Nullable
     @Override
@@ -20,5 +24,8 @@ public class AjustesFragment extends Fragment {
         View rootView;
         rootView = inflater.inflate(R.layout.fragment_ajustes, container, false);
         return rootView;
+
+
     }
+
 }
