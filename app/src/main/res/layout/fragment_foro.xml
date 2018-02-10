@@ -1,0 +1,69 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lyContent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    tools:context="com.sanus.sanus.Fragments.ForoFragment">
+
+    <RelativeLayout
+        android:id="@+id/rlHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/lyHeader"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitXY"
+                android:src="@drawable/hforo" />
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/carSearch"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="180dp">
+
+            <LinearLayout
+                android:id="@+id/lySearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <SearchView
+                    android:id="@+id/buscador"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/btnredondo"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:queryHint="¿Qué síntomas tiene?"></SearchView>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabAdd"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="285dp"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/icon_mas"
+            app:backgroundTint="@color/btnCrea" />
+
+    </RelativeLayout>
+
+</LinearLayout>
