@@ -16,7 +16,7 @@
     tools:context="com.sanus.sanus.Activities.LoginActivity">
 
     <LinearLayout
-        android:paddingTop="150dp"
+        android:paddingTop="200dp"
         android:id="@+id/email_login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -72,13 +72,13 @@ public class CitasFragment extends Fragment {
                 for(DocumentChange doc: documentSnapshots.getDocumentChanges()){
                     if(doc.getType() == DocumentChange.Type.ADDED){
 
-                        String fecha = doc.getDocument().getString("fecha");
-                        String hora = doc.getDocument().getString("hora");
-                        String usuario = doc.getDocument().getString("usuario");
                         String doctor = doc.getDocument().getString("doctor");
                         String hospital = doc.getDocument().getString("hospital");
+                        String fecha = doc.getDocument().getString("fecha");
+                        String hora = doc.getDocument().getString("hora");
+                        //String usuario = doc.getDocument().getString("usuario");
 
-                        busquedaDoctors.add(new Citas(fecha,hora, usuario, doctor, hospital));
+                        busquedaDoctors.add(new Citas(doctor,hospital, fecha, hora));
 
                         adapter.notifyDataSetChanged();
                     }

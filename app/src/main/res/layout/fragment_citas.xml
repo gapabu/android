@@ -30,17 +30,16 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/carTitle"
+            android:background="@drawable/btnaranja"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="90dp"
-            android:background="@android:color/transparent">
+            android:layout_marginTop="90dp">
 
             <LinearLayout
                 android:id="@+id/lyTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
                 android:orientation="horizontal"
                 android:weightSum="3">
 
@@ -48,7 +47,6 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="250dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/btnredondo"
                     android:gravity="center"
                     android:text="Mi historial de citas"></TextView>
             </LinearLayout>

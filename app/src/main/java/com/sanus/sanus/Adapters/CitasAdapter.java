@@ -39,7 +39,7 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
     public void onBindViewHolder(CitasAdapter.ViewHolder holder, int position) {
         holder.fecha.setText(busquedaDoctorList.get(position).getFecha());
         holder.hora.setText(busquedaDoctorList.get(position).getHora());
-        holder.usuario.setText(busquedaDoctorList.get(position).getUsuario());
+        //holder.usuario.setText(busquedaDoctorList.get(position).getUsuario());
         holder.doctor.setText(busquedaDoctorList.get(position).getDoctor());
         holder.hospital.setText(busquedaDoctorList.get(position).getHospital());
 
@@ -66,7 +66,7 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
             cardView = (CardView) itemView.findViewById(R.id.cardView);
             fecha = (TextView) itemView.findViewById(R.id.fecha);
             hora = (TextView) itemView.findViewById(R.id.hora);
-            usuario = (TextView) itemView.findViewById(R.id.usuario);
+            //usuario = (TextView) itemView.findViewById(R.id.usuario);
             doctor = (TextView) itemView.findViewById(R.id.doctor);
             hospital = (TextView) itemView.findViewById(R.id.hospital);
         }
