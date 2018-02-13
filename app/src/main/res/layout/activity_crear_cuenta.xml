@@ -1,92 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_height="wrap_content"
     android:background="@drawable/creacuenta">
 
     <LinearLayout
-        android:paddingTop="180dp"
         android:id="@+id/email_login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:paddingEnd="60dp"
+        android:paddingStart="60dp"
+        android:paddingTop="20dp">
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/action_crea_cuenta"
-            android:textColor="@android:color/background_dark"
-            android:textSize="30sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/action_crea_cuenta"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30sp" />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/edCorreoE"
-                android:layout_width="270dp"
-                android:layout_height="43dp"
-                android:background="@drawable/btnredondo"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:hint="@string/prompt_email"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:orientation="vertical">
+
+            <AutoCompleteTextView
+                android:id="@+id/edCorreoE"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btnredondo"
+                android:gravity="center"
+                android:hint="@string/prompt_email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/edContrasenia"
-                android:layout_width="270dp"
+                android:layout_width="match_parent"
                 android:layout_height="43dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/btnredondo"
                 android:gravity="center"
-                android:layout_gravity="center"
                 android:hint="@string/prompt_password"
-                android:ems="10"
-                android:inputType="textPassword" />
-        </android.support.design.widget.TextInputLayout>
+                android:imeActionId="6"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true" />
 
-        <Button
-            android:id="@+id/btnCrearCuenta"
-            android:layout_width="270dp"
-            android:layout_height="43dp"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginTop="16dp"
-            android:layout_gravity="center"
-            android:text="@string/action_sign_in_short"
-            android:background="@drawable/btnazul"
-            android:textStyle="bold"
-            style="?android:textAppearanceSmall"/>
+            <Button
+                android:id="@+id/btnCrearCuenta"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/action_sign_in_short"
+                android:background="@drawable/btnazul"
+                android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnIrInicio"
-            android:textColor="@color/colorPrimary"
-            android:layout_width="270dp"
-            android:layout_height="43dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/btnaranja"
-            android:text="@string/action_sign_in"
-            android:textStyle="bold"
-            style="?android:textAppearanceSmall"/>
+            <Button
+                android:id="@+id/btnIrInicio"
+                android:textColor="@color/colorPrimary"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btnaranja"
+                android:text="@string/action_sign_in"/>
 
+        </LinearLayout>
     </LinearLayout>
+
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -96,4 +92,4 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-</LinearLayout>
+</RelativeLayout>

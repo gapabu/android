@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#F6F7FB</color>
-    <color name="colorPrimaryDark">#0097e3</color>
-    <color name="colorAccent">#C2D4FF</color>
+    <color name="colorPrimaryDark">#0094EA</color>
+    <color name="colorAccent">#C1D1FF</color>
 
     <color name="text">#FFFFFF</color>
-    <color name="btnCrea">#ff7230</color>
+    <color name="ed">#CACBCC</color>
+    <color name="btnCrea">#FF6400</color>
     <color name="btnGoogle">#ff0000</color>
-    <color name="btnfacebook">#050505</color>
+    <color name="btnfacebook">#3B3CA9</color>
 
 
 </resources>

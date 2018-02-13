@@ -47,7 +47,7 @@
                 android:text="doctor" />
 
             <TextView
-                android:id="@+id/hospital"
+                android:id="@+id/fecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -56,21 +56,21 @@
                 android:text="hospital" />
 
             <TextView
-                android:id="@+id/fecha"
+                android:id="@+id/hospital"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/hospital"
                 android:text="fecha" />
 
             <TextView
                 android:id="@+id/hora"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/hospital"
                 android:text="hora" />
         </RelativeLayout>
 
