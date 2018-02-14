@@ -21,7 +21,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.sanus.sanus.Activities.CrearCuentaActivity;
 import com.sanus.sanus.Activities.CurriculumActivity;
+import com.sanus.sanus.Activities.MainActivity;
 import com.sanus.sanus.Data.BusquedaDoctor;
 import com.sanus.sanus.R;
 
@@ -38,8 +40,6 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
     Context context;
     List<BusquedaDoctor> busquedaDoctorList;
 
-
-
     public BusquedaDoctorAdapter(Context context, List<BusquedaDoctor> busquedaDoctorList){
         this.context = context;
         this.busquedaDoctorList = busquedaDoctorList;
@@ -49,7 +49,6 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.buscar_item, parent, false);
         return new ViewHolder(view);
-
     }
 
     @Override
@@ -61,14 +60,18 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
         final String user_id = busquedaDoctorList.get(position).userId;
 
 
-
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "User ID: " + user_id, Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(context, CurriculumActivity.class);
 
+                Intent intent = new Intent(context, CurriculumActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+                //https://www.youtube.com/watch?v=ZXoGG2XTjzU
             }
+
+
         });
     }
 

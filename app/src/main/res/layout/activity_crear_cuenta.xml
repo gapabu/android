@@ -71,6 +71,7 @@
 
             <Button
                 android:id="@+id/btnIrInicio"
+                android:onClick="irInicio"
                 android:textColor="@color/colorPrimary"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
@@ -78,7 +79,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/btnaranja"
-                android:text="@string/action_sign_in"/>
+                android:text="@string/action_sign_in" />
 
         </LinearLayout>
     </LinearLayout>
