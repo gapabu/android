@@ -111,7 +111,7 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
             super(itemView);
             mView = itemView;
 
-            cardView = (CardView) itemView.findViewById(R.id.cardView);
+            //cardView = (CardView) itemView.findViewById(R.id.cardView);
             nombre = (TextView) itemView.findViewById(R.id.nombre);
             especialidad = (TextView) itemView.findViewById(R.id.especialidad);
             imageView = (ImageView) itemView.findViewById(R.id.avatar);

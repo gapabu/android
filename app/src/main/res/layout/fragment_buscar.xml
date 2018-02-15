@@ -28,37 +28,35 @@
                 android:src="@drawable/hdoctores" />
         </LinearLayout>
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/carSearch"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="180dp">
 
             <LinearLayout
                 android:id="@+id/lySearch"
                 android:background="@drawable/btnredondo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="3">
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="180dp"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="1">
                 <EditText
                     android:id="@+id/edbuscador"
-                    android:hint="Busca a tu doctor"
+                    android:hint="Busca por especialidad"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="43dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/btnredondo"
                     android:gravity="center"
-                    android:layout_weight=".1">
+                    android:imeActionId="6"
+                    android:imeOptions="actionUnspecified"
+                    android:maxLines="1"
+                    android:singleLine="true">
                 </EditText>
-                </LinearLayout>
 
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_publish"
-        android:icon="@drawable/ic_done_grey600_24dp"
+        android:icon="@drawable/ic_good"
         android:title="Done"
         app:showAsAction="always"/>
 </menu>

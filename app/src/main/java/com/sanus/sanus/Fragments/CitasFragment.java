@@ -81,6 +81,7 @@ public class CitasFragment extends Fragment {
                         busquedaDoctors.add(new Citas(doctor,hospital, fecha, hora));
 
                         adapter.notifyDataSetChanged();
+                        //https://www.youtube.com/watch?v=y3exATaC0kA
                     }
                 }
             }
