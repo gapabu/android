@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".domain.splash.view.SplashActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".domain.login.view.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,10 +38,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CrearCuentaActivity" />
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.CurriculumActivity" />
-        <activity android:name=".activities.CompletaRegistroActivity" />
+        <activity android:name=".domain.account.create.view.CreateAccountActivity" />
+        <activity android:name=".domain.main.view.MainActivity" />
+        <activity android:name=".domain.curriculum.view.CurriculumActivity" />
+        <activity android:name=".domain.account.complete.view.CompletaRegistroActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,59 @@
+package com.sanus.sanus.domain.citas.data;
+
+public class Citas {
+    private String doctor;
+    private String fecha;
+    //private String usuario;
+    private String hospital;
+    private String hora;
+
+    public Citas(String doctor, String fecha, String hospital, String hora) {
+        this.doctor = doctor;
+        this.fecha = fecha;
+        //this.usuario = usuario;
+        this.hospital = hospital;
+        this.hora = hora;
+    }
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+
+    public String getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(String doctor) {
+        this.doctor = doctor;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    /*public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }*/
+
+    public String getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(String hospital) {
+        this.hospital = hospital;
+    }
+
+
+}
