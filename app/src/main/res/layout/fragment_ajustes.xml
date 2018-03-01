@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@color/colorPrimary"
     android:id="@+id/fragment_ajustes"
-    tools:context="com.sanus.sanus.Fragments.AjustesFragment">
+    tools:context="com.sanus.sanus.fragments.AjustesFragment">
 
     <RelativeLayout
         android:id="@+id/container"

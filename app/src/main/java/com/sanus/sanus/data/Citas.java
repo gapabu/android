@@ -1,15 +1,11 @@
-package com.sanus.sanus.Data;
-
-/**
- * Created by Mireya on 10/02/2018.
- */
+package com.sanus.sanus.data;
 
 public class Citas {
-    String doctor;
-    String fecha;
-    //String usuario;
-    String hospital;
-    String hora;
+    private String doctor;
+    private String fecha;
+    //private String usuario;
+    private String hospital;
+    private String hora;
 
     public Citas(String doctor, String fecha, String hospital, String hora) {
         this.doctor = doctor;

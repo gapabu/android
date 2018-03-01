@@ -1,4 +1,4 @@
-package com.sanus.sanus.Activities;
+package com.sanus.sanus.activities;
 
 import android.app.Activity;
 import android.content.Intent;

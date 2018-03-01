@@ -1,8 +1,7 @@
-package com.sanus.sanus.Fragments;
+package com.sanus.sanus.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,10 +16,8 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.sanus.sanus.Adapters.BusquedaDoctorAdapter;
-import com.sanus.sanus.Adapters.CitasAdapter;
-import com.sanus.sanus.Data.BusquedaDoctor;
-import com.sanus.sanus.Data.Citas;
+import com.sanus.sanus.adapters.CitasAdapter;
+import com.sanus.sanus.data.Citas;
 import com.sanus.sanus.R;
 
 import java.util.ArrayList;
@@ -29,9 +26,9 @@ import java.util.List;
 import static android.content.ContentValues.TAG;
 
 public class CitasFragment extends Fragment {
-    RecyclerView recyclerView;
-    List<Citas> busquedaDoctors;
-    CitasAdapter adapter;
+    private RecyclerView recyclerView;
+    private List<Citas> busquedaDoctors;
+    private CitasAdapter adapter;
     private FirebaseFirestore mFirestore;
 
     @Nullable
@@ -43,9 +40,9 @@ public class CitasFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);

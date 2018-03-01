@@ -1,42 +1,38 @@
-package com.sanus.sanus.Adapters;
+package com.sanus.sanus.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sanus.sanus.Data.BusquedaDoctor;
-import com.sanus.sanus.Data.Citas;
+import com.sanus.sanus.data.Citas;
 import com.sanus.sanus.R;
-import com.sanus.sanus.Data.Citas;
+
 import java.util.List;
 
-/**
- * Created by Mireya on 10/02/2018.
- */
-
 public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> {
-    Context context;
-    List<Citas> busquedaDoctorList;
+    private Context context;
+    private List<Citas> busquedaDoctorList;
 
     public CitasAdapter(Context context, List<Citas> busquedaDoctorList) {
         this.context = context;
         this.busquedaDoctorList = busquedaDoctorList;
     }
 
+    @NonNull
     @Override
-    public CitasAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CitasAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.citas_item, parent, false);
         return new CitasAdapter.ViewHolder(view);
 
     }
 
     @Override
-    public void onBindViewHolder(CitasAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CitasAdapter.ViewHolder holder, int position) {
         holder.fecha.setText(busquedaDoctorList.get(position).getFecha());
         holder.hora.setText(busquedaDoctorList.get(position).getHora());
         //holder.usuario.setText(busquedaDoctorList.get(position).getUsuario());
@@ -63,12 +59,12 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
             super(itemView);
             mView = itemView;
 
-            cardView = (CardView) itemView.findViewById(R.id.cardView);
-            fecha = (TextView) itemView.findViewById(R.id.fecha);
-            hora = (TextView) itemView.findViewById(R.id.hora);
-            //usuario = (TextView) itemView.findViewById(R.id.usuario);
-            doctor = (TextView) itemView.findViewById(R.id.doctor);
-            hospital = (TextView) itemView.findViewById(R.id.hospital);
+            cardView = itemView.findViewById(R.id.cardView);
+            fecha = itemView.findViewById(R.id.fecha);
+            hora = itemView.findViewById(R.id.hora);
+            //usuario = itemView.findViewById(R.id.usuario);
+            doctor = itemView.findViewById(R.id.doctor);
+            hospital = itemView.findViewById(R.id.hospital);
         }
     }
 }

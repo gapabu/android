@@ -1,4 +1,4 @@
-package com.sanus.sanus.Activities;
+package com.sanus.sanus.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

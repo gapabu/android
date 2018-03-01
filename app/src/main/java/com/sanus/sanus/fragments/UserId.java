@@ -1,10 +1,6 @@
-package com.sanus.sanus.Fragments;
+package com.sanus.sanus.fragments;
 
 import android.support.annotation.NonNull;
-
-/**
- * Created by Mireya on 12/02/2018.
- */
 
 public class UserId  {
 

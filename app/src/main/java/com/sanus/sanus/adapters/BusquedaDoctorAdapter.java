@@ -1,58 +1,44 @@
-package com.sanus.sanus.Adapters;
+package com.sanus.sanus.adapters;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.sanus.sanus.Activities.CrearCuentaActivity;
-import com.sanus.sanus.Activities.CurriculumActivity;
-import com.sanus.sanus.Activities.MainActivity;
-import com.sanus.sanus.Data.BusquedaDoctor;
+import com.sanus.sanus.activities.CurriculumActivity;
+import com.sanus.sanus.data.BusquedaDoctor;
 import com.sanus.sanus.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-/**
- * Created by Mireya on 09/02/2018.
- */
 
 public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAdapter.ViewHolder> implements SearchView.OnQueryTextListener {
-    Context context;
-    List<BusquedaDoctor> busquedaDoctorList;
+    private Context context;
+    private List<BusquedaDoctor> busquedaDoctorList;
 
     public BusquedaDoctorAdapter(Context context, List<BusquedaDoctor> busquedaDoctorList){
         this.context = context;
         this.busquedaDoctorList = busquedaDoctorList;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.buscar_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.nombre.setText(busquedaDoctorList.get(position).getNombre());
         holder.especialidad.setText(busquedaDoctorList.get(position).getEspecialidad());
 
@@ -111,13 +97,13 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
             super(itemView);
             mView = itemView;
 
-            //cardView = (CardView) itemView.findViewById(R.id.cardView);
-            nombre = (TextView) itemView.findViewById(R.id.nombre);
-            especialidad = (TextView) itemView.findViewById(R.id.especialidad);
-            imageView = (ImageView) itemView.findViewById(R.id.avatar);
+            //cardView = itemView.findViewById(R.id.cardView);
+            nombre = itemView.findViewById(R.id.nombre);
+            especialidad = itemView.findViewById(R.id.especialidad);
+            imageView = itemView.findViewById(R.id.avatar);
 
             //buscador
-            edbuscador = (EditText) itemView.findViewById(R.id.edbuscador);
+            edbuscador = itemView.findViewById(R.id.edbuscador);
 
         }
     }

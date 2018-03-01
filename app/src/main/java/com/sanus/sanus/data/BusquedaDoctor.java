@@ -1,14 +1,10 @@
-package com.sanus.sanus.Data;
+package com.sanus.sanus.data;
 
-import com.sanus.sanus.Fragments.UserId;
-
-/**
- * Created by Mireya on 09/02/2018.
- */
+import com.sanus.sanus.fragments.UserId;
 
 public class BusquedaDoctor extends UserId{
-    String nombre;
-    String especialidad;
+    private String nombre;
+    private String especialidad;
 
     public BusquedaDoctor (String nombre, String especialidad){
         this.nombre = nombre;
