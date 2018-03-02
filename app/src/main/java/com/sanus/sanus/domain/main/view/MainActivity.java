@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.sanus.sanus.domain.configuration.view.AjustesFragment;
+import com.sanus.sanus.domain.main.presenter.MainPresenter;
+import com.sanus.sanus.domain.main.presenter.MainPresenterImpl;
 import com.sanus.sanus.domain.search.view.BusquedaFragment;
 import com.sanus.sanus.domain.chat.view.ChatFragment;
 import com.sanus.sanus.domain.citas.view.CitasFragment;
@@ -16,14 +18,22 @@ import com.sanus.sanus.R;
 public class MainActivity extends AppCompatActivity implements MainView {
 
     private BottomNavigationView navigation;
+    private MainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setUpVariable();
         setUpView();
         showSerchFragment();
+    }
+
+    private void setUpVariable() {
+        if (presenter == null) {
+            presenter = new MainPresenterImpl(this);
+        }
     }
 
     private void setUpView() {

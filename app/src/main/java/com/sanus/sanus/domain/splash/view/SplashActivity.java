@@ -6,29 +6,33 @@ import android.os.Bundle;
 
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.login.view.LoginActivity;
+import com.sanus.sanus.domain.splash.presenter.SplashPresenter;
+import com.sanus.sanus.domain.splash.presenter.SplashPresenterImpl;
 
-import java.util.Timer;
-import java.util.TimerTask;
+public class SplashActivity extends AppCompatActivity implements SplasView {
 
-public class SplashActivity extends AppCompatActivity {
-
-    public static final long SPLASH_SCREEN_DELETE = 2000;
+    private SplashPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        };
+        setUpVariable();
 
-        Timer timer = new Timer();
-        timer.schedule(timerTask, SPLASH_SCREEN_DELETE);
+        presenter.init();
+    }
+
+    private void setUpVariable() {
+        if (presenter == null) {
+            presenter = new SplashPresenterImpl(this);
+        }
+    }
+
+    @Override
+    public void goLogin() {
+        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
