@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
-import com.sanus.sanus.CallbackAlert;
 import com.sanus.sanus.R;
 
 public class AlertUtils {

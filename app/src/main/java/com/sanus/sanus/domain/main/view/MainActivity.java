@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import com.sanus.sanus.domain.configuration.view.AjustesFragment;
 import com.sanus.sanus.domain.main.presenter.MainPresenter;
 import com.sanus.sanus.domain.main.presenter.MainPresenterImpl;
-import com.sanus.sanus.domain.search.view.BusquedaFragment;
+import com.sanus.sanus.domain.search.view.SearchFragment;
 import com.sanus.sanus.domain.chat.view.ChatFragment;
 import com.sanus.sanus.domain.citas.view.CitasFragment;
 import com.sanus.sanus.domain.foro.view.ForoFragment;
@@ -84,13 +84,13 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     private void showSerchFragment() {
 
-        BusquedaFragment busquedaFragment = (BusquedaFragment) getSupportFragmentManager().findFragmentByTag(BusquedaFragment.IDENTIFIER);
-        if(busquedaFragment == null){
-            busquedaFragment = new BusquedaFragment();
+        SearchFragment searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentByTag(SearchFragment.IDENTIFIER);
+        if(searchFragment == null){
+            searchFragment = new SearchFragment();
         }
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment, busquedaFragment, BusquedaFragment.IDENTIFIER)
+                .replace(R.id.fragment, searchFragment, SearchFragment.IDENTIFIER)
                 .commit();
     }
 

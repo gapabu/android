@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.sanus.sanus.CallbackAlert;
+import com.sanus.sanus.utils.alert.CallbackAlert;
 import com.sanus.sanus.domain.configuration.presenter.AjustesPresenter;
 import com.sanus.sanus.domain.configuration.presenter.AjustesPresenterImpl;
 import com.sanus.sanus.domain.login.view.LoginActivity;

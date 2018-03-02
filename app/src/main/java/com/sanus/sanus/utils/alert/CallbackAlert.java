@@ -1,4 +1,4 @@
-package com.sanus.sanus;
+package com.sanus.sanus.utils.alert;
 
 public interface CallbackAlert {
 
