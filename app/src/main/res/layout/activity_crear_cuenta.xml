@@ -71,7 +71,6 @@
 
             <Button
                 android:id="@+id/btnIrInicio"
-                android:onClick="irInicio"
                 android:textColor="@color/colorPrimary"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
