@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,7 +25,6 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
 
     private CreateAccountPresenter presenter;
     private EditText inputEmail, inputPassword;
-    private ProgressBar progressBar;
     private FirebaseAuth auth;
 
     @Override
@@ -51,7 +49,6 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
 
         inputEmail = findViewById(R.id.edCorreoE);
         inputPassword = findViewById(R.id.edContrasenia);
-        progressBar = findViewById(R.id.progressBar);
         Button btnSignUp = findViewById(R.id.btnCrearCuenta);
 
 
@@ -72,7 +69,6 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
     @Override
     protected void onResume() {
         super.onResume();
-        progressBar.setVisibility(View.GONE);
     }
 
     @Override
