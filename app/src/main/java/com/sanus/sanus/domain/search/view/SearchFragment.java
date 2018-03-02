@@ -61,13 +61,11 @@ public class SearchFragment extends Fragment implements SearchView{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                presenter.buscador(""+ s);
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-                presenter.buscador(""+ s);
-            }
+            public void afterTextChanged(Editable s) {}
         });
 
     }
