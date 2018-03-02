@@ -35,7 +35,7 @@ public class CreateAccountInteractorImpl implements CreateaccountInteractor {
         }
 
         if (!presenter.getEmail().matches(RegexUtils.emailPattern())) {
-            presenter.showMessage(R.string.invalid_email);
+            presenter.showMessage(R.string.error_invalid_email);
             return;
         }
 

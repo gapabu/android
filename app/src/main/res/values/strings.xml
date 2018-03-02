@@ -8,7 +8,7 @@
     <string name="title_ajustes">Ajustes</string>
 
     <string name="bienvenido">Bienvenido</string>
-    <string name="correo">Correo electronico</string>
+    <string name="correo">Correo electrónico</string>
     <string name="contrasenia">Contraseña</string>
     <string name="repetir_contrasenia">Repetir contraseña</string>
     <string name="password_corta">Contraseña corta</string>
@@ -18,11 +18,11 @@
     <string name="button_cancel">Cancelar</string>
 
 
-    <string name="prompt_email">Correo electronico</string>
+    <string name="prompt_email">Correo electrónico</string>
     <string name="prompt_password">Contraseña</string>
-    <string name="action_sign_in">Iniciar sesion</string>
+    <string name="action_sign_in">Iniciar sesión</string>
     <string name="action_sign_in_short">Crear cuenta</string>
-    <string name="error_invalid_email">El correo electronico es invalido</string>
+    <string name="error_invalid_email">El correo electrónico es inválido</string>
     <string name="error_invalid_password">Contraseña corta</string>
     <string name="error_incorrect_password">Error en la contraseña</string>
     <string name="action_crea_cuenta">Crear cuenta</string>
@@ -31,8 +31,8 @@
     <string name="empty_password">Ingresa una contraseña</string>
     <string name="empty_email_password">Ingresa correo y contraseña</string>
     <string name="length_password">Se necesitan mínimo 6 caracteres</string>
-    <string name="invalid_email">Correo inválido</string>
     <string name="authenticate_failed">Autenticacion fallida</string>
+    <string name="logout_msg">¿Cerrar sesión?</string>
 
 
 

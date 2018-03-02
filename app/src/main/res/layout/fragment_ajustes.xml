@@ -83,6 +83,7 @@
                 android:weightSum="3">
 
                 <LinearLayout
+                    android:id="@+id/logout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -90,14 +91,12 @@
                     android:background="@drawable/btnredondo">
 
                     <ImageView
-                        android:id="@+id/imgCerrar"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_weight=".3"
                         android:src="@drawable/ic_cerrar" />
 
                     <TextView
-                        android:id="@+id/tvCerrar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

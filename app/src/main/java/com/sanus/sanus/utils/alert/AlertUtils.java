@@ -16,9 +16,10 @@ public class AlertUtils {
         this.callbackAlert = callbackAlert;
     }
 
-    public void retryRequest(Context context, String msg) {
+    public void configureAlert(Context context, String msg) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setIcon(R.mipmap.ic_launcher);
         builder.setTitle(R.string.app_name);
         builder.setCancelable(false);
         builder.setMessage(msg);
