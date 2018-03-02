@@ -6,10 +6,11 @@ import android.os.Bundle;
 
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.login.view.LoginActivity;
+import com.sanus.sanus.domain.main.view.MainActivity;
 import com.sanus.sanus.domain.splash.presenter.SplashPresenter;
 import com.sanus.sanus.domain.splash.presenter.SplashPresenterImpl;
 
-public class SplashActivity extends AppCompatActivity implements SplasView {
+public class SplashActivity extends AppCompatActivity implements SplashView {
 
     private SplashPresenter presenter;
 
@@ -32,6 +33,14 @@ public class SplashActivity extends AppCompatActivity implements SplasView {
     @Override
     public void goLogin() {
         Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void goMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }

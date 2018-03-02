@@ -1,9 +1,9 @@
 package com.sanus.sanus.domain.splash.presenter;
 
 
-import com.sanus.sanus.domain.splash.view.SplasView;
+import com.sanus.sanus.domain.splash.view.SplashView;
 
-public interface SplashPresenter extends SplasView {
+public interface SplashPresenter extends SplashView {
 
     void init();
 }

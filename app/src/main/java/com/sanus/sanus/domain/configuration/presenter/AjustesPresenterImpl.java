@@ -14,12 +14,29 @@ public class AjustesPresenterImpl implements AjustesPresenter{
     }
 
     @Override
+    public void onResume() {
+        interactor.onResume();
+    }
+
+    @Override
     public void logout() {
         interactor.logout();
     }
 
     @Override
-    public void goLogin() {
-        view.goLogin();
+    public void goSplash() {
+        view.goSplash();
     }
+
+    @Override
+    public void showData(String name, String email) {
+        view.showData(name, email);
+    }
+
+    @Override
+    public void showPhoto(String photo) {
+        view.showPhoto(photo);
+    }
+
+
 }

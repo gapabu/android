@@ -3,13 +3,13 @@ package com.sanus.sanus.domain.splash.presenter;
 
 import com.sanus.sanus.domain.splash.interactor.SplashInteractor;
 import com.sanus.sanus.domain.splash.interactor.SplashInteractorImpl;
-import com.sanus.sanus.domain.splash.view.SplasView;
+import com.sanus.sanus.domain.splash.view.SplashView;
 
 public class SplashPresenterImpl implements SplashPresenter {
-    private SplasView view;
+    private SplashView view;
     private SplashInteractor interactor;
 
-    public SplashPresenterImpl(SplasView view) {
+    public SplashPresenterImpl(SplashView view) {
         this.view = view;
         interactor = new SplashInteractorImpl(this);
     }
@@ -22,5 +22,10 @@ public class SplashPresenterImpl implements SplashPresenter {
     @Override
     public void goLogin() {
         view.goLogin();
+    }
+
+    @Override
+    public void goMain() {
+        view.goMain();
     }
 }

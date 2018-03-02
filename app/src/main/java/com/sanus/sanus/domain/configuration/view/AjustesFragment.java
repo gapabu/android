@@ -8,20 +8,27 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.sanus.sanus.domain.splash.view.SplashActivity;
 import com.sanus.sanus.utils.alert.CallbackAlert;
 import com.sanus.sanus.domain.configuration.presenter.AjustesPresenter;
 import com.sanus.sanus.domain.configuration.presenter.AjustesPresenterImpl;
-import com.sanus.sanus.domain.login.view.LoginActivity;
 import com.sanus.sanus.R;
 import com.sanus.sanus.utils.alert.AlertUtils;
 
+import com.sanus.sanus.utils.glide.GlideApp;
 
 public class AjustesFragment extends Fragment implements AjustesView, CallbackAlert {
 
     public static String IDENTIFIER = "CONFIG_FRAGMENT";
     private AjustesPresenter presenter;
+    private TextView tvNombre;
+    private ImageView imgAvatar;
 
     @Nullable
     @Override
@@ -35,6 +42,12 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
     private void setUpVariable() {
 
         if (presenter == null) {
@@ -43,6 +56,9 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
     }
 
     private void setUpView(View view) {
+
+        tvNombre = view.findViewById(R.id.tvNombre);
+        imgAvatar = view.findViewById(R.id.imgAvatar);
 
         LinearLayout linearLayoutLogout = view.findViewById(R.id.logout);
         linearLayoutLogout.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +75,6 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
         alertUtils.configureAlert(getContext(), getString(R.string.logout_msg));
     }
 
-
     @Override
     public void acceptAlert() {
         presenter.logout();
@@ -71,8 +86,23 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
     }
 
     @Override
-    public void goLogin() {
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
+    public void goSplash() {
+        Intent intent = new Intent(getActivity(), SplashActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+
+        if(getActivity() != null){
+            getActivity().finish();
+        }
+    }
+
+    @Override
+    public void showData(String name, String email) {
+        tvNombre.setText(email);
+    }
+
+    @Override
+    public void showPhoto(String photo) {
+        GlideApp.with(this).load(photo).transform(new RoundedCorners(500)).diskCacheStrategy(DiskCacheStrategy.ALL).into(imgAvatar);
     }
 }

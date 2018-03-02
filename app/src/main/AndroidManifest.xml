@@ -25,20 +25,22 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".domain.login.view.LoginActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".domain.account.create.view.CreateAccountActivity" />
+        <activity
+            android:name=".domain.account.create.view.CreateAccountActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".domain.main.view.MainActivity" />
         <activity android:name=".domain.curriculum.view.CurriculumActivity" />
         <activity android:name=".domain.account.complete.view.CompleteRegisterActivity" />
