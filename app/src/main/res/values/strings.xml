@@ -26,6 +26,8 @@
     <string name="error_invalid_password">Contraseña corta</string>
     <string name="error_incorrect_password">Error en la contraseña</string>
     <string name="action_crea_cuenta">Crear cuenta</string>
+    <string name="signin_sucess">Registro exitoso</string>
+    <string name="signin_error">Error al guardar</string>
 
     <string name="empty_email">Ingresa un correo</string>
     <string name="empty_password">Ingresa una contraseña</string>
@@ -34,6 +36,9 @@
     <string name="authenticate_failed">Autenticacion fallida</string>
     <string name="logout_msg">¿Cerrar sesión?</string>
 
+    <string name="uploading">Subiendo</string>
+    <string name="upload_complete">Completo</string>
+    <string name="error">Error</string>
 
 
     <string name="action_facebook">Facebook</string>

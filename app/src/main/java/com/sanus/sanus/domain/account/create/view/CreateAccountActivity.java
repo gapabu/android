@@ -15,7 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.sanus.sanus.R;
-import com.sanus.sanus.domain.account.complete.view.CompletaRegistroActivity;
+import com.sanus.sanus.domain.account.complete.view.CompleteRegisterActivity;
 import com.sanus.sanus.domain.account.create.presenter.CreateAccountPresenter;
 import com.sanus.sanus.domain.account.create.presenter.CreateAccountPresenterImpl;
 import com.sanus.sanus.domain.login.view.LoginActivity;
@@ -88,7 +88,7 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
 
     @Override
     public void goCompleteAccount() {
-        startActivity(new Intent(this, CompletaRegistroActivity.class));
+        startActivity(new Intent(this, CompleteRegisterActivity.class));
         finish();
     }
 

@@ -8,16 +8,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.sanus.sanus.R;
+import com.sanus.sanus.domain.chat.presenter.ChatPresenter;
+import com.sanus.sanus.domain.chat.presenter.ChatPresenterImpl;
 
-public class ChatFragment extends Fragment {
+public class ChatFragment extends Fragment implements ChatFragmentView{
 
     public static String IDENTIFIER = "CHAT_FRAGMENT";
+    private ChatPresenter presenter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView;
-        rootView = inflater.inflate(R.layout.fragment_chat, container, false);
-        return rootView;
+        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+        setUpVariable();
+
+        return view;
+    }
+
+    private void setUpVariable() {
+        if (presenter == null) {
+            presenter = new ChatPresenterImpl(this);
+        }
     }
 }
