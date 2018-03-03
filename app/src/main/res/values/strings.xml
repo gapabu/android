@@ -6,6 +6,9 @@
     <string name="title_chat">Chat</string>
     <string name="title_foro">Foro</string>
     <string name="title_ajustes">Ajustes</string>
+    
+    <string name="serch_speciality">Busca por especialidad</string>
+    <string name="my_history_quotes">Mi historial de citas</string>
 
     <string name="bienvenido">Bienvenido</string>
     <string name="correo">Correo electrónico</string>
@@ -35,6 +38,7 @@
     <string name="length_password">Se necesitan mínimo 6 caracteres</string>
     <string name="authenticate_failed">Autenticacion fallida</string>
     <string name="logout_msg">¿Cerrar sesión?</string>
+    <string name="logout_text">Cerrar sesión</string>
 
     <string name="uploading">Subiendo</string>
     <string name="upload_complete">Completo</string>

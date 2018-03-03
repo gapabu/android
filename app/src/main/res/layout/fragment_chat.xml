@@ -1,12 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lyContent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:orientation="vertical"
-    tools:context=".domain.fragments.ChatFragment">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rlHeader"
@@ -25,7 +23,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:scaleType="fitXY"
-                android:src="@drawable/hchat" />
+                android:src="@drawable/hchat"
+                android:contentDescription="@string/app_name" />
         </LinearLayout>
 
         <android.support.v7.widget.CardView
@@ -50,7 +49,7 @@
                     android:layout_height="50dp"
                     android:background="@drawable/btnredondo"
                     android:gravity="center"
-                    android:text="Chat"></TextView>
+                    android:text="@string/title_chat"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
@@ -58,7 +57,7 @@
             android:id="@+id/fabAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="255dp"
+            android:layout_marginStart="255dp"
             android:layout_marginTop="180dp"
             android:src="@drawable/icon_mas"
             app:backgroundTint="@color/btnCrea" />

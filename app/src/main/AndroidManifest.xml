@@ -41,7 +41,10 @@
         <activity
             android:name=".domain.account.create.view.CreateAccountActivity"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".domain.main.view.MainActivity" />
+        <activity
+            android:name=".domain.main.view.MainActivity"
+            android:windowSoftInputMode="adjustPan" />
+
         <activity android:name=".domain.curriculum.view.CurriculumActivity" />
         <activity android:name=".domain.account.complete.view.CompleteRegisterActivity" />
     </application>

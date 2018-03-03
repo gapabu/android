@@ -1,12 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lyContent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:orientation="vertical"
-    tools:context=".domain.fragments.ForoFragment">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rlHeader"
@@ -25,7 +23,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:scaleType="fitXY"
-                android:src="@drawable/hforo" />
+                android:src="@drawable/hforo"
+                android:contentDescription="@string/app_name" />
         </LinearLayout>
 
         <android.support.v7.widget.CardView
@@ -50,7 +49,7 @@
                     android:background="@drawable/btnredondo"
                     android:gravity="center"
                     android:inputType="text"
-                    android:queryHint="¿Qué síntomas tiene?"></SearchView>
+                    android:queryHint="¿Qué síntomas tiene?"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
@@ -59,7 +58,7 @@
             android:id="@+id/fabAdd"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginLeft="285dp"
+            android:layout_marginStart="285dp"
             android:layout_marginTop="100dp"
             android:src="@drawable/icon_mas"
             app:backgroundTint="@color/btnCrea" />
