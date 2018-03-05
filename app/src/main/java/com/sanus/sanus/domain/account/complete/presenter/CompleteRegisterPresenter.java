@@ -15,6 +15,7 @@ public interface CompleteRegisterPresenter extends CompleteRegisterView {
     void onClickSaveData();
     void uploadFile();
 
+
     void onSuccess(UploadTask.TaskSnapshot taskSnapshot);
     void onProgress(UploadTask.TaskSnapshot taskSnapshot);
     void onFailure();
