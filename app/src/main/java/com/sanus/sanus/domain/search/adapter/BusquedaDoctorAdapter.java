@@ -49,7 +49,7 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "User ID: " + user_id, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "User ID: " + user_id, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(context, CurriculumActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

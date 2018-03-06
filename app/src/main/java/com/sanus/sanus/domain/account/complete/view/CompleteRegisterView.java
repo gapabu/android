@@ -8,9 +8,11 @@ import com.google.firebase.storage.StorageReference;
 
 public interface CompleteRegisterView {
 
-
+    void setImageAvatar(Bitmap bitmap);
     void selectMale();
     void selectFemale();
+    void showFileChooser(int requestCode);
+    void fileStorageReference(StorageReference fileRef, Uri filePath);
 
     String getName();
     String getLastName();
@@ -19,4 +21,6 @@ public interface CompleteRegisterView {
     void showMessage(int msg);
     void goMain();
 
+    ProgressDialog getLoading();
 }
+

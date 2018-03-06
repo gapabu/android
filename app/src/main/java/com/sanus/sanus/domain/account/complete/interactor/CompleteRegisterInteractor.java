@@ -10,9 +10,11 @@ public interface CompleteRegisterInteractor {
     void onActivityResult(int requestCode, int resultCode, Intent data, Context context);
     void onClickGenderMale();
     void onClickGenderFemale();
-
+    void onClickImgCamera();
     void onClickSaveData();
+    void uploadFile();
 
-    void BringImagePicker();
-
+    void onSuccess(UploadTask.TaskSnapshot taskSnapshot);
+    void onProgress(UploadTask.TaskSnapshot taskSnapshot);
+    void onFailure();
 }
