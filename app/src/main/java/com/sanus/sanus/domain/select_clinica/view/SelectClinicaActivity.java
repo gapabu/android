@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.select_clinica.presenter.SelectClinicaPresenter;
@@ -19,16 +20,20 @@ public class SelectClinicaActivity extends AppCompatActivity implements SelectCl
      setContentView(R.layout.select_hospital);
 
      setUpVariable();
-
-     recyclerView = findViewById(R.id.recyclerView);
-     recyclerView.setHasFixedSize(true);
-
-     LinearLayoutManager linearLayoutManager= LinearLayoutManager(getContex, LinearLayoutManager.VERTICAL, false);
+     setUpView(recyclerView);
  }
 
     private void setUpVariable(){
      if (presenter == null){
          presenter = new SelectClinicaPresenterImpl(this);
      }
+    }
+
+    private void setUpView(View view){
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
     }
 }

@@ -126,7 +126,7 @@ public class NewCitaActivity extends AppCompatActivity implements NewCitaView{
         }
         //Set current dot active
         if(dotstv.length>0){
-            dotstv[page].setTextColor(Color.parseColor("#ffffff"));
+            dotstv[page].setTextColor(Color.parseColor("#0094EA"));
         }
     }
     private void startMainActivity(){

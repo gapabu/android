@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,10 +12,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/btnredondo"
         android:orientation="horizontal"
-        android:weightSum="10">
+        android:weightSum="10"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -49,14 +51,14 @@
                 android:id="@+id/nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombre" />
+                android:text="@string/nameDoct" />
 
             <TextView
                 android:id="@+id/especialidad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Especialidad" />
+                android:text="@string/especialidad" />
         </LinearLayout>
 
     </LinearLayout>
