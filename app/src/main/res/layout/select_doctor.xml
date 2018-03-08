@@ -1,11 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/lyContent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
     <RelativeLayout
         android:id="@+id/rlHeader"
@@ -15,7 +14,7 @@
         <LinearLayout
             android:id="@+id/lyHeader"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="160dp"
             android:orientation="vertical">
 
             <ImageView
@@ -24,17 +23,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:scaleType="fitXY"
-                android:src="@drawable/hcitas" />
+                android:src="@drawable/hcitas"
+                android:contentDescription="@string/title_chat"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/lyTitle"
-            android:background="@drawable/btnredondo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/btnredondo"
+            android:orientation="horizontal"
             android:weightSum="3">
 
             <TextView
@@ -42,23 +42,18 @@
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="Mi historial de citas"></TextView>
+                android:textColor="@android:color/black"
+                android:text="@string/select_doctor"></TextView>
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/fabAddCita"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="250dp"
-            android:layout_marginTop="150dp"
-            android:src="@drawable/icon_mas" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin">
 
     </android.support.v7.widget.RecyclerView>
 
+
 </LinearLayout>
+

@@ -61,7 +61,7 @@ public class CompleteRegisterActivity extends AppCompatActivity implements Compl
 
         imgavatar = findViewById(R.id.imgHeader);
         imgCamara = findViewById(R.id.imgCamera);
-        imgSave = findViewById(R.id.imgSave);
+        //imgSave = findViewById(R.id.imgSave);
 
         items = getResources().getStringArray(R.array.Edad);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, items);
@@ -97,12 +97,12 @@ public class CompleteRegisterActivity extends AppCompatActivity implements Compl
             }
         });
 
-        imgSave.setOnClickListener(new View.OnClickListener() {
+        /*imgSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 presenter.uploadFile();
             }
-        });
+        });*/
 
         //guardando datos en firestore
         guardar.setOnClickListener(new View.OnClickListener() {
