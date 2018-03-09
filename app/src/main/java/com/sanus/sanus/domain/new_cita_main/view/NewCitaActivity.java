@@ -3,11 +3,13 @@ package com.sanus.sanus.domain.new_cita_main.view;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
+import android.nfc.Tag;
 import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,6 +25,7 @@ import com.sanus.sanus.domain.new_cita_main.presenter.NewCitaPresenterImpl;
 import com.sanus.sanus.domain.resume_new_cita.view.ResumeNewCitaActivity;
 
 public class NewCitaActivity extends AppCompatActivity implements NewCitaView{
+
     private NewCitaPresenter presenter;
 
     private ViewPager viewPager;
@@ -81,6 +84,7 @@ public class NewCitaActivity extends AppCompatActivity implements NewCitaView{
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+
             }
 
             @Override
@@ -121,7 +125,6 @@ public class NewCitaActivity extends AppCompatActivity implements NewCitaView{
             dotstv[i] = new TextView(this);
             dotstv[i].setText(Html.fromHtml("&#8226;"));
             dotstv[i].setTextSize(30);
-            dotstv[i].setTextColor(Color.parseColor("#a9b4bb"));
             layoutDot.addView(dotstv[i]);
         }
         //Set current dot active
