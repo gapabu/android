@@ -4,4 +4,8 @@ public interface SplashView {
 
     void goLogin();
     void goMain();
+    void goCompleteRegister();
+
+    void showAlertRegister();
+    void closeApp();
 }

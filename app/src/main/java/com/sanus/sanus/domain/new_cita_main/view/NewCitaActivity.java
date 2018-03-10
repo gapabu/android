@@ -75,7 +75,7 @@ public class NewCitaActivity extends AppCompatActivity implements NewCitaView{
                 }
             }
         });
-        layouts = new int[]{R.layout.select_hospital,R.layout.select_doctor, R.layout.select_day, R.layout.select_hour};
+        layouts = new int[]{R.layout.activity_select_clinica2,R.layout.select_doctor, R.layout.select_day, R.layout.select_hour};
         pagerAdapter = new MyPagerAdapter(layouts,getApplicationContext());
         viewPager.setAdapter(pagerAdapter);
 

@@ -43,7 +43,7 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
         holder.especialidad.setText(busquedaDoctorList.get(position).getEspecialidad());
 
 
-        final String user_id = busquedaDoctorList.get(position).userId;
+        //final String user_id = busquedaDoctorList.get(position).userId;
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {

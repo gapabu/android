@@ -5,9 +5,14 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,14 +23,17 @@ import com.sanus.sanus.R;
 import com.sanus.sanus.domain.account.complete.view.CompleteRegisterActivity;
 import com.sanus.sanus.domain.account.create.presenter.CreateAccountPresenter;
 import com.sanus.sanus.domain.account.create.presenter.CreateAccountPresenterImpl;
-import com.sanus.sanus.domain.login.view.LoginActivity;
 import com.sanus.sanus.utils.alert.AlertUtils;
+import com.sanus.sanus.utils.keyboard.KeyboardUtil;
 
 public class CreateAccountActivity extends AppCompatActivity implements CreateAccountView {
 
     private CreateAccountPresenter presenter;
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
+    private TextView showPassword;
+    private boolean flagPassword;
+    private Button btnSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +49,7 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
 
         if (presenter==null){
             presenter= new CreateAccountPresenterImpl(this);
+            flagPassword = false;
         }
         auth = FirebaseAuth.getInstance();
     }
@@ -49,9 +58,21 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
 
         inputEmail = findViewById(R.id.edCorreoE);
         inputPassword = findViewById(R.id.edContrasenia);
-        Button btnSignUp = findViewById(R.id.btnCrearCuenta);
-
-
+        showPassword = findViewById(R.id.showPassword);
+        showPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flagPassword = !flagPassword;
+                if (flagPassword) {
+                    showPassword.setText(R.string.hide_password);
+                    inputPassword.setInputType(InputType.TYPE_CLASS_TEXT);
+                } else {
+                    showPassword.setText(R.string.show_password);
+                    inputPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+            }
+        });
+        btnSignUp = findViewById(R.id.btnCrearCuenta);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,20 +80,45 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
             }
         });
 
-        Button btnLogin = findViewById(R.id.btnIrInicio);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        inputEmail.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view) {
-                login();
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                presenter.validateButtonEnable();
+            }
+        });
+
+        inputPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                presenter.validateButtonEnable();
             }
         });
     }
 
-
-    private void login() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        KeyboardUtil.hide(this);
+        return true;
     }
 
     @Override
@@ -110,6 +156,16 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
                         presenter.createUserWithEmailAndPasswordComplete(task);
                     }
                 });
+    }
+
+    @Override
+    public void enableButton() {
+        btnSignUp.setEnabled(true);
+    }
+
+    @Override
+    public void disableButton() {
+        btnSignUp.setEnabled(false);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,8 +19,7 @@ import com.sanus.sanus.R;
 import com.sanus.sanus.domain.citas.presenter.CitasPresenter;
 import com.sanus.sanus.domain.citas.presenter.CitasPresenterImpl;
 import com.sanus.sanus.domain.new_cita_main.view.NewCitaActivity;
-import com.sanus.sanus.domain.select_clinica.view.SelectClinicaView;
-import com.sanus.sanus.domain.select_clinica.view.SelectHospitalActivity;
+import com.sanus.sanus.domain.select_clinica.view.SelectClinicaActivity;
 
 import java.util.List;
 
@@ -27,8 +27,8 @@ public class CitasFragment extends Fragment implements CitasView {
 
     private CitasPresenter presenter;
     private RecyclerView recyclerView;
-    ImageView newCita;
     public static String IDENTIFIER = "CITAS_FRAGMENT";
+    FloatingActionButton newCita;
 
     @Nullable
     @Override
@@ -38,17 +38,15 @@ public class CitasFragment extends Fragment implements CitasView {
         setUpVariable();
         setUpView(view);
         presenter.init();
-
-        newCita = view.findViewById(R.id.fabAddCita);
+        newCita = view.findViewById(R.id.fabAdd);
 
         newCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), SelectHospitalActivity.class);
+                Intent intent = new Intent(getContext(), NewCitaActivity.class);
                 startActivity(intent);
             }
         });
-
         return view;
     }
 

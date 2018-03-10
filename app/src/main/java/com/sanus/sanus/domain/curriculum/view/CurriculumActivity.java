@@ -1,37 +1,48 @@
 package com.sanus.sanus.domain.curriculum.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.comments.view.CommentsActivity;
-import com.sanus.sanus.domain.comments.view.CommentsView;
 import com.sanus.sanus.domain.curriculum.presenter.CurriculumPresenter;
 import com.sanus.sanus.domain.curriculum.presenter.CurriculumPresenterImpl;
+import com.sanus.sanus.domain.main.view.MainActivity;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class CurriculumActivity extends AppCompatActivity implements CurriculumView {
 
     private CurriculumPresenter presenter;
-
-    TextView curricumlum, cedula, especialidad;
-    FloatingActionButton goComent;
+    ImageView goComent;
     private Toolbar toolbar;
+    TextView curricumlum, cedula, especialidad, cv;
+    private CircleImageView setupImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curriculum);
 
-
-        setUpView();
         setUpVariable();
-        presenter.init();
+        setUpView();
+        initializedData();
     }
 
     private void setUpVariable() {
@@ -44,8 +55,9 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         curricumlum = findViewById(R.id.tvCv);
         cedula = findViewById(R.id.tvCedula);
         especialidad = findViewById(R.id.tvEspecialidad);
+        cv = findViewById(R.id.tvCv);
+        setupImage = findViewById(R.id.setup_image);
         goComent = findViewById(R.id.floatinIrComentarios);
-
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,5 +73,62 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         });
     }
 
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case android.R.id.home:
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+                break;
+        }
+        return true;
+    }
 
+    private void initializedData() {
+        //datosDoctorList = new ArrayList<>();
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("doctores").document("MbisakX6endQjlgSdPRqDcAibpY2").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if (task.isSuccessful()) {
+                    if (task.getResult().exists()) {
+                        //Toast.makeText(CurriculumActivity.this, "Data exist", Toast.LENGTH_SHORT).show();
+                        String nombre = task.getResult().getString("nombre");
+                        String especialidad1 = task.getResult().getString("especialidad");
+                        String cedul = task.getResult().getString("cedula");
+                        String cv1 = task.getResult().getString("cv");
+                        String image = task.getResult().getString("avatar");
+                        especialidad.setText(especialidad1);
+                        cedula.setText(cedul);
+                        cv.setText(cv1);
+
+                        //storeFirestore(null, user_id);
+                        //mainImageURI = Uri.parse(image);
+                        //setupName.setText(nombre);
+
+                        toolbar = (Toolbar) findViewById(R.id.toolbar);
+                        setSupportActionBar(toolbar);
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                        getSupportActionBar().setTitle(nombre);
+
+
+
+                        String url = "https://firebasestorage.googleapis.com/v0/b/sanus-27.appspot.com/o/avatar%2FMbisakX6endQjlgSdPRqDcAibpY2.png?alt=media&token=049741fa-58c0-4566-804b-703f50b92070";
+                        //Glide.with(CurriculumActivity.this).load(url).into(setupImage);
+                        Picasso.with(CurriculumActivity.this).load(url).placeholder(R.drawable.default_image).into(setupImage);
+                        //Picasso.with(CurriculumActivity.this).load(url).placeholder(R.drawable.default_image).into(setupImage);
+                        //Toast.makeText(CurriculumActivity.this, "url: " + image, Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(CurriculumActivity.this, "Data doen't exist", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    String error = task.getException().getMessage();
+                    Toast.makeText(CurriculumActivity.this, "FIRESTORE retrieve error " + error, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 }
+
+

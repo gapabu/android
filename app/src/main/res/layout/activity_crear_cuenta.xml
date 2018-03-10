@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/creacuenta">
+    android:background="@color/background_customer"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/creacuenta"
+        android:contentDescription="@string/app_name" />
 
     <LinearLayout
         android:id="@+id/email_login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:orientation="vertical"
-        android:paddingEnd="60dp"
-        android:paddingStart="60dp"
+        android:paddingEnd="40dp"
+        android:paddingStart="40dp"
         android:paddingTop="20dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/action_crea_cuenta"
-        android:textColor="@android:color/background_dark"
-        android:textSize="30sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/action_crea_cuenta"
+            android:textColor="@android:color/background_dark"
+            android:textSize="30sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,27 +39,45 @@
                 android:layout_height="43dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btnredondo"
-                android:gravity="center"
+                android:background="@drawable/btnround"
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp"
                 android:singleLine="true" />
 
-            <EditText
-                android:id="@+id/edContrasenia"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="43dp"
-                android:layout_gravity="center"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btnredondo"
-                android:gravity="center"
-                android:hint="@string/prompt_password"
-                android:imeActionId="6"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true" />
+                android:background="@drawable/btnround"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edContrasenia"
+                    android:layout_width="0dp"
+                    android:layout_height="43dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btnsquare_no_line"
+                    android:hint="@string/prompt_password"
+                    android:imeActionId="6"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+                    android:labelFor="@id/edContrasenia"
+                    android:maxLines="1"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/showPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="7dp"
+                    android:textColor="@color/btnfacebook"
+                    android:text="@string/show_password" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btnCrearCuenta"
@@ -63,24 +85,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/colorPrimary"
-                android:text="@string/action_sign_in_short"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/btnazul"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/btnIrInicio"
+                android:text="@string/action_sign_in_short"
+                android:enabled="false"
                 android:textColor="@color/colorPrimary"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="43dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/btnaranja"
-                android:text="@string/action_sign_in" />
+                android:textStyle="bold" />
 
         </LinearLayout>
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,11 +11,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btnredondo"
+        android:layout_height="80dp"
+        android:background="@drawable/btnround"
         android:orientation="horizontal"
-        android:weightSum="10"
-        android:baselineAligned="false">
+        android:weightSum="10">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -27,13 +25,13 @@
             android:layout_weight="2"
             android:orientation="vertical">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/avatar"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/user" />
+                android:src="@drawable/doctor_defaul" />
         </LinearLayout>
 
         <LinearLayout
@@ -51,14 +49,14 @@
                 android:id="@+id/nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/nameDoct" />
+                android:text="Nombre" />
 
             <TextView
                 android:id="@+id/especialidad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/especialidad" />
+                android:text="Especialidad" />
         </LinearLayout>
 
     </LinearLayout>

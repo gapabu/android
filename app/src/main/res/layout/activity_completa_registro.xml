@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lyContent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorPrimary"
-    tools:context=".domain.account.complete.view.CompleteRegisterActivity">
-
+    android:orientation="vertical">
 
 
     <RelativeLayout
@@ -20,18 +16,18 @@
         <LinearLayout
             android:id="@+id/lyHeader"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-
 
             <ImageView
                 android:id="@+id/imgHeader"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
                 android:scaleType="fitXY"
-                 />
-            <!--android:src="@drawable/hcompleteregister"-->
+                android:src="@drawable/hcompleteregister" />
         </LinearLayout>
 
 
@@ -41,8 +37,8 @@
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="55dp"
-            app:srcCompat="@drawable/user"
-            android:contentDescription="@string/app_name"/>
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@drawable/user" />
 
         <ImageView
             android:id="@+id/imgCamera"
@@ -50,6 +46,7 @@
             android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="130dp"
+            android:contentDescription="@string/app_name"
             android:src="@drawable/ic_camera" />
 
         <LinearLayout
@@ -58,108 +55,101 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginTop="165dp"
-            android:background="@drawable/btnredondo"
-            android:orientation="vertical">
+            android:background="@drawable/backgroundround"
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 android:layout_marginTop="8dp"
                 android:paddingBottom="16dp"
-                android:text="Para completar el registro necesitamos algunos datos." />
+                android:text="@string/complete_register" />
 
             <TextView
                 android:id="@+id/tvTitleObligatorio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 android:paddingBottom="16dp"
-                android:text="* Los datos son obligatorios." />
+                android:text="@string/required_data" />
 
             <EditText
                 android:id="@+id/edNombre"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btnredondo"
-                android:gravity="center"
-                android:hint="* Nombre(s) :"
+                android:background="@drawable/btnround"
+                android:hint="@string/required_name"
                 android:imeActionId="6"
                 android:imeOptions="actionUnspecified"
                 android:maxLines="1"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
                 android:singleLine="true" />
+
             <EditText
                 android:id="@+id/edApellido"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btnredondo"
-                android:gravity="center"
-                android:hint="* Apellido(s):"
+                android:background="@drawable/btnround"
+                android:hint="@string/required_last_name"
                 android:imeActionId="6"
                 android:imeOptions="actionUnspecified"
                 android:maxLines="1"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
                 android:singleLine="true" />
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal"
-                android:weightSum="100">
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnMasculino"
+                    style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
                     android:background="@android:color/black"
-                    android:text="Masculino"
-                    android:textColor="#fff" />
+                    android:text="@string/gender_male"
+                    android:textColor="@color/white" />
 
                 <Button
                     android:id="@+id/btnFemenino"
+                    style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
-                    android:background="@android:color/white"
-                    android:text="Femenino" />
+                    android:background="@color/white"
+                    android:text="@string/gender_female" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Selecciona una edad"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="16dp"
+                android:text="@string/age_select" />
 
-            <Spinner
-                android:id="@+id/spinnerEdad"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="8dp"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_weight="5"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btnround"
+                android:orientation="horizontal">
 
+                <Spinner
+                    android:id="@+id/spinnerEdad"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp" />
+            </LinearLayout>
 
 
             <Button
@@ -170,7 +160,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/btnazul"
-                android:text="Guardar"
+                android:enabled="false"
+                android:text="@string/button_save"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold" />
 
@@ -180,5 +171,4 @@
     </RelativeLayout>
 
 
-
-</LinearLayout>
+</ScrollView>

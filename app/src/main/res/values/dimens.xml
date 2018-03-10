@@ -7,6 +7,7 @@
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="publish_photo_thumbnail_size">96dp</dimen>
+
     <dimen name="margin_top_new_cita">125dp</dimen>
     <dimen name="margin_left_new_cita">280dp</dimen>
     <dimen name="margin_left_10">10dp</dimen>

@@ -12,11 +12,4 @@ public class CurriculumPresenterImpl implements CurriculumPresenter {
         this.view = view;
         interactor = new CurriculumInteractorImpl(this);
     }
-
-    @Override
-    public void init() {
-        interactor.init();
-
-    }
-
 }

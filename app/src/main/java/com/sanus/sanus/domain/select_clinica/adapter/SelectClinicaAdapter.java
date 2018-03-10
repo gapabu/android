@@ -9,46 +9,47 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sanus.sanus.R;
-import com.sanus.sanus.domain.select_clinica.data.ClinicaData;
+import com.sanus.sanus.domain.select_clinica.data.SelectClinica;
 
 import java.util.List;
 
-public class SelectClinicaAdapter extends RecyclerView.Adapter<SelectClinicaAdapter.ViewHolder> {
- Context context;
- List<ClinicaData> clinicaDataList;
+/**
+ * Created by Mireya on 10/03/2018.
+ */
 
-public SelectClinicaAdapter(Context context, List<ClinicaData> clinicaDataList){
-    this.context = context;
-    this.clinicaDataList = clinicaDataList;
-}
+public class SelectClinicaAdapter extends RecyclerView.Adapter<SelectClinicaAdapter.ViewHolder>{
+   private Context context;
+   private List<SelectClinica> selectClinicaList;
+
+   public SelectClinicaAdapter(Context context, List<SelectClinica> selectClinicaList){
+       this.context = context;
+       this.selectClinicaList = selectClinicaList;
+   }
+
     @NonNull
     @Override
-    public SelectClinicaAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.clinicas_item, parent, false);
         return new SelectClinicaAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SelectClinicaAdapter.ViewHolder holder, int position) {
-        holder.nombre.setText(clinicaDataList.get(position).getNombre());
-        holder.direccion.setText(clinicaDataList.get(position).getDireccion());
-
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+       holder.nombre.setText(selectClinicaList.get(position).getNombre());
+       holder.direccion.setText(selectClinicaList.get(position).getDireccion());
     }
 
     @Override
     public int getItemCount() {
-        return clinicaDataList.size();
+        return selectClinicaList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-    View mView;
-    TextView nombre, direccion;
-
+       View mView;
+       TextView nombre, direccion;
         public ViewHolder(View itemView) {
-
             super(itemView);
             mView = itemView;
-
             nombre = itemView.findViewById(R.id.clinica);
             direccion = itemView.findViewById(R.id.direccion);
         }

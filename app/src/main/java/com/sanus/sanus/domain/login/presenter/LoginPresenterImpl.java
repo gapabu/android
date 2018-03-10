@@ -33,13 +33,33 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
+    public void showAlertRegister() {
+        view.showAlertRegister();
+    }
+
+    @Override
     public void signInWithEmailAndPassword() {
         view.signInWithEmailAndPassword();
     }
 
     @Override
+    public void enableButton() {
+        view.enableButton();
+    }
+
+    @Override
+    public void disableButton() {
+        view.disableButton();
+    }
+
+    @Override
     public void goMain() {
         view.goMain();
+    }
+
+    @Override
+    public void goCompleteRegister() {
+        view.goCompleteRegister();
     }
 
     @Override
@@ -55,5 +75,20 @@ public class LoginPresenterImpl implements LoginPresenter {
     @Override
     public void signInWithEmailAndPasswordComplete(Task<AuthResult> task) {
         interactor.signInWithEmailAndPasswordComplete(task);
+    }
+
+    @Override
+    public void validateButtonEnable() {
+        interactor.validateButtonEnable();
+    }
+
+    @Override
+    public void acceptAlert() {
+        interactor.acceptAlert();
+    }
+
+    @Override
+    public void cancelAlert() {
+        interactor.cancelAlert();
     }
 }

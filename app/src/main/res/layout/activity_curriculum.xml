@@ -7,20 +7,13 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar"/>
+    <include
+        layout="@layout/toolbar">
+    </include>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <!--<ImageView
-            android:id="@+id/imageView"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp"
-            app:srcCompat="@drawable/user" />-->
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/setup_image"
@@ -66,7 +59,7 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="15dp"
-            android:background="@drawable/btnredondo"
+            android:background="@drawable/btnround"
             android:orientation="vertical"
             android:id="@+id/linearLayout2">
 
@@ -141,9 +134,8 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="100dp"
-            android:background="@drawable/btnredondo"
+            android:background="@drawable/btnround"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/tvCv"
                 android:layout_width="match_parent"
