@@ -10,6 +10,7 @@ public class CommentsDoctor {
         this.usuario = usuario;
         this.cometario = cometario;
         this.fecha = fecha;
+        this.calificacion = calificacion;
     }
 
     public String getUsuario() {

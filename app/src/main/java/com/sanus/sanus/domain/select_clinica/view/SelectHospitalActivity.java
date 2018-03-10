@@ -1,13 +1,9 @@
 package com.sanus.sanus.domain.select_clinica.view;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Toast;
 
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.select_clinica.adapter.SelectClinicaAdapter;
@@ -17,43 +13,37 @@ import com.sanus.sanus.domain.select_clinica.presenter.SelectClinicaPresenterImp
 
 import java.util.List;
 
-public class SelectClinicaActivity extends AppCompatActivity implements SelectClinicaView{
+public class SelectHospitalActivity extends AppCompatActivity implements SelectClinicaView{
     private SelectClinicaPresenter presenter;
-    private RecyclerView recyclerView;
+    RecyclerView recyclerView;
     SelectClinicaAdapter adapter;
- @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
-     super.onCreate(savedInstanceState);
-     setContentView(R.layout.select_hospital);
-
-     setUpVariable();
-     setUpView();
-     presenter.init();
-
-
-
-
-
- }
-
-    private void setUpVariable(){
-     if (presenter == null){
-         presenter = new SelectClinicaPresenterImpl(this);
-     }
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.select_hospital);
+        
+        setUpVariable();
+        setUpView();
     }
 
-    private void setUpView(){
+    private void setUpView() {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        //recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void setUpVariable() {
+        if (presenter == null){
+            presenter = new SelectClinicaPresenterImpl(this);
+        }
     }
 
     @Override
     public void setDataAdapter(List<ClinicaData> clinicaDataList) {
-        SelectClinicaAdapter clinicaAdapter = new SelectClinicaAdapter(getApplicationContext(), clinicaDataList);
-        clinicaAdapter.notifyDataSetChanged();
+        SelectClinicaAdapter selectClinicaAdapter = new SelectClinicaAdapter(getApplicationContext(), clinicaDataList);
+        recyclerView.setAdapter(selectClinicaAdapter);
+        selectClinicaAdapter.notifyDataSetChanged();
     }
 }

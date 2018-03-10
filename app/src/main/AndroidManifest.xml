@@ -48,8 +48,9 @@
         <activity android:name=".domain.curriculum.view.CurriculumActivity" />
         <activity android:name=".domain.account.complete.view.CompleteRegisterActivity" />
         <activity android:name=".domain.comments.view.CommentsActivity" />
-        <activity android:name=".domain.new_cita_main.view.NewCitaActivity"></activity>
-        <activity android:name=".domain.resume_new_cita.view.ResumeNewCitaActivity"/>
+        <activity android:name=".domain.new_cita_main.view.NewCitaActivity" />
+        <activity android:name=".domain.resume_new_cita.view.ResumeNewCitaActivity" />
+        <activity android:name=".domain.select_clinica.view.SelectHospitalActivity"></activity>
     </application>
 
 </manifest>

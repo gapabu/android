@@ -9,4 +9,6 @@
     <dimen name="publish_photo_thumbnail_size">96dp</dimen>
     <dimen name="margin_top_new_cita">125dp</dimen>
     <dimen name="margin_left_new_cita">280dp</dimen>
+    <dimen name="margin_left_10">10dp</dimen>
+    <dimen name="margin_left_35">35dp</dimen>
 </resources>

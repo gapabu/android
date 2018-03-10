@@ -18,6 +18,8 @@ import com.sanus.sanus.R;
 import com.sanus.sanus.domain.citas.presenter.CitasPresenter;
 import com.sanus.sanus.domain.citas.presenter.CitasPresenterImpl;
 import com.sanus.sanus.domain.new_cita_main.view.NewCitaActivity;
+import com.sanus.sanus.domain.select_clinica.view.SelectClinicaView;
+import com.sanus.sanus.domain.select_clinica.view.SelectHospitalActivity;
 
 import java.util.List;
 
@@ -42,7 +44,7 @@ public class CitasFragment extends Fragment implements CitasView {
         newCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), NewCitaActivity.class);
+                Intent intent = new Intent(getContext(), SelectHospitalActivity.class);
                 startActivity(intent);
             }
         });

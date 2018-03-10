@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -39,7 +38,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="no coments"
+                android:text="@string/no_coments"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -64,7 +63,7 @@
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:progressTint="@color/colorPrimaryDark"
                 android:numStars="5"
                 android:stepSize="1"/>
@@ -73,7 +72,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -86,7 +86,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:inputType="text" />
             </LinearLayout>
 
             <LinearLayout
@@ -97,7 +98,8 @@
                     android:id="@+id/btnGuardarComentario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_enviar"/>
+                    android:src="@drawable/ic_enviar"
+                    android:contentDescription="@string/enviar" />
             </LinearLayout>
 
         </LinearLayout>

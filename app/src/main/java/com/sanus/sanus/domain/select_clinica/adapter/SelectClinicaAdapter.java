@@ -14,8 +14,8 @@ import com.sanus.sanus.domain.select_clinica.data.ClinicaData;
 import java.util.List;
 
 public class SelectClinicaAdapter extends RecyclerView.Adapter<SelectClinicaAdapter.ViewHolder> {
-private Context context;
-private List<ClinicaData> clinicaDataList;
+ Context context;
+ List<ClinicaData> clinicaDataList;
 
 public SelectClinicaAdapter(Context context, List<ClinicaData> clinicaDataList){
     this.context = context;
@@ -25,7 +25,7 @@ public SelectClinicaAdapter(Context context, List<ClinicaData> clinicaDataList){
     @Override
     public SelectClinicaAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.clinicas_item, parent, false);
-        return new ViewHolder(view);
+        return new SelectClinicaAdapter.ViewHolder(view);
     }
 
     @Override
@@ -42,8 +42,8 @@ public SelectClinicaAdapter(Context context, List<ClinicaData> clinicaDataList){
 
     public class ViewHolder extends RecyclerView.ViewHolder{
     View mView;
-
     TextView nombre, direccion;
+
         public ViewHolder(View itemView) {
 
             super(itemView);

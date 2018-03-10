@@ -10,18 +10,21 @@ import java.util.List;
 public class SelectClinicaPresenterImpl implements SelectClinicaPresenter{
     private SelectClinicaView view;
     private SelectClinicaInteractor interactor;
-    public SelectClinicaPresenterImpl(SelectClinicaView view){
-        interactor = new SelectClinicaInteractorImpl(this);
-    }
 
-    @Override
-    public void init() {
-        interactor.init();
+    public SelectClinicaPresenterImpl(SelectClinicaView view){
+        this.view = view;
+        interactor = new SelectClinicaInteractorImpl(this);
+
     }
 
 
     @Override
     public void setDataAdapter(List<ClinicaData> clinicaDataList) {
         view.setDataAdapter(clinicaDataList);
+    }
+
+    @Override
+    public void viewClinic() {
+        interactor.viewClinic();
     }
 }

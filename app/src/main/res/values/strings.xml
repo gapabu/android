@@ -92,6 +92,11 @@
     <string name="dia_de_cita">Dia de cita</string>
     <string name="hora_de_cita">Hora de cita</string>
     <string name="hora">Hora</string>
+    <string name="enviar">enviar</string>
+    <string name="no_coments">no coments</string>
+    <string name="title_comments">Comentarios</string>
+    <string name="fecha">Fecha</string>
+    <string name="usuario">Usuario</string>
 
 
 </resources>

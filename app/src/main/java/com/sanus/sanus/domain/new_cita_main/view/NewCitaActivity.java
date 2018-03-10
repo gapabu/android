@@ -32,15 +32,14 @@ public class NewCitaActivity extends AppCompatActivity implements NewCitaView{
     private LinearLayout layoutDot;
     private TextView[]dotstv;
     private int[]layouts;
-   // private Button btnSkip;
-    //private Button btnNext;
+
     private ImageView btnSkip;
     private ImageView btnNext;
     private MyPagerAdapter pagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setStatusBarTransparent();
+        setStatusBarTransparent();
         setContentView(R.layout.activity_new_cita);
 
         setUpVariable();
