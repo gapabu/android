@@ -37,7 +37,7 @@ public class CommentsInteractorImpl implements CommentsInteractor {
                         String comentario = doc.getDocument().getString("comentario");
                         String calificacion1 = doc.getDocument().getString("calificacion");
 
-                        Log.d(TAG, "" + comentario);
+                        Log.d(TAG, "" + calificacion1);
                         commentsDoctorList.add(new CommentsDoctor(usuario, comentario, fecha, calificacion1));
                         presenter.setDataAdapter(commentsDoctorList);
                         //adapter.notifyDataSetChanged();
