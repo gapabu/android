@@ -18,12 +18,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.comments.adapter.CommentsDoctorAdapter;
 import com.sanus.sanus.domain.comments.data.CommentsDoctor;
@@ -38,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 
 public class CommentsActivity extends AppCompatActivity implements CommentsView{
-    private static final String TAG = "Comments";
     private CommentsPresenter presenter;
     private RatingBar ratingBar;
     private EditText edNuevoComentario;

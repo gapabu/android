@@ -1,10 +1,10 @@
 package com.sanus.sanus.domain.comments.data;
 
 public class CommentsDoctor {
-    String usuario;
-    String cometario;
-    String fecha;
-    String calificacion;
+    private String usuario;
+    private String cometario;
+    private String fecha;
+    private String calificacion;
 
     public CommentsDoctor(String usuario, String cometario, String fecha, String calificacion) {
         this.usuario = usuario;

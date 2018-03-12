@@ -87,7 +87,8 @@
                     android:layout_weight="1"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    tools:ignore="LabelFor,NestedWeights" />
             </LinearLayout>
 
             <LinearLayout

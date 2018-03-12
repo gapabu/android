@@ -17,8 +17,8 @@ import java.util.List;
 
 
 public class CommentsDoctorAdapter extends RecyclerView.Adapter<CommentsDoctorAdapter.ViewHolder>{
-    Context context;
-    List<CommentsDoctor> commentsDoctorList;
+    private Context context;
+    private List<CommentsDoctor> commentsDoctorList;
 
     public CommentsDoctorAdapter(Context context, List<CommentsDoctor> commentsDoctorList){
         this.context = context;
@@ -45,11 +45,11 @@ public class CommentsDoctorAdapter extends RecyclerView.Adapter<CommentsDoctorAd
         return commentsDoctorList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
         View mView;
         TextView fecha, usuario, comentario;
         RatingBar calificacion;
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
             fecha =  itemView.findViewById(R.id.tvFecha);

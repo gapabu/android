@@ -88,7 +88,6 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
         View mView;
 
         TextView nombre, especialidad;
-        CardView cardView;
         ImageView imageView;
         EditText edbuscador;
 
