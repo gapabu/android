@@ -199,6 +199,10 @@
     <string name="title_comments">Comentarios</string>
     <string name="fecha">Fecha</string>
     <string name="usuario">Usuario</string>
+    <string name="direccion_de_hospital">Direccion de hospital</string>
+    <string name="hospital">Hospital</string>
+    <string name="closecita">closeCita</string>
+    <string name="savecita">saveCita</string>
 
 
 </resources>

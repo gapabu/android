@@ -57,9 +57,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".domain.comments.view.CommentsActivity" />
-        <activity android:name=".domain.new_cita_main.view.NewCitaActivity" />
         <activity android:name=".domain.resume_new_cita.view.ResumeNewCitaActivity" />
-        <activity android:name=".domain.select_clinica.view.SelectClinicaActivity"></activity>
+        <activity android:name=".domain.hospital.view.HospitalActivity"/>
+        <activity android:name=".domain.select_doctor.view.SelectDoctorActivity"/>
+        <activity android:name=".domain.select_day.view.SelectDayActivity"/>
+        <activity android:name=".domain.select_hour.view.SelectHourActivity"/>
     </application>
 
 </manifest>

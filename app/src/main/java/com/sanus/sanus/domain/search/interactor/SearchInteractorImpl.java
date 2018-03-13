@@ -32,10 +32,7 @@ public class SearchInteractorImpl implements SearchInteractor{
 
     @Override
     public void init() {
-
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-
-
         mFirestore.collection("doctores").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(final QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
@@ -45,14 +42,25 @@ public class SearchInteractorImpl implements SearchInteractor{
                 for(DocumentChange doc: documentSnapshots.getDocumentChanges()){
                     if(doc.getType() == DocumentChange.Type.ADDED){
                         user_id = doc.getDocument().getId();
-                        Log.d(TAG, "id: " + user_id + " " + especialidad);
-                        //nombre = doc.getDocument().getString("nombre");
+
+                        mFirestore.collection("usuarios").document(user_id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                            @Override
+                            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+                                if (e!=null){
+                                    Log.d(TAG, "Error" + e.getMessage());
+                                }
+                                for (DocumentChange doc: documentSnapshots.getDocumentChanges()){
+                                    if (doc.getType() == DocumentChange.Type.ADDED) {
+                                        nombre = doc.getDocument().getString("nombre");
+                                        //Log.d(TAG, nombre);
+                                    }
+                                }
+
+                            }
+                        });
+
                         especialidad = doc.getDocument().getString("especialidad");
-
-
-
-                        //busquedaDoctors.add(new BusquedaDoctor(nombre, especialidad).withId(user_id));
-
+                        //Log.d(TAG,nombre);
                         busquedaDoctors.add(new BusquedaDoctor(nombre, especialidad));
                         presenter.setDataAdapter(busquedaDoctors);
 

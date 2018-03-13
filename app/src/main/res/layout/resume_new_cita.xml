@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/colorPrimary">
 
@@ -264,28 +264,30 @@
     </LinearLayout>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="12dp">
-
+        android:layout_marginBottom="20dp">
         <ImageView
             android:id="@+id/closeCita"
             android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="30dp"
-            android:src="@drawable/ic_close"
-            android:contentDescription="@string/img_cancel" />
-
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="43dp"
+            app:srcCompat="@drawable/ic_close"
+            android:contentDescription="@string/closecita" />
         <ImageView
             android:id="@+id/saveCita"
             android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="180dp"
-            android:src="@drawable/ic_save_cite"
-            android:contentDescription="@string/img_save" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="44dp"
+            app:srcCompat="@drawable/ic_save_cite"
+            android:contentDescription="@string/savecita"/>
+    </RelativeLayout>
 
 </RelativeLayout>

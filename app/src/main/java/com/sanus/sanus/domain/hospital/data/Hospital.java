@@ -1,14 +1,11 @@
-package com.sanus.sanus.domain.select_clinica.data;
+package com.sanus.sanus.domain.hospital.data;
 
-/**
- * Created by Mireya on 10/03/2018.
- */
 
-public class SelectClinica {
-    String nombre;
-    String direccion;
+public class Hospital {
 
-    public SelectClinica(String nombre, String direccion) {
+    private String nombre;
+    private String direccion;
+    public Hospital(String nombre, String direccion) {
         this.nombre = nombre;
         this.direccion = direccion;
     }
@@ -27,10 +24,5 @@ public class SelectClinica {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
-
-
-
-
 
 }

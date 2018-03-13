@@ -11,16 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.sanus.sanus.domain.citas.adapter.CitasAdapter;
 import com.sanus.sanus.domain.citas.data.Citas;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.citas.presenter.CitasPresenter;
 import com.sanus.sanus.domain.citas.presenter.CitasPresenterImpl;
-import com.sanus.sanus.domain.new_cita_main.view.NewCitaActivity;
-import com.sanus.sanus.domain.select_clinica.view.SelectClinicaActivity;
-
+import com.sanus.sanus.domain.hospital.view.HospitalActivity;
 import java.util.List;
 
 public class CitasFragment extends Fragment implements CitasView {
@@ -43,7 +40,7 @@ public class CitasFragment extends Fragment implements CitasView {
         newCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), NewCitaActivity.class);
+                Intent intent = new Intent(getContext(), HospitalActivity.class);
                 startActivity(intent);
             }
         });
