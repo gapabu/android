@@ -19,6 +19,7 @@ public class HospitalInteractorImpl implements HospitalInteractor{
 	private HospitalPresenter presenter;
 
 	private List<Hospital> commentsDoctorList = new ArrayList<>();
+	private List<Hospital> listAuxiliar = new ArrayList<>();
 
 	public HospitalInteractorImpl(HospitalPresenter presenter){this.presenter = presenter;}
 
@@ -33,14 +34,32 @@ public class HospitalInteractorImpl implements HospitalInteractor{
 				}
 				for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
 					if (doc.getType() == DocumentChange.Type.ADDED) {
+						String id = doc.getDocument().getId();
 						String nombre = doc.getDocument().getString("nombre");
 						String direccion = doc.getDocument().getString("direccion");
-
+						Log.d(TAG, "id: " +id);
 						commentsDoctorList.add(new Hospital(nombre, direccion));
 						presenter.setDataAdapter(commentsDoctorList);
 					}
 				}
 			}
 		});
+	}
+
+	@Override
+	public void buscador(String texto) {
+		listAuxiliar.clear();
+
+		if(texto.isEmpty()){
+			presenter.setDataAdapter(commentsDoctorList);
+			return;
+		}
+
+		for (int i = 0; i < commentsDoctorList.size(); i++) {
+			if(commentsDoctorList.get(i).getNombre().toLowerCase().contains(texto.toLowerCase())){
+				listAuxiliar.add(new Hospital(commentsDoctorList.get(i).getNombre(),commentsDoctorList.get(i).getDireccion()));
+			}
+		}
+		presenter.setDataAdapter(listAuxiliar);
 	}
 }

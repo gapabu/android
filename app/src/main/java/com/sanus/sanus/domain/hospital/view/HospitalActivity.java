@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.sanus.sanus.R;
@@ -39,12 +42,15 @@ public class HospitalActivity extends AppCompatActivity implements HospitalView{
     }
 
     private void setUpView() {
+
         next = findViewById(R.id.btn_next);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+
+        EditText edbuscador = findViewById(R.id.edbuscador);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +59,21 @@ public class HospitalActivity extends AppCompatActivity implements HospitalView{
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
+            }
+        });
+
+        edbuscador.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                presenter.buscador(s.toString());
             }
         });
     }

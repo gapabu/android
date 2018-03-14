@@ -3,6 +3,7 @@ package com.sanus.sanus.domain.comments.interactor;
 import android.util.Log;
 
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -23,25 +24,35 @@ public class CommentsInteractorImpl implements CommentsInteractor {
 
     @Override
     public void viewComents() {
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection("comentarios").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
                 if (e != null) {
                     Log.d(TAG, "Error: " + e.getMessage());
                 }
-                for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
+                for (final DocumentChange doc : documentSnapshots.getDocumentChanges()) {
                     if (doc.getType() == DocumentChange.Type.ADDED) {
-                        String usuario = doc.getDocument().getString("usuario");
-                        String fecha = doc.getDocument().getString("fecha");
-                        String comentario = doc.getDocument().getString("comentario");
-                        String calificacion1 = doc.getDocument().getString("calificacion");
+                        String usuario1 = doc.getDocument().getString("usuario");
+                        final String fecha = doc.getDocument().getString("fecha");
+                        final String comentario = doc.getDocument().getString("comentario");
+                        final String calificacion1 = doc.getDocument().getString("calificacion");
 
-                        commentsDoctorList.add(new CommentsDoctor(usuario, comentario, fecha, calificacion1));
-                        presenter.setDataAdapter(commentsDoctorList);
+                        mFirestore.collection("usuarios").document(usuario1).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                            @Override
+                            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+                                String nombre = documentSnapshot.getString("nombre");
+                                String apellido = documentSnapshot.getString("apellido");
+                                String usuario = nombre + " " +apellido;
+                                commentsDoctorList.add(new CommentsDoctor(usuario,comentario, fecha, calificacion1));
+                                presenter.setDataAdapter(commentsDoctorList);
+                            }
+                        });
                     }
                 }
             }
         });
     }
+
+
 }

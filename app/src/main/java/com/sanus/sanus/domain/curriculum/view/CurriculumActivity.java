@@ -84,7 +84,8 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
     private void initializedData() {
         //datosDoctorList = new ArrayList<>();
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection("doctores").document("MbisakX6endQjlgSdPRqDcAibpY2").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
+        mFirestore.collection("doctores").document("pjfa24XK9caHEFOG0kyQIl1FVAn1").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
@@ -100,22 +101,14 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
                         cedula.setText(cedul);
                         cv.setText(cv1);
 
-                        //storeFirestore(null, user_id);
-                        //mainImageURI = Uri.parse(image);
-                        //setupName.setText(nombre);
-
                         toolbar = (Toolbar) findViewById(R.id.toolbar);
                         setSupportActionBar(toolbar);
                         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                         getSupportActionBar().setTitle(nombre);
 
-
-
                         String url = "https://firebasestorage.googleapis.com/v0/b/sanus-27.appspot.com/o/avatar%2FMbisakX6endQjlgSdPRqDcAibpY2.png?alt=media&token=049741fa-58c0-4566-804b-703f50b92070";
-                        //Glide.with(CurriculumActivity.this).load(url).into(setupImage);
                         Picasso.with(CurriculumActivity.this).load(url).placeholder(R.drawable.default_image).into(setupImage);
-                        //Picasso.with(CurriculumActivity.this).load(url).placeholder(R.drawable.default_image).into(setupImage);
-                        //Toast.makeText(CurriculumActivity.this, "url: " + image, Toast.LENGTH_SHORT).show();
+
 
                     } else {
                         Toast.makeText(CurriculumActivity.this, "Data doen't exist", Toast.LENGTH_SHORT).show();

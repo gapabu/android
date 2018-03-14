@@ -137,7 +137,6 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         CommentsDoctorAdapter commentsDoctorAdapter = new CommentsDoctorAdapter(getApplicationContext(), commentsDoctorList);
         recyclerView.setAdapter(commentsDoctorAdapter);
         commentsDoctorAdapter.notifyDataSetChanged();
-        //commentsDoctorList.clear();
     }
 
 }

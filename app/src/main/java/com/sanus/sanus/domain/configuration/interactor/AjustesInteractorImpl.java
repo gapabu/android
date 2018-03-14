@@ -25,8 +25,6 @@ public class AjustesInteractorImpl implements AjustesInteractor{
     private void showAccount(){
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-
         if (user!=null){
             presenter.showData(user.getDisplayName(), user.getEmail());
 

@@ -203,6 +203,8 @@
     <string name="hospital">Hospital</string>
     <string name="closecita">closeCita</string>
     <string name="savecita">saveCita</string>
+    <string name="search_hospital">Busca hospital</string>
+    <string name="editar_perfil">Editar perfil</string>
 
 
 </resources>

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.sanus.sanus.domain.curriculum.view.CurriculumActivity;
 import com.sanus.sanus.domain.search.data.BusquedaDoctor;
 import com.sanus.sanus.R;
+import com.sanus.sanus.domain.search.presenter.SearchPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,6 @@ import java.util.List;
 public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAdapter.ViewHolder> implements SearchView.OnQueryTextListener {
     private Context context;
     private List<BusquedaDoctor> busquedaDoctorList;
-
     public BusquedaDoctorAdapter(Context context, List<BusquedaDoctor> busquedaDoctorList){
         this.context = context;
         this.busquedaDoctorList = busquedaDoctorList;
@@ -38,26 +38,18 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.nombre.setText(busquedaDoctorList.get(position).getNombre());
         holder.especialidad.setText(busquedaDoctorList.get(position).getEspecialidad());
-
-
-        //final String user_id = busquedaDoctorList.get(position).userId;
-
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(context, "User ID: " + user_id, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(context, CurriculumActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
-                //https://www.youtube.com/watch?v=ZXoGG2XTjzU
             }
-
-
         });
     }
 
@@ -73,7 +65,6 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
 
     @Override
     public boolean onQueryTextChange(String newText) {
-
         return false;
     }
 
@@ -92,18 +83,14 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
         EditText edbuscador;
 
         public ViewHolder(View itemView) {
-
             super(itemView);
             mView = itemView;
 
-            //cardView = itemView.findViewById(R.id.cardView);
             nombre = itemView.findViewById(R.id.nombre);
             especialidad = itemView.findViewById(R.id.especialidad);
             imageView = itemView.findViewById(R.id.avatar);
-
             //buscador
             edbuscador = itemView.findViewById(R.id.edbuscador);
-
         }
     }
 

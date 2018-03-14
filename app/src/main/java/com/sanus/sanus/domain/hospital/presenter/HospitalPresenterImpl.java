@@ -27,4 +27,9 @@ public class HospitalPresenterImpl implements HospitalPresenter{
 	public void viewComents() {
 		interactor.viewComents();
 	}
+
+	@Override
+	public void buscador(String texto) {
+		interactor.buscador(texto);
+	}
 }

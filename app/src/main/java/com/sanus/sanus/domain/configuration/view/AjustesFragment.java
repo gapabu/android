@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.sanus.sanus.domain.account.complete.view.CompleteRegisterActivity;
 import com.sanus.sanus.domain.splash.view.SplashActivity;
 import com.sanus.sanus.utils.alert.CallbackAlert;
 import com.sanus.sanus.domain.configuration.presenter.AjustesPresenter;
@@ -65,6 +66,14 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
             @Override
             public void onClick(View view) {
                 showAlertLogout();
+            }
+        });
+
+        LinearLayout linearLayoutEdit = view.findViewById(R.id.editProfile);
+        linearLayoutEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), CompleteRegisterActivity.class));
             }
         });
 

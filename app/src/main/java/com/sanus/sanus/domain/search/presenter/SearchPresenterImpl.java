@@ -27,6 +27,7 @@ public class SearchPresenterImpl implements SearchPresenter {
         interactor.buscador(texto);
     }
 
+
     @Override
     public void setDataAdapter(List<BusquedaDoctor> busquedaDoctors) {
         view.setDataAdapter(busquedaDoctors);

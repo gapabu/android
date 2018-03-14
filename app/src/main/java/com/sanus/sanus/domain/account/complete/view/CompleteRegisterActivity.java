@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,6 +20,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.account.complete.presenter.CompleteRegisterPresenter;
 import com.sanus.sanus.domain.account.complete.presenter.CompleteRegisterPresenterImpl;
@@ -37,7 +44,7 @@ public class CompleteRegisterActivity extends AppCompatActivity implements Compl
     private Button masculino, femenino, save;
     private Spinner spinnerEdad;
     private ImageView imgavatar;
-    private String edadPosition;
+    private String edadPosition, id;
 
 
     @Override
@@ -48,6 +55,7 @@ public class CompleteRegisterActivity extends AppCompatActivity implements Compl
         setUpVariable();
         setUpView();
         presenter.setUpSpinner();
+        init();
 
     }
 
@@ -251,5 +259,33 @@ public class CompleteRegisterActivity extends AppCompatActivity implements Compl
     @Override
     public ProgressDialog getLoading() {
         return AlertUtils.getLoading(this);
+    }
+
+    private void init(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+           id = user.getUid();
+        }
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("usuarios").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().exists()) {
+                        String name = task.getResult().getString("nombre");
+                        String lasName = task.getResult().getString("apellido");
+
+                        nombre.setText(name);
+                        apellido.setText(lasName);
+                    }else{
+                        Toast.makeText(CompleteRegisterActivity.this, "Data doesn't exit", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    String error = task.getException().getMessage();
+                    Toast.makeText(CompleteRegisterActivity.this, "" + error, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 }

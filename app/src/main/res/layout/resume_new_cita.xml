@@ -277,7 +277,7 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="43dp"
-            app:srcCompat="@drawable/ic_close"
+            app:srcCompat="@mipmap/ic_close"
             android:contentDescription="@string/closecita" />
         <ImageView
             android:id="@+id/saveCita"
@@ -286,7 +286,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="44dp"
-            app:srcCompat="@drawable/ic_save_cite"
+            app:srcCompat="@mipmap/ic_save_cite"
             android:contentDescription="@string/savecita"/>
     </RelativeLayout>
 

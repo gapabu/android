@@ -22,8 +22,6 @@ public class SearchInteractorImpl implements SearchInteractor{
     private final String TAG= this.getClass().getSimpleName();
     private List<BusquedaDoctor> busquedaDoctors =  new ArrayList<>();
     private List<BusquedaDoctor> listAuxiliar = new ArrayList<>();
-    private String nombre;
-    private String especialidad;
     private String user_id;
 
     public SearchInteractorImpl(SearchPresenter presenter) {
@@ -39,31 +37,23 @@ public class SearchInteractorImpl implements SearchInteractor{
                 if (e!=null){
                     Log.d(TAG, "Error: " + e.getMessage());
                 }
-                for(DocumentChange doc: documentSnapshots.getDocumentChanges()){
+                for(final DocumentChange doc: documentSnapshots.getDocumentChanges()){
                     if(doc.getType() == DocumentChange.Type.ADDED){
                         user_id = doc.getDocument().getId();
+                        Log.d(TAG, "id:" + user_id);
+                        final String especialidad = doc.getDocument().getString("especialidad");
+
 
                         mFirestore.collection("usuarios").document(user_id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
                             @Override
                             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-                                if (e!=null){
-                                    Log.d(TAG, "Error" + e.getMessage());
-                                }
-                                for (DocumentChange doc: documentSnapshots.getDocumentChanges()){
-                                    if (doc.getType() == DocumentChange.Type.ADDED) {
-                                        nombre = doc.getDocument().getString("nombre");
-                                        //Log.d(TAG, nombre);
-                                    }
-                                }
-
+                                String nombre = documentSnapshot.getString("nombre");
+                                String apellido = documentSnapshot.getString("apellido");
+                                String usuario = nombre + " " +apellido;
+                                busquedaDoctors.add(new BusquedaDoctor(usuario, especialidad));
+                                presenter.setDataAdapter(busquedaDoctors);
                             }
                         });
-
-                        especialidad = doc.getDocument().getString("especialidad");
-                        //Log.d(TAG,nombre);
-                        busquedaDoctors.add(new BusquedaDoctor(nombre, especialidad));
-                        presenter.setDataAdapter(busquedaDoctors);
-
                     }
                 }
             }
@@ -72,20 +62,17 @@ public class SearchInteractorImpl implements SearchInteractor{
 
     @Override
     public void buscador(String texto) {
-
         listAuxiliar.clear();
-
         if(texto.isEmpty()){
             presenter.setDataAdapter(busquedaDoctors);
             return;
         }
-
         for (int i = 0; i < busquedaDoctors.size(); i++) {
             if(busquedaDoctors.get(i).getEspecialidad().toLowerCase().contains(texto.toLowerCase())){
                 listAuxiliar.add(new BusquedaDoctor(busquedaDoctors.get(i).getNombre(),busquedaDoctors.get(i).getEspecialidad()));
             }
         }
         presenter.setDataAdapter(listAuxiliar);
-
     }
+
 }
