@@ -37,7 +37,7 @@ public class HospitalInteractorImpl implements HospitalInteractor{
 						String id = doc.getDocument().getId();
 						String nombre = doc.getDocument().getString("nombre");
 						String direccion = doc.getDocument().getString("direccion");
-						Log.d(TAG, "id: " +id);
+						//Log.d(TAG, "id: " +id);
 						commentsDoctorList.add(new Hospital(nombre, direccion));
 						presenter.setDataAdapter(commentsDoctorList);
 					}

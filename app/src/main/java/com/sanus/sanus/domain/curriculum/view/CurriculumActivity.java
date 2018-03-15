@@ -1,6 +1,8 @@
 package com.sanus.sanus.domain.curriculum.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -20,6 +24,8 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.comments.view.CommentsActivity;
 import com.sanus.sanus.domain.curriculum.presenter.CurriculumPresenter;
@@ -35,16 +41,15 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
     private CurriculumPresenter presenter;
     ImageView goComent;
     private Toolbar toolbar;
-    TextView curricumlum, cedula, especialidad, cv;
+    TextView cedula, especialidad, cv;
     private CircleImageView setupImage;
     private final String TAG = this.getClass().getSimpleName();
-    private String user_id;
+    private String user_id, image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curriculum);
-
         setUpVariable();
         setUpView();
         initializedData();
@@ -57,17 +62,12 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
     }
 
     public void setUpView() {
-        curricumlum = findViewById(R.id.tvCv);
+        toolbar = findViewById(R.id.toolbar);
         cedula = findViewById(R.id.tvCedula);
         especialidad = findViewById(R.id.tvEspecialidad);
         cv = findViewById(R.id.tvCv);
         setupImage = findViewById(R.id.setup_image);
         goComent = findViewById(R.id.floatinIrComentarios);
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("nombre");
 
         goComent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +86,22 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
                 break;
         }
         return true;
+    }
+
+    private void showImage(){
+        final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://sanus-27.appspot.com/avatar/");
+        storageReference.child(image).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.with(CurriculumActivity.this).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
+                Toast.makeText(CurriculumActivity.this, "Error al traer foto", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initializedData() {
@@ -115,9 +131,11 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
                                             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                                                 String nombre = documentSnapshot.getString("nombre");
                                                 String apellido = documentSnapshot.getString("apellido");
-                                                String image = documentSnapshot.getString("avatar");
+                                                image = documentSnapshot.getString("avatar");
+
+                                                showImage();
                                                 String usuario = nombre + " " +apellido;
-                                                toolbar = findViewById(R.id.toolbar);
+
                                                 setSupportActionBar(toolbar);
                                                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                                                 getSupportActionBar().setTitle(usuario);

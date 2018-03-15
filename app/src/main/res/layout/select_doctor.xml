@@ -68,18 +68,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="43dp"
+                android:layout_marginStart="30dp"
                 app:srcCompat="@drawable/ic_skip"
-                android:contentDescription="@string/btn_skip" />
+                android:contentDescription="@string/app_name" />
             <ImageView
                 android:id="@+id/btn_next"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="44dp"
+                android:layout_marginEnd="30dp"
                 app:srcCompat="@drawable/ic_next"
-                android:contentDescription="@string/btn_next" />
+                android:contentDescription="@string/app_name" />
         </RelativeLayout>
     </RelativeLayout>
 

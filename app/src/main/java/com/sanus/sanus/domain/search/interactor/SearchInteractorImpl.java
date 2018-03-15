@@ -40,7 +40,7 @@ public class SearchInteractorImpl implements SearchInteractor{
                 for(final DocumentChange doc: documentSnapshots.getDocumentChanges()){
                     if(doc.getType() == DocumentChange.Type.ADDED){
                         user_id = doc.getDocument().getId();
-                        Log.d(TAG, "id:" + user_id);
+                        //Log.d(TAG, "id:" + user_id);
                         final String especialidad = doc.getDocument().getString("especialidad");
 
 

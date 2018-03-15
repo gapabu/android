@@ -35,12 +35,9 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ajustes, container, false);
-
         setUpVariable();
         setUpView(view);
-        
         return view;
-
     }
 
     @Override

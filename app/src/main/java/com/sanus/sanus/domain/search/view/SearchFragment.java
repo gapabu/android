@@ -34,9 +34,7 @@ public class SearchFragment extends Fragment implements SearchView{
         View view = inflater.inflate(R.layout.fragment_buscar, container, false);
         setUpVariable();
         setUpView(view);
-
         presenter.init();
-
         return view;
     }
 

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,11 +22,15 @@ import android.widget.Toast;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.account.complete.presenter.CompleteRegisterPresenter;
 import com.sanus.sanus.domain.account.complete.presenter.CompleteRegisterPresenterImpl;
@@ -44,7 +49,7 @@ public class CompleteRegisterActivity extends AppCompatActivity implements Compl
     private Button masculino, femenino, save;
     private Spinner spinnerEdad;
     private ImageView imgavatar;
-    private String edadPosition, id;
+    private String edadPosition, id, img;
 
 
     @Override
@@ -261,6 +266,21 @@ public class CompleteRegisterActivity extends AppCompatActivity implements Compl
         return AlertUtils.getLoading(this);
     }
 
+    private void showImage(){
+        final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://sanus-27.appspot.com/avatar/");
+        storageReference.child(img).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                GlideApp.with(CompleteRegisterActivity.this).load(uri.toString()).apply(RequestOptions.circleCropTransform()).into(imgavatar);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
+                Toast.makeText(CompleteRegisterActivity.this, "Error al traer foto", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     private void init(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -274,9 +294,10 @@ public class CompleteRegisterActivity extends AppCompatActivity implements Compl
                     if (task.getResult().exists()) {
                         String name = task.getResult().getString("nombre");
                         String lasName = task.getResult().getString("apellido");
-
+                        img = task.getResult().getString("avatar");
                         nombre.setText(name);
                         apellido.setText(lasName);
+                        showImage();
                     }else{
                         Toast.makeText(CompleteRegisterActivity.this, "Data doesn't exit", Toast.LENGTH_SHORT).show();
                     }

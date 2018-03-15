@@ -44,7 +44,10 @@ public class SelectDoctorInteractorImpl implements SelectDoctorInteractor {
                             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                                 String nombre = documentSnapshot.getString("nombre");
                                 String apellido = documentSnapshot.getString("apellido");
+                                String image = documentSnapshot.getString("avatar");
+
                                 String usuario = nombre + " " +apellido;
+                                Log.d(TAG, image);
                                 commentsDoctorList.add(new SelectDoctor(usuario, especialidad));
                                 presenter.setDataAdapter(commentsDoctorList);
                             }

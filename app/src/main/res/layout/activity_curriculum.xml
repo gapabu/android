@@ -38,22 +38,6 @@
             tools:ignore="RtlHardcoded"
             android:focusable="true" />
 
-        <ImageView
-            android:id="@+id/floatinNewComent"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignTop="@+id/setup_image"
-            android:layout_marginEnd="21dp"
-            android:layout_marginRight="21dp"
-            android:layout_toLeftOf="@+id/setup_image"
-            android:layout_toStartOf="@+id/setup_image"
-            android:clickable="true"
-            android:visibility="invisible"
-            app:srcCompat="@drawable/icon_mas"
-            tools:ignore="RtlHardcoded"
-            android:focusable="true"
-            android:contentDescription="@string/app_name" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
