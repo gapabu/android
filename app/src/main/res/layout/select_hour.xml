@@ -30,8 +30,10 @@
 
         <LinearLayout
             android:id="@+id/lyTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_vertical_margin"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="60dp"
             android:background="@drawable/btnround"
@@ -40,7 +42,7 @@
 
             <TextView
                 android:id="@+id/tvTitle"
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
                 android:textColor="@android:color/black"
@@ -78,8 +80,10 @@
         android:id="@+id/timePicker"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
         android:headerBackground="@color/colorPrimaryDark"
         android:numbersBackgroundColor="@color/colorPrimaryDark"
         android:background="@color/colorPrimary" />

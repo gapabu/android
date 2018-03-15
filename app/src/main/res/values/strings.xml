@@ -205,6 +205,8 @@
     <string name="savecita">saveCita</string>
     <string name="search_hospital">Busca hospital</string>
     <string name="editar_perfil">Editar perfil</string>
+    <string name="cedula">Cedula</string>
+    <string name="cv">CV</string>
 
 
 </resources>

@@ -1,4 +1,5 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/lyContent"
     android:layout_width="match_parent"
@@ -14,7 +15,7 @@
         <LinearLayout
             android:id="@+id/lyHeader"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:orientation="vertical">
 
             <ImageView
@@ -28,44 +29,46 @@
                 app:srcCompat="@drawable/hcitas" />
         </LinearLayout>
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/carTitle"
-            android:background="@drawable/btnaranja"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/lySearch"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="90dp">
+            android:layout_marginBottom="@dimen/margin_15"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/btnround"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/lyTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3">
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="@string/my_history_quotes"/>
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvTitle"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:text="@string/my_history_quotes"/>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabAdd"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="255dp"
-            android:layout_marginTop="180dp"
-            android:src="@drawable/icon_mas"
-            app:backgroundTint="@color/btnCrea" />
+            android:layout_marginTop="160dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/newCita"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="30dp"
+                app:srcCompat="@drawable/icon_mas"
+                android:contentDescription="@string/app_name" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

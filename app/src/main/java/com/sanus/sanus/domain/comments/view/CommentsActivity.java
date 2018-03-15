@@ -37,7 +37,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     private CommentsPresenter presenter;
     private RatingBar ratingBar;
     private EditText edNuevoComentario;
-    private String id;
+    private String id, user_id;
     RecyclerView recyclerView;
     CommentsDoctorAdapter adapter;
 
@@ -96,11 +96,12 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     @Override
     public void sendComments() {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-
+        FirebaseFirestore mDoctor = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             id = user.getUid();
         }
+        mDoctor.collection("doctores").getId();
 
         final Calendar calendar = Calendar.getInstance();
         int dia = calendar.get(Calendar.DAY_OF_MONTH);

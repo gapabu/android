@@ -2,14 +2,13 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/toolbar">
-    </include>
+    <include layout="@layout/toolbar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,7 +34,9 @@
             android:layout_toRightOf="@+id/setup_image"
             android:clickable="true"
             app:backgroundTint="@color/colorPrimaryDark"
-            app:srcCompat="@drawable/ic_book" />
+            app:srcCompat="@drawable/ic_book"
+            tools:ignore="RtlHardcoded"
+            android:focusable="true" />
 
         <ImageView
             android:id="@+id/floatinNewComent"
@@ -48,7 +49,10 @@
             android:layout_toStartOf="@+id/setup_image"
             android:clickable="true"
             android:visibility="invisible"
-            app:srcCompat="@drawable/icon_mas" />
+            app:srcCompat="@drawable/icon_mas"
+            tools:ignore="RtlHardcoded"
+            android:focusable="true"
+            android:contentDescription="@string/app_name" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,29 +67,17 @@
             android:orientation="vertical"
             android:id="@+id/linearLayout2">
 
-            <!-- <TextView
-                 android:id="@+id/tvNombre"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_marginBottom="3dp"
-                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                 android:layout_marginTop="8dp"
-                 android:text="Nombre"
-                 android:textSize="16dp"
-                 style="@style/titulos"/>-->
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="8dp"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin">
+                android:layout_marginStart="@dimen/activity_horizontal_margin">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Especialidad:"/>
+                    android:text="@string/especialidad"/>
 
                 <TextView
                     android:id="@+id/tvEspecialidad"
@@ -94,7 +86,7 @@
                     android:layout_marginBottom="3dp"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:text="Especialidad" />
+                    android:text="@string/especialidad" />
 
             </LinearLayout>
 
@@ -103,13 +95,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="8dp"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin">
+                android:layout_marginStart="@dimen/activity_horizontal_margin">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:text="Cedula" />
+                    android:text="@string/cedula" />
 
                 <TextView
                     android:id="@+id/tvCedula"
@@ -118,7 +110,7 @@
                     android:layout_marginBottom="3dp"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:text="Cedula" />
+                    android:text="@string/cedula" />
 
             </LinearLayout>
 
@@ -140,12 +132,11 @@
                 android:id="@+id/tvCv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="16dp"
-                android:text="CV" />
+                android:text="@string/cv" />
         </LinearLayout>
 
 

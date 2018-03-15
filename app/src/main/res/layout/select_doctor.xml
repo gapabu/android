@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
-    android:background="@color/colorPrimary">
+    tools:context="com.sanus.sanus.domain.select_doctor.view.SelectDoctorActivity">
 
     <RelativeLayout
         android:id="@+id/rlHeader"
@@ -29,21 +32,29 @@
 
         <LinearLayout
             android:id="@+id/lyTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="60dp"
             android:background="@drawable/btnround"
             android:orientation="horizontal"
             android:weightSum="3">
 
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
+            <EditText
+                android:id="@+id/edbuscador"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_gravity="center"
+                android:background="@drawable/btnround"
                 android:gravity="center"
-                android:textColor="@android:color/black"
-                android:text="@string/select_doctor" />
+                android:hint="@string/serch_speciality"
+                android:imeActionId="6"
+                android:imeOptions="actionUnspecified"
+                android:maxLines="1"
+                android:singleLine="true"/>
         </LinearLayout>
 
         <RelativeLayout
@@ -68,16 +79,17 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="44dp"
                 app:srcCompat="@drawable/ic_next"
-                android:contentDescription="@string/btn_next"/>
+                android:contentDescription="@string/btn_next" />
         </RelativeLayout>
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin">
+        android:layout_below="@+id/rlHeader">
     </android.support.v7.widget.RecyclerView>
 
 
-</LinearLayout>
-
+</RelativeLayout>

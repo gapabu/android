@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.sanus.sanus.domain.citas.adapter.CitasAdapter;
 import com.sanus.sanus.domain.citas.data.Citas;
@@ -25,7 +26,7 @@ public class CitasFragment extends Fragment implements CitasView {
     private CitasPresenter presenter;
     private RecyclerView recyclerView;
     public static String IDENTIFIER = "CITAS_FRAGMENT";
-    FloatingActionButton newCita;
+    ImageView newCita;
 
     @Nullable
     @Override
@@ -35,7 +36,7 @@ public class CitasFragment extends Fragment implements CitasView {
         setUpVariable();
         setUpView(view);
         presenter.init();
-        newCita = view.findViewById(R.id.fabAdd);
+        newCita = view.findViewById(R.id.newCita);
 
         newCita.setOnClickListener(new View.OnClickListener() {
             @Override

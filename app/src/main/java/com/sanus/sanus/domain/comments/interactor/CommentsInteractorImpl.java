@@ -48,6 +48,8 @@ public class CommentsInteractorImpl implements CommentsInteractor {
                                 presenter.setDataAdapter(commentsDoctorList);
                             }
                         });
+                    }else {
+                        Log.d(TAG, "Data doen't exist");
                     }
                 }
             }
