@@ -26,7 +26,7 @@ public class SelectDoctorActivity extends AppCompatActivity implements SelectDoc
     private SelectDoctorPresenter presenter;
     RecyclerView recyclerView;
     SelectDoctorAdapter adapter;
-    private ImageView next;
+    private ImageView next, skip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class SelectDoctorActivity extends AppCompatActivity implements SelectDoc
     private void setUpView() {
 
         next = findViewById(R.id.btn_next);
+        skip = findViewById(R.id.btn_skip);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
@@ -54,6 +55,14 @@ public class SelectDoctorActivity extends AppCompatActivity implements SelectDoc
 
         EditText edbuscador = findViewById(R.id.edbuscador);
 
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SelectDoctorActivity.this, HospitalActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                finish();
+            }
+        });
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

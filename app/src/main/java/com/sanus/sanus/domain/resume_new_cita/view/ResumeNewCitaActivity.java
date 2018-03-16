@@ -55,5 +55,7 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
     public void goActivity(){
         Intent intent = new Intent(ResumeNewCitaActivity.this, MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        finish();
     }
 }

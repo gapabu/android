@@ -74,6 +74,8 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
             public void onClick(View v) {
                 Intent intent = new Intent(CurriculumActivity.this, CommentsActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
             }
         });
     }
@@ -82,6 +84,7 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         switch (menuItem.getItemId()) {
             case android.R.id.home:
                 startActivity(new Intent(this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
                 break;
         }

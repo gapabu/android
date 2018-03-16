@@ -85,6 +85,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         switch (menuItem.getItemId()){
             case android.R.id.home:
                 startActivity(new Intent(this, CurriculumActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
                 break;
         }
@@ -116,13 +117,14 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         commentMap.put("comentario", comments);
         commentMap.put("fecha", date);
         commentMap.put("calificacion", String.valueOf(valoracionDoc));
-        commentMap.put("doctor", "MbisakX6endQjlgSdPRqDcAibpY2");
+        commentMap.put("doctor", "RaxaHfHCSYPnggnebd6WNHOhHeO2");
         commentMap.put("usuario", id);
 
         mFirestore.collection("comentarios").add(commentMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 startActivity(new Intent(getApplicationContext(), CommentsActivity.class));
+                //overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
             }
         }).addOnFailureListener(new OnFailureListener() {

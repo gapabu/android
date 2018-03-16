@@ -16,6 +16,7 @@ import com.sanus.sanus.domain.hospital.adapter.HospitalAdapter;
 import com.sanus.sanus.domain.hospital.data.Hospital;
 import com.sanus.sanus.domain.hospital.presenter.HospitalPresenter;
 import com.sanus.sanus.domain.hospital.presenter.HospitalPresenterImpl;
+import com.sanus.sanus.domain.main.view.MainActivity;
 import com.sanus.sanus.domain.select_doctor.view.SelectDoctorActivity;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class HospitalActivity extends AppCompatActivity implements HospitalView{
     private HospitalPresenter presenter;
     RecyclerView recyclerView;
     HospitalAdapter adapter;
-    private ImageView next;
+    private ImageView next, close;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class HospitalActivity extends AppCompatActivity implements HospitalView{
     private void setUpView() {
 
         next = findViewById(R.id.btn_next);
+        close = findViewById(R.id.btn_close);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
@@ -58,6 +60,15 @@ public class HospitalActivity extends AppCompatActivity implements HospitalView{
                 Intent intent = new Intent(HospitalActivity.this, SelectDoctorActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HospitalActivity.this, MainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
             }
         });
