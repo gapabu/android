@@ -48,8 +48,8 @@ public class SelectDoctorAdapter extends RecyclerView.Adapter<SelectDoctorAdapte
         holder.nombre.setText(commentsDoctorList.get(position).getNombre());
         holder.especialidad.setText(commentsDoctorList.get(position).getEspecialidad());
 
-        /*final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://sanus-27.appspot.com/avatar/");
-        storageReference.child(image).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://sanus-27.appspot.com/avatar/");
+        storageReference.child(commentsDoctorList.get(position).getAvatar()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Picasso.with(context).load(uri.toString()).placeholder(R.drawable.user).into(holder.avatar);
@@ -60,9 +60,7 @@ public class SelectDoctorAdapter extends RecyclerView.Adapter<SelectDoctorAdapte
                 e.printStackTrace();
                 Toast.makeText(context, "Error al traer foto", Toast.LENGTH_SHORT).show();
             }
-        });*/
-        String url= "https://firebasestorage.googleapis.com/v0/b/sanus-27.appspot.com/o/avatar%2FbOCiPsUoNMMfh09ddh9M5hQOn163?alt=media&token=03d6b45d-5f32-499e-9827-02ace8dcabb6";
-        Picasso.with(context).load(url).placeholder(R.drawable.default_image).into(holder.avatar);
+        });
     }
 
     @Override
@@ -98,6 +96,7 @@ public class SelectDoctorAdapter extends RecyclerView.Adapter<SelectDoctorAdapte
             mView = itemView;
             nombre =  itemView.findViewById(R.id.nombre);
             especialidad =  itemView.findViewById(R.id.especialidad);
+            //img = itemView.findViewById(R.id.idUs);
             //buscador
             edbuscador = itemView.findViewById(R.id.edbuscador);
             avatar = itemView.findViewById(R.id.avatar);

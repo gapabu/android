@@ -4,7 +4,7 @@ public class SelectDoctor {
     private String nombre;
     private String especialidad;
 
-   /* public String getAvatar() {
+   public String getAvatar() {
         return avatar;
     }
 
@@ -12,11 +12,11 @@ public class SelectDoctor {
         this.avatar = avatar;
     }
 
-    private String avatar;*/
-    public SelectDoctor(String nombre, String especialidad) {
+    private String avatar;
+    public SelectDoctor(String nombre, String especialidad, String avatar) {
         this.nombre = nombre;
         this.especialidad = especialidad;
-        //this.avatar = avatar;
+        this.avatar = avatar;
     }
 
     public String getNombre() {return nombre;}

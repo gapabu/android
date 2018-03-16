@@ -1,16 +1,20 @@
 package com.sanus.sanus.domain.select_doctor.interactor;
 
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.util.Log;
-
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.domain.select_doctor.data.SelectDoctor;
 import com.sanus.sanus.domain.select_doctor.presenter.SelectDoctorPresenter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,18 +41,15 @@ public class SelectDoctorInteractorImpl implements SelectDoctorInteractor {
                         String user_id = doc.getDocument().getId();
                         Log.d(TAG, "id:" + user_id);
                         final String especialidad = doc.getDocument().getString("especialidad");
-
-
                         mFirestore.collection("usuarios").document(user_id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
                             @Override
                             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                                 String nombre = documentSnapshot.getString("nombre");
                                 String apellido = documentSnapshot.getString("apellido");
-                                String image = documentSnapshot.getString("avatar");
-
+                                final String image = documentSnapshot.getString("avatar");
                                 String usuario = nombre + " " +apellido;
-                                Log.d(TAG, image);
-                                commentsDoctorList.add(new SelectDoctor(usuario, especialidad));
+                                //Log.d(TAG, image);
+                                commentsDoctorList.add(new SelectDoctor(usuario, especialidad,image));
                                 presenter.setDataAdapter(commentsDoctorList);
                             }
                         });
@@ -67,7 +68,7 @@ public class SelectDoctorInteractorImpl implements SelectDoctorInteractor {
         }
         for (int i = 0; i < commentsDoctorList.size(); i++) {
             if(commentsDoctorList.get(i).getEspecialidad().toLowerCase().contains(texto.toLowerCase())){
-                listAuxiliar.add(new SelectDoctor(commentsDoctorList.get(i).getNombre(),commentsDoctorList.get(i).getEspecialidad()));
+                listAuxiliar.add(new SelectDoctor(commentsDoctorList.get(i).getNombre(),commentsDoctorList.get(i).getEspecialidad(), commentsDoctorList.get(i).getAvatar()));
             }
         }
         presenter.setDataAdapter(listAuxiliar);
