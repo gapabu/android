@@ -49,8 +49,9 @@ public class SearchInteractorImpl implements SearchInteractor{
                             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                                 String nombre = documentSnapshot.getString("nombre");
                                 String apellido = documentSnapshot.getString("apellido");
+                                final String image = documentSnapshot.getString("avatar");
                                 String usuario = nombre + " " +apellido;
-                                busquedaDoctors.add(new BusquedaDoctor(usuario, especialidad));
+                                busquedaDoctors.add(new BusquedaDoctor(usuario, especialidad, image));
                                 presenter.setDataAdapter(busquedaDoctors);
                             }
                         });
@@ -69,7 +70,7 @@ public class SearchInteractorImpl implements SearchInteractor{
         }
         for (int i = 0; i < busquedaDoctors.size(); i++) {
             if(busquedaDoctors.get(i).getEspecialidad().toLowerCase().contains(texto.toLowerCase())){
-                listAuxiliar.add(new BusquedaDoctor(busquedaDoctors.get(i).getNombre(),busquedaDoctors.get(i).getEspecialidad()));
+                listAuxiliar.add(new BusquedaDoctor(busquedaDoctors.get(i).getNombre(),busquedaDoctors.get(i).getEspecialidad(),busquedaDoctors.get(i).getAvatar()));
             }
         }
         presenter.setDataAdapter(listAuxiliar);

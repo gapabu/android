@@ -44,12 +44,12 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                <ImageView
-                    android:id="@+id/imgAvatar"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatar"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:contentDescription="@string/app_name"
-                    app:srcCompat="@drawable/user" />
+                    android:src="@drawable/user"/>
 
                 <TextView
                     android:id="@+id/tvNombre"

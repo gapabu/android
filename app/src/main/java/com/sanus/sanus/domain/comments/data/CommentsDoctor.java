@@ -5,12 +5,20 @@ public class CommentsDoctor {
     private String cometario;
     private String fecha;
     private String calificacion;
+    private String avatar;
 
-    public CommentsDoctor(String usuario, String cometario, String fecha, String calificacion) {
+    public String getAvatar() {return avatar;}
+
+    public void setAvatar(String avatar) {this.avatar = avatar;}
+
+
+
+    public CommentsDoctor(String usuario, String cometario, String fecha, String calificacion, String avatar) {
         this.usuario = usuario;
         this.cometario = cometario;
         this.fecha = fecha;
         this.calificacion = calificacion;
+        this.avatar = avatar;
     }
 
     public String getUsuario() {

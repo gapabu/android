@@ -1,15 +1,18 @@
 package com.sanus.sanus.domain.search.data;
 
-
-import com.sanus.sanus.domain.account.data.UserId;
-
-public class BusquedaDoctor extends UserId {
+public class BusquedaDoctor{
     private String nombre;
     private String especialidad;
+    private String avatar;
 
-    public BusquedaDoctor (String nombre, String especialidad){
+    public String getAvatar() {return avatar;}
+    public void setAvatar(String avatar) {this.avatar = avatar;}
+
+
+    public BusquedaDoctor (String nombre, String especialidad, String avatar){
         this.nombre = nombre;
         this.especialidad = especialidad;
+        this.avatar = avatar;
     }
 
     public String getNombre() {

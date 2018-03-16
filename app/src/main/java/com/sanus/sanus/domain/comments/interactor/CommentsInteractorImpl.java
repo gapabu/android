@@ -43,8 +43,9 @@ public class CommentsInteractorImpl implements CommentsInteractor {
                             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                                 String nombre = documentSnapshot.getString("nombre");
                                 String apellido = documentSnapshot.getString("apellido");
+                                final String image = documentSnapshot.getString("avatar");
                                 String usuario = nombre + " " +apellido;
-                                commentsDoctorList.add(new CommentsDoctor(usuario,comentario, fecha, calificacion1));
+                                commentsDoctorList.add(new CommentsDoctor(usuario,comentario, fecha, calificacion1,image));
                                 presenter.setDataAdapter(commentsDoctorList);
                             }
                         });

@@ -2,6 +2,7 @@ package com.sanus.sanus.domain.search.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,12 +12,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.domain.curriculum.view.CurriculumActivity;
 import com.sanus.sanus.domain.search.data.BusquedaDoctor;
 import com.sanus.sanus.R;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAdapter.ViewHolder> implements SearchView.OnQueryTextListener {
     private Context context;
@@ -37,6 +47,20 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.nombre.setText(busquedaDoctorList.get(position).getNombre());
         holder.especialidad.setText(busquedaDoctorList.get(position).getEspecialidad());
+
+        final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://sanus-27.appspot.com/avatar/");
+        storageReference.child(busquedaDoctorList.get(position).getAvatar()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.with(context).load(uri.toString()).placeholder(R.drawable.user).into(holder.avatar);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
+                Toast.makeText(context, "Error al traer foto", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +100,7 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
         TextView nombre, especialidad;
         ImageView imageView;
         EditText edbuscador;
+        CircleImageView avatar;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -83,9 +108,8 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
 
             nombre = itemView.findViewById(R.id.nombre);
             especialidad = itemView.findViewById(R.id.especialidad);
-            imageView = itemView.findViewById(R.id.avatar);
-            //buscador
             edbuscador = itemView.findViewById(R.id.edbuscador);
+            avatar = itemView.findViewById(R.id.avatar);
         }
     }
 

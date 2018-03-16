@@ -96,8 +96,6 @@ public class SelectDoctorAdapter extends RecyclerView.Adapter<SelectDoctorAdapte
             mView = itemView;
             nombre =  itemView.findViewById(R.id.nombre);
             especialidad =  itemView.findViewById(R.id.especialidad);
-            //img = itemView.findViewById(R.id.idUs);
-            //buscador
             edbuscador = itemView.findViewById(R.id.edbuscador);
             avatar = itemView.findViewById(R.id.avatar);
         }

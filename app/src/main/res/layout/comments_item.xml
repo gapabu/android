@@ -31,7 +31,7 @@
                 tools:ignore="UselessParent">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgAvatar"
+                    android:id="@+id/avatar"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
@@ -49,8 +49,8 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginLeft="13dp"
                     android:layout_marginStart="13dp"
-                    android:layout_toEndOf="@+id/imgAvatar"
-                    android:layout_toRightOf="@+id/imgAvatar"
+                    android:layout_toEndOf="@+id/avatar"
+                    android:layout_toRightOf="@+id/avatar"
                     android:text="@string/usuario"
                     tools:ignore="RtlHardcoded" />
             </RelativeLayout>
