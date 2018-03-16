@@ -3,8 +3,11 @@ package com.sanus.sanus.domain.select_doctor.interactor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
+
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -28,35 +31,36 @@ public class SelectDoctorInteractorImpl implements SelectDoctorInteractor {
     public SelectDoctorInteractorImpl(SelectDoctorPresenter presenter){this.presenter = presenter;}
 
     @Override
-    public void viewComents() {
+    public void viewComents(String idDoc) {
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection("doctores").addSnapshotListener(new EventListener<QuerySnapshot>() {
+
+        mFirestore.collection("doctores").whereEqualTo("hospital", idDoc).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onEvent(final QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                if (e!=null){
-                    Log.d(TAG, "Error: " + e.getMessage());
-                }
-                for(final DocumentChange doc: documentSnapshots.getDocumentChanges()){
-                    if(doc.getType() == DocumentChange.Type.ADDED){
-                        String user_id = doc.getDocument().getId();
-                        Log.d(TAG, "id:" + user_id);
-                        final String especialidad = doc.getDocument().getString("especialidad");
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot document : task.getResult()) {
+                        final String user_id = document.getId();
+                        final String especialidad = document.getString("especialidad");
+
                         mFirestore.collection("usuarios").document(user_id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
                             @Override
                             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                                 String nombre = documentSnapshot.getString("nombre");
                                 String apellido = documentSnapshot.getString("apellido");
                                 final String image = documentSnapshot.getString("avatar");
-                                String usuario = nombre + " " +apellido;
+                                String usuario = nombre + " " + apellido;
                                 //Log.d(TAG, image);
-                                commentsDoctorList.add(new SelectDoctor(usuario, especialidad,image));
+                                commentsDoctorList.add(new SelectDoctor(usuario, especialidad, image, user_id));
                                 presenter.setDataAdapter(commentsDoctorList);
                             }
-                        });
+                            });
+                        }
                     }
                 }
-            }
-        });
+            });
+
+
+
     }
 
     @Override
@@ -68,7 +72,8 @@ public class SelectDoctorInteractorImpl implements SelectDoctorInteractor {
         }
         for (int i = 0; i < commentsDoctorList.size(); i++) {
             if(commentsDoctorList.get(i).getEspecialidad().toLowerCase().contains(texto.toLowerCase())){
-                listAuxiliar.add(new SelectDoctor(commentsDoctorList.get(i).getNombre(),commentsDoctorList.get(i).getEspecialidad(), commentsDoctorList.get(i).getAvatar()));
+                listAuxiliar.add(new SelectDoctor(commentsDoctorList.get(i).getNombre(),commentsDoctorList.get(i).getEspecialidad(),
+                        commentsDoctorList.get(i).getAvatar(), commentsDoctorList.get(i).getId()));
             }
         }
         presenter.setDataAdapter(listAuxiliar);

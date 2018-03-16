@@ -34,11 +34,11 @@ public class HospitalInteractorImpl implements HospitalInteractor{
 				}
 				for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
 					if (doc.getType() == DocumentChange.Type.ADDED) {
-						String id = doc.getDocument().getId();
+						final String user_id = doc.getDocument().getId();
 						String nombre = doc.getDocument().getString("nombre");
 						String direccion = doc.getDocument().getString("direccion");
 						//Log.d(TAG, "id: " +id);
-						commentsDoctorList.add(new Hospital(nombre, direccion));
+						commentsDoctorList.add(new Hospital(nombre, direccion, user_id));
 						presenter.setDataAdapter(commentsDoctorList);
 					}
 				}
@@ -57,7 +57,8 @@ public class HospitalInteractorImpl implements HospitalInteractor{
 
 		for (int i = 0; i < commentsDoctorList.size(); i++) {
 			if(commentsDoctorList.get(i).getNombre().toLowerCase().contains(texto.toLowerCase())){
-				listAuxiliar.add(new Hospital(commentsDoctorList.get(i).getNombre(),commentsDoctorList.get(i).getDireccion()));
+				listAuxiliar.add(new Hospital(commentsDoctorList.get(i).getNombre(),commentsDoctorList.get(i).getDireccion()
+												,commentsDoctorList.get(i).getId()));
 			}
 		}
 		presenter.setDataAdapter(listAuxiliar);

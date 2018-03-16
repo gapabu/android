@@ -1,6 +1,7 @@
 package com.sanus.sanus.domain.hospital.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.hospital.data.Hospital;
+import com.sanus.sanus.domain.select_doctor.view.SelectDoctorActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +35,19 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HospitalAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HospitalAdapter.ViewHolder holder, final int position) {
         holder.nombre.setText(commentsDoctorList.get(position).getNombre());
         holder.direccion.setText(commentsDoctorList.get(position).getDireccion());
-
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(context, " " + commentsDoctorList.get(position).getId(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, SelectDoctorActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("id", commentsDoctorList.get(position).getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

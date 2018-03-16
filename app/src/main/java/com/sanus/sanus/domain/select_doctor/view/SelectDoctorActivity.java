@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.hospital.view.HospitalActivity;
@@ -27,6 +28,7 @@ public class SelectDoctorActivity extends AppCompatActivity implements SelectDoc
     RecyclerView recyclerView;
     SelectDoctorAdapter adapter;
     private ImageView next, skip;
+    private String idUs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class SelectDoctorActivity extends AppCompatActivity implements SelectDoc
         setContentView(R.layout.select_doctor);
         setUpVariable();
         setUpView();
-        presenter.viewComents();
+        presenter.viewComents(idUs);
     }
 
     private void setUpVariable() {
@@ -44,7 +46,8 @@ public class SelectDoctorActivity extends AppCompatActivity implements SelectDoc
     }
 
     private void setUpView() {
-
+        idUs = getIntent().getStringExtra("id");
+        Toast.makeText(this, "" + idUs, Toast.LENGTH_SHORT).show();
         next = findViewById(R.id.btn_next);
         skip = findViewById(R.id.btn_skip);
         recyclerView = findViewById(R.id.recyclerView);

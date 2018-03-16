@@ -5,9 +5,20 @@ public class Hospital {
 
     private String nombre;
     private String direccion;
-    public Hospital(String nombre, String direccion) {
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private String id;
+    public Hospital(String nombre, String direccion, String id) {
         this.nombre = nombre;
         this.direccion = direccion;
+        this.id = id;
     }
     public String getNombre() {
         return nombre;

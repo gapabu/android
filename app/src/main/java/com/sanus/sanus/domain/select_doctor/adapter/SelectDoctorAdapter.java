@@ -44,7 +44,7 @@ public class SelectDoctorAdapter extends RecyclerView.Adapter<SelectDoctorAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final SelectDoctorAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final SelectDoctorAdapter.ViewHolder holder, final int position) {
         holder.nombre.setText(commentsDoctorList.get(position).getNombre());
         holder.especialidad.setText(commentsDoctorList.get(position).getEspecialidad());
 
@@ -59,6 +59,12 @@ public class SelectDoctorAdapter extends RecyclerView.Adapter<SelectDoctorAdapte
             public void onFailure(@NonNull Exception e) {
                 e.printStackTrace();
                 Toast.makeText(context, "Error al traer foto", Toast.LENGTH_SHORT).show();
+            }
+        });
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, " " + commentsDoctorList.get(position).getId(), Toast.LENGTH_SHORT).show();
             }
         });
     }
