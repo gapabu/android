@@ -67,6 +67,7 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
             public void onClick(View v) {
                 Intent intent = new Intent(context, CurriculumActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("id", busquedaDoctorList.get(position).getId());
                 context.startActivity(intent);
             }
         });
@@ -98,7 +99,6 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
         View mView;
 
         TextView nombre, especialidad;
-        ImageView imageView;
         EditText edbuscador;
         CircleImageView avatar;
 
@@ -110,6 +110,7 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
             especialidad = itemView.findViewById(R.id.especialidad);
             edbuscador = itemView.findViewById(R.id.edbuscador);
             avatar = itemView.findViewById(R.id.avatar);
+
         }
     }
 

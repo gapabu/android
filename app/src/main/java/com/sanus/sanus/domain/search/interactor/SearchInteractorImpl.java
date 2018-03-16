@@ -22,7 +22,6 @@ public class SearchInteractorImpl implements SearchInteractor{
     private final String TAG= this.getClass().getSimpleName();
     private List<BusquedaDoctor> busquedaDoctors =  new ArrayList<>();
     private List<BusquedaDoctor> listAuxiliar = new ArrayList<>();
-    private String user_id;
 
     public SearchInteractorImpl(SearchPresenter presenter) {
         this.presenter = presenter;
@@ -39,10 +38,9 @@ public class SearchInteractorImpl implements SearchInteractor{
                 }
                 for(final DocumentChange doc: documentSnapshots.getDocumentChanges()){
                     if(doc.getType() == DocumentChange.Type.ADDED){
-                        user_id = doc.getDocument().getId();
-                        //Log.d(TAG, "id:" + user_id);
+                        final String user_id = doc.getDocument().getId();
+                        Log.d(TAG, "id:" + user_id);
                         final String especialidad = doc.getDocument().getString("especialidad");
-
 
                         mFirestore.collection("usuarios").document(user_id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
                             @Override
@@ -51,8 +49,9 @@ public class SearchInteractorImpl implements SearchInteractor{
                                 String apellido = documentSnapshot.getString("apellido");
                                 final String image = documentSnapshot.getString("avatar");
                                 String usuario = nombre + " " +apellido;
-                                busquedaDoctors.add(new BusquedaDoctor(usuario, especialidad, image));
+                                busquedaDoctors.add(new BusquedaDoctor(usuario, especialidad, image, user_id));
                                 presenter.setDataAdapter(busquedaDoctors);
+                                //Log.d(TAG, "id: " + user_id);
                             }
                         });
                     }
@@ -70,7 +69,8 @@ public class SearchInteractorImpl implements SearchInteractor{
         }
         for (int i = 0; i < busquedaDoctors.size(); i++) {
             if(busquedaDoctors.get(i).getEspecialidad().toLowerCase().contains(texto.toLowerCase())){
-                listAuxiliar.add(new BusquedaDoctor(busquedaDoctors.get(i).getNombre(),busquedaDoctors.get(i).getEspecialidad(),busquedaDoctors.get(i).getAvatar()));
+                listAuxiliar.add(new BusquedaDoctor(busquedaDoctors.get(i).getNombre(),busquedaDoctors.get(i).getEspecialidad(),
+                        busquedaDoctors.get(i).getAvatar(),busquedaDoctors.get(i).getId() ));
             }
         }
         presenter.setDataAdapter(listAuxiliar);

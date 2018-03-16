@@ -45,6 +45,7 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
     private CircleImageView setupImage;
     private final String TAG = this.getClass().getSimpleName();
     private String user_id, image;
+    private String idUs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CurriculumActivity.this, CommentsActivity.class);
+                intent.putExtra("id", idUs);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
@@ -108,51 +110,33 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
     }
 
     private void initializedData() {
+        idUs = getIntent().getStringExtra("id");
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection("doctores").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        mFirestore.collection("doctores").document(idUs).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                if (e!=null){
-                    Log.d(TAG, "Error" + e.getMessage());
-                }
-                for (final DocumentChange doc: documentSnapshots.getDocumentChanges()){
-                    if (doc.getType() == DocumentChange.Type.ADDED){
-                        user_id = doc.getDocument().getId();
-                        mFirestore.collection("doctores").document(user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()){
-                                    if (task.getResult().exists()){
-                                        String especialidad1 = task.getResult().getString("especialidad");
-                                        String cedul = task.getResult().getString("cedula");
-                                        String cv1 = task.getResult().getString("cv");
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().exists()) {
+                        String especialidad1 = task.getResult().getString("especialidad");
+                        String cedul = task.getResult().getString("cedula");
+                        String cv1 = task.getResult().getString("cv");
 
-                                        mFirestore.collection("usuarios").document(user_id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-                                                String nombre = documentSnapshot.getString("nombre");
-                                                String apellido = documentSnapshot.getString("apellido");
-                                                image = documentSnapshot.getString("avatar");
-                                                showImage();
-                                                String usuario = nombre + " " +apellido;
-                                                setSupportActionBar(toolbar);
-                                                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                                                getSupportActionBar().setTitle(usuario);
-                                            }
-                                        });
-                                        especialidad.setText(especialidad1);
-                                        cedula.setText(cedul);
-                                        cv.setText(cv1);
-                                    }else {
-                                        Log.d(TAG, "Data doen't exist");
-                                    }
-                                }else{
-                                    String error = task.getException().getMessage();
-                                    Log.d(TAG, "FIRESTORE retrieve error " + error);
-                                }
+                        mFirestore.collection("usuarios").document(idUs).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                            @Override
+                            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+                                String nombre = documentSnapshot.getString("nombre");
+                                String apellido = documentSnapshot.getString("apellido");
+                                image = documentSnapshot.getString("avatar");
+                                showImage();
+                                String usuario = nombre + " " +apellido;
+                                setSupportActionBar(toolbar);
+                                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                                getSupportActionBar().setTitle(usuario);
                             }
                         });
-
+                        especialidad.setText(especialidad1);
+                        cedula.setText(cedul);
+                        cv.setText(cv1);
                     }
                 }
             }

@@ -40,6 +40,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     private String id, user_id;
     RecyclerView recyclerView;
     CommentsDoctorAdapter adapter;
+    private String idUs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
 
         setUpVariable();
         setUpView();
-        presenter.viewComents();
+        presenter.viewComents(idUs);
     }
 
     private void setUpVariable() {
@@ -58,6 +59,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     }
 
     private void setUpView() {
+        idUs = getIntent().getStringExtra("id");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -84,7 +86,9 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     public boolean onOptionsItemSelected(MenuItem menuItem){
         switch (menuItem.getItemId()){
             case android.R.id.home:
-                startActivity(new Intent(this, CurriculumActivity.class));
+                Intent intent = new Intent(this, CurriculumActivity.class);
+                intent.putExtra("id", idUs);
+                startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
                 break;
@@ -117,13 +121,15 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         commentMap.put("comentario", comments);
         commentMap.put("fecha", date);
         commentMap.put("calificacion", String.valueOf(valoracionDoc));
-        commentMap.put("doctor", "RaxaHfHCSYPnggnebd6WNHOhHeO2");
+        commentMap.put("doctor", idUs);
         commentMap.put("usuario", id);
 
         mFirestore.collection("comentarios").add(commentMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-                startActivity(new Intent(getApplicationContext(), CommentsActivity.class));
+                Intent intent = new Intent(getApplicationContext(), CommentsActivity.class);
+                intent.putExtra("id", idUs);
+                startActivity(intent);
                 //overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
             }

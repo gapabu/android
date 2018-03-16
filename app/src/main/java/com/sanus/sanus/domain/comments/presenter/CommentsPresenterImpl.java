@@ -29,7 +29,7 @@ public class CommentsPresenterImpl implements  CommentsPresenter{
     }
 
     @Override
-    public void viewComents() {
-        interactor.viewComents();
+    public void viewComents(String idDoc) {
+        interactor.viewComents(idDoc);
     }
 }
