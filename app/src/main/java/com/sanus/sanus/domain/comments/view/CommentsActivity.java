@@ -149,7 +149,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
 
     @Override
     public void setDataAdapter(List<CommentsDoctor> commentsDoctorList) {
-        CommentsDoctorAdapter commentsDoctorAdapter = new CommentsDoctorAdapter(getApplicationContext(), commentsDoctorList);
+        CommentsDoctorAdapter commentsDoctorAdapter = new CommentsDoctorAdapter(getApplicationContext(), commentsDoctorList, presenter);
         recyclerView.setAdapter(commentsDoctorAdapter);
         commentsDoctorAdapter.notifyDataSetChanged();
     }
