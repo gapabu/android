@@ -37,7 +37,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     private CommentsPresenter presenter;
     private RatingBar ratingBar;
     private EditText edNuevoComentario;
-    private String id, user_id;
+    private String id;
     RecyclerView recyclerView;
     CommentsDoctorAdapter adapter;
     private String idUs;
@@ -112,6 +112,11 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         int dia = calendar.get(Calendar.DAY_OF_MONTH);
         int mes = calendar.get(Calendar.MONTH);
         int anio = calendar.get(Calendar.YEAR);
+        int hora = calendar.get(Calendar.HOUR);
+        int minutos = calendar.get(Calendar.MINUTE);
+
+
+        String hour = (hora + ":" + minutos);
         String date = (dia + "/" + (mes + 1) + "/" + anio);
         String comments = edNuevoComentario.getText().toString();
         float valoracion = (ratingBar.getRating()) * 20;
@@ -123,6 +128,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         commentMap.put("calificacion", String.valueOf(valoracionDoc));
         commentMap.put("doctor", idUs);
         commentMap.put("usuario", id);
+        commentMap.put("hora", hour);
 
         mFirestore.collection("comentarios").add(commentMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
@@ -130,7 +136,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
                 Intent intent = new Intent(getApplicationContext(), CommentsActivity.class);
                 intent.putExtra("id", idUs);
                 startActivity(intent);
-                //overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
             }
         }).addOnFailureListener(new OnFailureListener() {

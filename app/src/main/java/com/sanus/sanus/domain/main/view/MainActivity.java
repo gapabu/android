@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment, searchFragment, SearchFragment.IDENTIFIER)
                 .commit();
+
     }
 
     private void showChatFragment() {

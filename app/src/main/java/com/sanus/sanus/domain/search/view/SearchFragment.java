@@ -24,7 +24,6 @@ import java.util.List;
 public class SearchFragment extends Fragment implements SearchView{
 
     public static String IDENTIFIER = "SEARCH_FRAGMENT";
-
     private SearchPresenter presenter;
     private RecyclerView recyclerView;
 
@@ -49,30 +48,24 @@ public class SearchFragment extends Fragment implements SearchView{
         EditText edbuscador = view.findViewById(R.id.edbuscador);
 
         recyclerView.setHasFixedSize(true);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         edbuscador.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override
             public void afterTextChanged(Editable s) {
                 presenter.buscador(s.toString());
             }
         });
-
     }
 
     @Override
     public void setDataAdapter(List<BusquedaDoctor> busquedaDoctors) {
-        BusquedaDoctorAdapter busquedaDoctorAdapteradapter = new BusquedaDoctorAdapter(getContext(), busquedaDoctors);
+        BusquedaDoctorAdapter busquedaDoctorAdapteradapter = new BusquedaDoctorAdapter(getContext(), busquedaDoctors, presenter);
         recyclerView.setAdapter(busquedaDoctorAdapteradapter);
         busquedaDoctorAdapteradapter.notifyDataSetChanged();
     }

@@ -73,11 +73,7 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         goComent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CurriculumActivity.this, CommentsActivity.class);
-                intent.putExtra("id", idUs);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
+                goComments();
             }
         });
     }
@@ -93,20 +89,12 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         return true;
     }
 
-    private void showImage(){
-        final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://sanus-27.appspot.com/avatar/");
-        storageReference.child(image).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.with(CurriculumActivity.this).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                e.printStackTrace();
-                Toast.makeText(CurriculumActivity.this, "Error al traer foto", Toast.LENGTH_SHORT).show();
-            }
-        });
+    private void goComments(){
+        Intent intent = new Intent(CurriculumActivity.this, CommentsActivity.class);
+        intent.putExtra("id", idUs);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        finish();
     }
 
     private void initializedData() {
@@ -127,7 +115,9 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
                                 String nombre = documentSnapshot.getString("nombre");
                                 String apellido = documentSnapshot.getString("apellido");
                                 image = documentSnapshot.getString("avatar");
-                                showImage();
+
+                                presenter.showImage(image, CurriculumActivity.this, setupImage);
+
                                 String usuario = nombre + " " +apellido;
                                 setSupportActionBar(toolbar);
                                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
