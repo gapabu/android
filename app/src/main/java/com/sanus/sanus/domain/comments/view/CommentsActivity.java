@@ -37,10 +37,10 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     private CommentsPresenter presenter;
     private RatingBar ratingBar;
     private EditText edNuevoComentario;
-    private String id;
+    private String idUser;
     RecyclerView recyclerView;
     CommentsDoctorAdapter adapter;
-    private String idUs;
+    private String idDoct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
 
         setUpVariable();
         setUpView();
-        presenter.viewComents(idUs);
+        presenter.viewComents(idDoct);
     }
 
     private void setUpVariable() {
@@ -59,7 +59,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     }
 
     private void setUpView() {
-        idUs = getIntent().getStringExtra("id");
+        idDoct = getIntent().getStringExtra("idDoctor");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -87,7 +87,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         switch (menuItem.getItemId()){
             case android.R.id.home:
                 Intent intent = new Intent(this, CurriculumActivity.class);
-                intent.putExtra("id", idUs);
+                intent.putExtra("idDoctor", idDoct);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
@@ -101,12 +101,10 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     @Override
     public void sendComments() {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        FirebaseFirestore mDoctor = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            id = user.getUid();
+            idUser = user.getUid();
         }
-        mDoctor.collection("doctores").getId();
 
         final Calendar calendar = Calendar.getInstance();
         int dia = calendar.get(Calendar.DAY_OF_MONTH);
@@ -126,15 +124,15 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         commentMap.put("comentario", comments);
         commentMap.put("fecha", date);
         commentMap.put("calificacion", String.valueOf(valoracionDoc));
-        commentMap.put("doctor", idUs);
-        commentMap.put("usuario", id);
+        commentMap.put("doctor", idDoct);
+        commentMap.put("usuario", idUser);
         commentMap.put("hora", hour);
 
         mFirestore.collection("comentarios").add(commentMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Intent intent = new Intent(getApplicationContext(), CommentsActivity.class);
-                intent.putExtra("id", idUs);
+                intent.putExtra("idDoctor", idDoct);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();

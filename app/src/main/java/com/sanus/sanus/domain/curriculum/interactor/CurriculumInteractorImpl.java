@@ -3,7 +3,7 @@ package com.sanus.sanus.domain.curriculum.interactor;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -11,12 +11,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.curriculum.presenter.CurriculumPresenter;
-import com.squareup.picasso.Picasso;
+import com.sanus.sanus.utils.glide.GlideApp;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CurriculumInteractorImpl implements CurriculumInteractor{
     private CurriculumPresenter presenter;
+    private String TAG = getClass().getSimpleName();
+
 
     public CurriculumInteractorImpl(CurriculumPresenter presenter) {
         this.presenter = presenter;
@@ -28,13 +30,13 @@ public class CurriculumInteractorImpl implements CurriculumInteractor{
         storageReference.child(idImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Picasso.with(context).load(uri.toString()).placeholder(R.drawable.user).into(image);
+                GlideApp.with(context).load(uri.toString()).placeholder(R.drawable.user).into(image);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 e.printStackTrace();
-                Toast.makeText(context, "Error al traer foto", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Sin conexion");
             }
         });
     }

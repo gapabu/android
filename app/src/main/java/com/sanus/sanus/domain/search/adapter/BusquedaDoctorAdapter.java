@@ -22,6 +22,7 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
     private Context context;
     private List<BusquedaDoctor> busquedaDoctorList;
     private SearchPresenter presenter;
+
     public BusquedaDoctorAdapter(Context context, List<BusquedaDoctor> busquedaDoctorList, SearchPresenter presenter ){
         this.context = context;
         this.busquedaDoctorList = busquedaDoctorList;
@@ -47,7 +48,7 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
             public void onClick(View v) {
                 Intent intent = new Intent(context, CurriculumActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("id", busquedaDoctorList.get(position).getId());
+                intent.putExtra("idDoctor", busquedaDoctorList.get(position).getId());
                 context.startActivity(intent);
             }
         });

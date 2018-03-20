@@ -24,7 +24,6 @@ public class CommentsPresenterImpl implements  CommentsPresenter{
     @Override
     public void sendComments() {
         view.sendComments();
-
     }
 
     @Override

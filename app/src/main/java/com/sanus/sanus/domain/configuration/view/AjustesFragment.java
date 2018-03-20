@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +44,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
     private AjustesPresenter presenter;
     private TextView tvNombre;
     private CircleImageView setupImage;
-    private String id, image;
+    private String idUser, image;
 
     @Nullable
     @Override
@@ -132,10 +131,10 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         if (user != null) {
-            id = user.getUid();
+            idUser = user.getUid();
         }
 
-        mFirestore.collection("usuarios").document(id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        mFirestore.collection("usuarios").document(idUser).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                 String nombre = documentSnapshot.getString("nombre");

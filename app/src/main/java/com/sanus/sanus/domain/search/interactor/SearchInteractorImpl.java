@@ -19,6 +19,7 @@ import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.search.data.BusquedaDoctor;
 import com.sanus.sanus.domain.search.presenter.SearchPresenter;
+import com.sanus.sanus.utils.glide.GlideApp;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -89,13 +90,13 @@ public class SearchInteractorImpl implements SearchInteractor{
         storageReference.child(idImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Picasso.with(context).load(uri.toString()).placeholder(R.drawable.user).into(image);
+                GlideApp.with(context).load(uri.toString()).placeholder(R.drawable.user).into(image);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 e.printStackTrace();
-                Toast.makeText(context, "Error al traer foto", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Sin conexion");
             }
         });
     }

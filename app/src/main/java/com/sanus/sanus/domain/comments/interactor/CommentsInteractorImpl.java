@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -20,7 +19,7 @@ import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.comments.data.CommentsDoctor;
 import com.sanus.sanus.domain.comments.presenter.CommentsPresenter;
-import com.squareup.picasso.Picasso;
+import com.sanus.sanus.utils.glide.GlideApp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,6 @@ public class CommentsInteractorImpl implements CommentsInteractor {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (DocumentSnapshot document : task.getResult()) {
-
                         String usuario1 = document.getString("usuario");
                         final String fecha = document.getString("fecha");
                         final String comentario = document.getString("comentario");
@@ -77,13 +75,13 @@ public class CommentsInteractorImpl implements CommentsInteractor {
         storageReference.child(idImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Picasso.with(context).load(uri.toString()).placeholder(R.drawable.user).into(image);
+                GlideApp.with(context).load(uri.toString()).placeholder(R.drawable.user).into(image);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 e.printStackTrace();
-                Toast.makeText(context, "Error al traer foto", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "No hay conexion");
             }
         });
     }
