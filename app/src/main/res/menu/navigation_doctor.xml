@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_doctor"
+        android:icon="@drawable/icons_doctor"
+        android:title="@string/title_perfil" />
+
+    <item
+        android:id="@+id/navigation_citas"
+        android:icon="@drawable/icons_calendario"
+        android:title="@string/title_citas" />
+
+    <item
+        android:id="@+id/navigation_chat"
+        android:icon="@drawable/icons_comunicacion"
+        android:title="@string/title_chat" />
+
+    <item
+        android:id="@+id/navigation_ajustes"
+        android:icon="@drawable/icons_ajustes"
+        android:title="@string/title_ajustes" />
+
+</menu>

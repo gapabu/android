@@ -1,11 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment_ajustes"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_configuration_doctor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.sanus.sanus.domain.doctor_module.configuration.view.ConfigurationDoctorFragment">
 
     <RelativeLayout
         android:id="@+id/rlHeader"
@@ -103,10 +106,7 @@
                     android:gravity="center"
                     android:text="@string/logout_text" />
             </LinearLayout>
-
-
         </RelativeLayout>
 
     </RelativeLayout>
-
 </LinearLayout>
