@@ -82,11 +82,13 @@
 
                 <EditText
                     android:id="@+id/edComentario"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@drawable/btnround"
+                    android:hint="@string/type_a_message"
+                    android:imeOptions="actionSend"
+                    android:padding="@dimen/padding_small" />
             </LinearLayout>
 
             <LinearLayout
@@ -96,6 +98,7 @@
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/btnGuardarComentario"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:tint="@android:color/white"

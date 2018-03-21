@@ -80,6 +80,7 @@
     <string name="cedula">Cedula</string>
     <string name="cv">CV</string>
     <string name="en_linea">En linea</string>
+    <string name="type_a_message">Escribe tu mensaje</string>
 
 
 </resources>

@@ -50,7 +50,7 @@
             tools:ignore="RtlHardcoded" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imgNewChat"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_alignStart="@+id/floatinIrComentarios"

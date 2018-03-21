@@ -28,4 +28,14 @@ public class CurriculumPresenterImpl implements CurriculumPresenter {
     public void showImage(String idImage, Context context, CircleImageView image) {
         interactor.showImage(idImage, context, image);
     }
+
+    @Override
+    public void goComments() {
+        view.goComments();
+    }
+
+    @Override
+    public void goNewChat() {
+        view.goNewChat();
+    }
 }

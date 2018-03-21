@@ -81,6 +81,8 @@
         <activity android:name=".domain.doctor_module.main_doctor.view.MainActivityDoctor"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".domain.new_chat.view.NewChatActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

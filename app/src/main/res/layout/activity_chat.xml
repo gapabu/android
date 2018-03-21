@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_chat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/newMessage"
+        app:layoutManager="LinearLayoutManager"
+        android:layout_below="@+id/toolbar"/>
+
+<LinearLayout
+    android:id="@+id/newMessage"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+    android:weightSum="10">
+
+    <EditText
+        android:id="@+id/edit_text_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_small"
+        android:background="@drawable/btnround"
+        android:hint="@string/type_a_message"
+        android:imeOptions="actionSend"
+        android:padding="@dimen/padding_small"
+        android:layout_weight="9"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnGuardarComentario"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:fabSize="mini"
+        app:rippleColor="@android:color/white"
+        app:srcCompat="@android:drawable/ic_menu_send"
+        android:layout_weight="1"/>
+
+</LinearLayout>
+
+
+
+</RelativeLayout>

@@ -21,19 +21,21 @@ import com.sanus.sanus.domain.comments.view.CommentsActivity;
 import com.sanus.sanus.domain.curriculum.presenter.CurriculumPresenter;
 import com.sanus.sanus.domain.curriculum.presenter.CurriculumPresenterImpl;
 import com.sanus.sanus.domain.main.view.MainActivity;
+import com.sanus.sanus.domain.new_chat.view.NewChatActivity;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class CurriculumActivity extends AppCompatActivity implements CurriculumView {
 
     private CurriculumPresenter presenter;
-    ImageView goComent;
     private Toolbar toolbar;
     TextView cedula, especialidad, cv;
     private CircleImageView setupImage;
     private String image;
     private String idDoct;
     private RatingBar ratingBar;
+    ImageView goComent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +54,7 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
     }
 
     public void setUpView() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            idDoct = user.getUid();
-        }
+
         idDoct = getIntent().getStringExtra("idDoctor");
         toolbar = findViewById(R.id.toolbar);
         cedula = findViewById(R.id.tvCedula);
@@ -65,10 +64,18 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         goComent = findViewById(R.id.floatinIrComentarios);
         ratingBar = findViewById(R.id.ratingBar);
         ratingBar.getRating();
+        ImageView newChat = findViewById(R.id.imgNewChat);
+
+        newChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.goNewChat();
+            }
+        });
         goComent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goComments();
+                presenter.goComments();
             }
         });
     }
@@ -84,18 +91,10 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         return true;
     }
 
-    private void goComments(){
-        Intent intent = new Intent(CurriculumActivity.this, CommentsActivity.class);
-        intent.putExtra("idDoctor", idDoct);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        finish();
-    }
+
 
     private void showData() {
-        idDoct = getIntent().getStringExtra("idDoctor");
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-
         mFirestore.collection("usuarios").document(idDoct).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
@@ -113,6 +112,24 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         });
 
 
+    }
+
+    @Override
+    public void goComments() {
+            Intent intent = new Intent(CurriculumActivity.this, CommentsActivity.class);
+            intent.putExtra("idDoctor", idDoct);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            finish();
+    }
+
+    @Override
+    public void goNewChat() {
+        Intent intent = new Intent(CurriculumActivity.this, NewChatActivity.class);
+        intent.putExtra("idDoctor", idDoct);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        finish();
     }
 }
 
