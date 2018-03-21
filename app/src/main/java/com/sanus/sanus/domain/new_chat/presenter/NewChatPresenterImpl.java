@@ -13,4 +13,16 @@ public class NewChatPresenterImpl implements NewChatPresenter{
         this.view = view;
         interactor = new NewChatInteractorImpl(this);
     }
+
+    @Override
+    public void sendMessages(String idUser, String idDoct, String fecha, String hora, String message) {
+        interactor.sendMessages(idUser,idDoct,fecha,hora,message);
+    }
+
+    @Override
+    public void getDate() {
+        view.getDate();
+    }
+
+
 }

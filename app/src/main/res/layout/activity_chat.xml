@@ -28,7 +28,7 @@
     android:weightSum="10">
 
     <EditText
-        android:id="@+id/edit_text_message"
+        android:id="@+id/editMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_small"
@@ -39,7 +39,7 @@
         android:layout_weight="9"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnGuardarComentario"
+        android:id="@+id/btnSaveMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
