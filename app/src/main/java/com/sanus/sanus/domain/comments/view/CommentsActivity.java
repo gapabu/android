@@ -2,6 +2,7 @@ package com.sanus.sanus.domain.comments.view;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,11 +15,14 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.comments.adapter.CommentsDoctorAdapter;
@@ -66,7 +70,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         getSupportActionBar().setTitle(R.string.title_comments);
 
         edNuevoComentario = findViewById(R.id.edComentario);
-        ImageView guardarComentario = findViewById(R.id.btnGuardarComentario);
+        FloatingActionButton guardarComentario = findViewById(R.id.btnGuardarComentario);
         ratingBar = findViewById(R.id.ratingBar);
         ratingBar.getRating();
         guardarComentario.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +105,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     @Override
     public void sendComments() {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        final FirebaseFirestore mFirestoreDoct = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             idUser = user.getUid();
@@ -118,7 +123,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         String date = (dia + "/" + (mes + 1) + "/" + anio);
         String comments = edNuevoComentario.getText().toString();
         float valoracion = (ratingBar.getRating()) * 20;
-        int valoracionDoc = (int) valoracion;
+        final int valoracionDoc = (int) valoracion;
 
         Map<String, String> commentMap = new HashMap<>();
         commentMap.put("comentario", comments);
@@ -128,14 +133,50 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         commentMap.put("usuario", idUser);
         commentMap.put("hora", hour);
 
+
         mFirestore.collection("comentarios").add(commentMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-                Intent intent = new Intent(getApplicationContext(), CommentsActivity.class);
-                intent.putExtra("idDoctor", idDoct);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                finish();
+                mFirestoreDoct.collection("doctores").document(idDoct).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if (task.getResult().exists()) {
+                                String cv = task.getResult().getString("cv");
+                                String cedula = task.getResult().getString("cedula");
+                                String especialida = task.getResult().getString("especialidad");
+                                String hospital = task.getResult().getString("hospital");
+                                String comentarios = task.getResult().getString("comentario");
+                                String calificacion = task.getResult().getString("calificacion");
+                                Integer com = Integer.parseInt(comentarios);
+                                Integer califi = Integer.parseInt(calificacion);
+
+                                int totalCalif = califi + valoracionDoc;
+                                int totalComen = com + 1;
+
+                                Map<String, String> doctMap = new HashMap<>();
+                                doctMap.put("comentario", String.valueOf(totalComen));
+                                doctMap.put("calificacion", String.valueOf(totalCalif));
+                                doctMap.put("cv", cv);
+                                doctMap.put("cedula", cedula);
+                                doctMap.put("especialidad", especialida);
+                                doctMap.put("hospital", hospital);
+
+                                mFirestoreDoct.collection("doctores").document(idDoct).set(doctMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Intent intent = new Intent(getApplicationContext(), CommentsActivity.class);
+                                        intent.putExtra("idDoctor", idDoct);
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                                        finish();
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -143,6 +184,9 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
                 Toast.makeText(CommentsActivity.this, "error " + e, Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
     }
 
     @Override

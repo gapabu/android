@@ -8,7 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -32,6 +35,7 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
     private CircleImageView setupImage;
     private String image;
     private String idDoct;
+    private RatingBar ratingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,9 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         cv = findViewById(R.id.tvCv);
         setupImage = findViewById(R.id.setup_image);
         goComent = findViewById(R.id.floatinIrComentarios);
+        ratingBar = findViewById(R.id.ratingBar);
+        ratingBar.getRating();
+
 
         goComent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +101,18 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
                         String especialidad1 = task.getResult().getString("especialidad");
                         String cedul = task.getResult().getString("cedula");
                         String cv1 = task.getResult().getString("cv");
+                        String comentarios = task.getResult().getString("comentario");
+                        String calificacion = task.getResult().getString("calificacion");
+                        Integer comen = Integer.parseInt(comentarios);
+                        Integer cal = Integer.parseInt(calificacion);
+
+                        if (comen == 0 && cal == 0){
+                            ratingBar.setRating(0);
+                        }else {
+                            Integer valoracion = (cal / comen) / 20;
+                            ratingBar.setRating(valoracion);
+                        }
+
 
                         mFirestore.collection("usuarios").document(idDoct).addSnapshotListener(new EventListener<DocumentSnapshot>() {
                             @Override
@@ -110,9 +129,11 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
                                 getSupportActionBar().setTitle(usuario);
                             }
                         });
+
                         especialidad.setText(especialidad1);
                         cedula.setText(cedul);
                         cv.setText(cv1);
+
                     }
                 }
             }

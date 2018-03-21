@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/colorPrimary"
     tools:context="com.sanus.sanus.domain.comments.view.CommentsActivity">
@@ -86,21 +86,24 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:inputType="text"
-                    tools:ignore="LabelFor,NestedWeights" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="45dp"
                 android:layout_weight="1">
-                <ImageView
+
+                <android.support.design.widget.FloatingActionButton
                     android:id="@+id/btnGuardarComentario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_enviar"
-                    android:contentDescription="@string/enviar" />
+                    android:tint="@android:color/white"
+                    app:backgroundTint="@color/colorPrimaryDark"
+                    app:fabSize="mini"
+                    app:rippleColor="@android:color/white"
+                    app:srcCompat="@android:drawable/ic_menu_send"/>
+
             </LinearLayout>
 
         </LinearLayout>

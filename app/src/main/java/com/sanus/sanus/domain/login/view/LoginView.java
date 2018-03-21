@@ -14,6 +14,7 @@ public interface LoginView {
     void disableButton();
 
     void goMain();
+    void goMainDoctor();
     void goCompleteRegister();
 
     ProgressDialog getLoading();

@@ -146,7 +146,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
                 storageReference.child(image).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Picasso.with(getContext()).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
+                        GlideApp.with(getContext()).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

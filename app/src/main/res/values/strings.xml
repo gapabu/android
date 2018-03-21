@@ -79,6 +79,7 @@
     <string name="editar_perfil">Editar perfil</string>
     <string name="cedula">Cedula</string>
     <string name="cv">CV</string>
+    <string name="en_linea">En linea</string>
 
 
 </resources>

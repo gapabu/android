@@ -17,9 +17,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.account.complete.view.CompleteRegisterActivity;
 import com.sanus.sanus.domain.account.create.view.CreateAccountActivity;
+import com.sanus.sanus.domain.comments.data.CommentsDoctor;
+import com.sanus.sanus.domain.doctor_module.main_doctor.view.MainActivityDoctor;
 import com.sanus.sanus.domain.login.presenter.LoginPresenter;
 import com.sanus.sanus.domain.login.presenter.LoginPresenterImpl;
 import com.sanus.sanus.domain.main.view.MainActivity;
@@ -109,6 +115,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
+
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
@@ -166,6 +173,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
     @Override
     public void goMain() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        Toast.makeText(this, "goMain", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    @Override
+    public void goMainDoctor() {
+        Intent intent = new Intent(LoginActivity.this, MainActivityDoctor.class);
+        Toast.makeText(this, "goMainDoctor", Toast.LENGTH_SHORT).show();
         startActivity(intent);
         finish();
     }

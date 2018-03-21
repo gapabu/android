@@ -18,10 +18,21 @@
             android:id="@+id/setup_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="12dp"
-            android:layout_alignParentTop="true"
             android:src="@drawable/user" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/setup_image"
+            android:layout_centerHorizontal="true"
+            android:numStars="5"
+            android:progressTint="@color/colorPrimaryDark"
+            android:stepSize="1" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatinIrComentarios"
@@ -33,43 +44,53 @@
             android:layout_toEndOf="@+id/setup_image"
             android:layout_toRightOf="@+id/setup_image"
             android:clickable="true"
+            android:focusable="true"
             app:backgroundTint="@color/colorPrimaryDark"
             app:srcCompat="@drawable/ic_book"
-            tools:ignore="RtlHardcoded"
-            android:focusable="true" />
+            tools:ignore="RtlHardcoded" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignStart="@+id/floatinIrComentarios"
+            android:layout_below="@+id/floatinIrComentarios"
+            android:layout_marginTop="21dp"
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@drawable/icon_mas" />
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/setup_image"
+            android:layout_below="@+id/ratingBar"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="15dp"
             android:background="@drawable/btnround"
-            android:orientation="vertical"
-            android:id="@+id/linearLayout2">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="8dp"
-                android:layout_marginStart="@dimen/activity_horizontal_margin">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/especialidad"/>
+                    android:text="@string/especialidad" />
 
                 <TextView
                     android:id="@+id/tvEspecialidad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
                     android:text="@string/especialidad" />
 
             </LinearLayout>
@@ -77,9 +98,9 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="8dp"
-                android:layout_marginStart="@dimen/activity_horizontal_margin">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -92,10 +113,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="60dp"
                     android:text="@string/cedula" />
-
             </LinearLayout>
 
 
@@ -112,6 +132,7 @@
             android:layout_marginTop="100dp"
             android:background="@drawable/btnround"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tvCv"
                 android:layout_width="match_parent"
@@ -121,6 +142,30 @@
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="16dp"
                 android:text="@string/cv" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearActivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/setup_image"
+            android:layout_toStartOf="@+id/ratingBar"
+            android:orientation="horizontal"
+            tools:ignore="RelativeOverlap">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/btn_linea" />
+
+            <TextView
+                android:id="@+id/tvLinea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/en_linea"
+                android:textColor="@color/colorGreen" />
+
         </LinearLayout>
 
 

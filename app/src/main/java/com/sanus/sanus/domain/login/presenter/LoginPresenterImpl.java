@@ -58,6 +58,11 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
+    public void goMainDoctor() {
+        view.goMainDoctor();
+    }
+
+    @Override
     public void goCompleteRegister() {
         view.goCompleteRegister();
     }

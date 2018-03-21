@@ -13,6 +13,7 @@
 
     <color name="background_customer">#F6F7FB</color>
     <color name="colorGrey500">#9E9E9E</color>
+    <color name="colorGreen">#00980a</color>
 
 
 </resources>
