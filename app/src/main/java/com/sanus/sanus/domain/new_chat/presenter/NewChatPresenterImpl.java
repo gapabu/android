@@ -20,6 +20,11 @@ public class NewChatPresenterImpl implements NewChatPresenter{
     }
 
     @Override
+    public void showDataDoctor() {
+        view.showDataDoctor();
+    }
+
+    @Override
     public void getDate() {
         view.getDate();
     }

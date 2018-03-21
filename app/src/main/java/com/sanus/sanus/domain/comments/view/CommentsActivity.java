@@ -44,6 +44,8 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     RecyclerView recyclerView;
     CommentsDoctorAdapter adapter;
     private String idDoct;
+    private String hour;
+    private String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
 
         setUpVariable();
         setUpView();
+        getDate();
         presenter.viewComents(idDoct);
     }
 
@@ -110,16 +113,6 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
             idUser = user.getUid();
         }
 
-        final Calendar calendar = Calendar.getInstance();
-        int dia = calendar.get(Calendar.DAY_OF_MONTH);
-        int mes = calendar.get(Calendar.MONTH);
-        int anio = calendar.get(Calendar.YEAR);
-        int hora = calendar.get(Calendar.HOUR);
-        int minutos = calendar.get(Calendar.MINUTE);
-
-
-        String hour = (hora + ":" + minutos);
-        String date = (dia + "/" + (mes + 1) + "/" + anio);
         String comments = edNuevoComentario.getText().toString();
         float valoracion = (ratingBar.getRating()) * 20;
         final int valoracionDoc = (int) valoracion;
@@ -193,6 +186,19 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         CommentsDoctorAdapter commentsDoctorAdapter = new CommentsDoctorAdapter(getApplicationContext(), commentsDoctorList, presenter);
         recyclerView.setAdapter(commentsDoctorAdapter);
         commentsDoctorAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getDate() {
+        final Calendar calendar = Calendar.getInstance();
+        int dia = calendar.get(Calendar.DAY_OF_MONTH);
+        int mes = calendar.get(Calendar.MONTH);
+        int anio = calendar.get(Calendar.YEAR);
+        int hora = calendar.get(Calendar.HOUR);
+        int minutos = calendar.get(Calendar.MINUTE);
+
+        hour = (hora + ":" + minutos);
+        date = (dia + "/" + (mes + 1) + "/" + anio);
     }
 
 }

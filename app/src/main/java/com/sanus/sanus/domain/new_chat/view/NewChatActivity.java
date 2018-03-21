@@ -38,10 +38,9 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
          setUpVariable();
          setUpView();
-         showData();
+         showDataDoctor();
          getDate();
 
     }
@@ -51,6 +50,7 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
                 presenter = new NewChatPresenterImpl(this);
             }
     }
+
     private void setUpView() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -84,7 +84,9 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
         return true;
     }
 
-    private void showData() {
+
+    @Override
+    public void showDataDoctor() {
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection("usuarios").document(idDoct).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -100,7 +102,6 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
 
         });
     }
-
 
     @Override
     public void getDate() {

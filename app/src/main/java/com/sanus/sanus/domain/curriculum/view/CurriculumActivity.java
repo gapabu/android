@@ -10,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -43,7 +41,7 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         setContentView(R.layout.activity_curriculum);
         setUpVariable();
         setUpView();
-        showData();
+        showDataDoctor();
         presenter.init(idDoct, ratingBar, cedula, especialidad, cv);
     }
 
@@ -54,7 +52,6 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
     }
 
     public void setUpView() {
-
         idDoct = getIntent().getStringExtra("idDoctor");
         toolbar = findViewById(R.id.toolbar);
         cedula = findViewById(R.id.tvCedula);
@@ -91,29 +88,6 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         return true;
     }
 
-
-
-    private void showData() {
-        final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection("usuarios").document(idDoct).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-                String nombre = documentSnapshot.getString("nombre");
-                String apellido = documentSnapshot.getString("apellido");
-                image = documentSnapshot.getString("avatar");
-
-                presenter.showImage(image, CurriculumActivity.this, setupImage);
-
-                String usuario = nombre + " " +apellido;
-                setSupportActionBar(toolbar);
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setTitle(usuario);
-            }
-        });
-
-
-    }
-
     @Override
     public void goComments() {
             Intent intent = new Intent(CurriculumActivity.this, CommentsActivity.class);
@@ -130,6 +104,26 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         finish();
+    }
+
+    @Override
+    public void showDataDoctor() {
+        final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("usuarios").document(idDoct).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+                String nombre = documentSnapshot.getString("nombre");
+                String apellido = documentSnapshot.getString("apellido");
+                image = documentSnapshot.getString("avatar");
+
+                presenter.showImage(image, CurriculumActivity.this, setupImage);
+
+                String usuario = nombre + " " +apellido;
+                setSupportActionBar(toolbar);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setTitle(usuario);
+            }
+        });
     }
 }
 

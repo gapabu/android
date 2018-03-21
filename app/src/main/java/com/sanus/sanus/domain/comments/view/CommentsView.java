@@ -8,4 +8,5 @@ public interface CommentsView {
 
     void sendComments();
     void setDataAdapter(List<CommentsDoctor> commentsDoctorList);
+    void getDate();
 }

@@ -38,4 +38,9 @@ public class CurriculumPresenterImpl implements CurriculumPresenter {
     public void goNewChat() {
         view.goNewChat();
     }
+
+    @Override
+    public void showDataDoctor() {
+        view.showDataDoctor();
+    }
 }
