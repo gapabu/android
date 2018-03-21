@@ -37,6 +37,18 @@
             android:layout_alignParentTop="true"
             android:src="@drawable/user" />
 
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/setup_image"
+            android:layout_centerHorizontal="true"
+            android:numStars="5"
+            android:progressTint="@color/colorPrimaryDark"
+            android:stepSize="1"
+            android:layout_marginTop="5dp"/>
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatinIrComentarios"
             android:layout_width="wrap_content"
@@ -55,7 +67,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/setup_image"
+            android:layout_below="@+id/ratingBar"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
@@ -106,6 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
+                    android:layout_marginStart="60dp"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:text="@string/cedula" />

@@ -174,14 +174,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
     public void goMain() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
-        Toast.makeText(this, "goMain", Toast.LENGTH_SHORT).show();
         finish();
     }
 
     @Override
     public void goMainDoctor() {
         Intent intent = new Intent(LoginActivity.this, MainActivityDoctor.class);
-        Toast.makeText(this, "goMainDoctor", Toast.LENGTH_SHORT).show();
         startActivity(intent);
         finish();
     }

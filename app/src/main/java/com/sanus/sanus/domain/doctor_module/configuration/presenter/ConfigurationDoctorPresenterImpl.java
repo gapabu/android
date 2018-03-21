@@ -12,4 +12,29 @@ public class ConfigurationDoctorPresenterImpl implements ConfigurationDoctorPres
         this.view = view;
         interactor = new ConfigurationDoctorInteractorImpl(this);
     }
+
+    @Override
+    public void onResume() {
+        interactor.onResume();
+    }
+
+    @Override
+    public void logout() {
+        interactor.logout();
+    }
+
+    @Override
+    public void goSplash() {
+        view.goSplash();
+    }
+
+    @Override
+    public void showData(String name, String email) {
+        view.showData(name, email);
+    }
+
+    @Override
+    public void showPhoto(String photo) {
+        view.showPhoto(photo);
+    }
 }
