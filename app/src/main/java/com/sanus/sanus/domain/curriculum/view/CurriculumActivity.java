@@ -2,7 +2,6 @@ package com.sanus.sanus.domain.curriculum.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -10,10 +9,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -43,7 +41,8 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         setContentView(R.layout.activity_curriculum);
         setUpVariable();
         setUpView();
-        initializedData();
+        showData();
+        presenter.init(idDoct, ratingBar, cedula, especialidad, cv);
     }
 
     private void setUpVariable() {
@@ -53,6 +52,11 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
     }
 
     public void setUpView() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            idDoct = user.getUid();
+        }
+        idDoct = getIntent().getStringExtra("idDoctor");
         toolbar = findViewById(R.id.toolbar);
         cedula = findViewById(R.id.tvCedula);
         especialidad = findViewById(R.id.tvEspecialidad);
@@ -61,8 +65,6 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         goComent = findViewById(R.id.floatinIrComentarios);
         ratingBar = findViewById(R.id.ratingBar);
         ratingBar.getRating();
-
-
         goComent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,54 +92,27 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         finish();
     }
 
-    private void initializedData() {
+    private void showData() {
         idDoct = getIntent().getStringExtra("idDoctor");
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection("doctores").document(idDoct).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
+        mFirestore.collection("usuarios").document(idDoct).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    if (task.getResult().exists()) {
-                        String especialidad1 = task.getResult().getString("especialidad");
-                        String cedul = task.getResult().getString("cedula");
-                        String cv1 = task.getResult().getString("cv");
-                        String comentarios = task.getResult().getString("comentario");
-                        String calificacion = task.getResult().getString("calificacion");
-                        Integer comen = Integer.parseInt(comentarios);
-                        Integer cal = Integer.parseInt(calificacion);
+            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+                String nombre = documentSnapshot.getString("nombre");
+                String apellido = documentSnapshot.getString("apellido");
+                image = documentSnapshot.getString("avatar");
 
-                        if (comen == 0 && cal == 0){
-                            ratingBar.setRating(0);
-                        }else {
-                            Integer valoracion = (cal / comen) / 20;
-                            ratingBar.setRating(valoracion);
-                        }
+                presenter.showImage(image, CurriculumActivity.this, setupImage);
 
-
-                        mFirestore.collection("usuarios").document(idDoct).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                            @Override
-                            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-                                String nombre = documentSnapshot.getString("nombre");
-                                String apellido = documentSnapshot.getString("apellido");
-                                image = documentSnapshot.getString("avatar");
-
-                                presenter.showImage(image, CurriculumActivity.this, setupImage);
-
-                                String usuario = nombre + " " +apellido;
-                                setSupportActionBar(toolbar);
-                                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                                getSupportActionBar().setTitle(usuario);
-                            }
-                        });
-
-                        especialidad.setText(especialidad1);
-                        cedula.setText(cedul);
-                        cv.setText(cv1);
-
-                    }
-                }
+                String usuario = nombre + " " +apellido;
+                setSupportActionBar(toolbar);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setTitle(usuario);
             }
         });
+
+
     }
 }
 

@@ -1,6 +1,8 @@
 package com.sanus.sanus.domain.curriculum.presenter;
 
 import android.content.Context;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.sanus.sanus.domain.curriculum.interactor.CurriculumInteractor;
 import com.sanus.sanus.domain.curriculum.interactor.CurriculumInteractorImpl;
@@ -15,6 +17,11 @@ public class CurriculumPresenterImpl implements CurriculumPresenter {
     public CurriculumPresenterImpl(CurriculumView view) {
         this.view = view;
         interactor = new CurriculumInteractorImpl(this);
+    }
+
+    @Override
+    public void init(String idDoct, RatingBar ratingBar, TextView especialidad, TextView cedula, TextView cv) {
+        interactor.init(idDoct,ratingBar,especialidad,cedula,cv);
     }
 
     @Override
