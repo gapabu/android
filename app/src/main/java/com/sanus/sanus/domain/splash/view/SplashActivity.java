@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.account.complete.view.CompleteRegisterActivity;
+import com.sanus.sanus.domain.doctor_module.main_doctor.view.MainActivityDoctor;
 import com.sanus.sanus.domain.login.view.LoginActivity;
 import com.sanus.sanus.domain.main.view.MainActivity;
 import com.sanus.sanus.domain.splash.presenter.SplashPresenter;
@@ -43,6 +44,14 @@ public class SplashActivity extends AppCompatActivity implements SplashView, Cal
     @Override
     public void goMain() {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void goMainDoctor() {
+        Intent intent = new Intent(this, MainActivityDoctor.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();

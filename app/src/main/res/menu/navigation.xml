@@ -15,10 +15,7 @@
         android:id="@+id/navigation_chat"
         android:icon="@drawable/icons_comunicacion"
         android:title="@string/title_chat" />
-    <item
-        android:id="@+id/navigation_foro"
-        android:icon="@drawable/icons_comentar"
-        android:title="@string/title_foro" />
+
     <item
         android:id="@+id/navigation_ajustes"
         android:icon="@drawable/icons_ajustes"

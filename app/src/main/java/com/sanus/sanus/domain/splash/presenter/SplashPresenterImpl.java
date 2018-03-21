@@ -30,6 +30,11 @@ public class SplashPresenterImpl implements SplashPresenter {
     }
 
     @Override
+    public void goMainDoctor() {
+        view.goMainDoctor();
+    }
+
+    @Override
     public void goCompleteRegister() {
         view.goCompleteRegister();
     }

@@ -28,10 +28,6 @@ public class SplashInteractorImpl implements SplashInteractor {
     @Override
     public void init() {
 
-        //     TimerTask timerTask = new TimerTask() {
-        //  @Override
-        //public void run() {
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String userIdNow = user.getUid();
@@ -42,7 +38,14 @@ public class SplashInteractorImpl implements SplashInteractor {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-                            presenter.goMain();
+                            String tipo = document.getString("tipo");
+                            if (tipo.equals("Medico")){
+                                presenter.goMainDoctor();
+                            }
+                            if (tipo.equals("Paciente")){
+                                presenter.goMain();
+                            }
+
                             Log.d(TAG, "DocumentSnapshot data: " + task.getResult().getData());
                         } else {
                             presenter.showAlertRegister();

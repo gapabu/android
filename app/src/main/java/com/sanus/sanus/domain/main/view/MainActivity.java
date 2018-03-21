@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
                     case R.id.navigation_chat:
                         showChatFragment();
                         return true;
-                    case R.id.navigation_foro:
+                    /*case R.id.navigation_foro:
                         showForoFragment();
-                        return true;
+                        return true;*/
                     case R.id.navigation_ajustes:
                         showConfigFragment();
                         return true;

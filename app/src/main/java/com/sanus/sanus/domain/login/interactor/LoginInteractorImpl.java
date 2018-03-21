@@ -56,7 +56,14 @@ public class LoginInteractorImpl implements LoginInteractor {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-                            presenter.goMain();
+                            String tipo = document.getString("tipo");
+                            if (tipo.equals("Medico")){
+                                presenter.goMainDoctor();
+                            }
+                            if (tipo.equals("Paciente")){
+                                presenter.goMain();
+                            }
+
                             Log.d(TAG, "DocumentSnapshot data: " + task.getResult().getData());
                         } else {
                             presenter.showAlertRegister();
