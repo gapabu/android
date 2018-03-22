@@ -1,7 +1,9 @@
 package com.sanus.sanus.domain.doctor_module.profile.view;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +19,8 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.sanus.sanus.R;
+import com.sanus.sanus.domain.comments.view.CommentsActivity;
+import com.sanus.sanus.domain.doctor_module.all_comments.view.AllCommentsActivity;
 import com.sanus.sanus.domain.doctor_module.profile.presenter.ProfileDoctorPresenter;
 import com.sanus.sanus.domain.doctor_module.profile.presenter.ProfileDoctorPresenterImpl;
 
@@ -30,6 +34,7 @@ public class ProfileFragment extends Fragment implements ProfileFragmentView  {
     private String image;
     private String idDoct;
     private RatingBar ratingBar;
+    private FloatingActionButton goComments;
 
     @Nullable
     @Override
@@ -58,6 +63,14 @@ public class ProfileFragment extends Fragment implements ProfileFragmentView  {
         setupImage = view.findViewById(R.id.setup_image);
         ratingBar = view.findViewById(R.id.ratingBar);
         ratingBar.getRating();
+        goComments = view.findViewById(R.id.floatinIrComentarios);
+
+        goComments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goComments();
+            }
+        });
     }
 
     private void showPhoto() {
@@ -69,6 +82,13 @@ public class ProfileFragment extends Fragment implements ProfileFragmentView  {
                 presenter.showImage(image, getContext(), setupImage);
             }
         });
+
+    }
+
+    public void goComments() {
+        Intent intent = new Intent(getContext(), AllCommentsActivity.class);
+        intent.putExtra("idDoctor", idDoct);
+        startActivity(intent);
 
     }
 }

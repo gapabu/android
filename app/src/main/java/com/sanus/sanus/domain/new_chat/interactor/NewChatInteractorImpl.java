@@ -23,7 +23,6 @@ public class NewChatInteractorImpl implements NewChatInteractor{
 
     @Override
     public void sendMessages(String idUser,String idDoct, String fecha, String hora, String message) {
-
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         Map<String, String> messageMap = new HashMap<>();
         messageMap.put("autor", idUser );
