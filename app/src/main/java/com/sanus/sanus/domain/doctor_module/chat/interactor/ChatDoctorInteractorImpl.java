@@ -15,6 +15,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.R;
@@ -46,33 +47,36 @@ public class ChatDoctorInteractorImpl implements ChatDoctorInteractor{
             idUser = user.getUid();
         }
 
-        mFirestore.collection("contactos").document(idUser).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        mFirestore.collection("contactos").whereEqualTo("doctor", idUser).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    if (task.getResult().exists()) {
-                        String autor = task.getResult().getString("autor");
+                    for (DocumentSnapshot document : task.getResult()) {
+                        Log.d(TAG, document.getId() + " => " + document.getData());
+                        final String autor = document.getString("autor");
 
-                        mFirestoreUser.collection("usuarios").document(autor).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                            @Override
-                            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-                                final String user_id = documentSnapshot.getId();
-                                String nombre = documentSnapshot.getString("nombre");
-                                String apellido = documentSnapshot.getString("apellido");
-                                final String image = documentSnapshot.getString("avatar");
+                        mFirestoreUser.collection("usuarios").whereEqualTo("autor", autor).get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        mFirestoreUser.collection("usuarios").document(autor).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+                                                final String user_id = documentSnapshot.getId();
+                                                String nombre = documentSnapshot.getString("nombre");
+                                                String apellido = documentSnapshot.getString("apellido");
+                                                final String image = documentSnapshot.getString("avatar");
 
-                                String usuario = nombre + " " +apellido;
-                                busquedaDoctors.add(new ContactDoctor(usuario,image,user_id));
-                                present.setDataAdapter(busquedaDoctors);
-                            }
-                        });
+                                                String usuario = nombre + " " + apellido;
+                                                busquedaDoctors.add(new ContactDoctor(usuario, image, user_id));
+                                                present.setDataAdapter(busquedaDoctors);
+                                            }
+                                        });
 
-
-                    }else {
-                        Log.d(TAG, "data no exist");
+                                    }
+                                });
                     }
                 }
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

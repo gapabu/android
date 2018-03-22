@@ -78,7 +78,7 @@ public class NewChatInteractorImpl implements NewChatInteractor{
     }
 
     @Override
-    public void getTipoUser(String idUser, final String idDoct) {
+    public void getTipoUser(final String idUser, final String idDoct) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -90,7 +90,6 @@ public class NewChatInteractorImpl implements NewChatInteractor{
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         String tipo = document.getString("tipo");
-
                         if (tipo.equals("Paciente")) {
                             presenter.insertContact(userIdNow, idDoct);
                         }
@@ -113,7 +112,19 @@ public class NewChatInteractorImpl implements NewChatInteractor{
         contactMap.put("autor", idUser );
         contactMap.put("doctor", idDoct);
 
-        mFirestore.collection("contactos").document(idDoct).set(contactMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+        mFirestore.collection("contactos").add(contactMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                presenter.goMessages();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+        /*mFirestore.collection("contactos").document(idDoct).set(contactMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 presenter.goMessages();
@@ -123,7 +134,7 @@ public class NewChatInteractorImpl implements NewChatInteractor{
             public void onFailure(@NonNull Exception e) {
 
             }
-        });
+        });*/
     }
 
 

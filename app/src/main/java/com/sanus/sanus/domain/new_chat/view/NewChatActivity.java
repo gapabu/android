@@ -125,8 +125,9 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
         int anio = calendar.get(Calendar.YEAR);
         int hora = calendar.get(Calendar.HOUR);
         int minutos = calendar.get(Calendar.MINUTE);
+        int segundos = calendar.get(Calendar.SECOND);
 
-        hour = (hora + ":" + minutos);
+        hour = (hora + ":" + minutos + ":" + segundos);
         date = (dia + "/" + (mes + 1) + "/" + anio);
     }
 

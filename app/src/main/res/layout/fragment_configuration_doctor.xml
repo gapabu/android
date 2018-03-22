@@ -84,10 +84,38 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/actividad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:layout_below="@+id/editProfile">
+
+                <Button
+                    android:id="@+id/btnMasculino"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:background="@android:color/black"
+                    android:text="@string/activo"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btnFemenino"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:background="@color/white"
+                    android:text="@string/inactivo" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editProfile"
+                android:layout_below="@+id/actividad"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/btnround"
                 android:orientation="horizontal"

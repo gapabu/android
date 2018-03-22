@@ -7,7 +7,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public interface SearchInteractor {
 
     void init();
-    void buscador(String texto);
     void showImage(String idImage, final Context context, final CircleImageView image);
+    void buscador(String texto);
 
 }
