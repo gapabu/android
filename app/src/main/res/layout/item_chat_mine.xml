@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,7 +15,7 @@
     android:focusable="true">
 
     <TextView
-        android:id="@+id/text_view_chat_message"
+        android:id="@+id/viewMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_huge"
@@ -27,8 +28,8 @@
 
     <TextView
         android:id="@+id/text_view_user_alphabet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="@dimen/margin_avg"
         android:background="@drawable/circle_accent"

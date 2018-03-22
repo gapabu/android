@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,10 +19,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.curriculum.view.CurriculumActivity;
+import com.sanus.sanus.domain.new_chat.adapter.MessagesAdapter;
+import com.sanus.sanus.domain.new_chat.data.Messages;
 import com.sanus.sanus.domain.new_chat.presenter.NewChatPresenter;
 import com.sanus.sanus.domain.new_chat.presenter.NewChatPresenterImpl;
 
 import java.util.Calendar;
+import java.util.List;
 
 
 public class NewChatActivity extends AppCompatActivity implements NewChatView {
@@ -32,6 +37,8 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
     private String message;
     private String hour;
     private String date;
+    RecyclerView recyclerView;
+    MessagesAdapter adapter;
 
 
     @Override
@@ -42,6 +49,7 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
          setUpView();
          showDataDoctor();
          getDate();
+         presenter.viewMessages(idDoct, idUser);
 
     }
 
@@ -69,6 +77,12 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
                 presenter.sendMessages(idUser, idDoct, date, hour, message);
             }
         });
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
     }
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
@@ -115,4 +129,23 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
         hour = (hora + ":" + minutos);
         date = (dia + "/" + (mes + 1) + "/" + anio);
     }
+
+    @Override
+    public void setDataAdapter(List<Messages> commentsDoctorList) {
+        MessagesAdapter commentsDoctorAdapter = new MessagesAdapter(getApplicationContext(), commentsDoctorList, presenter);
+        recyclerView.setAdapter(commentsDoctorAdapter);
+        commentsDoctorAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void goMessages() {
+        Intent intent = new Intent(getApplicationContext(), NewChatActivity.class);
+        intent.putExtra("idDoctor", idDoct);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        finish();
+
+    }
+
+
 }

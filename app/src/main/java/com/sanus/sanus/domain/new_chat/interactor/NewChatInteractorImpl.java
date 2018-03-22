@@ -4,18 +4,30 @@ package com.sanus.sanus.domain.new_chat.interactor;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.sanus.sanus.domain.doctor_module.all_comments.data.AllCommentsDoctor;
+import com.sanus.sanus.domain.new_chat.data.Messages;
 import com.sanus.sanus.domain.new_chat.presenter.NewChatPresenter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class NewChatInteractorImpl implements NewChatInteractor{
     private NewChatPresenter presenter;
     private final String TAG = this.getClass().getSimpleName();
+
+    private List<Messages> commentsDoctorList = new ArrayList<>();
 
     public NewChatInteractorImpl(NewChatPresenter presenter) {
         this.presenter = presenter;
@@ -36,6 +48,7 @@ public class NewChatInteractorImpl implements NewChatInteractor{
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Log.d(TAG, "enviado con exito");
+                presenter.goMessages();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -43,6 +56,29 @@ public class NewChatInteractorImpl implements NewChatInteractor{
                 Log.d(TAG, "fallo al enviar");
             }
         });
+    }
+
+    @Override
+    public void viewMessages(String idDoc, String idUser) {
+        final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("mensajes").whereEqualTo("doctor", idDoc).whereEqualTo("usuario", idUser).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot document : task.getResult()) {
+                        String mensaje = document.getString("mensaje");
+
+
+                        commentsDoctorList.add(new Messages(mensaje));
+                        presenter.setDataAdapter(commentsDoctorList);
+
+                    }
+                }else {
+                    Log.d(TAG, "Data doen't exist");
+                }
+            }
+        });
+
     }
 
 }

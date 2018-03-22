@@ -1,9 +1,12 @@
 package com.sanus.sanus.domain.new_chat.presenter;
 
 
+import com.sanus.sanus.domain.new_chat.data.Messages;
 import com.sanus.sanus.domain.new_chat.interactor.NewChatInteractor;
 import com.sanus.sanus.domain.new_chat.interactor.NewChatInteractorImpl;
 import com.sanus.sanus.domain.new_chat.view.NewChatView;
+
+import java.util.List;
 
 public class NewChatPresenterImpl implements NewChatPresenter{
     private NewChatView view;
@@ -12,6 +15,11 @@ public class NewChatPresenterImpl implements NewChatPresenter{
     public NewChatPresenterImpl(NewChatView view) {
         this.view = view;
         interactor = new NewChatInteractorImpl(this);
+    }
+
+    @Override
+    public void viewMessages(String idDoc, String idUser) {
+        interactor.viewMessages(idDoc, idUser);
     }
 
     @Override
@@ -27,6 +35,16 @@ public class NewChatPresenterImpl implements NewChatPresenter{
     @Override
     public void getDate() {
         view.getDate();
+    }
+
+    @Override
+    public void setDataAdapter(List<Messages> commentsDoctorList) {
+        view.setDataAdapter(commentsDoctorList);
+    }
+
+    @Override
+    public void goMessages() {
+        view.goMessages();
     }
 
 
