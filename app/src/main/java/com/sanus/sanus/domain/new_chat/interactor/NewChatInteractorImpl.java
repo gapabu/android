@@ -124,17 +124,7 @@ public class NewChatInteractorImpl implements NewChatInteractor{
 
             }
         });
-        /*mFirestore.collection("contactos").document(idDoct).set(contactMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                presenter.goMessages();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
 
-            }
-        });*/
     }
 
 

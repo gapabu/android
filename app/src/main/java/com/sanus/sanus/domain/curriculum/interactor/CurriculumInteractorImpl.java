@@ -11,13 +11,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.curriculum.presenter.CurriculumPresenter;
 import com.sanus.sanus.utils.glide.GlideApp;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -78,4 +83,53 @@ public class CurriculumInteractorImpl implements CurriculumInteractor{
             }
         });
     }
+
+    @Override
+    public void insertContact(String idUser, String idDoct) {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        Map<String, String> contactMap = new HashMap<>();
+        contactMap.put("autor", idUser );
+        contactMap.put("doctor", idDoct);
+
+
+        mFirestore.collection("contactos").add(contactMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d(TAG, "correcto");
+                presenter.goNewChat();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "error al insertar");
+
+            }
+        });
+
+    }
+
+    @Override
+    public void verifyContact(final String idUser, final String idDoct) {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+
+        mFirestore.collection("contactos").whereEqualTo("autor", idUser).whereEqualTo("doctor", idDoct).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot document : task.getResult()) {
+                        Log.d(TAG, document.getId() + " => " + document.getData());
+                        presenter.goNewChat();
+                    }
+                }
+                if (task.getResult().isEmpty()){
+                    Log.d(TAG, "No have data");
+                    presenter.insertContact(idUser, idDoct);
+                }else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
+
+    }
+
 }

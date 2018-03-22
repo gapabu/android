@@ -30,6 +30,16 @@ public class CurriculumPresenterImpl implements CurriculumPresenter {
     }
 
     @Override
+    public void insertContact(String idUser, String idDoct) {
+        interactor.insertContact(idUser,idDoct);
+    }
+
+    @Override
+    public void verifyContact(String idUser, String idDoct) {
+        interactor.verifyContact(idUser, idDoct);
+    }
+
+    @Override
     public void goComments() {
         view.goComments();
     }

@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,6 +34,7 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
     private CircleImageView setupImage;
     private String image;
     private String idDoct;
+    private String idUser;
     private RatingBar ratingBar;
     ImageView goComent;
 
@@ -52,6 +55,11 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
     }
 
     public void setUpView() {
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            idUser = user.getUid();
+        }
         idDoct = getIntent().getStringExtra("idDoctor");
         toolbar = findViewById(R.id.toolbar);
         cedula = findViewById(R.id.tvCedula);
@@ -66,9 +74,11 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         newChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.goNewChat();
+                presenter.verifyContact(idUser, idDoct);
             }
         });
+
+
         goComent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,6 +135,9 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
             }
         });
     }
+
+
+
 }
 
 
