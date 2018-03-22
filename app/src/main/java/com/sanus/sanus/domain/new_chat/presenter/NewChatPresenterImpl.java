@@ -38,6 +38,16 @@ public class NewChatPresenterImpl implements NewChatPresenter{
     }
 
     @Override
+    public void getTipoUser(String idUser, String idDoct) {
+        interactor.getTipoUser(idUser,idDoct);
+    }
+
+    @Override
+    public void insertContact(String idUser, String idDoct) {
+        interactor.insertContact(idUser,idDoct);
+    }
+
+    @Override
     public void setDataAdapter(List<Messages> commentsDoctorList) {
         view.setDataAdapter(commentsDoctorList);
     }
