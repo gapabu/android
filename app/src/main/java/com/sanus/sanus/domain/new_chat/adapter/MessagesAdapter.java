@@ -1,7 +1,6 @@
 package com.sanus.sanus.domain.new_chat.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,11 +11,12 @@ import android.widget.TextView;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.new_chat.data.Messages;
 import com.sanus.sanus.domain.new_chat.presenter.NewChatPresenter;
-import com.sanus.sanus.domain.new_chat.view.NewChatActivity;
+
 
 import java.util.List;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHolder> {
+    private static final String TAG = "Message adapter" ;
     private Context context;
     private List<Messages> commentsDoctorList;
     private NewChatPresenter presenter;
@@ -36,7 +36,13 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final MessagesAdapter.ViewHolder holder, int position) {
-        holder.message.setText(commentsDoctorList.get(position).getMensaje());
+
+            if (commentsDoctorList.get(position).getAutor().equals(commentsDoctorList.get(position).getId())) {
+                holder.message1.setText(commentsDoctorList.get(position).getMensaje());
+            }else {
+                holder.mensage2.setText(commentsDoctorList.get(position).getMensaje());
+            }
+
 
     }
 
@@ -47,13 +53,14 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
         View mView;
-        TextView message;
+        TextView message1, mensage2;
 
         ViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
 
-            message = itemView.findViewById(R.id.viewMessage);
+            message1 = itemView.findViewById(R.id.viewMessage);
+            mensage2 = itemView.findViewById(R.id.viewMessage1);
 
         }
     }

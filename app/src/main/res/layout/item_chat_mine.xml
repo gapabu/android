@@ -41,4 +41,16 @@
         android:textStyle="bold"
         tools:text="a" />
 
+    <TextView
+    android:id="@+id/viewMessage1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        android:layout_below="@+id/viewMessage"
+    android:layout_marginEnd="@dimen/margin_huge"
+    android:background="@drawable/chat_rounded_rect_bg"
+    android:padding="@dimen/padding_small"
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:textColor="@color/black"
+    tools:text="Hello mate ! \ntest" />
+
 </RelativeLayout>
