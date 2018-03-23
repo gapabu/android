@@ -4,4 +4,6 @@ public interface AjustesInteractor {
 
     void onResume();
     void logout();
+    void onClickActive();
+    void onClickInactive();
 }

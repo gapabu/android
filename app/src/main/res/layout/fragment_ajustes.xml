@@ -89,7 +89,7 @@
                 android:layout_below="@+id/editProfile">
 
                 <Button
-                    android:id="@+id/btnMasculino"
+                    android:id="@+id/btnActivo"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                     android:textColor="@color/white" />
 
                 <Button
-                    android:id="@+id/btnFemenino"
+                    android:id="@+id/btnInactivo"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

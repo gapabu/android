@@ -6,4 +6,6 @@ public interface AjustesView {
 
     void showData(String name, String email);
     void showPhoto(String photo);
+    void selectActive();
+    void selectInactive();
 }

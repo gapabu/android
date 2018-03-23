@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +47,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
     private TextView tvNombre;
     private CircleImageView setupImage;
     private String idUser, image;
+    private Button activo, inactivo;
 
     @Nullable
     @Override
@@ -89,6 +92,23 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
             }
         });
 
+        activo = view.findViewById(R.id.btnActivo);
+        inactivo = view.findViewById(R.id.btnInactivo);
+
+        activo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectActive();
+            }
+        });
+
+        inactivo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectInactive();
+            }
+        });
+
     }
 
     private void showAlertLogout() {
@@ -127,6 +147,25 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
         GlideApp.with(this).load(photo).transform(new RoundedCorners(500)).diskCacheStrategy(DiskCacheStrategy.ALL).into(setupImage);
     }
 
+    @Override
+    public void selectActive() {
+        activo.setBackgroundColor(getResources().getColor(R.color.black));
+        activo.setTextColor(getResources().getColor(R.color.white));
+        inactivo.setBackgroundColor(getResources().getColor(R.color.white));
+        inactivo.setTextColor(getResources().getColor(R.color.black));
+        presenter.onClickActive();
+
+    }
+
+    @Override
+    public void selectInactive() {
+        inactivo.setBackgroundColor(getResources().getColor(R.color.black));
+        inactivo.setTextColor(getResources().getColor(R.color.white));
+        activo.setBackgroundColor(getResources().getColor(R.color.white));
+        activo.setTextColor(getResources().getColor(R.color.black));
+        presenter.onClickInactive();
+    }
+
     private void showImage(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
@@ -153,7 +192,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         e.printStackTrace();
-                        Toast.makeText(getContext(), "error al traer imagen", Toast.LENGTH_SHORT).show();
+                        Log.d(String.valueOf(this), "no hay conexion" );
                     }
                 });
             }

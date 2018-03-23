@@ -24,6 +24,16 @@ public class AjustesPresenterImpl implements AjustesPresenter{
     }
 
     @Override
+    public void onClickActive() {
+        interactor.onClickActive();
+    }
+
+    @Override
+    public void onClickInactive() {
+        interactor.onClickInactive();
+    }
+
+    @Override
     public void goSplash() {
         view.goSplash();
     }
@@ -36,6 +46,16 @@ public class AjustesPresenterImpl implements AjustesPresenter{
     @Override
     public void showPhoto(String photo) {
         view.showPhoto(photo);
+    }
+
+    @Override
+    public void selectActive() {
+        view.selectActive();
+    }
+
+    @Override
+    public void selectInactive() {
+        view.selectInactive();
     }
 
 
