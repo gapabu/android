@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.curriculum.view.CurriculumActivity;
 import com.sanus.sanus.domain.doctor_module.main_doctor.view.MainActivityDoctor;
@@ -42,6 +44,7 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
     private String message;
     private String hour;
     private String date;
+    private String userIdNow;
     RecyclerView recyclerView;
     MessagesAdapter adapter;
 
@@ -79,9 +82,41 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
             @Override
             public void onClick(View v) {
                 message = edNewMessage.getText().toString();
-                presenter.sendMessages(idUser, idDoct, date, hour, message);
+                //presenter.sendMessages(idUser, idDoct, date, hour, message, idUser);
+
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    userIdNow = user.getUid();
+
+                }
+
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                DocumentReference usuarios = db.collection("usuarios").document(userIdNow);
+                usuarios.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                String tipo = document.getString("tipo");
+                                if (tipo.equals("Medico")) {
+                                    presenter.sendMessages(idUser, idUser, date, hour, message, idDoct);
+                                }
+                                if (tipo.equals("Paciente")) {
+                                    presenter.sendMessages(idUser, idDoct, date, hour, message, idUser);
+                                }
+
+                            }
+                        }
+                    }
+                });
+
+
             }
         });
+
+
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -121,6 +156,7 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
                 }
                 return true;
         }
+
 
 
     @Override

@@ -24,14 +24,10 @@ public class AjustesPresenterImpl implements AjustesPresenter{
     }
 
     @Override
-    public void onClickActive() {
-        interactor.onClickActive();
+    public void onClickActive(String activo) {
+        interactor.onClickActive(activo);
     }
 
-    @Override
-    public void onClickInactive() {
-        interactor.onClickInactive();
-    }
 
     @Override
     public void goSplash() {

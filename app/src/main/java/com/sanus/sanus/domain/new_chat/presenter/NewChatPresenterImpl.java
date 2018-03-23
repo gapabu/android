@@ -23,8 +23,8 @@ public class NewChatPresenterImpl implements NewChatPresenter{
     }
 
     @Override
-    public void sendMessages(String idUser, String idDoct, String fecha, String hora, String message) {
-        interactor.sendMessages(idUser,idDoct,fecha,hora,message);
+    public void sendMessages(String idUser, String idDoct, String fecha, String hora, String message, String id) {
+        interactor.sendMessages(idUser,idDoct,fecha,hora,message, id);
     }
 
     @Override

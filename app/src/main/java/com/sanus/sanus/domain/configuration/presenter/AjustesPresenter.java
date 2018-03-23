@@ -6,6 +6,6 @@ public interface AjustesPresenter extends AjustesView {
 
     void onResume();
     void logout();
-    void onClickActive();
-    void onClickInactive();
+    void onClickActive(String activo);
+
 }

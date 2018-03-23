@@ -13,10 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +33,6 @@ import com.sanus.sanus.R;
 import com.sanus.sanus.utils.alert.AlertUtils;
 
 import com.sanus.sanus.utils.glide.GlideApp;
-import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -55,7 +51,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
         View view = inflater.inflate(R.layout.fragment_ajustes, container, false);
         setUpVariable();
         setUpView(view);
-        showImage();
+        showPhoto(image);
         return view;
     }
 
@@ -143,30 +139,8 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
     }
 
     @Override
-    public void showPhoto(String photo) {
-        GlideApp.with(this).load(photo).transform(new RoundedCorners(500)).diskCacheStrategy(DiskCacheStrategy.ALL).into(setupImage);
-    }
+    public void showPhoto(final String photo) {
 
-    @Override
-    public void selectActive() {
-        activo.setBackgroundColor(getResources().getColor(R.color.black));
-        activo.setTextColor(getResources().getColor(R.color.white));
-        inactivo.setBackgroundColor(getResources().getColor(R.color.white));
-        inactivo.setTextColor(getResources().getColor(R.color.black));
-        presenter.onClickActive();
-
-    }
-
-    @Override
-    public void selectInactive() {
-        inactivo.setBackgroundColor(getResources().getColor(R.color.black));
-        inactivo.setTextColor(getResources().getColor(R.color.white));
-        activo.setBackgroundColor(getResources().getColor(R.color.white));
-        activo.setTextColor(getResources().getColor(R.color.black));
-        presenter.onClickInactive();
-    }
-
-    private void showImage(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         if (user != null) {
@@ -197,5 +171,24 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
                 });
             }
         });
+    }
+
+    @Override
+    public void selectActive() {
+        activo.setBackgroundColor(getResources().getColor(R.color.black));
+        activo.setTextColor(getResources().getColor(R.color.white));
+        inactivo.setBackgroundColor(getResources().getColor(R.color.white));
+        inactivo.setTextColor(getResources().getColor(R.color.black));
+        //presenter.onClickActive("1");
+
+    }
+
+    @Override
+    public void selectInactive() {
+        inactivo.setBackgroundColor(getResources().getColor(R.color.black));
+        inactivo.setTextColor(getResources().getColor(R.color.white));
+        activo.setBackgroundColor(getResources().getColor(R.color.white));
+        activo.setTextColor(getResources().getColor(R.color.black));
+        //presenter.onClickActive("0");
     }
 }
