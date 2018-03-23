@@ -4,8 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentChange;
@@ -20,7 +18,7 @@ import com.sanus.sanus.R;
 import com.sanus.sanus.domain.search.data.BusquedaDoctor;
 import com.sanus.sanus.domain.search.presenter.SearchPresenter;
 import com.sanus.sanus.utils.glide.GlideApp;
-import com.squareup.picasso.Picasso;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +55,9 @@ public class SearchInteractorImpl implements SearchInteractor{
                                 String nombre = documentSnapshot.getString("nombre");
                                 String apellido = documentSnapshot.getString("apellido");
                                 final String image = documentSnapshot.getString("avatar");
+                                String estado = documentSnapshot.getString("estado");
                                 String usuario = nombre + " " +apellido;
-                                busquedaDoctors.add(new BusquedaDoctor(usuario, especialidad, image, user_id));
+                                busquedaDoctors.add(new BusquedaDoctor(usuario, especialidad, image, user_id, estado));
                                 presenter.setDataAdapter(busquedaDoctors);
                             }
                         });
@@ -78,7 +77,7 @@ public class SearchInteractorImpl implements SearchInteractor{
         for (int i = 0; i < busquedaDoctors.size(); i++) {
             if(busquedaDoctors.get(i).getEspecialidad().toLowerCase().contains(texto.toLowerCase())){
                 listAuxiliar.add(new BusquedaDoctor(busquedaDoctors.get(i).getNombre(),busquedaDoctors.get(i).getEspecialidad(),
-                        busquedaDoctors.get(i).getAvatar(),busquedaDoctors.get(i).getId() ));
+                        busquedaDoctors.get(i).getAvatar(),busquedaDoctors.get(i).getId(), busquedaDoctors.get(i).getEstado() ));
             }
         }
         presenter.setDataAdapter(listAuxiliar);

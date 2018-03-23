@@ -4,11 +4,13 @@ public class ContactDoctor {
     private String nombre;
     private String avatar;
     private String id;
+    private String estado;
 
-    public ContactDoctor (String nombre, String avatar, String id){
+    public ContactDoctor (String nombre, String avatar, String id, String estado){
         this.nombre = nombre;
         this.avatar = avatar;
         this.id = id;
+        this.estado = estado;
     }
 
     public String getId() {return id;}
@@ -21,4 +23,6 @@ public class ContactDoctor {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    public String getEstado() {return estado;}
+
 }

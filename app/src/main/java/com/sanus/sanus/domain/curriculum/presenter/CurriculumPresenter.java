@@ -13,5 +13,4 @@ public interface CurriculumPresenter extends CurriculumView {
     void showImage(String idImage, final Context context, final CircleImageView image);
     void insertContact(String idUser, String idDoct);
     void verifyContact(final String idUser, final String idDoct);
-
 }

@@ -47,7 +47,8 @@ public class NewChatInteractorImpl implements NewChatInteractor{
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Log.d(TAG, "enviado con exito");
-                presenter.getTipoUser(idUser,idDoct);
+                //presenter.viewMessages(idDoct, idUser);
+                presenter.goMessages();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -58,16 +59,29 @@ public class NewChatInteractorImpl implements NewChatInteractor{
     }
 
     @Override
-    public void viewMessages(String idDoc, String idUser) {
+    public void viewMessages(final String idDoc, final String idUser) {
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        final FirebaseFirestore mMessage = FirebaseFirestore.getInstance();
+
         mFirestore.collection("mensajes").whereEqualTo("doctor", idDoc).whereEqualTo("usuario", idUser).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (DocumentSnapshot document : task.getResult()) {
-                        String mensaje = document.getString("mensaje");
-                        commentsDoctorList.add(new Messages(mensaje));
-                        presenter.setDataAdapter(commentsDoctorList);
+
+
+                        mMessage.collection("mensajes").whereEqualTo("doctor", idDoc).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                for (DocumentSnapshot doc : task.getResult()){
+                                    String mensaje = doc.getString("mensaje");
+                                    commentsDoctorList.add(new Messages(mensaje));
+                                    presenter.setDataAdapter(commentsDoctorList);
+                                }
+                            }
+                        });
+
+
                     }
                 }else {
                     Log.d(TAG, "Data doen't exist");
@@ -77,55 +91,8 @@ public class NewChatInteractorImpl implements NewChatInteractor{
 
     }
 
-    @Override
-    public void getTipoUser(final String idUser, final String idDoct) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            final String userIdNow = user.getUid();
-            DocumentReference usuarios = db.collection("usuarios").document(userIdNow);
-            usuarios.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        String tipo = document.getString("tipo");
-                        if (tipo.equals("Paciente")) {
-                            presenter.insertContact(userIdNow, idDoct);
-                        }
-                    }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-
-                }
-            });
-
-        }
-    }
-
-    @Override
-    public void insertContact(String idUser, String idDoct) {
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        Map<String, String> contactMap = new HashMap<>();
-        contactMap.put("autor", idUser );
-        contactMap.put("doctor", idDoct);
 
 
-        mFirestore.collection("contactos").add(contactMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                presenter.goMessages();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
-
-    }
 
 
 

@@ -51,7 +51,7 @@ public class ChatDoctorInteractorImpl implements ChatDoctorInteractor{
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    for (DocumentSnapshot document : task.getResult()) {
+                    for (final DocumentSnapshot document : task.getResult()) {
                         Log.d(TAG, document.getId() + " => " + document.getData());
                         final String autor = document.getString("autor");
 
@@ -66,9 +66,10 @@ public class ChatDoctorInteractorImpl implements ChatDoctorInteractor{
                                                 String nombre = documentSnapshot.getString("nombre");
                                                 String apellido = documentSnapshot.getString("apellido");
                                                 final String image = documentSnapshot.getString("avatar");
+                                                String estado = documentSnapshot.getString("estado");
 
                                                 String usuario = nombre + " " + apellido;
-                                                busquedaDoctors.add(new ContactDoctor(usuario, image, user_id));
+                                                busquedaDoctors.add(new ContactDoctor(usuario, image, user_id, estado));
                                                 present.setDataAdapter(busquedaDoctors);
                                             }
                                         });

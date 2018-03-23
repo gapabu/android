@@ -8,13 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.chat.data.ContactUser;
 import com.sanus.sanus.domain.chat.presenter.ChatPresenter;
-import com.sanus.sanus.domain.main.view.MainActivity;
+import com.sanus.sanus.domain.new_chat.view.NewChatActivity;
 
 import java.util.List;
 
@@ -43,14 +43,17 @@ public class ContactUserAdapter extends RecyclerView.Adapter<ContactUserAdapter.
         holder.nombre.setText(busquedaDoctorList.get(position).getNombre());
 
         presenter.showImage(busquedaDoctorList.get(position).getAvatar(),context, holder.avatar);
+        if (busquedaDoctorList.get(position).getEstado().equals("1")){
+            holder.estado.setVisibility(View.VISIBLE);
+        }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(context, NewChatActivity.class);
+                Intent intent = new Intent(context, NewChatActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("idDoctor", busquedaDoctorList.get(position).getId());
-                context.startActivity(intent);*/
+                context.startActivity(intent);
             }
         });
     }
@@ -65,6 +68,7 @@ public class ContactUserAdapter extends RecyclerView.Adapter<ContactUserAdapter.
 
         TextView nombre;
         CircleImageView avatar;
+        ImageView estado;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -72,6 +76,7 @@ public class ContactUserAdapter extends RecyclerView.Adapter<ContactUserAdapter.
 
             nombre = itemView.findViewById(R.id.nombre);
             avatar = itemView.findViewById(R.id.avatar);
+            estado = itemView.findViewById(R.id.btnEstado);
         }
     }
 

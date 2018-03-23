@@ -39,6 +39,7 @@ public class CurriculumPresenterImpl implements CurriculumPresenter {
         interactor.verifyContact(idUser, idDoct);
     }
 
+
     @Override
     public void goComments() {
         view.goComments();

@@ -5,12 +5,14 @@ public class BusquedaDoctor{
     private String especialidad;
     private String avatar;
     private String id;
+    private String estado;
 
-    public BusquedaDoctor (String nombre, String especialidad, String avatar, String id){
+    public BusquedaDoctor (String nombre, String especialidad, String avatar, String id, String estado){
         this.nombre = nombre;
         this.especialidad = especialidad;
         this.avatar = avatar;
         this.id = id;
+        this.estado = estado;
     }
 
     public String getId() {return id;}
@@ -29,5 +31,6 @@ public class BusquedaDoctor{
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
+    public String getEstado() {return estado;}
 
 }

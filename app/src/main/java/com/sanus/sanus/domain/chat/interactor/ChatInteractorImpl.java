@@ -64,9 +64,10 @@ public class ChatInteractorImpl implements ChatInteractor {
                                                 String nombre = documentSnapshot.getString("nombre");
                                                 String apellido = documentSnapshot.getString("apellido");
                                                 final String image = documentSnapshot.getString("avatar");
+                                                String estado = documentSnapshot.getString("estado");
 
                                                 String usuario = nombre + " " + apellido;
-                                                busquedaDoctors.add(new ContactUser(usuario, image, user_id));
+                                                busquedaDoctors.add(new ContactUser(usuario, image, user_id, estado));
                                                 presenter.setDataAdapter(busquedaDoctors);
                                             }
                                         });

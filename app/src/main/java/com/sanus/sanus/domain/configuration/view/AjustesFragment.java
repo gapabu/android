@@ -142,6 +142,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
                 image = documentSnapshot.getString("avatar");
                 String usuario = nombre + " " +apellido;
                 tvNombre.setText(usuario);
+
                 final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://sanus-27.appspot.com/avatar/");
                 storageReference.child(image).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override

@@ -17,6 +17,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.sanus.sanus.R;
+
 import com.sanus.sanus.domain.comments.view.CommentsActivity;
 import com.sanus.sanus.domain.curriculum.presenter.CurriculumPresenter;
 import com.sanus.sanus.domain.curriculum.presenter.CurriculumPresenterImpl;
@@ -75,6 +76,7 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
             @Override
             public void onClick(View v) {
                 presenter.verifyContact(idUser, idDoct);
+
             }
         });
 
@@ -135,6 +137,7 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
             }
         });
     }
+
 
 
 

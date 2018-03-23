@@ -1,6 +1,7 @@
 package com.sanus.sanus.domain.new_chat.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.new_chat.data.Messages;
 import com.sanus.sanus.domain.new_chat.presenter.NewChatPresenter;
+import com.sanus.sanus.domain.new_chat.view.NewChatActivity;
 
 import java.util.List;
 
@@ -35,6 +37,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull final MessagesAdapter.ViewHolder holder, int position) {
         holder.message.setText(commentsDoctorList.get(position).getMensaje());
+
     }
 
     @Override

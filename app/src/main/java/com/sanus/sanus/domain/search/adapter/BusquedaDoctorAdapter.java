@@ -3,18 +3,23 @@ package com.sanus.sanus.domain.search.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
+
 import com.sanus.sanus.domain.curriculum.view.CurriculumActivity;
 import com.sanus.sanus.domain.search.data.BusquedaDoctor;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.search.presenter.SearchPresenter;
+
 import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,12 +41,16 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         holder.nombre.setText(busquedaDoctorList.get(position).getNombre());
         holder.especialidad.setText(busquedaDoctorList.get(position).getEspecialidad());
-
         presenter.showImage(busquedaDoctorList.get(position).getAvatar(),context, holder.avatar);
+
+        if (busquedaDoctorList.get(position).getEstado().equals("1")){
+            holder.estado.setVisibility(View.VISIBLE);
+        }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +61,10 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
                 context.startActivity(intent);
             }
         });
+
+
+
+
     }
 
     @Override
@@ -75,6 +88,7 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
         TextView nombre, especialidad;
         EditText edbuscador;
         CircleImageView avatar;
+        ImageView estado;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -84,6 +98,7 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
             especialidad = itemView.findViewById(R.id.especialidad);
             edbuscador = itemView.findViewById(R.id.edbuscador);
             avatar = itemView.findViewById(R.id.avatar);
+            estado = itemView.findViewById(R.id.btnEstado);
         }
     }
 

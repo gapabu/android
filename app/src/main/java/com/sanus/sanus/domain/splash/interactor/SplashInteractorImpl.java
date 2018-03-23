@@ -31,6 +31,7 @@ public class SplashInteractorImpl implements SplashInteractor {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String userIdNow = user.getUid();
+
             DocumentReference usuarios = db.collection("usuarios").document(userIdNow);
             usuarios.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override

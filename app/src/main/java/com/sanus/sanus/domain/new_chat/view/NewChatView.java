@@ -10,4 +10,6 @@ public interface NewChatView {
     void getDate();
     void setDataAdapter(List<Messages> commentsDoctorList);
     void goMessages();
+    void goCurriculum();
+    void goFramentChat();
 }
