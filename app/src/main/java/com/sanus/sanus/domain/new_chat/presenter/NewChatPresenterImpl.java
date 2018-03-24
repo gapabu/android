@@ -57,5 +57,10 @@ public class NewChatPresenterImpl implements NewChatPresenter{
         view.goFramentChat();
     }
 
+    @Override
+    public void viewMessagesByTipe() {
+        view.viewMessagesByTipe();
+    }
+
 
 }

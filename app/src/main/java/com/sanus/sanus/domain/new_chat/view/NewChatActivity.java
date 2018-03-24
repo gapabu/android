@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -45,6 +46,7 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
     private String userIdNow;
     RecyclerView recyclerView;
     MessagesAdapter adapter;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
     @Override
@@ -55,7 +57,30 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
          setUpView();
          showDataDoctor();
          getDate();
-         presenter.viewMessages(idDoct, idUser);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            userIdNow = user.getUid();
+        }
+
+        DocumentReference usuarios = db.collection("usuarios").document(userIdNow);
+        usuarios.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        String tipo = document.getString("tipo");
+                        if (tipo.equals("Medico")){
+                            presenter.viewMessages(idUser, idDoct);
+                        }
+                        if (tipo.equals("Paciente")){
+                            presenter.viewMessages(idDoct, idUser);
+                        }
+                    }
+                }
+            }
+        });
 
     }
 
@@ -221,6 +246,11 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
+    }
+
+    @Override
+    public void viewMessagesByTipe() {
+
     }
 
 

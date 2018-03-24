@@ -49,7 +49,6 @@ public class NewChatInteractorImpl implements NewChatInteractor{
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Log.d(TAG, "enviado con exito");
-                //presenter.viewMessages(idDoct, idUser);
                 presenter.goMessages();
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -64,7 +63,9 @@ public class NewChatInteractorImpl implements NewChatInteractor{
     public void viewMessages(final String idDoc, final String idUser) {
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
 
-        mFirestore.collection("mensajes").whereEqualTo("doctor", idDoc).whereEqualTo("usuario", idUser).orderBy("hora", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        mFirestore.collection("mensajes").whereEqualTo("doctor", idDoc).whereEqualTo("usuario", idUser).orderBy("fecha", Query.Direction.ASCENDING)
+                .orderBy("hora", Query.Direction.ASCENDING)
+               .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {

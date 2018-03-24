@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ContactDoctorAdapter extends RecyclerView.Adapter<ContactDoctorAdapter.ViewHolder>  {
+    private static final String TAG = "ContactDoctorAdapter";
     private Context context;
     private List<ContactDoctor> busquedaDoctorList;
     private ChatDoctorPresent presenter;
@@ -56,6 +58,7 @@ public class ContactDoctorAdapter extends RecyclerView.Adapter<ContactDoctorAdap
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("idDoctor", busquedaDoctorList.get(position).getId());
                 context.startActivity(intent);
+                Log.d(TAG, "click" );
             }
         });
     }

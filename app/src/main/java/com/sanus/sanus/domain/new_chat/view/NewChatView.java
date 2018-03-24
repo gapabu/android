@@ -12,4 +12,5 @@ public interface NewChatView {
     void goMessages();
     void goCurriculum();
     void goFramentChat();
+    void viewMessagesByTipe();
 }
