@@ -16,7 +16,6 @@ import com.sanus.sanus.domain.new_chat.presenter.NewChatPresenter;
 import java.util.List;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHolder> {
-    private static final String TAG = "Message adapter" ;
     private Context context;
     private List<Messages> commentsDoctorList;
     private NewChatPresenter presenter;

@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -33,8 +32,8 @@ import com.sanus.sanus.domain.new_chat.presenter.NewChatPresenterImpl;
 import java.util.Calendar;
 import java.util.List;
 
-
 public class NewChatActivity extends AppCompatActivity implements NewChatView {
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private NewChatPresenter presenter;
     private Toolbar toolbar;
     private String idDoct;
@@ -43,10 +42,9 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
     private String message;
     private String hour;
     private String date;
-    private String userIdNow;
     RecyclerView recyclerView;
     MessagesAdapter adapter;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
 
     @Override
@@ -57,31 +55,7 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
          setUpView();
          showDataDoctor();
          getDate();
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            userIdNow = user.getUid();
-        }
-
-        DocumentReference usuarios = db.collection("usuarios").document(userIdNow);
-        usuarios.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        String tipo = document.getString("tipo");
-                        if (tipo.equals("Medico")){
-                            presenter.viewMessages(idUser, idDoct);
-                        }
-                        if (tipo.equals("Paciente")){
-                            presenter.viewMessages(idDoct, idUser);
-                        }
-                    }
-                }
-            }
-        });
-
+         viewMessagesByTipe();
     }
 
     private void setUpVariable() {
@@ -105,37 +79,7 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
             @Override
             public void onClick(View v) {
                 message = edNewMessage.getText().toString();
-                //presenter.sendMessages(idUser, idDoct, date, hour, message, idUser);
-
-
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null) {
-                    userIdNow = user.getUid();
-
-                }
-
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                DocumentReference usuarios = db.collection("usuarios").document(userIdNow);
-                usuarios.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                String tipo = document.getString("tipo");
-                                if (tipo.equals("Medico")) {
-                                    presenter.sendMessages(idUser, idUser, date, hour, message, idDoct);
-                                }
-                                if (tipo.equals("Paciente")) {
-                                    presenter.sendMessages(idUser, idDoct, date, hour, message, idUser);
-                                }
-
-                            }
-                        }
-                    }
-                });
-
-
+                sendMessagesByType();
             }
         });
 
@@ -151,12 +95,7 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null) {
-                    String userIdNow = user.getUid();
-
-                    DocumentReference usuarios = db.collection("usuarios").document(userIdNow);
+                    DocumentReference usuarios = db.collection("usuarios").document(idUser);
                     usuarios.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -174,7 +113,7 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
                             }
                         }
                     });
-                }
+
                 break;
                 }
                 return true;
@@ -250,8 +189,45 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
 
     @Override
     public void viewMessagesByTipe() {
-
+        DocumentReference usuarios = db.collection("usuarios").document(idUser);
+        usuarios.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        String tipo = document.getString("tipo");
+                        if (tipo.equals("Medico")){
+                            presenter.viewMessages(idUser, idDoct);
+                        }
+                        if (tipo.equals("Paciente")){
+                            presenter.viewMessages(idDoct, idUser);
+                        }
+                    }
+                }
+            }
+        });
     }
 
-
+    @Override
+    public void sendMessagesByType() {
+        DocumentReference usuarios = db.collection("usuarios").document(idUser);
+        usuarios.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        String tipo = document.getString("tipo");
+                        if (tipo.equals("Medico")) {
+                            presenter.sendMessages(idUser, idUser, date, hour, message, idDoct);
+                        }
+                        if (tipo.equals("Paciente")) {
+                            presenter.sendMessages(idUser, idDoct, date, hour, message, idUser);
+                        }
+                    }
+                }
+            }
+        });
+    }
 }

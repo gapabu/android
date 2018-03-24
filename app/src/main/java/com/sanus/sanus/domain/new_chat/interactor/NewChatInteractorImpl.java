@@ -70,7 +70,6 @@ public class NewChatInteractorImpl implements NewChatInteractor{
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot document : task.getResult()) {
-                                //Log.d(TAG, document.getId() + " => " + document.getData());
                                 List<String> mensages = new ArrayList<>();
                                 String dataMensage = String.valueOf(document.getData());
                                 mensages.add(dataMensage);

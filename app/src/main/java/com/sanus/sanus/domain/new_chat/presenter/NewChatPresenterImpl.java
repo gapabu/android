@@ -62,5 +62,10 @@ public class NewChatPresenterImpl implements NewChatPresenter{
         view.viewMessagesByTipe();
     }
 
+    @Override
+    public void sendMessagesByType() {
+        view.sendMessagesByType();
+    }
+
 
 }
