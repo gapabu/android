@@ -37,9 +37,11 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
     public void onBindViewHolder(@NonNull final MessagesAdapter.ViewHolder holder, int position) {
 
             if (commentsDoctorList.get(position).getAutor().equals(commentsDoctorList.get(position).getId())) {
-                holder.message1.setText(commentsDoctorList.get(position).getMensaje());
+                holder.message.setVisibility(View.VISIBLE);
+                holder.message.setText(commentsDoctorList.get(position).getMensaje());
             }else {
-                holder.mensage2.setText(commentsDoctorList.get(position).getMensaje());
+                holder.mensage1.setText(commentsDoctorList.get(position).getMensaje());
+                holder.mensage1.setVisibility(View.VISIBLE);
             }
 
 
@@ -52,14 +54,14 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
         View mView;
-        TextView message1, mensage2;
+        TextView message, mensage1;
 
         ViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
 
-            message1 = itemView.findViewById(R.id.viewMessage);
-            mensage2 = itemView.findViewById(R.id.viewMessage1);
+            message = itemView.findViewById(R.id.viewMessage);
+            mensage1 = itemView.findViewById(R.id.viewMessage1);
 
         }
     }

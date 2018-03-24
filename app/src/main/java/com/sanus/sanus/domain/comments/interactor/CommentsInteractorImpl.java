@@ -39,8 +39,7 @@ public class CommentsInteractorImpl implements CommentsInteractor {
     @Override
     public void viewComents(String idDoc) {
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection("comentarios").whereEqualTo("doctor", idDoc).orderBy("hora", Query.Direction.DESCENDING)
-                .orderBy("fecha", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        mFirestore.collection("comentarios").whereEqualTo("doctor", idDoc).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
