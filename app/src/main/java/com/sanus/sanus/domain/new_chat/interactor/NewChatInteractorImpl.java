@@ -2,6 +2,7 @@ package com.sanus.sanus.domain.new_chat.interactor;
 
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -10,9 +11,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.sanus.sanus.domain.new_chat.data.Messages;
@@ -29,6 +33,7 @@ public class NewChatInteractorImpl implements NewChatInteractor{
     private String userIdNow;
 
     private List<Messages> commentsDoctorList = new ArrayList<>();
+
 
     public NewChatInteractorImpl(NewChatPresenter presenter) {
         this.presenter = presenter;
@@ -49,7 +54,7 @@ public class NewChatInteractorImpl implements NewChatInteractor{
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Log.d(TAG, "enviado con exito");
-                presenter.goMessages();
+                presenter.viewMessagesByTipe();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -63,7 +68,8 @@ public class NewChatInteractorImpl implements NewChatInteractor{
     public void viewMessages(final String idDoc, final String idUser) {
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
 
-        mFirestore.collection("mensajes").whereEqualTo("doctor", idDoc).whereEqualTo("usuario", idUser).orderBy("fecha", Query.Direction.ASCENDING)
+        /*mFirestore.collection("mensajes").whereEqualTo("doctor", idDoc).whereEqualTo("usuario", idUser)
+                .orderBy("fecha", Query.Direction.ASCENDING)
                 .orderBy("hora", Query.Direction.ASCENDING)
                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -89,7 +95,46 @@ public class NewChatInteractorImpl implements NewChatInteractor{
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
-                });
+                });*/
+
+
+
+
+
+        mFirestore.collection("mensajes").whereEqualTo("doctor", idDoc).whereEqualTo("usuario", idUser)
+                .orderBy("hora", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                List<String> mensages = new ArrayList<>();
+                mensages.clear();
+                commentsDoctorList.clear();
+
+                for (DocumentSnapshot doc : value) {
+
+                    String dataMensage = String.valueOf(doc.getData());
+                    mensages.add(dataMensage);
+
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user != null) {userIdNow = user.getUid();}
+
+                    Log.d(TAG, "ms: " + mensages);
+                    String mensaje = doc.getString("mensaje");
+                    String autor = doc.getString("autor");
+                    commentsDoctorList.add(new Messages(mensaje, autor, userIdNow));
+                    presenter.setDataAdapter(commentsDoctorList);
+                }
+                Log.d(TAG, "Current ci CA: " + mensages);
+            }
+        });
+
+
+
 
 
     }

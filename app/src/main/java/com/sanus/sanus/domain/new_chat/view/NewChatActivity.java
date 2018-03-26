@@ -1,5 +1,6 @@
 package com.sanus.sanus.domain.new_chat.view;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -29,6 +30,7 @@ import com.sanus.sanus.domain.new_chat.data.Messages;
 import com.sanus.sanus.domain.new_chat.presenter.NewChatPresenter;
 import com.sanus.sanus.domain.new_chat.presenter.NewChatPresenterImpl;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -80,6 +82,7 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
             public void onClick(View v) {
                 message = edNewMessage.getText().toString();
                 sendMessagesByType();
+
             }
         });
 
@@ -141,16 +144,24 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
 
     @Override
     public void getDate() {
+
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm:ss:SS");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
         final Calendar calendar = Calendar.getInstance();
-        int dia = calendar.get(Calendar.DAY_OF_MONTH);
+
+        hour = simpleTimeFormat.format(calendar.getTime());
+        date = simpleDateFormat.format(calendar.getTime());
+
+        /*int dia = calendar.get(Calendar.DAY_OF_MONTH);
         int mes = calendar.get(Calendar.MONTH);
         int anio = calendar.get(Calendar.YEAR);
         int hora = calendar.get(Calendar.HOUR);
         int minutos = calendar.get(Calendar.MINUTE);
-        int segundos = calendar.get(Calendar.SECOND);
+        int segundos = calendar.get(Calendar.SECOND);*/
+        //hour = (hora + ":" + minutos + ":" + segundos);
+        //date = (dia + "/" + (mes + 1) + "/" + anio);
 
-        hour = (hora + ":" + minutos + ":" + segundos);
-        date = (dia + "/" + (mes + 1) + "/" + anio);
     }
 
     @Override
@@ -199,9 +210,12 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
                         String tipo = document.getString("tipo");
                         if (tipo.equals("Medico")){
                             presenter.viewMessages(idUser, idDoct);
+                            edNewMessage.getText().clear();
                         }
                         if (tipo.equals("Paciente")){
+                            edNewMessage.getText().clear();
                             presenter.viewMessages(idDoct, idUser);
+
                         }
                     }
                 }
