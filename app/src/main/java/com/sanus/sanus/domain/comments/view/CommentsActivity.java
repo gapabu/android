@@ -1,5 +1,6 @@
 package com.sanus.sanus.domain.comments.view;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -31,6 +32,7 @@ import com.sanus.sanus.domain.comments.presenter.CommentsPresenterImpl;
 import com.sanus.sanus.domain.curriculum.view.CurriculumActivity;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -79,6 +81,8 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
             @Override
             public void onClick(View v) {
                 sendComments();
+                edNuevoComentario.getText().clear();
+                ratingBar.setRating(0);
             }
         });
 
@@ -157,11 +161,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
                                 mFirestoreDoct.collection("doctores").document(idDoct).set(doctMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Intent intent = new Intent(getApplicationContext(), CommentsActivity.class);
-                                        intent.putExtra("idDoctor", idDoct);
-                                        startActivity(intent);
-                                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                                        finish();
+                                        presenter.viewComents(idDoct);
                                     }
                                 });
                             }
@@ -190,16 +190,11 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
 
     @Override
     public void getDate() {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm:ss:SS");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         final Calendar calendar = Calendar.getInstance();
-        int dia = calendar.get(Calendar.DAY_OF_MONTH);
-        int mes = calendar.get(Calendar.MONTH);
-        int anio = calendar.get(Calendar.YEAR);
-        int hora = calendar.get(Calendar.HOUR);
-        int minutos = calendar.get(Calendar.MINUTE);
-        int segundos = calendar.get(Calendar.SECOND);
-
-        hour = (hora + ":" + minutos + ":" + segundos);
-        date = (dia + "/" + (mes + 1) + "/" + anio);
+        hour = simpleTimeFormat.format(calendar.getTime());
+        date = simpleDateFormat.format(calendar.getTime());
     }
 
 }

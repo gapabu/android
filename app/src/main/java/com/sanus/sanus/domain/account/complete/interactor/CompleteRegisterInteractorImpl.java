@@ -113,6 +113,7 @@ public class CompleteRegisterInteractorImpl implements CompleteRegisterInteracto
             userEntity.edad = presenter.getEdadPosition();
             userEntity.tipo = "Paciente";
             userEntity.sexo = sex;
+            userEntity.estado = "1";
 
            if (imageUri != null) {
                 try {

@@ -3,12 +3,11 @@ package com.sanus.sanus.domain.comments.interactor;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,7 +30,6 @@ public class CommentsInteractorImpl implements CommentsInteractor {
     private final String TAG = this.getClass().getSimpleName();
     private CommentsPresenter presenter;
 
-
     private List<CommentsDoctor> commentsDoctorList = new ArrayList<>();
 
     public CommentsInteractorImpl(CommentsPresenter presenter){this.presenter = presenter;}
@@ -39,34 +37,54 @@ public class CommentsInteractorImpl implements CommentsInteractor {
     @Override
     public void viewComents(String idDoc) {
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection("comentarios").whereEqualTo("doctor", idDoc).orderBy("hora", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (DocumentSnapshot document : task.getResult()) {
-                        String usuario1 = document.getString("usuario");
-                        final String fecha = document.getString("fecha");
-                        final String comentario = document.getString("comentario");
-                        final String calificacion1 = document.getString("calificacion");
 
-                        mFirestore.collection("usuarios").document(usuario1).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                            @Override
-                            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-                                String nombre = documentSnapshot.getString("nombre");
-                                String apellido = documentSnapshot.getString("apellido");
-                                final String image = documentSnapshot.getString("avatar");
+        mFirestore.collection("comentarios").whereEqualTo("doctor", idDoc).orderBy("hora", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                List<String> mensages = new ArrayList<>();
+                mensages.clear();
+                commentsDoctorList.clear();
+
+                for (DocumentSnapshot doc : value) {
+                    String dataMensage = String.valueOf(doc.getData());
+                    mensages.add(dataMensage);
+
+                    String usuario1 = doc.getString("usuario");
+                    final String fecha = doc.getString("fecha");
+                    final String comentario = doc.getString("comentario");
+                    final String calificacion1 = doc.getString("calificacion");
+
+                    mFirestore.collection("usuarios").document(usuario1).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                            if (e != null) {
+                                Log.w(TAG, "Listen failed.", e);
+                                return;
+                            }
+
+                            if (snapshot != null && snapshot.exists()) {
+                                Log.d(TAG, "Current data: " + snapshot.getData());
+                                String nombre = snapshot.getString("nombre");
+                                String apellido = snapshot.getString("apellido");
+                                final String image = snapshot.getString("avatar");
                                 String usuario = nombre + " " + apellido;
                                 commentsDoctorList.add(new CommentsDoctor(usuario, comentario, fecha, calificacion1, image));
                                 presenter.setDataAdapter(commentsDoctorList);
+                            } else {
+                                Log.d(TAG, "Current data: null");
                             }
-                        });
-
-                    }
-                }else {
-                    Log.d(TAG, "Data doen't exist");
+                        }
+                    });
                 }
+                Log.d(TAG, "Current data: " + mensages);
             }
         });
+
 
     }
 

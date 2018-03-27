@@ -52,19 +52,28 @@ public class SearchInteractorImpl implements SearchInteractor{
                         mFirestore.collection("usuarios").document(user_id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
                             @Override
                             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-                                String nombre = documentSnapshot.getString("nombre");
-                                String apellido = documentSnapshot.getString("apellido");
-                                final String image = documentSnapshot.getString("avatar");
-                                String estado = documentSnapshot.getString("estado");
-                                String usuario = nombre + " " +apellido;
-                                busquedaDoctors.add(new BusquedaDoctor(usuario, especialidad, image, user_id, estado));
-                                presenter.setDataAdapter(busquedaDoctors);
+                                if (e != null) {
+                                    Log.w(TAG, "Listen failed.", e);
+                                    return;
+                                }
+                                if (documentSnapshot != null && documentSnapshot.exists()) {
+                                    String nombre = documentSnapshot.getString("nombre");
+                                    String apellido = documentSnapshot.getString("apellido");
+                                    final String image = documentSnapshot.getString("avatar");
+                                    String estado = documentSnapshot.getString("estado");
+                                    String usuario = nombre + " " + apellido;
+                                    busquedaDoctors.add(new BusquedaDoctor(usuario, especialidad, image, user_id, estado));
+                                    presenter.setDataAdapter(busquedaDoctors);
+                                }else {
+                                    Log.d(TAG, "Current data: null");
+                                }
                             }
                         });
                     }
                 }
             }
         });
+
     }
 
     @Override

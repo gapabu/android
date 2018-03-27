@@ -82,7 +82,6 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
             public void onClick(View v) {
                 message = edNewMessage.getText().toString();
                 sendMessagesByType();
-
             }
         });
 
@@ -144,24 +143,11 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
 
     @Override
     public void getDate() {
-
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm:ss:SS");
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
         final Calendar calendar = Calendar.getInstance();
-
         hour = simpleTimeFormat.format(calendar.getTime());
         date = simpleDateFormat.format(calendar.getTime());
-
-        /*int dia = calendar.get(Calendar.DAY_OF_MONTH);
-        int mes = calendar.get(Calendar.MONTH);
-        int anio = calendar.get(Calendar.YEAR);
-        int hora = calendar.get(Calendar.HOUR);
-        int minutos = calendar.get(Calendar.MINUTE);
-        int segundos = calendar.get(Calendar.SECOND);*/
-        //hour = (hora + ":" + minutos + ":" + segundos);
-        //date = (dia + "/" + (mes + 1) + "/" + anio);
-
     }
 
     @Override
@@ -213,9 +199,8 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
                             edNewMessage.getText().clear();
                         }
                         if (tipo.equals("Paciente")){
-                            edNewMessage.getText().clear();
                             presenter.viewMessages(idDoct, idUser);
-
+                            edNewMessage.getText().clear();
                         }
                     }
                 }
