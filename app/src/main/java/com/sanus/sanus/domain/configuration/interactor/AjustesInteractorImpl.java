@@ -21,6 +21,7 @@ public class AjustesInteractorImpl implements AjustesInteractor{
     private AjustesPresenter presenter;
     private String idUser;
 
+
     public AjustesInteractorImpl(AjustesPresenter presenter) {
         this.presenter = presenter;
     }
@@ -33,6 +34,7 @@ public class AjustesInteractorImpl implements AjustesInteractor{
     @Override
     public void logout() {
         FirebaseAuth.getInstance().signOut();
+
         presenter.goSplash();
     }
 

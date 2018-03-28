@@ -73,6 +73,11 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
+    public void signInWithGoogle() {
+        view.signInWithGoogle();
+    }
+
+    @Override
     public void onClickLogin() {
         interactor.onClickLogin();
     }

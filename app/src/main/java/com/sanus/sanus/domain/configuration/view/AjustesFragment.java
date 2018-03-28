@@ -44,6 +44,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
     private CircleImageView setupImage;
     private String idUser, image;
     private Button activo, inactivo;
+    private FirebaseAuth.AuthStateListener mAutthListener;
 
     @Nullable
     @Override
@@ -104,6 +105,15 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
                 selectInactive();
             }
         });
+
+        mAutthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() != null){
+                    goSplash();
+                }
+            }
+        };
 
     }
 

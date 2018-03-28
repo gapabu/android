@@ -54,8 +54,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
     private LoginPresenter presenter;
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
-    private Button btnLogin;
-    private SignInButton mGoogleBtn;
+    private Button btnLogin, btnLoginGoogle;
     CallbackManager mCallbackManager;
     public static final int RC_SIGN_IN = 1;
     private GoogleApiClient mGoogleApiClient;
@@ -72,37 +71,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
     }
 
     private void setUpView() {
-        mGoogleBtn = findViewById(R.id.googleBtn);
 
-        mAutthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() != null){
-                    goCompleteRegister();
-                }
-            }
-        };
-
-        // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
-                .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
-                    @Override
-                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-                        Toast.makeText(LoginActivity.this, "You got an Error", Toast.LENGTH_SHORT).show();
-                    }
-                }).addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-        mGoogleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
+        signInWithGoogle();
 
         Button btnLoginFacebook = findViewById(R.id.btnFacebook);
         mCallbackManager = CallbackManager.Factory.create();
@@ -118,6 +88,26 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
         inputPassword = findViewById(R.id.edContraseña);
         btnLogin = findViewById(R.id.btnInicio);
         Button btnSignup = findViewById(R.id.btnCrearCuenta);
+
+        btnLoginGoogle = findViewById(R.id.btnGoogle);
+
+        btnLoginGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
+
+
+        mAutthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() != null){
+                    goCompleteRegister();
+                }
+            }
+        };
+
 
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,6 +164,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
             finish();
         }
     }
+
+    private void loginGoogle(){
+        // Configure Google Sign In
+
+    }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -248,6 +244,24 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
     @Override
     public ProgressDialog getLoading() {
         return AlertUtils.getLoading(this);
+    }
+
+    @Override
+    public void signInWithGoogle() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
+                .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+                        Toast.makeText(LoginActivity.this, "You got an Error", Toast.LENGTH_SHORT).show();
+                    }
+                }).addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
     }
 
     @Override
