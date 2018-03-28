@@ -64,7 +64,7 @@ public class NewChatInteractorImpl implements NewChatInteractor{
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
 
         mFirestore.collection("mensajes").whereEqualTo("doctor", idDoc).whereEqualTo("usuario", idUser)
-                .orderBy("hora", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+              .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
                 if (e != null) {

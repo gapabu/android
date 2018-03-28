@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Sanus</string>
+    <string name="facebook_app_id">2083369358565347</string>
+    <string name="fb_login_protocol_scheme">fb2083369358565347</string>
+
+
     <string name="title_buscar">Buscar</string>
     <string name="title_citas">Citas</string>
     <string name="title_chat">Chat</string>
