@@ -25,7 +25,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -54,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
     private LoginPresenter presenter;
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
-    private Button btnLogin, btnLoginGoogle;
+    private Button btnLogin;
     CallbackManager mCallbackManager;
     public static final int RC_SIGN_IN = 1;
     private GoogleApiClient mGoogleApiClient;
@@ -89,7 +88,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
         btnLogin = findViewById(R.id.btnInicio);
         Button btnSignup = findViewById(R.id.btnCrearCuenta);
 
-        btnLoginGoogle = findViewById(R.id.btnGoogle);
+        Button btnLoginGoogle = findViewById(R.id.btnGoogle);
 
         btnLoginGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,12 +163,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
             finish();
         }
     }
-
-    private void loginGoogle(){
-        // Configure Google Sign In
-
-    }
-
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -333,6 +326,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
+
+                goMain();
             }
             @Override
             public void onCancel() {
@@ -373,7 +368,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            //FirebaseUser user = auth.getCurrentUser();
+                            FirebaseUser user = auth.getCurrentUser();
                             updateUI();
                         } else {
                             // If sign in fails, display a message to the user.
