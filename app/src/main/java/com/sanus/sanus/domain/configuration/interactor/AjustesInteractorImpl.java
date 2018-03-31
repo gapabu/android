@@ -1,9 +1,12 @@
 package com.sanus.sanus.domain.configuration.interactor;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -11,13 +14,14 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.domain.configuration.presenter.AjustesPresenter;
-
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class AjustesInteractorImpl implements AjustesInteractor{
+public class AjustesInteractorImpl implements AjustesInteractor {
     private AjustesPresenter presenter;
     private String idUser;
 
@@ -69,7 +73,7 @@ public class AjustesInteractorImpl implements AjustesInteractor{
                 mFirestoreU.collection("usuarios").document(idUser).set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Log.d("Ajustes", "exitos" );
+                        Log.d("Ajustes", "exitos");
                     }
                 });
             }
@@ -77,16 +81,46 @@ public class AjustesInteractorImpl implements AjustesInteractor{
     }
 
 
-    private void showAccount(){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user!=null){
-            presenter.showData(user.getDisplayName(), user.getEmail());
+    private void showAccount() {
 
-            if (user.getPhotoUrl()!=null) {
-                presenter.showPhoto(user.getPhotoUrl().toString());
-            }
-        }else{
-            presenter.showData("Nombre", "Correo");
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        if (user != null) {
+            idUser = user.getUid();
         }
+
+        mFirestore.collection("usuarios").document(idUser).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+
+                String nombre = documentSnapshot.getString("nombre");
+                String apellido = documentSnapshot.getString("apellido");
+
+                presenter.showName(nombre.concat(apellido));
+
+                final String storageImage = documentSnapshot.getString("avatar");
+
+                if (storageImage == null || storageImage.isEmpty()) {
+                    return;
+                }
+
+                final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://sanus-27.appspot.com/avatar/");
+                storageReference.child(storageImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        presenter.showPhoto(uri);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        e.printStackTrace();
+                        Log.d(String.valueOf(this), "no hay conexion");
+                    }
+                });
+
+
+            }
+        });
     }
 }

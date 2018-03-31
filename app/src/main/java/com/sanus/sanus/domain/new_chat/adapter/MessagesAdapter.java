@@ -38,12 +38,16 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
 
             if (commentsDoctorList.get(position).getAutor().equals(commentsDoctorList.get(position).getId())) {
                 holder.message.setVisibility(View.VISIBLE);
-                holder.message.setText(commentsDoctorList.get(position).getMensaje());
+                String data = commentsDoctorList.get(position).getMensaje() + '\n' + commentsDoctorList.get(position).getHour();
+                holder.message.setText(data);
+                //holder.message.setText(commentsDoctorList.get(position).getMensaje());
+
             }else {
-                holder.mensage1.setText(commentsDoctorList.get(position).getMensaje());
+                String data = commentsDoctorList.get(position).getMensaje() + '\n' + commentsDoctorList.get(position).getHour();
+                holder.mensage1.setText(data);
+                //holder.mensage1.setText(commentsDoctorList.get(position).getMensaje());
                 holder.mensage1.setVisibility(View.VISIBLE);
             }
-
 
     }
 

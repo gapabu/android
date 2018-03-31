@@ -1,5 +1,7 @@
 package com.sanus.sanus.domain.configuration.presenter;
 
+import android.net.Uri;
+
 import com.sanus.sanus.domain.configuration.interactor.AjustesInteractor;
 import com.sanus.sanus.domain.configuration.interactor.AjustesInteractorImpl;
 import com.sanus.sanus.domain.configuration.view.AjustesView;
@@ -35,13 +37,18 @@ public class AjustesPresenterImpl implements AjustesPresenter{
     }
 
     @Override
+    public void showName(String name) {
+        view.showName(name);
+    }
+
+    @Override
     public void showData(String name, String email) {
         view.showData(name, email);
     }
 
     @Override
-    public void showPhoto(String photo) {
-        view.showPhoto(photo);
+    public void showPhoto(Uri uri) {
+        view.showPhoto(uri);
     }
 
     @Override

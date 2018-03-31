@@ -2,15 +2,20 @@ package com.sanus.sanus.domain.new_chat.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.format.Time;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DigitalClock;
 import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,8 +51,9 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
     private String date;
     RecyclerView recyclerView;
     MessagesAdapter adapter;
-
-
+    Time mTime;
+    Handler handler;
+    Runnable r;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +73,22 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
     }
 
     private void setUpView() {
+
+       /* mTime = new Time();
+        r = new Runnable() {
+            @Override
+            public void run() {
+                mTime.setToNow();
+                int hou = mTime.hour;
+                int minute = mTime.minute;
+                int second = mTime.second;
+                hour = hou + ":" + minute + ":" + second;
+            }
+        };*/
+
+        handler = new Handler();
+        handler.postDelayed(r, 1000);
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             idUser = user.getUid();
@@ -85,8 +107,6 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
             }
         });
 
-
-
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
@@ -94,6 +114,17 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
         recyclerView.setAdapter(adapter);
     }
 
+    public float getBatteryLevel(){
+        Intent batteryIntent = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+
+        if (level == -1 || scale == -1){
+            return 50.0f;
+        }
+
+        return ((float) level / (float) scale) *100.0f;
+    }
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
@@ -146,8 +177,9 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm:ss:SS");
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         final Calendar calendar = Calendar.getInstance();
-        hour = simpleTimeFormat.format(calendar.getTime());
         date = simpleDateFormat.format(calendar.getTime());
+        hour = simpleTimeFormat.format(calendar.getTime());
+
     }
 
     @Override

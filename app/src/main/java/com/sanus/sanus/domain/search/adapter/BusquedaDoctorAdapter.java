@@ -46,7 +46,7 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
     public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         holder.nombre.setText(busquedaDoctorList.get(position).getNombre());
         holder.especialidad.setText(busquedaDoctorList.get(position).getEspecialidad());
-        presenter.showImage(busquedaDoctorList.get(position).getAvatar(),context, holder.avatar);
+        //presenter.showImage(busquedaDoctorList.get(position).getAvatar(),context, holder.avatar);
 
         if (busquedaDoctorList.get(position).getEstado().equals("1")){
             holder.estado.setVisibility(View.VISIBLE);

@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/newMessage"
         app:layoutManager="LinearLayoutManager"
-        android:layout_below="@+id/toolbar"/>
+        android:layout_below="@+id/toolbar" />
 
 <LinearLayout
     android:id="@+id/newMessage"
@@ -44,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
         android:tint="@android:color/white"
+        android:layout_marginEnd="@dimen/margin_small"
         app:backgroundTint="@color/colorPrimaryDark"
         app:fabSize="mini"
         app:rippleColor="@android:color/white"

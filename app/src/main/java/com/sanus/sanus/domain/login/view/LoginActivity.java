@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
     private Button btnLogin;
-    CallbackManager mCallbackManager;
+    private CallbackManager mCallbackManager;
     public static final int RC_SIGN_IN = 1;
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth.AuthStateListener mAutthListener;
@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
         setupVariable();
         setUpView();
     }
-
+ 
     private void setUpView() {
 
         signInWithGoogle();
@@ -319,15 +319,13 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
     }*/
 
     public void irFacebook(View view) {
-        Toast.makeText(this, "Crea cuenta facebook", Toast.LENGTH_SHORT).show();
-        LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "public_profile"));
         LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
 
-                goMain();
             }
             @Override
             public void onCancel() {

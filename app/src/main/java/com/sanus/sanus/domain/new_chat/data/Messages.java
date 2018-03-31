@@ -6,10 +6,21 @@ public class Messages {
     private String autor;
     private String  id;
 
-    public Messages(String mensaje, String autor, String  id) {
+    public String getHour() {
+        return hour;
+    }
+
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+
+    private  String hour;
+
+    public Messages(String mensaje, String autor, String  id, String hour) {
         this.mensaje = mensaje;
         this.autor = autor;
         this.id = id;
+        this.hour = hour;
     }
 
     public String getId() {

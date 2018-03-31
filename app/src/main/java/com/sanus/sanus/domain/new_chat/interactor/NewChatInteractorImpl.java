@@ -49,6 +49,7 @@ public class NewChatInteractorImpl implements NewChatInteractor{
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Log.d(TAG, "enviado con exito");
+                //presenter.goMessages();
                 presenter.viewMessagesByTipe();
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -64,7 +65,7 @@ public class NewChatInteractorImpl implements NewChatInteractor{
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
 
         mFirestore.collection("mensajes").whereEqualTo("doctor", idDoc).whereEqualTo("usuario", idUser)
-              .addSnapshotListener(new EventListener<QuerySnapshot>() {
+              .orderBy("hora", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
                 if (e != null) {
@@ -85,7 +86,8 @@ public class NewChatInteractorImpl implements NewChatInteractor{
                     Log.d(TAG, "ms: " + mensages);
                     String mensaje = doc.getString("mensaje");
                     String autor = doc.getString("autor");
-                    commentsDoctorList.add(new Messages(mensaje, autor, userIdNow));
+                    String hour = doc.getString("hora");
+                    commentsDoctorList.add(new Messages(mensaje, autor, userIdNow, hour));
                     presenter.setDataAdapter(commentsDoctorList);
                 }
                 Log.d(TAG, "Current data:  " + mensages);
