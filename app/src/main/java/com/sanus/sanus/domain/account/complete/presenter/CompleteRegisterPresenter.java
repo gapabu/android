@@ -18,7 +18,6 @@ public interface CompleteRegisterPresenter extends CompleteRegisterView {
     void setUpSpinner();
 
     void onSuccess(UploadTask.TaskSnapshot taskSnapshot);
-    void onProgress(UploadTask.TaskSnapshot taskSnapshot);
     void onFailure();
 
 }

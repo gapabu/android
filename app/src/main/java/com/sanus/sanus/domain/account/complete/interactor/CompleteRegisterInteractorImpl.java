@@ -48,7 +48,6 @@ public class CompleteRegisterInteractorImpl implements CompleteRegisterInteracto
             case PICK_IMAGE_REQUEST:
 
                 if (resultCode == Activity.RESULT_OK && data != null) {
-
                     if (data.getData() == null) {
                         return;
                     }
@@ -67,7 +66,6 @@ public class CompleteRegisterInteractorImpl implements CompleteRegisterInteracto
         } catch (Exception e) {
             Log.e(TAG, "Error mostrar imagen", e);
         }
-
     }
 
     @Override

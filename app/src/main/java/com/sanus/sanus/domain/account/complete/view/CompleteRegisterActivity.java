@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,6 +44,7 @@ import java.util.ArrayList;
 
 
 public class CompleteRegisterActivity extends AppCompatActivity implements CompleteRegisterView {
+    private final String TAG = getClass().getSimpleName();
     private CompleteRegisterPresenter presenter;
 
     private EditText nombre, apellido;
@@ -299,11 +301,11 @@ public class CompleteRegisterActivity extends AppCompatActivity implements Compl
                         apellido.setText(lasName);
                         showImage();
                     }else{
-                        Toast.makeText(CompleteRegisterActivity.this, "Data doesn't exit", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "no existe");
                     }
                 }else {
                     String error = task.getException().getMessage();
-                    Toast.makeText(CompleteRegisterActivity.this, "" + error, Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, error);
                 }
             }
         });

@@ -62,10 +62,6 @@ public class CompleteRegisterPresenterImpl implements CompleteRegisterPresenter 
         interactor.onSuccess(taskSnapshot);
     }
 
-    @Override
-    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-        interactor.onProgress(taskSnapshot);
-    }
 
     @Override
     public void onFailure() {
