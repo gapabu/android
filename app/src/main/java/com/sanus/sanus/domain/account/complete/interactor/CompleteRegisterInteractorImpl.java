@@ -25,8 +25,6 @@ import com.sanus.sanus.domain.account.complete.presenter.CompleteRegisterPresent
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.UUID;
-
 
 public class CompleteRegisterInteractorImpl implements CompleteRegisterInteractor {
 
@@ -39,8 +37,6 @@ public class CompleteRegisterInteractorImpl implements CompleteRegisterInteracto
     private ProgressDialog loading;
     private String idUser;
     private String sex = "Masculino";
-
-
 
     public CompleteRegisterInteractorImpl(CompleteRegisterPresenter presenter) {
         this.presenter = presenter;
@@ -120,7 +116,7 @@ public class CompleteRegisterInteractorImpl implements CompleteRegisterInteracto
                     InputStream inputStream = presenter.getContentResolve().openInputStream(imageUri);
                     if (inputStream != null) {
 
-                        userEntity.avatar = UUID.randomUUID().toString();
+                        userEntity.avatar = idUser;
 
                         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("avatar");
                         StorageReference file = storageReference.child(userEntity.avatar);
@@ -130,7 +126,7 @@ public class CompleteRegisterInteractorImpl implements CompleteRegisterInteracto
                             @Override
                             public void onFailure(@NonNull Exception exception) {
 
-                                userEntity.avatar = "";
+                                userEntity.avatar = "userDefaults.png";
                                 Log.e(TAG, "onFailure", exception);
 
                             }
@@ -146,13 +142,14 @@ public class CompleteRegisterInteractorImpl implements CompleteRegisterInteracto
                     }
                 } catch (Exception e) {
                     presenter.showMessage(R.string.photo_error);
+                    userEntity.avatar = "userDefaults.png";
                     saveUser(userEntity);
                 }
 
             } else {
+                userEntity.avatar = "userDefaults.png";
                 saveUser(userEntity);
             }
-
         }
 
     }
@@ -210,7 +207,6 @@ public class CompleteRegisterInteractorImpl implements CompleteRegisterInteracto
 
     @Override
     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-        //Uri downloadUrl = taskSnapshot.getDownloadUrl();
         cancelLoading();
         presenter.showMessage(R.string.upload_complete);
     }

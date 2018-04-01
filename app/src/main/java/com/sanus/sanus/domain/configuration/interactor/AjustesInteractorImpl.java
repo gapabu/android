@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,7 +39,7 @@ public class AjustesInteractorImpl implements AjustesInteractor {
     @Override
     public void logout() {
         FirebaseAuth.getInstance().signOut();
-
+        LoginManager.getInstance().logOut();
         presenter.goSplash();
     }
 
@@ -97,7 +98,7 @@ public class AjustesInteractorImpl implements AjustesInteractor {
                 String nombre = documentSnapshot.getString("nombre");
                 String apellido = documentSnapshot.getString("apellido");
 
-                presenter.showName(nombre.concat(apellido));
+                presenter.showName(nombre.concat(" " + apellido));
 
                 final String storageImage = documentSnapshot.getString("avatar");
 
