@@ -61,7 +61,7 @@ public class SearchInteractorImpl implements SearchInteractor{
                                     String apellido = documentSnapshot.getString("apellido");
                                     final String image = documentSnapshot.getString("avatar");
                                     String estado = documentSnapshot.getString("estado");
-                                    String usuario = nombre + " " + apellido;
+                                    String usuario = nombre.concat(" " + apellido);
                                     busquedaDoctors.add(new BusquedaDoctor(usuario, especialidad, image, user_id, estado));
                                     presenter.setDataAdapter(busquedaDoctors);
                                 }else {

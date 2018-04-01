@@ -48,12 +48,12 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     private String idDoct;
     private String hour;
     private String date;
+    Calendar calendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coments);
-
         setUpVariable();
         setUpView();
         presenter.viewComents(idDoct);
@@ -66,7 +66,9 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     }
 
     private void setUpView() {
+
         idDoct = getIntent().getStringExtra("idDoctor");
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -79,7 +81,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         guardarComentario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendComments();
+                presenter.onClickSaveData();
                 edNuevoComentario.getText().clear();
                 ratingBar.setRating(0);
             }
@@ -193,9 +195,38 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     public void getDate() {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm:ss:SS");
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar calendar = Calendar.getInstance();
+
         hour = simpleTimeFormat.format(calendar.getTime());
         date = simpleDateFormat.format(calendar.getTime());
+    }
+
+    @Override
+    public String getComment() {
+        return edNuevoComentario.getText().toString();
+    }
+
+    @Override
+    public String getHour() {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm:ss:SS");
+        return hour = simpleTimeFormat.format(calendar.getTime());
+    }
+
+    @Override
+    public String getFecha() {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return date = simpleDateFormat.format(calendar.getTime());
+    }
+
+    @Override
+    public String getCalificacion() {
+        float valoracion = (ratingBar.getRating()) * 20;
+        final int valoracionDoc = (int) valoracion;
+        return String.valueOf(valoracionDoc);
+    }
+
+    @Override
+    public String getIdDoctor() {
+        return idDoct = getIntent().getStringExtra("idDoctor");
     }
 
 }

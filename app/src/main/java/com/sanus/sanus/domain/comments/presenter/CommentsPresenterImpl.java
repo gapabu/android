@@ -37,6 +37,31 @@ public class CommentsPresenterImpl implements  CommentsPresenter{
     }
 
     @Override
+    public String getComment() {
+        return view.getComment();
+    }
+
+    @Override
+    public String getHour() {
+        return view.getHour();
+    }
+
+    @Override
+    public String getFecha() {
+        return view.getFecha();
+    }
+
+    @Override
+    public String getCalificacion() {
+        return view.getCalificacion();
+    }
+
+    @Override
+    public String getIdDoctor() {
+        return view.getIdDoctor();
+    }
+
+    @Override
     public void viewComents(String idDoc) {
         interactor.viewComents(idDoc);
     }
@@ -45,4 +70,10 @@ public class CommentsPresenterImpl implements  CommentsPresenter{
     public void showImage(String idImage, Context context, CircleImageView image) {
         interactor.showImage(idImage, context, image);
     }
+
+    @Override
+    public void onClickSaveData() {
+        interactor.onClickSaveData();
+    }
+
 }
