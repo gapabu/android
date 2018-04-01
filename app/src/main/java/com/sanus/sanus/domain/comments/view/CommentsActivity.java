@@ -43,8 +43,8 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     private RatingBar ratingBar;
     private EditText edNuevoComentario;
     private String idUser;
-    RecyclerView recyclerView;
-    CommentsDoctorAdapter adapter;
+    private RecyclerView recyclerView;
+    private CommentsDoctorAdapter adapter;
     private String idDoct;
     private String hour;
     private String date;
@@ -56,7 +56,6 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
 
         setUpVariable();
         setUpView();
-        getDate();
         presenter.viewComents(idDoct);
     }
 
@@ -116,6 +115,8 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         if (user != null) {
             idUser = user.getUid();
         }
+
+        getDate();
 
         String comments = edNuevoComentario.getText().toString();
         float valoracion = (ratingBar.getRating()) * 20;
@@ -192,7 +193,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     public void getDate() {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm:ss:SS");
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        final Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         hour = simpleTimeFormat.format(calendar.getTime());
         date = simpleDateFormat.format(calendar.getTime());
     }
