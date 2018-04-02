@@ -43,6 +43,7 @@ public class AjustesInteractorImpl implements AjustesInteractor {
         FirebaseAuth.getInstance().signOut();
         LoginManager.getInstance().logOut();
         presenter.goSplash();
+        onClickActive("0");
     }
 
     @Override
@@ -70,7 +71,6 @@ public class AjustesInteractorImpl implements AjustesInteractor {
                         mFirestore.collection("usuarios").document(idUser).set(userEntity).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Log.d("ajustes", "estado actualizado");
                             }
                         });
                     }
@@ -93,15 +93,11 @@ public class AjustesInteractorImpl implements AjustesInteractor {
 
                 String nombre = documentSnapshot.getString("nombre");
                 String apellido = documentSnapshot.getString("apellido");
-
                 presenter.showName(nombre.concat(" " + apellido));
-
                 final String storageImage = documentSnapshot.getString("avatar");
-
                 if (storageImage == null || storageImage.isEmpty()) {
                     return;
                 }
-
                 final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://sanus-27.appspot.com/avatar/");
                 storageReference.child(storageImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override

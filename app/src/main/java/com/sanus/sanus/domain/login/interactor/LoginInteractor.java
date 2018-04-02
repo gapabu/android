@@ -10,4 +10,5 @@ public interface LoginInteractor extends CallbackAlert{
     void signInWithEmailAndPasswordComplete(Task<AuthResult> task);
 
     void validateButtonEnable();
+    void onClickActive(String estado);
 }

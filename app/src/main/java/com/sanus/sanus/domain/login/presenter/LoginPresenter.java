@@ -12,4 +12,5 @@ public interface LoginPresenter extends LoginView,CallbackAlert{
     void signInWithEmailAndPasswordComplete(Task<AuthResult> task);
 
     void validateButtonEnable();
+    void onClickActive(String estado);
 }

@@ -93,6 +93,11 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
+    public void onClickActive(String estado) {
+        interactor.onClickActive(estado);
+    }
+
+    @Override
     public void acceptAlert() {
         interactor.acceptAlert();
     }

@@ -13,6 +13,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sanus.sanus.R;
+import com.sanus.sanus.data.repository.firebase.entity.user.UserEntity;
 import com.sanus.sanus.domain.login.presenter.LoginPresenter;
 import com.sanus.sanus.utils.regex.RegexUtils;
 
@@ -21,6 +22,8 @@ public class LoginInteractorImpl implements LoginInteractor {
     private ProgressDialog loading;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String TAG = this.getClass().getSimpleName();
+    private UserEntity userEntity = new UserEntity();
+    private String idUser;
 
     public LoginInteractorImpl(LoginPresenter presenter) {
         this.presenter = presenter;
@@ -28,17 +31,13 @@ public class LoginInteractorImpl implements LoginInteractor {
 
     @Override
     public void onClickLogin() {
-
         showLoading();
         presenter.signInWithEmailAndPassword();
-
     }
 
     @Override
     public void signInWithEmailAndPasswordComplete(Task<AuthResult> task) {
-
         cancelLoading();
-
         if (!task.isSuccessful()) {
             presenter.showMessage(R.string.autenticacion_fallida);
             return;
@@ -59,9 +58,11 @@ public class LoginInteractorImpl implements LoginInteractor {
                             String tipo = document.getString("tipo");
                             if (tipo.equals("Medico")){
                                 presenter.goMainDoctor();
+                                onClickActive("1");
                             }
                             if (tipo.equals("Paciente")){
                                 presenter.goMain();
+                                onClickActive("1");
                             }
 
                             Log.d(TAG, "DocumentSnapshot data: " + task.getResult().getData());
@@ -90,6 +91,38 @@ public class LoginInteractorImpl implements LoginInteractor {
             return;
         }
         presenter.disableButton();
+    }
+
+    @Override
+    public void onClickActive(final String estado) {
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            idUser = user.getUid();
+        }
+
+        final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+
+        mFirestore.collection("usuarios").document(idUser).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().exists()) {
+                        userEntity.apellido = task.getResult().getString("apellido");
+                        userEntity.avatar = task.getResult().getString("avatar");
+                        userEntity.edad = task.getResult().getString("edad");
+                        userEntity.nombre = task.getResult().getString("nombre");
+                        userEntity.sexo = task.getResult().getString("sexo");
+                        userEntity.tipo = task.getResult().getString("tipo");
+                        userEntity.estado = estado;
+                        mFirestore.collection("usuarios").document(idUser).set(userEntity).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                            }
+                        });
+                    }
+                }
+            }
+        });
     }
 
     private void showLoading() {
