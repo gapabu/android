@@ -38,7 +38,7 @@ public class CommentsDoctorAdapter extends RecyclerView.Adapter<CommentsDoctorAd
         holder.fecha.setText(commentsDoctorList.get(position).getFecha());
         holder.calificacion.setRating(Float.parseFloat(commentsDoctorList.get(position).getCalificacion())/20);
 
-        presenter.showImage(commentsDoctorList.get(position).getAvatar(), context, holder.avatar);
+        presenter.showImage(commentsDoctorList.get(position).getAvatar(), holder.avatar);
     }
 
     @Override

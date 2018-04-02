@@ -8,7 +8,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public interface CommentsPresenter extends CommentsView {
     void viewComents(String idDoc);
-    void showImage(String idImage, final Context context, final CircleImageView image);
+    void showImage(String idImage, CircleImageView image);
     void onClickSaveData();
     void getDate();
     void updatingCalification(String qualification);

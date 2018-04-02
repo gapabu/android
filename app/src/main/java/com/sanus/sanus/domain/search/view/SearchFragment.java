@@ -1,5 +1,6 @@
 package com.sanus.sanus.domain.search.view;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,8 +19,11 @@ import com.sanus.sanus.domain.search.adapter.BusquedaDoctorAdapter;
 import com.sanus.sanus.domain.search.data.BusquedaDoctor;
 import com.sanus.sanus.domain.search.presenter.SearchPresenter;
 import com.sanus.sanus.domain.search.presenter.SearchPresenterImpl;
+import com.sanus.sanus.utils.glide.GlideApp;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SearchFragment extends Fragment implements SearchView{
 
@@ -68,6 +72,11 @@ public class SearchFragment extends Fragment implements SearchView{
         BusquedaDoctorAdapter busquedaDoctorAdapteradapter = new BusquedaDoctorAdapter(getContext(), busquedaDoctors, presenter);
         recyclerView.setAdapter(busquedaDoctorAdapteradapter);
         busquedaDoctorAdapteradapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showPhoto(Uri uri, CircleImageView avatar) {
+        GlideApp.with(getActivity()).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
     }
 }
 

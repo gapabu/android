@@ -1,6 +1,7 @@
 package com.sanus.sanus.domain.curriculum.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,6 +24,7 @@ import com.sanus.sanus.domain.curriculum.presenter.CurriculumPresenter;
 import com.sanus.sanus.domain.curriculum.presenter.CurriculumPresenterImpl;
 import com.sanus.sanus.domain.main.view.MainActivity;
 import com.sanus.sanus.domain.new_chat.view.NewChatActivity;
+import com.sanus.sanus.utils.glide.GlideApp;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -128,9 +130,9 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
                 String apellido = documentSnapshot.getString("apellido");
                 image = documentSnapshot.getString("avatar");
 
-                presenter.showImage(image, CurriculumActivity.this, setupImage);
+                presenter.showImage(image, setupImage);
 
-                String usuario = nombre + " " +apellido;
+                String usuario = nombre.concat(" " + apellido);
                 setSupportActionBar(toolbar);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 getSupportActionBar().setTitle(usuario);
@@ -138,7 +140,10 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         });
     }
 
-
+    @Override
+    public void showPhoto(Uri uri, CircleImageView avatar) {
+        GlideApp.with(getApplicationContext()).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
+    }
 
 
 }

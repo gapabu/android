@@ -1,6 +1,7 @@
 package com.sanus.sanus.domain.comments.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,8 +18,11 @@ import com.sanus.sanus.domain.comments.data.CommentsDoctor;
 import com.sanus.sanus.domain.comments.presenter.CommentsPresenter;
 import com.sanus.sanus.domain.comments.presenter.CommentsPresenterImpl;
 import com.sanus.sanus.domain.curriculum.view.CurriculumActivity;
+import com.sanus.sanus.utils.glide.GlideApp;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class CommentsActivity extends AppCompatActivity implements CommentsView{
@@ -111,6 +115,11 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     @Override
     public String getIdDoctor() {
         return idDoct = getIntent().getStringExtra("idDoctor");
+    }
+
+    @Override
+    public void showPhoto(Uri uri, CircleImageView avatar) {
+        GlideApp.with(getApplicationContext()).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
     }
 
 }

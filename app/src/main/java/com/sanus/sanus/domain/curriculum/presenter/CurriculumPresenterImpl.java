@@ -1,6 +1,6 @@
 package com.sanus.sanus.domain.curriculum.presenter;
 
-import android.content.Context;
+import android.net.Uri;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -25,8 +25,8 @@ public class CurriculumPresenterImpl implements CurriculumPresenter {
     }
 
     @Override
-    public void showImage(String idImage, Context context, CircleImageView image) {
-        interactor.showImage(idImage, context, image);
+    public void showImage(String idImage,CircleImageView image) {
+        interactor.showImage(idImage, image);
     }
 
     @Override
@@ -53,5 +53,10 @@ public class CurriculumPresenterImpl implements CurriculumPresenter {
     @Override
     public void showDataDoctor() {
         view.showDataDoctor();
+    }
+
+    @Override
+    public void showPhoto(Uri photo, CircleImageView avatar) {
+        view.showPhoto(photo, avatar);
     }
 }

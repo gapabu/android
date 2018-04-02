@@ -1,7 +1,6 @@
 package com.sanus.sanus.domain.comments.interactor;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,13 +20,10 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.sanus.sanus.R;
 import com.sanus.sanus.data.repository.firebase.entity.user.CommentEntity;
 import com.sanus.sanus.data.repository.firebase.entity.user.DoctorEntity;
 import com.sanus.sanus.domain.comments.data.CommentsDoctor;
 import com.sanus.sanus.domain.comments.presenter.CommentsPresenter;
-import com.sanus.sanus.utils.glide.GlideApp;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -95,12 +91,12 @@ public class CommentsInteractorImpl implements CommentsInteractor {
     }
 
     @Override
-    public void showImage(String idImage, final Context context, final CircleImageView image) {
+    public void showImage(String idImage, final CircleImageView image) {
         final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://sanus-27.appspot.com/avatar/");
         storageReference.child(idImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                GlideApp.with(context).load(uri.toString()).placeholder(R.drawable.user).into(image);
+                presenter.showPhoto(uri, image);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
