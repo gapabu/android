@@ -4,5 +4,5 @@ public interface AjustesInteractor {
 
     void onResume();
     void logout();
-    void onClickActive(String activo);
+    void onClickActive(String estado);
 }

@@ -26,8 +26,8 @@ public class AjustesPresenterImpl implements AjustesPresenter{
     }
 
     @Override
-    public void onClickActive(String activo) {
-        interactor.onClickActive(activo);
+    public void onClickActive(String estado) {
+        interactor.onClickActive(estado);
     }
 
 

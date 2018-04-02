@@ -142,10 +142,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
 
     @Override
     public void showPhoto(Uri uri) {
-
         GlideApp.with(getActivity()).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
-
-
     }
 
     @Override
@@ -154,8 +151,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
         activo.setTextColor(getResources().getColor(R.color.white));
         inactivo.setBackgroundColor(getResources().getColor(R.color.white));
         inactivo.setTextColor(getResources().getColor(R.color.black));
-        //presenter.onClickActive("1");
-
+        presenter.onClickActive("1");
     }
 
     @Override
@@ -164,6 +160,6 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
         inactivo.setTextColor(getResources().getColor(R.color.white));
         activo.setBackgroundColor(getResources().getColor(R.color.white));
         activo.setTextColor(getResources().getColor(R.color.black));
-        //presenter.onClickActive("0");
+        presenter.onClickActive("0");
     }
 }

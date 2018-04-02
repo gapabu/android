@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.sanus.sanus.data.repository.firebase.entity.user.UserEntity;
 import com.sanus.sanus.domain.configuration.presenter.AjustesPresenter;
 
 import java.util.HashMap;
@@ -25,6 +26,7 @@ import java.util.Map;
 public class AjustesInteractorImpl implements AjustesInteractor {
     private AjustesPresenter presenter;
     private String idUser;
+    private UserEntity userEntity = new UserEntity();
 
 
     public AjustesInteractorImpl(AjustesPresenter presenter) {
@@ -44,47 +46,41 @@ public class AjustesInteractorImpl implements AjustesInteractor {
     }
 
     @Override
-    public void onClickActive(final String activo) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    public void onClickActive(final String estado) {
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             idUser = user.getUid();
         }
 
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        final FirebaseFirestore mFirestoreU = FirebaseFirestore.getInstance();
-        mFirestore.collection("usuarios").document(idUser).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+
+        mFirestore.collection("usuarios").document(idUser).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-                String apellido = documentSnapshot.getString("apellido");
-                String avatar = documentSnapshot.getString("avatar");
-                String edad = documentSnapshot.getString("edad");
-                String nombre = documentSnapshot.getString("nombre");
-                String sexo = documentSnapshot.getString("sexo");
-                String tipo = documentSnapshot.getString("tipo");
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().exists()) {
+                        userEntity.apellido = task.getResult().getString("apellido");
+                        userEntity.avatar = task.getResult().getString("avatar");
+                        userEntity.edad = task.getResult().getString("edad");
+                        userEntity.nombre = task.getResult().getString("nombre");
+                        userEntity.sexo = task.getResult().getString("sexo");
+                        userEntity.tipo = task.getResult().getString("tipo");
+                        userEntity.estado = estado;
 
-                Map<String, String> userMap = new HashMap<>();
-                userMap.put("apellido", apellido);
-                userMap.put("avatar", avatar);
-                userMap.put("edad", edad);
-                userMap.put("nombre", nombre);
-                userMap.put("sexo", sexo);
-                userMap.put("tipo", tipo);
-                userMap.put("estado", activo);
-
-                mFirestoreU.collection("usuarios").document(idUser).set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Log.d("Ajustes", "exitos");
+                        mFirestore.collection("usuarios").document(idUser).set(userEntity).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Log.d("ajustes", "estado actualizado");
+                            }
+                        });
                     }
-                });
+                }
             }
         });
     }
 
 
     private void showAccount() {
-
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         if (user != null) {
