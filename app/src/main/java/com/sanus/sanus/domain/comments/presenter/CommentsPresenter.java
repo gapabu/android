@@ -11,4 +11,5 @@ public interface CommentsPresenter extends CommentsView {
     void showImage(String idImage, final Context context, final CircleImageView image);
     void onClickSaveData();
     void getDate();
+    void updatingCalification(String qualification);
 }

@@ -6,12 +6,8 @@ import java.util.List;
 
 public interface CommentsView {
 
-    void sendComments();
     void setDataAdapter(List<CommentsDoctor> commentsDoctorList);
-    void getDate();
     String getComment();
-    String getHour();
-    String getFecha();
     String getCalificacion();
     String getIdDoctor();
 }

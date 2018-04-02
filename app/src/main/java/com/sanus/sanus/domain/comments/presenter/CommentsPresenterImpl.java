@@ -20,35 +20,20 @@ public class CommentsPresenterImpl implements  CommentsPresenter{
         interactor = new CommentsInteractorImpl(this);
     }
 
-
-    @Override
-    public void sendComments() {
-        view.sendComments();
-    }
-
     @Override
     public void setDataAdapter(List<CommentsDoctor> commentsDoctorList) {
         view.setDataAdapter(commentsDoctorList);
     }
 
+
     @Override
-    public void getDate() {
-        view.getDate();
+    public void updatingCalification(String qualification) {
+        interactor.updatingCalification(qualification);
     }
 
     @Override
     public String getComment() {
         return view.getComment();
-    }
-
-    @Override
-    public String getHour() {
-        return view.getHour();
-    }
-
-    @Override
-    public String getFecha() {
-        return view.getFecha();
     }
 
     @Override
@@ -74,6 +59,11 @@ public class CommentsPresenterImpl implements  CommentsPresenter{
     @Override
     public void onClickSaveData() {
         interactor.onClickSaveData();
+    }
+
+    @Override
+    public void getDate() {
+        interactor.getDate();
     }
 
 }
