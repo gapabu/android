@@ -159,9 +159,7 @@ public class CompleteRegisterInteractorImpl implements CompleteRegisterInteracto
                 @Override
                 public void onSuccess(Void aVoid) {
                     cancelLoading();
-                    presenter.showMessage(R.string.signin_sucess);
                     presenter.goMain();
-
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override

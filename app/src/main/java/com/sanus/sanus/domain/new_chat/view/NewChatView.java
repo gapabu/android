@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface NewChatView {
     void showDataDoctor();
-    void getDate();
     void setDataAdapter(List<Messages> commentsDoctorList);
     void goMessages();
     void goCurriculum();
     void goFramentChat();
     void viewMessagesByTipe();
     void sendMessagesByType();
+    String getMessages();
 }

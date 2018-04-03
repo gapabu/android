@@ -23,18 +23,18 @@ public class NewChatPresenterImpl implements NewChatPresenter{
     }
 
     @Override
-    public void sendMessages(String idUser, String idDoct, String fecha, String hora, String message, String id) {
-        interactor.sendMessages(idUser,idDoct,fecha,hora,message, id);
+    public void sendMessages(String idUser, String idDoct,String id) {
+        interactor.sendMessages(idUser,idDoct,id);
+    }
+
+    @Override
+    public void getDate() {
+        interactor.getDate();
     }
 
     @Override
     public void showDataDoctor() {
         view.showDataDoctor();
-    }
-
-    @Override
-    public void getDate() {
-        view.getDate();
     }
 
     @Override
@@ -65,6 +65,11 @@ public class NewChatPresenterImpl implements NewChatPresenter{
     @Override
     public void sendMessagesByType() {
         view.sendMessagesByType();
+    }
+
+    @Override
+    public String getMessages() {
+        return view.getMessages();
     }
 
 

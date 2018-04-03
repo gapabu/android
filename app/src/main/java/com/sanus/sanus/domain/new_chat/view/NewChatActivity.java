@@ -46,14 +46,8 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
     private String idDoct;
     private String idUser;
     private EditText edNewMessage;
-    private String message;
-    private String hour;
-    private String date;
     RecyclerView recyclerView;
     MessagesAdapter adapter;
-    Time mTime;
-    Handler handler;
-    Runnable r;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +56,6 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
          setUpVariable();
          setUpView();
          showDataDoctor();
-         getDate();
          viewMessagesByTipe();
     }
 
@@ -73,21 +66,6 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
     }
 
     private void setUpView() {
-
-       /* mTime = new Time();
-        r = new Runnable() {
-            @Override
-            public void run() {
-                mTime.setToNow();
-                int hou = mTime.hour;
-                int minute = mTime.minute;
-                int second = mTime.second;
-                hour = hou + ":" + minute + ":" + second;
-            }
-        };*/
-
-        handler = new Handler();
-        handler.postDelayed(r, 1000);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -102,7 +80,7 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                message = edNewMessage.getText().toString();
+                //message = edNewMessage.getText().toString();
                 sendMessagesByType();
             }
         });
@@ -114,17 +92,6 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
         recyclerView.setAdapter(adapter);
     }
 
-    public float getBatteryLevel(){
-        Intent batteryIntent = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-
-        if (level == -1 || scale == -1){
-            return 50.0f;
-        }
-
-        return ((float) level / (float) scale) *100.0f;
-    }
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
@@ -160,26 +127,13 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
         mFirestore.collection("usuarios").document(idDoct).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-                String nombre = documentSnapshot.getString("nombre");
-                String apellido = documentSnapshot.getString("apellido");
-
-                String usuario = nombre + " " + apellido;
+                String usuario = documentSnapshot.getString("nombre").concat(" " + documentSnapshot.getString("apellido"));
                 setSupportActionBar(toolbar);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 getSupportActionBar().setTitle(usuario);
             }
 
         });
-    }
-
-    @Override
-    public void getDate() {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm:ss:SS");
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        final Calendar calendar = Calendar.getInstance();
-        date = simpleDateFormat.format(calendar.getTime());
-        hour = simpleTimeFormat.format(calendar.getTime());
-
     }
 
     @Override
@@ -251,14 +205,19 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
                     if (document.exists()) {
                         String tipo = document.getString("tipo");
                         if (tipo.equals("Medico")) {
-                            presenter.sendMessages(idUser, idUser, date, hour, message, idDoct);
+                            presenter.sendMessages(idUser, idUser, idDoct);
                         }
                         if (tipo.equals("Paciente")) {
-                            presenter.sendMessages(idUser, idDoct, date, hour, message, idUser);
+                            presenter.sendMessages(idUser, idDoct, idUser);
                         }
                     }
                 }
             }
         });
+    }
+
+    @Override
+    public String getMessages() {
+        return edNewMessage.getText().toString();
     }
 }

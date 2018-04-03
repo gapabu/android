@@ -8,6 +8,8 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
+
+
     <RelativeLayout
         android:id="@+id/rlHeader"
         android:layout_width="wrap_content"
@@ -29,6 +31,8 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/hcompleteregister" />
         </LinearLayout>
+
+        <include layout="@layout/toolbar" />
 
 
         <ImageView

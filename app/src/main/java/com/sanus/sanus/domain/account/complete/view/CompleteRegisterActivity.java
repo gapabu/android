@@ -8,9 +8,11 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,7 +55,6 @@ public class CompleteRegisterActivity extends AppCompatActivity implements Compl
     private ImageView imgavatar;
     private String edadPosition, id, img;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +68,6 @@ public class CompleteRegisterActivity extends AppCompatActivity implements Compl
     }
 
     private void setUpView() {
-
         nombre = findViewById(R.id.edNombre);
         apellido = findViewById(R.id.edApellido);
         masculino = findViewById(R.id.btnMasculino);
@@ -148,6 +148,17 @@ public class CompleteRegisterActivity extends AppCompatActivity implements Compl
         });
     }
 
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        switch (menuItem.getItemId()){
+            case android.R.id.home:
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                finish();
+                break;
+        }
+        return true;
+    }
     private void hideKeyboard() {
         KeyboardUtil.hide(this);
     }
@@ -273,17 +284,19 @@ public class CompleteRegisterActivity extends AppCompatActivity implements Compl
         storageReference.child(img).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                GlideApp.with(CompleteRegisterActivity.this).load(uri.toString()).apply(RequestOptions.circleCropTransform()).into(imgavatar);
+
+                GlideApp.with(getApplicationContext()).load(uri.toString()).apply(RequestOptions.circleCropTransform()).into(imgavatar);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 e.printStackTrace();
-                Toast.makeText(CompleteRegisterActivity.this, "Error al traer foto", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Error al traer foto");
             }
         });
     }
     private void init(){
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
            id = user.getUid();
@@ -294,12 +307,24 @@ public class CompleteRegisterActivity extends AppCompatActivity implements Compl
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     if (task.getResult().exists()) {
-                        String name = task.getResult().getString("nombre");
-                        String lasName = task.getResult().getString("apellido");
+
+                        nombre.setText(task.getResult().getString("nombre"));
+                        apellido.setText(task.getResult().getString("apellido"));
                         img = task.getResult().getString("avatar");
-                        nombre.setText(name);
-                        apellido.setText(lasName);
+
+                        String age = task.getResult().getString("edad");
+                        //ArrayAdapter<String> adap = new ArrayAdapter<String>(age);
+
+                       // ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item, ageList);
+                        //adapter.setDropDownViewResource(R.layout.list_item_spinner);
+                        edadPosition = "13 años";
                         showImage();
+
+                        Toolbar toolbar = findViewById(R.id.toolbar);
+                        setSupportActionBar(toolbar);
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                        getSupportActionBar().setTitle(" ");
+
                     }else{
                         Log.d(TAG, "no existe");
                     }

@@ -1,6 +1,6 @@
 package com.sanus.sanus.domain.new_chat.interactor;
 
-
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -16,18 +16,23 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.sanus.sanus.data.repository.firebase.entity.user.MessageEntity;
 import com.sanus.sanus.domain.new_chat.data.Messages;
 import com.sanus.sanus.domain.new_chat.presenter.NewChatPresenter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 
 public class NewChatInteractorImpl implements NewChatInteractor{
-    private NewChatPresenter presenter;
     private final String TAG = this.getClass().getSimpleName();
+    private MessageEntity messageEntity = new MessageEntity();
+    private NewChatPresenter presenter;
     private String userIdNow;
+    private String hour;
+    private String date;
+
 
     private List<Messages> commentsDoctorList = new ArrayList<>();
     public NewChatInteractorImpl(NewChatPresenter presenter) {
@@ -35,21 +40,21 @@ public class NewChatInteractorImpl implements NewChatInteractor{
     }
 
     @Override
-    public void sendMessages(final String idUser, final String idDoct, String fecha, String hora, String message, String id) {
+    public void sendMessages(String idUser, String idDoct, String id) {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        Map<String, String> messageMap = new HashMap<>();
-        messageMap.put("autor", idUser );
-        messageMap.put("doctor", idDoct); //idUser
-        messageMap.put("fecha", fecha);
-        messageMap.put("hora", hora);
-        messageMap.put("mensaje", message);
-        messageMap.put("usuario", id); //idDoctor
 
-        mFirestore.collection("mensajes").add(messageMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        getDate();
+        messageEntity.autor = idUser;
+        messageEntity.doctor = idDoct;
+        messageEntity.fecha = date;
+        messageEntity.hora = hour;
+        messageEntity.mensaje = presenter.getMessages();
+        messageEntity.usuario = id;
+
+        mFirestore.collection("mensajes").add(messageEntity).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Log.d(TAG, "enviado con exito");
-                //presenter.goMessages();
                 presenter.viewMessagesByTipe();
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -61,7 +66,7 @@ public class NewChatInteractorImpl implements NewChatInteractor{
     }
 
     @Override
-    public void viewMessages(final String idDoc, final String idUser) {
+    public void viewMessages(String idDoc, String idUser) {
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
 
         mFirestore.collection("mensajes").whereEqualTo("doctor", idDoc).whereEqualTo("usuario", idUser)
@@ -80,10 +85,10 @@ public class NewChatInteractorImpl implements NewChatInteractor{
                 for (DocumentSnapshot doc : value) {
                     String dataMensage = String.valueOf(doc.getData());
                     mensages.add(dataMensage);
+
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     if (user != null) {userIdNow = user.getUid();}
 
-                    Log.d(TAG, "ms: " + mensages);
                     String mensaje = doc.getString("mensaje");
                     String autor = doc.getString("autor");
                     String hour = doc.getString("hora");
@@ -94,6 +99,15 @@ public class NewChatInteractorImpl implements NewChatInteractor{
             }
         });
 
+    }
+
+    @Override
+    public void getDate() {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm:ss:SS");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar calendar = Calendar.getInstance();
+        hour = simpleTimeFormat.format(calendar.getTime());
+        date = simpleDateFormat.format(calendar.getTime());
     }
 
 }
