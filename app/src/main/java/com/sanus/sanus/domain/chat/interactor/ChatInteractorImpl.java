@@ -48,31 +48,26 @@ public class ChatInteractorImpl implements ChatInteractor {
             idUser = user.getUid();
         }
 
-        /*mFirestore.collection("contactos").whereEqualTo("autor", idUser).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        mFirestore.collection("contactos").whereEqualTo("autor", idUser).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (DocumentSnapshot document : task.getResult()) {
                         final String doctor = document.getString("doctor");
-                        mFirestoreUser.collection("usuarios").whereEqualTo("doctor", doctor).get()
-                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        mFirestoreUser.collection("usuarios").whereEqualTo("doctor", doctor).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         mFirestoreUser.collection("usuarios").document(doctor).addSnapshotListener(new EventListener<DocumentSnapshot>() {
                                             @Override
                                             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                                                 final String user_id = documentSnapshot.getId();
-                                                String nombre = documentSnapshot.getString("nombre");
-                                                String apellido = documentSnapshot.getString("apellido");
                                                 final String image = documentSnapshot.getString("avatar");
                                                 String estado = documentSnapshot.getString("estado");
-
-                                                String usuario = nombre + " " + apellido;
+                                                String usuario = documentSnapshot.getString("nombre").concat(" " + documentSnapshot.getString("apellido"));
                                                 busquedaDoctors.add(new ContactUser(usuario, image, user_id, estado));
                                                 presenter.setDataAdapter(busquedaDoctors);
                                             }
                                         });
-
                                     }
                                 });
                     }
@@ -81,57 +76,8 @@ public class ChatInteractorImpl implements ChatInteractor {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-
-            }
-        });*/
-
-        mFirestore.collection("contactos").whereEqualTo("autor", idUser).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    Log.w(TAG, "Listen failed.", e);
-                    return;
-                }
-
-                final List<String> contact = new ArrayList<>();
-                contact.clear();
-                busquedaDoctors.clear();
-
-                for (DocumentSnapshot doc : value) {
-                    String dataContact = String.valueOf(doc.getData());
-                    contact.add(dataContact);
-                    final String doctor = doc.getString("doctor");
-
-                    mFirestoreUser.collection("usuarios").whereEqualTo("doctor", doctor).addSnapshotListener(new EventListener<QuerySnapshot>() {
-                        @Override
-                        public void onEvent(@Nullable QuerySnapshot value,
-                                            @Nullable FirebaseFirestoreException e) {
-                            if (e != null) {
-                                Log.w(TAG, "Listen failed.", e);
-                                return;
-                            }
-
-                            for (DocumentSnapshot doc : value) {
-                                final String user_id = doc.getId();
-                                String nombre = doc.getString("nombre");
-                                String apellido = doc.getString("apellido");
-                                final String image = doc.getString("avatar");
-                                String estado = doc.getString("estado");
-
-                                String usuario = nombre + " " + apellido;
-                                busquedaDoctors.add(new ContactUser(usuario, image, user_id, estado));
-                                presenter.setDataAdapter(busquedaDoctors);
-                            }
-                            Log.d(TAG, "Current cites in CA: " + contact);
-                        }
-                    });
-
-                }
-                Log.d(TAG, "Current cites in CA: " + contact);
             }
         });
-
-
     }
 
     @Override

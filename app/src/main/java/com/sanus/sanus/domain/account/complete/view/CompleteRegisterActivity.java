@@ -311,15 +311,7 @@ public class CompleteRegisterActivity extends AppCompatActivity implements Compl
                         nombre.setText(task.getResult().getString("nombre"));
                         apellido.setText(task.getResult().getString("apellido"));
                         img = task.getResult().getString("avatar");
-
-                        String age = task.getResult().getString("edad");
-                        //ArrayAdapter<String> adap = new ArrayAdapter<String>(age);
-
-                       // ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item, ageList);
-                        //adapter.setDropDownViewResource(R.layout.list_item_spinner);
-                        edadPosition = "13 años";
                         showImage();
-
                         Toolbar toolbar = findViewById(R.id.toolbar);
                         setSupportActionBar(toolbar);
                         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

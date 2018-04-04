@@ -49,7 +49,7 @@ import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity implements LoginView, CallbackAlert {
 
-    private static final String TAG = "LoginActivity";
+    private final String TAG = this.getClass().getName();
     private LoginPresenter presenter;
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
@@ -351,8 +351,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Callb
     }
 
     private void updateUI() {
-        Toast.makeText(this, "You are logeed in", Toast.LENGTH_SHORT).show();
-        goMain();
+
     }
 
     private void handleFacebookAccessToken(AccessToken token) {

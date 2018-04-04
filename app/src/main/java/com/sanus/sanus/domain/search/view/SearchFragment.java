@@ -20,6 +20,7 @@ import com.sanus.sanus.domain.search.data.BusquedaDoctor;
 import com.sanus.sanus.domain.search.presenter.SearchPresenter;
 import com.sanus.sanus.domain.search.presenter.SearchPresenterImpl;
 //import com.sanus.sanus.utils.glide.GlideApp;
+import com.sanus.sanus.utils.glide.GlideApp;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -77,8 +78,7 @@ public class SearchFragment extends Fragment implements SearchView{
 
     @Override
     public void showPhoto(Uri uri, CircleImageView avatar) {
-        //GlideApp.with(getActivity()).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
-        Picasso.with(getActivity()).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
+        GlideApp.with(getContext()).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
     }
 }
 

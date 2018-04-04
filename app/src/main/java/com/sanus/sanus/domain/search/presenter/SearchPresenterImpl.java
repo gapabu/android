@@ -1,5 +1,6 @@
 package com.sanus.sanus.domain.search.presenter;
 
+import android.content.Context;
 import android.net.Uri;
 
 import com.sanus.sanus.domain.search.data.BusquedaDoctor;
@@ -31,8 +32,8 @@ public class SearchPresenterImpl implements SearchPresenter {
     }
 
     @Override
-    public void showImage(String idImage, CircleImageView image) {
-        interactor.showImage(idImage,image);
+    public void showImage(String idImage, Context context, CircleImageView image) {
+        interactor.showImage(idImage,context,image);
     }
 
 

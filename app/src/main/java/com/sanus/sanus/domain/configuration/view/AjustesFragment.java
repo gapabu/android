@@ -22,7 +22,9 @@ import com.sanus.sanus.domain.configuration.presenter.AjustesPresenterImpl;
 import com.sanus.sanus.R;
 import com.sanus.sanus.utils.alert.AlertUtils;
 
+//import com.sanus.sanus.utils.glide.GlideApp;
 import com.sanus.sanus.utils.glide.GlideApp;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -142,7 +144,8 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
 
     @Override
     public void showPhoto(Uri uri) {
-        GlideApp.with(getActivity()).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
+        GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
+        //Picasso.with(getContext()).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
     }
 
     @Override

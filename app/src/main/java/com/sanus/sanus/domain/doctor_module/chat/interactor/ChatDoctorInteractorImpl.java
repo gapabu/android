@@ -63,12 +63,10 @@ public class ChatDoctorInteractorImpl implements ChatDoctorInteractor{
                                             @Override
                                             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                                                 final String user_id = documentSnapshot.getId();
-                                                String nombre = documentSnapshot.getString("nombre");
-                                                String apellido = documentSnapshot.getString("apellido");
                                                 final String image = documentSnapshot.getString("avatar");
                                                 String estado = documentSnapshot.getString("estado");
 
-                                                String usuario = nombre + " " + apellido;
+                                                String usuario = documentSnapshot.getString("nombre").concat(" " + documentSnapshot.getString("apellido"));
                                                 busquedaDoctors.add(new ContactDoctor(usuario, image, user_id, estado));
                                                 present.setDataAdapter(busquedaDoctors);
                                             }

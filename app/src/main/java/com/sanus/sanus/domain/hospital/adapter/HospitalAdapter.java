@@ -1,5 +1,6 @@
 package com.sanus.sanus.domain.hospital.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -34,18 +35,26 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
         return new HospitalAdapter.ViewHolder(view);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(@NonNull HospitalAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final HospitalAdapter.ViewHolder holder, final int position) {
         holder.nombre.setText(commentsDoctorList.get(position).getNombre());
         holder.direccion.setText(commentsDoctorList.get(position).getDireccion());
+        //holder.mView.setBackgroundColor(R.color.white);
+
+        //holder.mView.callOnClick();
+        //holder.mView.setSelected(true);
+
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(context, " " + commentsDoctorList.get(position).getId(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, SelectDoctorActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("id", commentsDoctorList.get(position).getId());
-                context.startActivity(intent);
+                //Intent intent = new Intent(context, SelectDoctorActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //intent.putExtra("id", commentsDoctorList.get(position).getId());
+                //context.startActivity(intent);
+
+                holder.mView.setBackgroundColor(R.color.colorPrimaryDark);
             }
         });
     }

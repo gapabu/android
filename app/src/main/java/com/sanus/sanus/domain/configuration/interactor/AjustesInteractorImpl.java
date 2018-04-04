@@ -19,6 +19,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.data.repository.firebase.entity.user.UserEntity;
 import com.sanus.sanus.domain.configuration.presenter.AjustesPresenter;
+import com.sanus.sanus.utils.glide.GlideApp;
 
 import java.util.HashMap;
 import java.util.Map;

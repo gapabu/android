@@ -119,7 +119,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
 
     @Override
     public void showPhoto(Uri uri, CircleImageView avatar) {
-        GlideApp.with(getApplicationContext()).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
+        GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
     }
 
 }
