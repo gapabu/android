@@ -1,23 +1,16 @@
 package com.sanus.sanus.domain.new_chat.view;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.BatteryManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.format.Time;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DigitalClock;
 import android.widget.EditText;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,19 +28,17 @@ import com.sanus.sanus.domain.new_chat.data.Messages;
 import com.sanus.sanus.domain.new_chat.presenter.NewChatPresenter;
 import com.sanus.sanus.domain.new_chat.presenter.NewChatPresenterImpl;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
-public class NewChatActivity extends AppCompatActivity implements NewChatView {
+public class NewChatActivity extends AppCompatActivity implements NewChatView{
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private NewChatPresenter presenter;
     private Toolbar toolbar;
-    private String idDoct;
-    private String idUser;
+    private String idDoct, idUser;
     private EditText edNewMessage;
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     MessagesAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,29 +51,21 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
     }
 
     private void setUpVariable() {
-            if(presenter == null){
-                presenter = new NewChatPresenterImpl(this);
-            }
+            if(presenter == null){presenter = new NewChatPresenterImpl(this);}
     }
 
     private void setUpView() {
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            idUser = user.getUid();
-        }
+        if (user != null) {idUser = user.getUid();}
+
         idDoct = getIntent().getStringExtra("idDoctor");
         toolbar = findViewById(R.id.toolbar);
         edNewMessage = findViewById(R.id.editMessage);
-
         FloatingActionButton sendMessage = findViewById(R.id.btnSaveMessage);
 
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                //message = edNewMessage.getText().toString();
-                sendMessagesByType();
-            }
+            public void onClick(View v) { sendMessagesByType();}
         });
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -90,6 +73,7 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+        recyclerView.scrollToPosition(recyclerView.getScrollBarSize() -1);
     }
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
@@ -113,13 +97,10 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
                             }
                         }
                     });
-
                 break;
                 }
                 return true;
         }
-
-
 
     @Override
     public void showDataDoctor() {
@@ -132,7 +113,6 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 getSupportActionBar().setTitle(usuario);
             }
-
         });
     }
 

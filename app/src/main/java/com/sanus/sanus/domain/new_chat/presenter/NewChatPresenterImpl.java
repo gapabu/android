@@ -27,10 +27,6 @@ public class NewChatPresenterImpl implements NewChatPresenter{
         interactor.sendMessages(idUser,idDoct,id);
     }
 
-    @Override
-    public void getDate() {
-        interactor.getDate();
-    }
 
     @Override
     public void showDataDoctor() {

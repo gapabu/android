@@ -29,10 +29,7 @@ public class NewChatInteractorImpl implements NewChatInteractor{
     private final String TAG = this.getClass().getSimpleName();
     private MessageEntity messageEntity = new MessageEntity();
     private NewChatPresenter presenter;
-    private String userIdNow;
-    private String hour;
-    private String date;
-
+    private String userIdNow, hour, date;
 
     private List<Messages> commentsDoctorList = new ArrayList<>();
     public NewChatInteractorImpl(NewChatPresenter presenter) {
@@ -91,11 +88,10 @@ public class NewChatInteractorImpl implements NewChatInteractor{
 
                     String mensaje = doc.getString("mensaje");
                     String autor = doc.getString("autor");
-                    String hour = doc.getString("hora");
-                    commentsDoctorList.add(new Messages(mensaje, autor, userIdNow, hour));
+                    commentsDoctorList.add(new Messages(mensaje, autor, userIdNow));
                     presenter.setDataAdapter(commentsDoctorList);
                 }
-                Log.d(TAG, "Current data:  " + mensages);
+                Log.d(TAG, "Data:  " + mensages);
             }
         });
 

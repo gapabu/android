@@ -10,7 +10,6 @@
     <include android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
@@ -18,6 +17,7 @@
         android:layout_above="@+id/newMessage"
         app:layoutManager="LinearLayoutManager"
         android:layout_below="@+id/toolbar" />
+
 
 <LinearLayout
     android:id="@+id/newMessage"

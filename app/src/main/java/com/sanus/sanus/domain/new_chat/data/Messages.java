@@ -5,13 +5,11 @@ public class Messages {
     private String mensaje;
     private String autor;
     private String  id;
-    private  String hour;
 
-    public Messages(String mensaje, String autor, String  id, String hour) {
+    public Messages(String mensaje, String autor, String  id) {
         this.mensaje = mensaje;
         this.autor = autor;
         this.id = id;
-        this.hour = hour;
     }
 
     public String getId() {
@@ -31,12 +29,4 @@ public class Messages {
     public String getMensaje() {return mensaje;}
 
     public void setMensaje(String mensaje) {this.mensaje = mensaje;}
-
-    public String getHour() {
-        return hour;
-    }
-
-    public void setHour(String hour) {
-        this.hour = hour;
-    }
 }
