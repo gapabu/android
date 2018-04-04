@@ -1,6 +1,7 @@
 package com.sanus.sanus.domain.hospital.view;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,7 +26,7 @@ public class HospitalActivity extends AppCompatActivity implements HospitalView{
     private HospitalPresenter presenter;
     RecyclerView recyclerView;
     HospitalAdapter adapter;
-    private ImageView next, close;
+    FloatingActionButton close, next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

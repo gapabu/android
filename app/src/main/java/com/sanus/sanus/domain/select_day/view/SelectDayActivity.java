@@ -3,6 +3,7 @@ package com.sanus.sanus.domain.select_day.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CalendarView;
@@ -18,7 +19,7 @@ import com.sanus.sanus.domain.select_hour.view.SelectHourActivity;
 public class SelectDayActivity extends AppCompatActivity implements SelectDayView, CalendarView.OnDateChangeListener {
 
     private SelectDayPresenter presenter;
-    private ImageView skip, next;
+    private FloatingActionButton skip, next;
     private CalendarView calendarView;
     private int dia, mes, anio;
     @Override

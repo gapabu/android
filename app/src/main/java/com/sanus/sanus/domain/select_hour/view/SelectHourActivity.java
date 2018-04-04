@@ -15,7 +15,7 @@ import com.sanus.sanus.domain.select_hour.presenter.SelectHourPresenterImpl;
 
 public class SelectHourActivity extends AppCompatActivity implements SelectHourView{
     private SelectHourPresenter presenter;
-    private ImageView skip, next;
+    private FloatingActionButton skip, next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

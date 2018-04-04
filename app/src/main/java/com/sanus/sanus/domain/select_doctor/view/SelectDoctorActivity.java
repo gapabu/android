@@ -2,6 +2,7 @@ package com.sanus.sanus.domain.select_doctor.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +28,7 @@ public class SelectDoctorActivity extends AppCompatActivity implements SelectDoc
     private SelectDoctorPresenter presenter;
     RecyclerView recyclerView;
     SelectDoctorAdapter adapter;
-    private ImageView next, skip;
+    private FloatingActionButton next, skip;
     private String idUs;
 
     @Override

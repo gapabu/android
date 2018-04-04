@@ -2,6 +2,7 @@ package com.sanus.sanus.domain.resume_new_cita.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +16,7 @@ import com.sanus.sanus.domain.resume_new_cita.presenter.ResumeNewCitaPresenterIm
 
 public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNewCitaView{
     private ResumeNewCitaPresenter presenter;
-    ImageView cerrarCita, guardarCita;
+    FloatingActionButton cerrarCita, guardarCita;
     private final String TAG= this.getClass().getSimpleName();
 
     @Override

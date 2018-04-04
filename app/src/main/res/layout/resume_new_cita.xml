@@ -272,24 +272,23 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp">
-        <ImageView
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/closeCita"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="30dp"
-            app:srcCompat="@mipmap/ic_close"
-            android:contentDescription="@string/app_name" />
-        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_close_white"
+            android:rotation="180"
+            app:backgroundTint="@color/btnGoogle"
+            android:layout_marginStart="@dimen/activity_vertical_margin"/>
+
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/saveCita"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="30dp"
-            app:srcCompat="@mipmap/ic_save_cite"
-            android:contentDescription="@string/app_name"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_check_white"
+            app:backgroundTint="@color/colorYellow"
+            android:layout_marginEnd="@dimen/activity_vertical_margin"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
 </RelativeLayout>
