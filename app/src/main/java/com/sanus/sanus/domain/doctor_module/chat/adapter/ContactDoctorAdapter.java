@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -73,7 +74,7 @@ public class ContactDoctorAdapter extends RecyclerView.Adapter<ContactDoctorAdap
 
         TextView nombre;
         CircleImageView avatar;
-        ImageView estado;
+        FloatingActionButton estado;
 
         ViewHolder(View itemView) {
             super(itemView);

@@ -3,6 +3,7 @@ package com.sanus.sanus.domain.curriculum.view;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -33,12 +34,13 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
 
     private CurriculumPresenter presenter;
     private Toolbar toolbar;
-    TextView cedula, especialidad, cv;
+    private TextView cedula, especialidad, cv;
     private CircleImageView setupImage;
     private String image;
     private String idDoct;
     private String idUser;
     private RatingBar ratingBar;
+    private FloatingActionButton newChat;
     ImageView goComent;
 
     @Override
@@ -72,7 +74,8 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         goComent = findViewById(R.id.floatinIrComentarios);
         ratingBar = findViewById(R.id.ratingBar);
         ratingBar.getRating();
-        ImageView newChat = findViewById(R.id.imgNewChat);
+
+        newChat = findViewById(R.id.imgNewChat);
 
         newChat.setOnClickListener(new View.OnClickListener() {
             @Override

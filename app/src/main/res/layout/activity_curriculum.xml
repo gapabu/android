@@ -49,15 +49,16 @@
             app:srcCompat="@drawable/ic_book"
             tools:ignore="RtlHardcoded" />
 
-        <ImageView
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/imgNewChat"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_alignStart="@+id/floatinIrComentarios"
             android:layout_below="@+id/floatinIrComentarios"
-            android:layout_marginTop="21dp"
-            android:contentDescription="@string/app_name"
-            app:srcCompat="@drawable/icon_mas" />
+            android:layout_marginTop="15dp"
+            android:rotation="45"
+            android:src="@drawable/ic_close_white"
+            app:backgroundTint="@color/btnCrea" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"

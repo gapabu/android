@@ -26,7 +26,7 @@ public class CitasFragment extends Fragment implements CitasView {
     private CitasPresenter presenter;
     private RecyclerView recyclerView;
     public static String IDENTIFIER = "CITAS_FRAGMENT";
-    ImageView newCita;
+    FloatingActionButton newCita;
 
     @Nullable
     @Override

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,7 +92,7 @@ public class BusquedaDoctorAdapter extends RecyclerView.Adapter<BusquedaDoctorAd
         TextView nombre, especialidad;
         EditText edbuscador;
         CircleImageView avatar;
-        ImageView estado;
+        FloatingActionButton estado;
 
         ViewHolder(View itemView) {
             super(itemView);
