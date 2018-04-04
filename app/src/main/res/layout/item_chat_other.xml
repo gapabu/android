@@ -6,10 +6,10 @@
     android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:orientation="horizontal"
-    android:paddingBottom="@dimen/padding_small"
-    android:paddingEnd="@dimen/padding_avg"
-    android:paddingStart="@dimen/padding_avg"
-    android:paddingTop="@dimen/padding_small"
+    android:paddingBottom="@dimen/padding_min"
+    android:paddingEnd="@dimen/padding_min"
+    android:paddingStart="@dimen/padding_small"
+    android:paddingTop="@dimen/padding_min"
     android:focusable="true">
 
     <TextView
