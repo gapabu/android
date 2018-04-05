@@ -1,5 +1,7 @@
 package com.sanus.sanus.domain.hospital.interactor;
 
+import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.firebase.firestore.DocumentChange;
@@ -24,7 +26,7 @@ public class HospitalInteractorImpl implements HospitalInteractor{
 	public HospitalInteractorImpl(HospitalPresenter presenter){this.presenter = presenter;}
 
 	@Override
-	public void viewComents() {
+	public void viewHospital() {
 		FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
 		mFirestore.collection("hospitales").addSnapshotListener(new EventListener<QuerySnapshot>() {
 			@Override
@@ -37,7 +39,7 @@ public class HospitalInteractorImpl implements HospitalInteractor{
 						final String user_id = doc.getDocument().getId();
 						String nombre = doc.getDocument().getString("nombre");
 						String direccion = doc.getDocument().getString("direccion");
-						//Log.d(TAG, "id: " +id);
+
 						commentsDoctorList.add(new Hospital(nombre, direccion, user_id));
 						presenter.setDataAdapter(commentsDoctorList);
 					}
@@ -63,4 +65,18 @@ public class HospitalInteractorImpl implements HospitalInteractor{
 		}
 		presenter.setDataAdapter(listAuxiliar);
 	}
+
+	@Override
+	public void validateButtonEnable() {
+		/*if (presenter.getEmail().matches(RegexUtils.emailPattern()) && presenter.getPassword().length() > 6) {
+			presenter.enableButton();
+			return;
+		}
+		presenter.disableButton();*/
+		presenter.enableButton();
+	}
+
+    @Override
+    public void getIdDoct(){
+    }
 }

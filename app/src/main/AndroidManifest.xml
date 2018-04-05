@@ -117,7 +117,6 @@
             android:screenOrientation="portrait" />
         <activity android:name=".domain.doctor_module.all_comments.view.AllCommentsActivity"
             android:screenOrientation="portrait"/>
-
     </application>
 
 </manifest>

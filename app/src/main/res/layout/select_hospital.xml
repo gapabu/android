@@ -76,11 +76,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_arrow_white"
-                app:backgroundTint="@color/colorPrimaryDark"
+                app:backgroundTint="@color/colorGrey500"
                 android:layout_marginEnd="@dimen/activity_vertical_margin"
                 android:layout_alignParentEnd="true"
-                android:enabled="false"
-                android:clickable="false"/>
+                style="?android:textAppearanceSmall"
+                android:clickable="false"
+                android:visibility="invisible"/>
 
         </RelativeLayout>
 

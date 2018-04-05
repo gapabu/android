@@ -10,9 +10,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.hospital.view.HospitalActivity;
 import com.sanus.sanus.domain.select_day.view.SelectDayActivity;
@@ -26,10 +23,10 @@ import java.util.List;
 public class SelectDoctorActivity extends AppCompatActivity implements SelectDoctorView {
 
     private SelectDoctorPresenter presenter;
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     SelectDoctorAdapter adapter;
-    private FloatingActionButton next, skip;
-    private String idUs;
+    FloatingActionButton next, skip;
+    private String idHospital;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +34,7 @@ public class SelectDoctorActivity extends AppCompatActivity implements SelectDoc
         setContentView(R.layout.select_doctor);
         setUpVariable();
         setUpView();
-        presenter.viewComents(idUs);
+        presenter.viewDoctor(idHospital);
     }
 
     private void setUpVariable() {
@@ -47,8 +44,8 @@ public class SelectDoctorActivity extends AppCompatActivity implements SelectDoc
     }
 
     private void setUpView() {
-        idUs = getIntent().getStringExtra("id");
-        Toast.makeText(this, "" + idUs, Toast.LENGTH_SHORT).show();
+        idHospital = getIntent().getStringExtra("idHospital");
+
         next = findViewById(R.id.btn_next);
         skip = findViewById(R.id.btn_skip);
         recyclerView = findViewById(R.id.recyclerView);

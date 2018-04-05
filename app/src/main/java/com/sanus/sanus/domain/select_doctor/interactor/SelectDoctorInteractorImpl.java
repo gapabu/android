@@ -1,28 +1,19 @@
 package com.sanus.sanus.domain.select_doctor.interactor;
 
-import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.util.Log;
-
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.domain.select_doctor.data.SelectDoctor;
 import com.sanus.sanus.domain.select_doctor.presenter.SelectDoctorPresenter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SelectDoctorInteractorImpl implements SelectDoctorInteractor {
-    private final String TAG = this.getClass().getSimpleName();
     private SelectDoctorPresenter presenter;
 
     private List<SelectDoctor> commentsDoctorList = new ArrayList<>();
@@ -31,10 +22,10 @@ public class SelectDoctorInteractorImpl implements SelectDoctorInteractor {
     public SelectDoctorInteractorImpl(SelectDoctorPresenter presenter){this.presenter = presenter;}
 
     @Override
-    public void viewComents(String idDoc) {
+    public void viewDoctor(String idHospital) {
         final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
 
-        mFirestore.collection("doctores").whereEqualTo("hospital", idDoc).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        mFirestore.collection("doctores").whereEqualTo("hospital", idHospital).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -45,11 +36,9 @@ public class SelectDoctorInteractorImpl implements SelectDoctorInteractor {
                         mFirestore.collection("usuarios").document(user_id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
                             @Override
                             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-                                String nombre = documentSnapshot.getString("nombre");
-                                String apellido = documentSnapshot.getString("apellido");
                                 final String image = documentSnapshot.getString("avatar");
-                                String usuario = nombre + " " + apellido;
-                                //Log.d(TAG, image);
+                                String usuario = documentSnapshot.getString("nombre").concat(" " + documentSnapshot.getString("apellido"));
+
                                 commentsDoctorList.add(new SelectDoctor(usuario, especialidad, image, user_id));
                                 presenter.setDataAdapter(commentsDoctorList);
                             }

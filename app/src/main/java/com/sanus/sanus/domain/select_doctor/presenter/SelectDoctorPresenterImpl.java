@@ -23,8 +23,8 @@ public class SelectDoctorPresenterImpl implements SelectDoctorPresenter{
     }
 
     @Override
-    public void viewComents(String idDoc) {
-        interactor.viewComents(idDoc);
+    public void viewDoctor(String idHospital) {
+        interactor.viewDoctor(idHospital);
     }
 
     @Override

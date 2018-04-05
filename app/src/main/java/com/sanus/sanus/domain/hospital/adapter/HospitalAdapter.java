@@ -3,6 +3,7 @@ package com.sanus.sanus.domain.hospital.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,18 +16,23 @@ import android.widget.Toast;
 
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.hospital.data.Hospital;
+import com.sanus.sanus.domain.hospital.presenter.HospitalPresenter;
 import com.sanus.sanus.domain.select_doctor.view.SelectDoctorActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHolder> implements SearchView.OnQueryTextListener{
     private Context context;
     private List<Hospital> commentsDoctorList;
+    private HospitalPresenter presenter;
 
-    public HospitalAdapter(Context context, List<Hospital> commentsDoctorList){
+    public HospitalAdapter(Context context, List<Hospital> commentsDoctorList, HospitalPresenter presenter){
         this.context = context;
         this.commentsDoctorList = commentsDoctorList;
+        this.presenter = presenter;
     }
     @NonNull
     @Override
@@ -40,21 +46,20 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
     public void onBindViewHolder(@NonNull final HospitalAdapter.ViewHolder holder, final int position) {
         holder.nombre.setText(commentsDoctorList.get(position).getNombre());
         holder.direccion.setText(commentsDoctorList.get(position).getDireccion());
-        //holder.mView.setBackgroundColor(R.color.white);
 
-        //holder.mView.callOnClick();
-        //holder.mView.setSelected(true);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(context, " " + commentsDoctorList.get(position).getId(), Toast.LENGTH_SHORT).show();
                 //Intent intent = new Intent(context, SelectDoctorActivity.class);
                 //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 //intent.putExtra("id", commentsDoctorList.get(position).getId());
                 //context.startActivity(intent);
 
                 holder.mView.setBackgroundColor(R.color.colorPrimaryDark);
+                presenter.enableButton();
+
+                presenter.selectDoctor(commentsDoctorList.get(position).getId());
             }
         });
     }

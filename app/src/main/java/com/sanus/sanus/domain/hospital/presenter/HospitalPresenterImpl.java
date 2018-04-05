@@ -24,12 +24,32 @@ public class HospitalPresenterImpl implements HospitalPresenter{
 	}
 
 	@Override
-	public void viewComents() {
-		interactor.viewComents();
+	public void enableButton() {
+		view.enableButton();
+	}
+
+	@Override
+	public void disableButton() {
+		view.disableButton();
+	}
+
+	@Override
+	public void selectDoctor(String value) {
+		view.selectDoctor(value);
+	}
+
+	@Override
+	public void viewHospital() {
+		interactor.viewHospital();
 	}
 
 	@Override
 	public void buscador(String texto) {
 		interactor.buscador(texto);
+	}
+
+	@Override
+	public void validateButtonEnable() {
+		interactor.validateButtonEnable();
 	}
 }

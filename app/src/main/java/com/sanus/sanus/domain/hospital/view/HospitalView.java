@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface HospitalView {
     void setDataAdapter(List<Hospital> commentsDoctorList);
+    void enableButton();
+    void disableButton();
+    void selectDoctor(String value);
 }
