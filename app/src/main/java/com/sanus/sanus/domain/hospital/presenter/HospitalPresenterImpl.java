@@ -7,15 +7,14 @@ import com.sanus.sanus.domain.hospital.view.HospitalView;
 
 import java.util.List;
 
-public class HospitalPresenterImpl implements HospitalPresenter{
+public class HospitalPresenterImpl implements HospitalPresenter {
 	private HospitalView view;
 	private HospitalInteractor interactor;
 
-	public HospitalPresenterImpl(HospitalView view){
+	public HospitalPresenterImpl(HospitalView view) {
 		this.view = view;
 		interactor = new HospitalInteractorImpl(this);
 	}
-
 
 
 	@Override
@@ -34,8 +33,13 @@ public class HospitalPresenterImpl implements HospitalPresenter{
 	}
 
 	@Override
-	public void selectDoctor(String value) {
-		view.selectDoctor(value);
+	public void goSelectDoctor(String value) {
+		view.goSelectDoctor(value);
+	}
+
+	@Override
+	public void closeNewCita() {
+		view.closeNewCita();
 	}
 
 	@Override
@@ -46,10 +50,5 @@ public class HospitalPresenterImpl implements HospitalPresenter{
 	@Override
 	public void buscador(String texto) {
 		interactor.buscador(texto);
-	}
-
-	@Override
-	public void validateButtonEnable() {
-		interactor.validateButtonEnable();
 	}
 }

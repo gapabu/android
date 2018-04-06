@@ -13,4 +13,24 @@ public class SelectDayPresenterImpl implements SelectDayPresenter{
         this.view = view;
         interactor = new SelectDayInteractorImpl(this);
     }
+
+    @Override
+    public void enableButton() {
+        view.enableButton();
+    }
+
+    @Override
+    public void disableButton() {
+        view.disableButton();
+    }
+
+    @Override
+    public void next() {
+        view.next();
+    }
+
+    @Override
+    public void previous() {
+        view.previous();
+    }
 }

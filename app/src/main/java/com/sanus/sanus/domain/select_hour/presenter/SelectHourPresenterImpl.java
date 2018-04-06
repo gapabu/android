@@ -13,4 +13,29 @@ public class SelectHourPresenterImpl implements SelectHourPresenter {
         this.view = view;
         interactor = new SelectHourInteractorImpl(this);
     }
+
+    @Override
+    public void viewSchedules(String id) {
+        interactor.viewSchedules(id);
+    }
+
+    @Override
+    public void enableButton() {
+        view.enableButton();
+    }
+
+    @Override
+    public void disableButton() {
+        view.disableButton();
+    }
+
+    @Override
+    public void next() {
+        view.next();
+    }
+
+    @Override
+    public void previous() {
+        view.previous();
+    }
 }

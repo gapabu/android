@@ -2,8 +2,6 @@ package com.sanus.sanus.domain.hospital.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,17 +10,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.hospital.data.Hospital;
 import com.sanus.sanus.domain.hospital.presenter.HospitalPresenter;
-import com.sanus.sanus.domain.select_doctor.view.SelectDoctorActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.Context.MODE_PRIVATE;
 
 public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHolder> implements SearchView.OnQueryTextListener{
     private Context context;
@@ -43,7 +37,7 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
 
     @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(@NonNull final HospitalAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final HospitalAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         holder.nombre.setText(commentsDoctorList.get(position).getNombre());
         holder.direccion.setText(commentsDoctorList.get(position).getDireccion());
 
@@ -51,15 +45,9 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(context, SelectDoctorActivity.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                //intent.putExtra("id", commentsDoctorList.get(position).getId());
-                //context.startActivity(intent);
-
                 holder.mView.setBackgroundColor(R.color.colorPrimaryDark);
                 presenter.enableButton();
-
-                presenter.selectDoctor(commentsDoctorList.get(position).getId());
+                presenter.goSelectDoctor(commentsDoctorList.get(position).getId());
             }
         });
     }
@@ -77,12 +65,6 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
     @Override
     public boolean onQueryTextChange(String newText) {
         return false;
-    }
-
-    public void setFilter(List<Hospital> commentsDoctorList){
-        commentsDoctorList = new ArrayList<>();
-        commentsDoctorList.addAll(commentsDoctorList);
-        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

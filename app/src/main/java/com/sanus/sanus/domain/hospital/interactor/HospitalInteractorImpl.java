@@ -1,9 +1,6 @@
 package com.sanus.sanus.domain.hospital.interactor;
 
-import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -66,17 +63,5 @@ public class HospitalInteractorImpl implements HospitalInteractor{
 		presenter.setDataAdapter(listAuxiliar);
 	}
 
-	@Override
-	public void validateButtonEnable() {
-		/*if (presenter.getEmail().matches(RegexUtils.emailPattern()) && presenter.getPassword().length() > 6) {
-			presenter.enableButton();
-			return;
-		}
-		presenter.disableButton();*/
-		presenter.enableButton();
-	}
 
-    @Override
-    public void getIdDoct(){
-    }
 }

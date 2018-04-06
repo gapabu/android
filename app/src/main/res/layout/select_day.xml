@@ -67,10 +67,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_arrow_white"
-                app:backgroundTint="@color/colorPrimaryDark"
+                app:backgroundTint="@color/colorGrey500"
                 android:layout_marginEnd="@dimen/activity_vertical_margin"
                 android:layout_alignParentEnd="true"
-                android:visibility="invisible"/>
+                android:visibility="visible" />
         </RelativeLayout>
 
     </RelativeLayout>
@@ -83,9 +83,7 @@
         android:layout_marginEnd="@dimen/activity_vertical_margin"
         android:layout_marginStart="@dimen/activity_vertical_margin"
         android:layout_marginTop="20dp"
-        android:background="@color/colorPrimaryDark" />
-
-
+        android:background="@color/white" />
 
 </LinearLayout>
 

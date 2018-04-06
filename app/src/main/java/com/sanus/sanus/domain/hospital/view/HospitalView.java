@@ -8,5 +8,6 @@ public interface HospitalView {
     void setDataAdapter(List<Hospital> commentsDoctorList);
     void enableButton();
     void disableButton();
-    void selectDoctor(String value);
+    void goSelectDoctor(String value);
+    void closeNewCita();
 }

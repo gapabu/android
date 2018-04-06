@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lyConten"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
-    android:orientation="vertical"
-    tools:context="com.sanus.sanus.domain.hospital.view.HospitalActivity">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rlHeader"
@@ -15,52 +14,54 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/lyHeader"
+            android:id="@+id/lyHead"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imgHeader"
+                android:id="@+id/imgHead"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
                 android:scaleType="fitXY"
-                android:src="@drawable/hcitas"
-                android:contentDescription="@string/title_chat"/>
+                app:srcCompat="@drawable/hcitas" />
         </LinearLayout>
 
+
         <LinearLayout
-            android:id="@+id/lyTitle"
+            android:id="@+id/lySearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/margin_15"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="60dp"
             android:background="@drawable/btnround"
-            android:orientation="horizontal"
-            android:weightSum="3">
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/edbuscador"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:layout_gravity="center"
-                android:gravity="center"
                 android:background="@drawable/btnround"
+                android:gravity="center"
                 android:hint="@string/search_hospital"
                 android:imeActionId="6"
                 android:imeOptions="actionUnspecified"
                 android:maxLines="1"
                 android:singleLine="true"/>
         </LinearLayout>
+    </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="@dimen/margin_top_new_cita"
+            android:layout_marginTop="-25dp"
             android:orientation="horizontal">
 
             <android.support.design.widget.FloatingActionButton
@@ -86,15 +87,12 @@
         </RelativeLayout>
 
 
-    </RelativeLayout>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rlHeader">
+        android:layout_height="wrap_content">
     </android.support.v7.widget.RecyclerView>
 
 
-</RelativeLayout>
+    </LinearLayout>

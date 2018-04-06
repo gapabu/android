@@ -1,11 +1,13 @@
 package com.sanus.sanus.domain.select_hour.view;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.TimePicker;
 
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.resume_new_cita.view.ResumeNewCitaActivity;
@@ -15,7 +17,11 @@ import com.sanus.sanus.domain.select_hour.presenter.SelectHourPresenterImpl;
 
 public class SelectHourActivity extends AppCompatActivity implements SelectHourView{
     private SelectHourPresenter presenter;
-    private FloatingActionButton skip, next;
+    private String TAG = this.getClass().getSimpleName();
+    FloatingActionButton skip, next;
+    String idHospital, idDoctor, fecha;
+    TimePicker time;
+    String hour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +29,7 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
         setContentView(R.layout.select_hour);
         setUpVariable();
         setUpView();
+        presenter.viewSchedules(idDoctor);
     }
 
     private void setUpVariable() {
@@ -32,24 +39,74 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
     }
 
     private void setUpView() {
+
+        time = findViewById(R.id.timePicker);
+
+        idHospital = getIntent().getStringExtra("idHospital");
+        idDoctor = getIntent().getStringExtra("idDoctor");
+        fecha = getIntent().getStringExtra("fecha");
+        Log.d(TAG, "idHospital=>" + idHospital + " " + "idDoctor=>" + idDoctor + " " + "fecha=>" +fecha);
+
+
+        time = findViewById(R.id.timePicker);
+
         skip = findViewById(R.id.btn_skip);
         next = findViewById(R.id.btn_next);
+        disableButton();
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SelectHourActivity.this, SelectDayActivity.class));
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                finish();
+               previous();
             }
         });
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SelectHourActivity.this, ResumeNewCitaActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
+               next();
             }
         });
+
+        time.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                hour = hourOfDay + ":" + minute;
+                Log.d(TAG, "this hour: " + hour );
+                enableButton();
+            }
+        });
+
+    }
+
+
+    @Override
+    public void enableButton() {
+        next.setEnabled(true);
+        next.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimaryDark)));
+    }
+
+    @Override
+    public void disableButton() {
+        next.setEnabled(false);
+    }
+
+    @Override
+    public void next() {
+        Intent intent = new Intent(SelectHourActivity.this, ResumeNewCitaActivity.class);
+        intent.putExtra("idDoctor", idDoctor);
+        intent.putExtra("idHospital", idHospital);
+        intent.putExtra("fecha", fecha);
+        intent.putExtra("hour", hour);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void previous() {
+        startActivity(new Intent(SelectHourActivity.this, SelectDayActivity.class));
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        finish();
     }
 }
+

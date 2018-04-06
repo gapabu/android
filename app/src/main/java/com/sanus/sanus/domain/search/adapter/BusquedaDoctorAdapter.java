@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -20,7 +19,6 @@ import com.sanus.sanus.domain.curriculum.view.CurriculumActivity;
 import com.sanus.sanus.domain.search.data.BusquedaDoctor;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.search.presenter.SearchPresenter;
-import com.sanus.sanus.utils.glide.GlideApp;
 
 import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;

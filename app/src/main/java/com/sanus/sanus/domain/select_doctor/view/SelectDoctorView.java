@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface SelectDoctorView {
     void setDataAdapter(List<SelectDoctor> commentsDoctorList);
+    void goSelectDay(String value);
+    void next();
+    void previous();
 }

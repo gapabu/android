@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import com.sanus.sanus.R;
@@ -24,6 +25,7 @@ public class SelectDoctorActivity extends AppCompatActivity implements SelectDoc
 
     private SelectDoctorPresenter presenter;
     private RecyclerView recyclerView;
+    private String TAG = this.getClass().getSimpleName();
     SelectDoctorAdapter adapter;
     FloatingActionButton next, skip;
     private String idHospital;
@@ -45,6 +47,8 @@ public class SelectDoctorActivity extends AppCompatActivity implements SelectDoc
 
     private void setUpView() {
         idHospital = getIntent().getStringExtra("idHospital");
+        Log.d(TAG, "idHospital: " +idHospital);
+
 
         next = findViewById(R.id.btn_next);
         skip = findViewById(R.id.btn_skip);
@@ -59,20 +63,17 @@ public class SelectDoctorActivity extends AppCompatActivity implements SelectDoc
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SelectDoctorActivity.this, HospitalActivity.class));
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                finish();
+               previous();
             }
         });
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SelectDoctorActivity.this, SelectDayActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
+                next();
             }
         });
+
+
 
         edbuscador.addTextChangedListener(new TextWatcher() {
             @Override
@@ -93,9 +94,36 @@ public class SelectDoctorActivity extends AppCompatActivity implements SelectDoc
 
     @Override
     public void setDataAdapter(List<SelectDoctor> commentsDoctorList) {
-        SelectDoctorAdapter commentsDoctorAdapter = new SelectDoctorAdapter(getApplicationContext(), commentsDoctorList);
+        SelectDoctorAdapter commentsDoctorAdapter = new SelectDoctorAdapter(getApplicationContext(), commentsDoctorList, presenter);
         recyclerView.setAdapter(commentsDoctorAdapter);
         commentsDoctorAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void goSelectDay(String value) {
+        Intent intent = new Intent(this, SelectDayActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("idDoctor", value);
+        intent.putExtra("idHospital", idHospital);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        startActivity(intent);
+    }
+
+    @Override
+    public void next() {
+        Intent intent = new Intent(this, SelectDayActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("idDoctor", "idDoctor");
+        intent.putExtra("idHospital", idHospital);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        startActivity(intent);
+    }
+
+    @Override
+    public void previous() {
+        startActivity(new Intent(SelectDoctorActivity.this, HospitalActivity.class));
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        finish();
     }
 
 }

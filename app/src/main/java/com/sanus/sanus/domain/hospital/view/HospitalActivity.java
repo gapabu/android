@@ -49,7 +49,6 @@ public class HospitalActivity extends AppCompatActivity implements HospitalView{
         //final SharedPreferences preferences = getSharedPreferences("hospital", Context.MODE_PRIVATE);
 
         next = findViewById(R.id.btn_next);
-
         close = findViewById(R.id.btn_close);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -76,22 +75,15 @@ public class HospitalActivity extends AppCompatActivity implements HospitalView{
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HospitalActivity.this, MainActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                finish();
+                closeNewCita();
             }
         });
 
         edbuscador.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override
             public void afterTextChanged(Editable s) {
                 presenter.buscador(s.toString());
@@ -120,7 +112,7 @@ public class HospitalActivity extends AppCompatActivity implements HospitalView{
     }
 
     @Override
-    public void selectDoctor(String value ) {
+    public void goSelectDoctor(String value ) {
         Intent intent = new Intent(this, SelectDoctorActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("idHospital", value);
@@ -131,6 +123,14 @@ public class HospitalActivity extends AppCompatActivity implements HospitalView{
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("idHospital", value);
         editor.clear();*/
+    }
+
+    @Override
+    public void closeNewCita() {
+        Intent intent = new Intent(HospitalActivity.this, MainActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        finish();
     }
 
 }

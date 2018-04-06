@@ -15,9 +15,11 @@ import com.sanus.sanus.domain.resume_new_cita.presenter.ResumeNewCitaPresenter;
 import com.sanus.sanus.domain.resume_new_cita.presenter.ResumeNewCitaPresenterImpl;
 
 public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNewCitaView{
+    private final String TAG= this.getClass().getSimpleName();
     private ResumeNewCitaPresenter presenter;
     FloatingActionButton cerrarCita, guardarCita;
-    private final String TAG= this.getClass().getSimpleName();
+
+    String idHospital, idDoctor, fecha, hour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,13 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
     }
 
     private void setUpView(){
+
+        idHospital = getIntent().getStringExtra("idHospital");
+        idDoctor = getIntent().getStringExtra("idDoctor");
+        fecha = getIntent().getStringExtra("fecha");
+        hour = getIntent().getStringExtra("hour");
+        Log.d(TAG, "idHospital=>" + idHospital + " " + "idDoctor=>" + idDoctor + " " + "fecha=>" +fecha + " " + "hora=>" + hour);
+
         cerrarCita = findViewById(R.id.closeCita);
         guardarCita = findViewById(R.id.saveCita);
 

@@ -85,7 +85,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/btnaranja"
                 android:text="@string/action_sign_in_short"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
