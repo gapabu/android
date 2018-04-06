@@ -6,10 +6,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.sanus.sanus.R;
-import com.sanus.sanus.domain.citas.view.CitasFragment;
 import com.sanus.sanus.domain.main.view.MainActivity;
 import com.sanus.sanus.domain.resume_new_cita.presenter.ResumeNewCitaPresenter;
 import com.sanus.sanus.domain.resume_new_cita.presenter.ResumeNewCitaPresenterImpl;
@@ -18,8 +17,8 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
     private final String TAG= this.getClass().getSimpleName();
     private ResumeNewCitaPresenter presenter;
     FloatingActionButton cerrarCita, guardarCita;
-
     String idHospital, idDoctor, fecha, hour;
+    TextView nameClinic, directionClinic, nameDoctor, specialty, hora, date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +43,16 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         hour = getIntent().getStringExtra("hour");
         Log.d(TAG, "idHospital=>" + idHospital + " " + "idDoctor=>" + idDoctor + " " + "fecha=>" +fecha + " " + "hora=>" + hour);
 
+        nameClinic = findViewById(R.id.nameClinic);
+        directionClinic = findViewById(R.id.directionClinic);
+        nameDoctor = findViewById(R.id.nameDoctor);
+        specialty = findViewById(R.id.specialty);
+        date = findViewById(R.id.fechaCite);
+        hora = findViewById(R.id.horaCite);
+
+        setDate();
+        setHour();
+
         cerrarCita = findViewById(R.id.closeCita);
         guardarCita = findViewById(R.id.saveCita);
 
@@ -57,6 +66,7 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         guardarCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                presenter.addAppointment(idHospital, idDoctor, fecha, hour);
                 goActivity();
             }
         });
@@ -67,5 +77,17 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         finish();
+    }
+
+    @Override
+    public String setDate() {
+        date.setText(fecha);
+        return String.valueOf(date);
+    }
+
+    @Override
+    public String setHour() {
+        hora.setText(hour);
+        return String.valueOf(hora);
     }
 }

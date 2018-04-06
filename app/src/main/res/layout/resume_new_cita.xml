@@ -76,13 +76,13 @@
 
 
             <TextView
-                android:id="@+id/nombreClinica"
+                android:id="@+id/nameClinic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/nombre_clinica" />
 
             <TextView
-                android:id="@+id/direccionClinica"
+                android:id="@+id/directionClinic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -134,13 +134,13 @@
 
 
         <TextView
-            android:id="@+id/nombre1"
+            android:id="@+id/nameDoctor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/nameDoct" />
 
         <TextView
-            android:id="@+id/especialidad1"
+            android:id="@+id/specialty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -250,13 +250,13 @@
 
 
             <TextView
-                android:id="@+id/hourCite"
+                android:id="@+id/horaCite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/hora" />
 
             <TextView
-                android:id="@+id/horaCite"
+                android:id="@+id/hourCite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

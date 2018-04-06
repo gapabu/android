@@ -13,4 +13,19 @@ public class ResumeNewCitaPresenterImpl implements ResumeNewCitaPresenter{
         this.view = view;
         interactor = new ResumeNewCitaInteractorImpl(this);
     }
+
+    @Override
+    public void addAppointment(String idHospital, String idDoctor, String fecha, String hora) {
+        interactor.addAppointment(idHospital, idDoctor, fecha, hora);
+    }
+
+    @Override
+    public String setDate() {
+        return view.setDate();
+    }
+
+    @Override
+    public String setHour() {
+        return view.setHour();
+    }
 }
