@@ -43,6 +43,8 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         hour = getIntent().getStringExtra("hour");
         Log.d(TAG, "idHospital=>" + idHospital + " " + "idDoctor=>" + idDoctor + " " + "fecha=>" +fecha + " " + "hora=>" + hour);
 
+        presenter.viewDataDoctor(idDoctor);
+
         nameClinic = findViewById(R.id.nameClinic);
         directionClinic = findViewById(R.id.directionClinic);
         nameDoctor = findViewById(R.id.nameDoctor);
@@ -89,5 +91,17 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
     public String setHour() {
         hora.setText(hour);
         return String.valueOf(hora);
+    }
+
+    @Override
+    public String setNameDoctor(String nameDr) {
+        nameDoctor.setText(nameDr);
+        return String.valueOf(nameDoctor);
+    }
+
+    @Override
+    public String setSpecialty(String especialidad) {
+        specialty.setText(especialidad);
+        return String.valueOf(specialty);
     }
 }

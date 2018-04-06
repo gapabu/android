@@ -20,6 +20,11 @@ public class ResumeNewCitaPresenterImpl implements ResumeNewCitaPresenter{
     }
 
     @Override
+    public void viewDataDoctor(String idDoctor) {
+        interactor.viewDataDoctor(idDoctor);
+    }
+
+    @Override
     public String setDate() {
         return view.setDate();
     }
@@ -27,5 +32,15 @@ public class ResumeNewCitaPresenterImpl implements ResumeNewCitaPresenter{
     @Override
     public String setHour() {
         return view.setHour();
+    }
+
+    @Override
+    public String setNameDoctor(String nameDr) {
+        return view.setNameDoctor(nameDr);
+    }
+
+    @Override
+    public String setSpecialty(String especialidad) {
+        return view.setSpecialty(especialidad);
     }
 }
