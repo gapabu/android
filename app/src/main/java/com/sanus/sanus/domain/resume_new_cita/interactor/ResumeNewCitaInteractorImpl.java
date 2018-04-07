@@ -71,7 +71,6 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor{
                         @Override
                         public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                             if (documentSnapshot != null && documentSnapshot.exists()){
-                                //Log.d(TAG, "Data: " + documentSnapshot.getData());
                                 String specialty = documentSnapshot.getString("especialidad");
                                 presenter.setSpecialty(specialty);
                             }

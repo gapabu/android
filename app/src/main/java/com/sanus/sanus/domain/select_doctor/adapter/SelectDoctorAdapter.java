@@ -35,6 +35,7 @@ public class SelectDoctorAdapter extends RecyclerView.Adapter<SelectDoctorAdapte
         return new SelectDoctorAdapter.ViewHolder(view);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final SelectDoctorAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         holder.nombre.setText(commentsDoctorList.get(position).getNombre());
@@ -43,7 +44,6 @@ public class SelectDoctorAdapter extends RecyclerView.Adapter<SelectDoctorAdapte
         presenter.showPhoto(commentsDoctorList.get(position).getAvatar(), context, holder.avatar);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
                 holder.mView.setBackgroundColor(R.color.colorPrimaryDark);
