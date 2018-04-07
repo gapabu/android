@@ -144,7 +144,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
 
     @Override
     public void showPhoto(Uri uri) {
-        GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
+        //GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
         //Picasso.with(getContext()).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
     }
 

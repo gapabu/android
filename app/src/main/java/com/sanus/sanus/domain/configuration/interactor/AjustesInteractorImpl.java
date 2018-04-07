@@ -103,7 +103,7 @@ public class AjustesInteractorImpl implements AjustesInteractor {
                 storageReference.child(storageImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        presenter.showPhoto(uri);
+                        //presenter.showPhoto(uri);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
