@@ -45,5 +45,13 @@
             android:gravity="center"
             android:text="@string/my_history_quotes"/>
     </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/imgHead"
+            android:layout_marginTop="@dimen/space_small"
+            android:layout_marginBottom="40dp"/>
     </RelativeLayout>
 </LinearLayout>

@@ -38,7 +38,6 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
         //holder.usuario.setText(busquedaDoctorList.get(position).getUsuario());
         holder.doctor.setText(busquedaDoctorList.get(position).getDoctor());
         holder.hospital.setText(busquedaDoctorList.get(position).getHospital());
-
     }
 
     @Override

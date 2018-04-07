@@ -145,7 +145,7 @@ public class ConfigurationDoctorFragment extends Fragment implements Configurati
                 storageReference.child(image).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        GlideApp.with(getContext()).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
+                        GlideApp.with(getActivity()).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
