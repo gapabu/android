@@ -3,16 +3,16 @@ package com.sanus.sanus.domain.citas.data;
 public class Citas {
     private String doctor;
     private String fecha;
-    //private String usuario;
     private String hospital;
     private String hora;
+    private String avatar;
 
-    public Citas(String doctor, String fecha, String hospital, String hora) {
+    public Citas(String doctor, String fecha, String hospital, String hora, String avatar) {
         this.doctor = doctor;
         this.fecha = fecha;
-        //this.usuario = usuario;
         this.hospital = hospital;
         this.hora = hora;
+        this.avatar = avatar;
     }
     public String getHora() {
         return hora;
@@ -39,14 +39,6 @@ public class Citas {
         this.fecha = fecha;
     }
 
-    /*public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }*/
-
     public String getHospital() {
         return hospital;
     }
@@ -55,5 +47,12 @@ public class Citas {
         this.hospital = hospital;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
 }
