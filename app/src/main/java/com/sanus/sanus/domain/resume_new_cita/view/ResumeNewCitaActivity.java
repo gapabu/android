@@ -44,6 +44,7 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         Log.d(TAG, "idHospital=>" + idHospital + " " + "idDoctor=>" + idDoctor + " " + "fecha=>" +fecha + " " + "hora=>" + hour);
 
         presenter.viewDataDoctor(idDoctor);
+        presenter.viewDataHospital(idHospital);
 
         nameClinic = findViewById(R.id.nameClinic);
         directionClinic = findViewById(R.id.directionClinic);
@@ -103,5 +104,17 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
     public String setSpecialty(String especialidad) {
         specialty.setText(especialidad);
         return String.valueOf(specialty);
+    }
+
+    @Override
+    public String setNameHospital(String nameHos) {
+        nameClinic.setText(nameHos);
+        return String.valueOf(nameClinic);
+    }
+
+    @Override
+    public String setDirectionHospital(String direction) {
+        directionClinic.setText(direction);
+        return String.valueOf(directionClinic);
     }
 }

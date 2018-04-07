@@ -71,13 +71,35 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor{
                         @Override
                         public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                             if (documentSnapshot != null && documentSnapshot.exists()){
-                                Log.d(TAG, "Data: " + documentSnapshot.getData());
+                                //Log.d(TAG, "Data: " + documentSnapshot.getData());
                                 String specialty = documentSnapshot.getString("especialidad");
                                 presenter.setSpecialty(specialty);
                             }
                         }
                     });
 
+                } else {
+                    Log.d(TAG, "Current data: null");
+                }
+            }
+        });
+    }
+
+    @Override
+    public void viewDataHospital(final String idHospital) {
+        mFirestore.collection("hospitales").document(idHospital).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+                if (documentSnapshot != null && documentSnapshot.exists()) {
+                    Log.d(TAG, "Current data: " + documentSnapshot.getData());
+                    String name = documentSnapshot.getString("nombre");
+                    String direction = documentSnapshot.getString("direccion");
+                    presenter.setNameHospital(name);
+                    presenter.setDirectionHospital(direction);
                 } else {
                     Log.d(TAG, "Current data: null");
                 }
