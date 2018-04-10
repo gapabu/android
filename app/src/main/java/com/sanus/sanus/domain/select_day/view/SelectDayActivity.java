@@ -1,9 +1,12 @@
 package com.sanus.sanus.domain.select_day.view;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,6 +17,8 @@ import com.sanus.sanus.domain.select_day.presenter.SelectDayPresenter;
 import com.sanus.sanus.domain.select_day.presenter.SelectDayPresenterImpl;
 import com.sanus.sanus.domain.select_doctor.view.SelectDoctorActivity;
 import com.sanus.sanus.domain.select_hour.view.SelectHourActivity;
+
+import java.util.Calendar;
 
 public class SelectDayActivity extends AppCompatActivity implements SelectDayView, CalendarView.OnDateChangeListener {
     private String TAG = this.getClass().getSimpleName();
@@ -67,11 +72,42 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @SuppressLint("ResourceType")
     @Override
     public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
         month++;
         fecha = dayOfMonth + "/" + month + "/" + year;
+
         Log.d(TAG, "fecha: " + fecha);
+
+
+        Calendar c = Calendar.getInstance();
+        c.set(year,month,dayOfMonth);// vairables int
+
+        month = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        Log.d(TAG, "total: " + month);
+        dayOfMonth = c.get(Calendar.DAY_OF_WEEK);
+
+        if (month == 30){
+            if(dayOfMonth==Calendar.SUNDAY){Log.d(TAG, "jueves " + dayOfMonth);}
+            else if(dayOfMonth==Calendar.MONDAY){Log.d(TAG, "viernes " + dayOfMonth);}
+            else if (dayOfMonth==Calendar.TUESDAY){Log.d(TAG, "sabado " + dayOfMonth);}
+            else if (dayOfMonth==Calendar.WEDNESDAY){Log.d(TAG, "domingo " + dayOfMonth);}
+            else if (dayOfMonth==Calendar.THURSDAY){Log.d(TAG, "lunes " + dayOfMonth);}
+            else if (dayOfMonth==Calendar.FRIDAY){Log.d(TAG, "martes " + dayOfMonth);}
+            else{Log.d(TAG, "miercoles " + dayOfMonth);}
+        }if (month == 31){
+            if(dayOfMonth==Calendar.SUNDAY){Log.d(TAG, "viernes " + dayOfMonth);}
+            else if(dayOfMonth==Calendar.MONDAY){Log.d(TAG, "sabado " + dayOfMonth);}
+            else if (dayOfMonth==Calendar.TUESDAY){Log.d(TAG, "domingo " + dayOfMonth);}
+            else if (dayOfMonth==Calendar.WEDNESDAY){Log.d(TAG, "lunes " + dayOfMonth);}
+            else if (dayOfMonth==Calendar.THURSDAY){Log.d(TAG, "martes " + dayOfMonth);}
+            else if (dayOfMonth==Calendar.FRIDAY){Log.d(TAG, "miercoles " + dayOfMonth);}
+            else{Log.d(TAG, "jueves " + dayOfMonth);}
+        }
+
         enableButton();
     }
 

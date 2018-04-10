@@ -35,6 +35,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
     private TextView tvNombre;
     private CircleImageView setupImage;
     private Button activo, inactivo;
+    private LinearLayout linearLayoutEdit;
 
     @Nullable
     @Override
@@ -70,7 +71,8 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
             }
         });
 
-        LinearLayout linearLayoutEdit = view.findViewById(R.id.editProfile);
+        linearLayoutEdit = view.findViewById(R.id.editProfile);
+
         linearLayoutEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

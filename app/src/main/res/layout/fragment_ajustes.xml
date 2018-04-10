@@ -1,6 +1,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_ajustes"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -43,15 +44,13 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/btnround"
                 android:orientation="horizontal"
-                android:padding="10dp">
-
+                android:padding="@dimen/padding_small">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/avatar"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/user"/>
-
                 <TextView
                     android:id="@+id/tvNombre"
                     android:layout_width="match_parent"
@@ -59,22 +58,20 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/app_name" />
-
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/editProfile"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/profile"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/btnround"
                 android:orientation="horizontal"
-                android:padding="10dp">
-
+                android:padding="@dimen/padding_small">
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="30dp"
                     android:text="@string/editar_perfil"
                     android:layout_gravity="center"
                     android:gravity="center"/>
@@ -84,9 +81,16 @@
                 android:id="@+id/actividad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_below="@+id/editProfile"
+                android:padding="@dimen/padding_small"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/btnround">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
                 android:orientation="horizontal"
-                android:layout_below="@+id/editProfile">
+                tools:ignore="UselessParent">
 
                 <Button
                     android:id="@+id/btnActivo"
@@ -108,6 +112,8 @@
                     android:text="@string/inactivo" />
             </LinearLayout>
 
+            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/logout"
                 android:layout_width="match_parent"
@@ -116,24 +122,21 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/btnround"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/padding_small">
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/ic_cerrar" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/logout_text" />
             </LinearLayout>
-
-
-
 
         </RelativeLayout>
 

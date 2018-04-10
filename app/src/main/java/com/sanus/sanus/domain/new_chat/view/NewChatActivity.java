@@ -8,9 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +35,7 @@ import com.sanus.sanus.domain.new_chat.presenter.NewChatPresenterImpl;
 import java.util.List;
 
 public class NewChatActivity extends AppCompatActivity implements NewChatView{
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private NewChatPresenter presenter;
     private Toolbar toolbar;
@@ -38,6 +43,10 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView{
     private EditText edNewMessage;
     private RecyclerView recyclerView;
     MessagesAdapter adapter;
+    private int TEXT_LINES = 1;
+
+    /*List<Messages> commentsDoctorList;
+    MessagesAdapter commentsDoctorAdapter = new MessagesAdapter(this, commentsDoctorList, presenter);*/
 
 
     @Override
@@ -61,6 +70,28 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView{
         idDoct = getIntent().getStringExtra("idDoctor");
         toolbar = findViewById(R.id.toolbar);
         edNewMessage = findViewById(R.id.editMessage);
+
+        edNewMessage.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Toast.makeText(NewChatActivity.this, "" + s, Toast.LENGTH_SHORT).show();
+                if (edNewMessage.getLayout().getLineCount() != TEXT_LINES){
+                    //recyclerView.scrollToPosition(commentsDoctorAdapter.getItemCount() -1);
+                    TEXT_LINES = edNewMessage.getLayout().getLineCount();
+                    setSctollbarChat();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         FloatingActionButton sendMessage = findViewById(R.id.btnSaveMessage);
 
         sendMessage.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +104,8 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView{
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
-        recyclerView.scrollToPosition(recyclerView.getScrollBarSize() -1);
+        //recyclerView.scrollToPosition(recyclerView.getScrollBarSize() -1);
+
     }
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
@@ -120,7 +152,9 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView{
     public void setDataAdapter(List<Messages> commentsDoctorList) {
         MessagesAdapter commentsDoctorAdapter = new MessagesAdapter(getApplicationContext(), commentsDoctorList, presenter);
         recyclerView.setAdapter(commentsDoctorAdapter);
+        recyclerView.scrollToPosition(commentsDoctorAdapter.getItemCount() -1);
         commentsDoctorAdapter.notifyDataSetChanged();
+        //setSctollbarChat();
     }
 
     @Override
@@ -196,6 +230,9 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView{
         });
     }
 
+    public void setSctollbarChat(){
+        recyclerView.scrollToPosition(adapter.getItemCount() -1);
+    }
     @Override
     public String getMessages() {
         return edNewMessage.getText().toString();

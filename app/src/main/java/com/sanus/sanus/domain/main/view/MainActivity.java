@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         setUpVariable();
         setUpView();
         showSerchFragment();
+        //showCitasFragment();
     }
 
     private void setUpVariable() {
