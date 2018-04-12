@@ -43,7 +43,8 @@ public class SelectHourPresenterImpl implements SelectHourPresenter {
     }
 
     @Override
-    public void setDataAdapter(List<SelectHour> commentsDoctorList) {
-        view.setDataAdapter(commentsDoctorList);
+    public void setDataAdapter(List<SelectHour> busquedaDoctors) {
+        view.setDataAdapter(busquedaDoctors);
     }
+
 }

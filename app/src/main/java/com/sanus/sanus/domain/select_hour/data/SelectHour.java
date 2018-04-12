@@ -1,21 +1,14 @@
 package com.sanus.sanus.domain.select_hour.data;
 
 public class SelectHour {
-
-
     private String horario;
 
-    public SelectHour(String data) {
-        this.horario = data;
+    public SelectHour(String horario) {
+        this.horario = horario;
     }
 
-    public String getData() {
+    public String getHorario() {
         return horario;
     }
-
-    public void setData(String data) {
-        this.horario = data;
-    }
-
 
 }

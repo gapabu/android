@@ -9,5 +9,5 @@ public interface SelectHourView {
     void disableButton();
     void next();
     void previous();
-    void setDataAdapter(List<SelectHour> commentsDoctorList);
+    void setDataAdapter(List<SelectHour> busquedaDoctors);
 }

@@ -9,8 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.TimePicker;
-
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.resume_new_cita.view.ResumeNewCitaActivity;
 import com.sanus.sanus.domain.select_day.view.SelectDayActivity;
@@ -26,7 +24,6 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
     private String TAG = this.getClass().getSimpleName();
     FloatingActionButton skip, next;
     String idHospital, idDoctor, fecha, dia;
-    //TimePicker time;
     String hour;
     private RecyclerView recyclerView;
     SelectHourAdapter adapter;
@@ -91,6 +88,7 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
 
+
     }
 
 
@@ -125,10 +123,12 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
     }
 
     @Override
-    public void setDataAdapter(List<SelectHour> commentsDoctorList) {
-        SelectHourAdapter commentsDoctorAdapter = new SelectHourAdapter(getApplicationContext(), commentsDoctorList, presenter);
-        recyclerView.setAdapter(commentsDoctorAdapter);
-        commentsDoctorAdapter.notifyDataSetChanged();
+    public void setDataAdapter(List<SelectHour> busquedaDoctors) {
+        SelectHourAdapter busquedaDoctorAdapteradapter = new SelectHourAdapter(getApplicationContext(), busquedaDoctors, presenter);
+        recyclerView.setAdapter(busquedaDoctorAdapteradapter);
+        busquedaDoctorAdapteradapter.notifyDataSetChanged();
     }
+
+
 }
 
