@@ -22,10 +22,11 @@ import java.util.List;
 public class SelectHourActivity extends AppCompatActivity implements SelectHourView{
     private SelectHourPresenter presenter;
     private String TAG = this.getClass().getSimpleName();
-    FloatingActionButton skip, next;
-    String idHospital, idDoctor, fecha, dia;
-    String hour;
     private RecyclerView recyclerView;
+    FloatingActionButton skip, next;
+    private String idHospital, idDoctor, fecha, dia;
+    private String hour;
+
     SelectHourAdapter adapter;
 
     @Override
@@ -44,17 +45,11 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
     }
 
     private void setUpView() {
-
-        //time = findViewById(R.id.timePicker);
-
         idHospital = getIntent().getStringExtra("idHospital");
         idDoctor = getIntent().getStringExtra("idDoctor");
         fecha = getIntent().getStringExtra("fecha");
         dia = getIntent().getStringExtra("dia");
         Log.d(TAG, "idHospital=>" + idHospital + " " + "idDoctor=>" + idDoctor + " " + "fecha=>" +fecha + " dia=>" + dia);
-
-
-        //time = findViewById(R.id.timePicker);
 
         skip = findViewById(R.id.btn_skip);
         next = findViewById(R.id.btn_next);
@@ -69,26 +64,15 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               next();
+               //next();
             }
         });
-
-      /*  time.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                hour = hourOfDay + ":" + minute;
-                Log.d(TAG, "this hour: " + hour );
-                enableButton();
-            }
-        });*/
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
-
-
     }
 
 
@@ -104,12 +88,12 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
     }
 
     @Override
-    public void next() {
+    public void next(String value) {
         Intent intent = new Intent(SelectHourActivity.this, ResumeNewCitaActivity.class);
         intent.putExtra("idDoctor", idDoctor);
         intent.putExtra("idHospital", idHospital);
         intent.putExtra("fecha", fecha);
-        intent.putExtra("hour", hour);
+        intent.putExtra("hour", value);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         startActivity(intent);
         finish();
@@ -117,8 +101,12 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
 
     @Override
     public void previous() {
-        startActivity(new Intent(SelectHourActivity.this, SelectDayActivity.class));
+        Intent intent = new Intent(SelectHourActivity.this, SelectDayActivity.class);
+        intent.putExtra("idDoctor", idDoctor);
+        intent.putExtra("idHospital", idHospital);
+        intent.putExtra("fecha", fecha);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        startActivity(intent);
         finish();
     }
 

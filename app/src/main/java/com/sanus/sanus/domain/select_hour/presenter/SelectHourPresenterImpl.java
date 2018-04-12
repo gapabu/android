@@ -33,8 +33,8 @@ public class SelectHourPresenterImpl implements SelectHourPresenter {
     }
 
     @Override
-    public void next() {
-        view.next();
+    public void next(String value) {
+        view.next(value);
     }
 
     @Override

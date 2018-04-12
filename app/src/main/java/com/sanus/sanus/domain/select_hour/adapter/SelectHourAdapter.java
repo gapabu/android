@@ -39,6 +39,16 @@ public class SelectHourAdapter extends RecyclerView.Adapter<SelectHourAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         holder.nombre.setText(busquedaDoctorList.get(position).getHorario());
+
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onClick(View v) {
+                holder.mView.setBackgroundColor(R.color.colorPrimaryDark);
+                presenter.next(busquedaDoctorList.get(position).getHorario());
+            }
+        });
+        
     }
 
     @Override

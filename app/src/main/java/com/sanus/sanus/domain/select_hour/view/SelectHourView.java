@@ -7,7 +7,7 @@ import java.util.List;
 public interface SelectHourView {
     void enableButton();
     void disableButton();
-    void next();
+    void next(String value);
     void previous();
     void setDataAdapter(List<SelectHour> busquedaDoctors);
 }

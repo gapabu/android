@@ -43,6 +43,7 @@ public class SelectDoctorAdapter extends RecyclerView.Adapter<SelectDoctorAdapte
 
         presenter.showPhoto(commentsDoctorList.get(position).getAvatar(), context, holder.avatar);
 
+
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
