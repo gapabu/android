@@ -15,8 +15,8 @@ public class SelectHourPresenterImpl implements SelectHourPresenter {
     }
 
     @Override
-    public void viewSchedules(String id) {
-        interactor.viewSchedules(id);
+    public void viewSchedules(String idDoctor, String dia) {
+        interactor.viewSchedules(idDoctor, dia);
     }
 
     @Override

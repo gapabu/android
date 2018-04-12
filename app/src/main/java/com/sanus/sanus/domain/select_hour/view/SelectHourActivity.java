@@ -29,7 +29,7 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
         setContentView(R.layout.select_hour);
         setUpVariable();
         setUpView();
-        presenter.viewSchedules(idDoctor);
+        presenter.viewSchedules(idDoctor, dia);
     }
 
     private void setUpVariable() {
