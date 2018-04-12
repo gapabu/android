@@ -89,4 +89,53 @@
     <string name="inactivo">Inactivo</string>
 
 
+    <string name="material_calendar_monday">L</string>
+    <string name="material_calendar_tuesday">M</string>
+    <string name="material_calendar_wednesday">M</string>
+    <string name="material_calendar_thursday">J</string>
+    <string name="material_calendar_friday">V</string>
+    <string name="material_calendar_saturday">S</string>
+    <string name="material_calendar_sunday">D</string>
+
+    <string name="calendar_monday">Lunes</string>
+    <string name="calendar_tuesday">Martes</string>
+    <string name="calendar_wednesday">Miercoles</string>
+    <string name="calendar_thursday">Jueves</string>
+    <string name="calendar_friday">Viernes</string>
+    <string name="calendar_saturday">Sabado</string>
+    <string name="calendar_sunday">Domingo</string>
+
+    <string name="calendar_january">Enero</string>
+    <string name="calendar_february">Febrero</string>
+    <string name="calendar_march">Marzo</string>
+    <string name="calendar_april">Abril</string>
+    <string name="calendar_may">Mayo</string>
+    <string name="calendar_june">Junio</string>
+    <string name="calendar_july">Julio</string>
+    <string name="calendar_august">Agosto</string>
+    <string name="calendar_september">Septiembre</string>
+    <string name="calendar_october">Octubre</string>
+    <string name="calendar_november">Noviembre</string>
+    <string name="calendar_december">Diciembre</string>
+
+
+    <array name="material_calendar_months_array">
+        <item>Enero</item>
+        <item>Febrero</item>
+        <item>Marzo</item>
+        <item>Abril</item>
+        <item>Mayo</item>
+        <item>Junio</item>
+        <item>Julio</item>
+        <item>Agosto</item>
+        <item>Septiembre</item>
+        <item>Octubre</item>
+        <item>Noviembre</item>
+        <item>Deciembre</item>
+    </array>
+
+    <string name="material_calendar_today_button">Today</string>
+    <string name="material_calendar_positive_button">OK</string>
+    <string name="material_calendar_negative_button">Cancel</string>
+
 </resources>

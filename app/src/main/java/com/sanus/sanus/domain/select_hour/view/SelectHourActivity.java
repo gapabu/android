@@ -19,7 +19,7 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
     private SelectHourPresenter presenter;
     private String TAG = this.getClass().getSimpleName();
     FloatingActionButton skip, next;
-    String idHospital, idDoctor, fecha;
+    String idHospital, idDoctor, fecha, dia;
     TimePicker time;
     String hour;
 
@@ -45,7 +45,8 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
         idHospital = getIntent().getStringExtra("idHospital");
         idDoctor = getIntent().getStringExtra("idDoctor");
         fecha = getIntent().getStringExtra("fecha");
-        Log.d(TAG, "idHospital=>" + idHospital + " " + "idDoctor=>" + idDoctor + " " + "fecha=>" +fecha);
+        dia = getIntent().getStringExtra("dia");
+        Log.d(TAG, "idHospital=>" + idHospital + " " + "idDoctor=>" + idDoctor + " " + "fecha=>" +fecha + " dia=>" + dia);
 
 
         time = findViewById(R.id.timePicker);
