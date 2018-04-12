@@ -1,9 +1,12 @@
 package com.sanus.sanus.domain.select_hour.presenter;
 
 
+import com.sanus.sanus.domain.select_hour.data.SelectHour;
 import com.sanus.sanus.domain.select_hour.interactor.SelectHourInteractor;
 import com.sanus.sanus.domain.select_hour.interactor.SelectHourInteractorImpl;
 import com.sanus.sanus.domain.select_hour.view.SelectHourView;
+
+import java.util.List;
 
 public class SelectHourPresenterImpl implements SelectHourPresenter {
     private SelectHourView view;
@@ -37,5 +40,10 @@ public class SelectHourPresenterImpl implements SelectHourPresenter {
     @Override
     public void previous() {
         view.previous();
+    }
+
+    @Override
+    public void setDataAdapter(List<SelectHour> commentsDoctorList) {
+        view.setDataAdapter(commentsDoctorList);
     }
 }

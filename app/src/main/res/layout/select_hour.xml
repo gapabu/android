@@ -75,7 +75,7 @@
                 </RelativeLayout>
     </RelativeLayout>
 
-    <TimePicker
+    <!--<TimePicker
         android:id="@+id/timePicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -86,7 +86,12 @@
         android:headerBackground="@color/colorPrimaryDark"
         android:numbersBackgroundColor="@color/colorPrimaryDark"
         android:background="@color/colorPrimary"
-        android:timePickerMode="clock"/>
+        android:timePickerMode="clock"/>!-->
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>
 
