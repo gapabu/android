@@ -20,7 +20,7 @@
         android:padding="@dimen/padding_avg">
 
         <TextView
-            android:id="@+id/nombre"
+            android:id="@+id/horario"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/nameDoct"

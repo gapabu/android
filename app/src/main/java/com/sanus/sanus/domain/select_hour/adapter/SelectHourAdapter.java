@@ -38,7 +38,7 @@ public class SelectHourAdapter extends RecyclerView.Adapter<SelectHourAdapter.Vi
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        holder.nombre.setText(busquedaDoctorList.get(position).getHorario());
+        holder.horario.setText(busquedaDoctorList.get(position).getHorario());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
@@ -48,7 +48,7 @@ public class SelectHourAdapter extends RecyclerView.Adapter<SelectHourAdapter.Vi
                 presenter.next(busquedaDoctorList.get(position).getHorario());
             }
         });
-        
+
     }
 
     @Override
@@ -59,12 +59,11 @@ public class SelectHourAdapter extends RecyclerView.Adapter<SelectHourAdapter.Vi
     class ViewHolder extends RecyclerView.ViewHolder{
         View mView;
 
-        TextView nombre;
+        TextView horario;
         ViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
-
-            nombre = itemView.findViewById(R.id.nombre);
+            horario = itemView.findViewById(R.id.horario);
 
         }
     }

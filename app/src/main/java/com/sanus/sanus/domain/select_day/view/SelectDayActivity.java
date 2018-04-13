@@ -23,10 +23,10 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
     private SelectDayPresenter presenter;
     FloatingActionButton skip, next;
     String idHospital, idDoctor;
-    String fecha, dia;
+    String fecha;
     String monthYear = null;
     String dayMont = null;
-
+    com.applandeo.materialcalendarview.CalendarView calendarView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +48,11 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
 
         skip = findViewById(R.id.btn_skip);
         next = findViewById(R.id.btn_next);
-
-        com.applandeo.materialcalendarview.CalendarView calendarView = findViewById(R.id.calendarView);
+        calendarView = findViewById(R.id.calendarView);
 
        calendarView.setOnDayClickListener(this);
-
-        disableButton();
+       calendarView.setMinimumDate(Calendar.getInstance());
+       disableButton();
 
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +68,6 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
             }
         });
     }
-
 
 
     @Override
@@ -107,17 +105,17 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
     @Override
     public void onDayClick(EventDay eventDay) {
 
-        Calendar c = eventDay.getCalendar();
-        int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
-        int month = c.get(Calendar.MONTH);
-        int year = c.get(Calendar.YEAR);
-        int day = c.get(Calendar.DAY_OF_WEEK);
+        Calendar calendar = eventDay.getCalendar();
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH);
+        int year = calendar.get(Calendar.YEAR);
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
 
         getMonthOfYear(month);
         getDayWeek(day);
 
         fecha = dayOfMonth + " " + monthYear + " " + year;
-
+        Log.d(TAG, " " + fecha);
         enableButton();
     }
 

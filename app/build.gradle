@@ -73,7 +73,7 @@ dependencies {
     compile 'com.airbnb.android:lottie:2.5.3'
 
     compile 'com.applandeo:material-calendar-view:1.4.0'
-    compile 'com.prolificinteractive:material-calendarview:1.4.3'
+
 }
 
 

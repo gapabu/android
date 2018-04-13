@@ -89,6 +89,7 @@
     <string name="inactivo">Inactivo</string>
 
 
+    <string name="guardar_cita">Deseas agendar esta cita</string>
     <string name="material_calendar_monday">L</string>
     <string name="material_calendar_tuesday">M</string>
     <string name="material_calendar_wednesday">M</string>

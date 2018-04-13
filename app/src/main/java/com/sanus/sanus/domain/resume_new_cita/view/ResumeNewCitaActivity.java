@@ -12,8 +12,10 @@ import com.sanus.sanus.R;
 import com.sanus.sanus.domain.main.view.MainActivity;
 import com.sanus.sanus.domain.resume_new_cita.presenter.ResumeNewCitaPresenter;
 import com.sanus.sanus.domain.resume_new_cita.presenter.ResumeNewCitaPresenterImpl;
+import com.sanus.sanus.utils.alert.AlertUtils;
+import com.sanus.sanus.utils.alert.CallbackAlert;
 
-public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNewCitaView{
+public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNewCitaView, CallbackAlert {
     private final String TAG= this.getClass().getSimpleName();
     private ResumeNewCitaPresenter presenter;
     FloatingActionButton cerrarCita, guardarCita;
@@ -69,8 +71,9 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         guardarCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.addAppointment(idHospital, idDoctor, fecha, hour);
-                goActivity();
+                //presenter.addAppointment(idHospital, idDoctor, fecha, hour);
+                //goActivity();
+                showAlertLogout();
             }
         });
     }
@@ -116,5 +119,21 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
     public String setDirectionHospital(String direction) {
         directionClinic.setText(direction);
         return String.valueOf(directionClinic);
+    }
+
+    private void showAlertLogout() {
+        AlertUtils alertUtils = new AlertUtils(this);
+        alertUtils.configureAlert(getApplicationContext(), getString(R.string.guardar_cita));
+    }
+
+
+    @Override
+    public void acceptAlert() {
+
+    }
+
+    @Override
+    public void cancelAlert() {
+
     }
 }

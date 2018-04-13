@@ -22,9 +22,6 @@ import com.sanus.sanus.domain.configuration.presenter.AjustesPresenterImpl;
 import com.sanus.sanus.R;
 import com.sanus.sanus.utils.alert.AlertUtils;
 
-//import com.sanus.sanus.utils.glide.GlideApp;
-import com.sanus.sanus.utils.glide.GlideApp;
-import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
