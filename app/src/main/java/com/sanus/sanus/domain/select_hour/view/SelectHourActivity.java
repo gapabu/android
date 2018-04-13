@@ -24,7 +24,7 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
     private String TAG = this.getClass().getSimpleName();
     private RecyclerView recyclerView;
     FloatingActionButton skip, next;
-    private String idHospital, idDoctor, fecha, dia;
+    private String idHospital, idDoctor, fecha, dia, idDocument;
     private String hour;
 
     SelectHourAdapter adapter;
@@ -49,7 +49,9 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
         idDoctor = getIntent().getStringExtra("idDoctor");
         fecha = getIntent().getStringExtra("fecha");
         dia = getIntent().getStringExtra("dia");
-        Log.d(TAG, "idHospital=>" + idHospital + " " + "idDoctor=>" + idDoctor + " " + "fecha=>" +fecha + " dia=>" + dia);
+        idDocument = getIntent().getStringExtra("idDocument");
+        Log.d(TAG, "idHospital=>" + idHospital + " " + "idDoctor=>" + idDoctor + " "
+                + "fecha=>" +fecha + " dia=>" + dia + " idDocumement=>" + idDocument);
 
         skip = findViewById(R.id.btn_skip);
         next = findViewById(R.id.btn_next);
@@ -89,6 +91,7 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
 
     @Override
     public void next(String value) {
+        presenter.addAppointment(idHospital, idDoctor, fecha, value, idDocument);
         Intent intent = new Intent(SelectHourActivity.this, ResumeNewCitaActivity.class);
         intent.putExtra("idDoctor", idDoctor);
         intent.putExtra("idHospital", idHospital);

@@ -23,6 +23,11 @@ public class SelectHourPresenterImpl implements SelectHourPresenter {
     }
 
     @Override
+    public void addAppointment(String idHospital, String idDoctor, String fecha, String hora, String idDocument) {
+        interactor.addAppointment(idHospital, idDoctor, fecha, hora, idDocument);
+    }
+
+    @Override
     public void enableButton() {
         view.enableButton();
     }
