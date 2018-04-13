@@ -1,6 +1,7 @@
 package com.sanus.sanus.domain.resume_new_cita.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -14,10 +15,14 @@ import com.sanus.sanus.domain.resume_new_cita.presenter.ResumeNewCitaPresenter;
 import com.sanus.sanus.domain.resume_new_cita.presenter.ResumeNewCitaPresenterImpl;
 import com.sanus.sanus.utils.alert.AlertUtils;
 import com.sanus.sanus.utils.alert.CallbackAlert;
+import com.sanus.sanus.utils.glide.GlideApp;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNewCitaView, CallbackAlert {
     private final String TAG= this.getClass().getSimpleName();
     private ResumeNewCitaPresenter presenter;
+    CircleImageView avatar;
     FloatingActionButton cerrarCita, guardarCita;
     String idHospital, idDoctor, fecha, hour, idDocument;
     TextView nameClinic, directionClinic, nameDoctor, specialty, hora, date;
@@ -56,7 +61,7 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         specialty = findViewById(R.id.specialty);
         date = findViewById(R.id.fechaCite);
         hora = findViewById(R.id.horaCite);
-
+        avatar = findViewById(R.id.avatar);
         setDate();
         setHour();
 
@@ -147,6 +152,11 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         finish();
+    }
+
+    @Override
+    public void showPhoto(Uri uri) {
+        GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
     }
 
 

@@ -1,6 +1,5 @@
 package com.sanus.sanus.domain.resume_new_cita.presenter;
 
-
 import com.sanus.sanus.domain.resume_new_cita.view.ResumeNewCitaView;
 
 public interface ResumeNewCitaPresenter extends ResumeNewCitaView {
@@ -8,4 +7,5 @@ public interface ResumeNewCitaPresenter extends ResumeNewCitaView {
     void viewDataDoctor(String idDoctor);
     void viewDataHospital(String idHospital);
     void deleteAppointment(String idDocument);
+    void showImage(String idImage);
 }

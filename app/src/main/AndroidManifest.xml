@@ -11,8 +11,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
-
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
@@ -115,7 +113,8 @@
         <activity
             android:name=".domain.new_chat.view.NewChatActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".domain.doctor_module.all_comments.view.AllCommentsActivity"
+        <activity
+            android:name=".domain.doctor_module.all_comments.view.AllCommentsActivity"
             android:screenOrientation="portrait"/>
     </application>
 

@@ -1,5 +1,6 @@
 package com.sanus.sanus.domain.resume_new_cita.interactor;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -10,6 +11,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.data.repository.firebase.entity.user.AppointmentEntity;
 import com.sanus.sanus.domain.resume_new_cita.presenter.ResumeNewCitaPresenter;
 import com.sanus.sanus.utils.alert.CallbackAlert;
@@ -66,6 +69,9 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor, Cal
                 if (documentSnapshot != null && documentSnapshot.exists()) {
                     Log.d(TAG, "Current data: " + documentSnapshot.getData());
                     String name = documentSnapshot.getString("nombre").concat(" " + documentSnapshot.getString("apellido"));
+                    String avatar = documentSnapshot.getString("avatar");
+
+                    showImage(avatar);
                     presenter.setNameDoctor(name);
 
                     mFirestore.collection("doctores").document(idDoctor).addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -119,6 +125,23 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor, Cal
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.w(TAG, "Error deleting document", e);
+            }
+        });
+    }
+
+    @Override
+    public void showImage(String idImage) {
+        final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://sanus-27.appspot.com/avatar/");
+        storageReference.child(idImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                presenter.showPhoto(uri);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
+                Log.d(TAG, "No hay conexion");
             }
         });
     }

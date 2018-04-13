@@ -1,6 +1,8 @@
 package com.sanus.sanus.domain.resume_new_cita.presenter;
 
 
+import android.net.Uri;
+
 import com.sanus.sanus.domain.resume_new_cita.interactor.ResumeNewCitaInteractor;
 import com.sanus.sanus.domain.resume_new_cita.interactor.ResumeNewCitaInteractorImpl;
 import com.sanus.sanus.domain.resume_new_cita.view.ResumeNewCitaView;
@@ -32,6 +34,11 @@ public class ResumeNewCitaPresenterImpl implements ResumeNewCitaPresenter{
     @Override
     public void deleteAppointment(String idDocument) {
         interactor.deleteAppointment(idDocument);
+    }
+
+    @Override
+    public void showImage(String idImage) {
+        interactor.showImage(idImage);
     }
 
     @Override
@@ -72,6 +79,11 @@ public class ResumeNewCitaPresenterImpl implements ResumeNewCitaPresenter{
     @Override
     public void goActivity() {
         view.goActivity();
+    }
+
+    @Override
+    public void showPhoto(Uri photo) {
+        view.showPhoto(photo);
     }
 
 

@@ -1,5 +1,7 @@
 package com.sanus.sanus.domain.resume_new_cita.view;
 
+import android.net.Uri;
+
 public interface ResumeNewCitaView {
     String setDate();
     String setHour();
@@ -11,4 +13,5 @@ public interface ResumeNewCitaView {
     void showExitoRegistro();
     void goActivity();
 
+    void showPhoto(Uri photo);
 }
