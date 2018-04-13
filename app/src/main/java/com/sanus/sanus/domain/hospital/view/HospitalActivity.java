@@ -20,10 +20,12 @@ import com.sanus.sanus.domain.hospital.presenter.HospitalPresenter;
 import com.sanus.sanus.domain.hospital.presenter.HospitalPresenterImpl;
 import com.sanus.sanus.domain.main.view.MainActivity;
 import com.sanus.sanus.domain.select_doctor.view.SelectDoctorActivity;
+import com.sanus.sanus.utils.alert.AlertUtils;
+import com.sanus.sanus.utils.alert.CallbackAlert;
 
 import java.util.List;
 
-public class HospitalActivity extends AppCompatActivity implements HospitalView{
+public class HospitalActivity extends AppCompatActivity implements HospitalView, CallbackAlert {
     private HospitalPresenter presenter;
     private RecyclerView recyclerView;
     HospitalAdapter adapter;
@@ -75,7 +77,7 @@ public class HospitalActivity extends AppCompatActivity implements HospitalView{
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                closeNewCita();
+                showAlertCancel();
             }
         });
 
@@ -133,4 +135,18 @@ public class HospitalActivity extends AppCompatActivity implements HospitalView{
         finish();
     }
 
+    @Override
+    public void acceptAlert() {
+        closeNewCita();
+    }
+
+    @Override
+    public void cancelAlert() {
+
+    }
+
+    private void showAlertCancel() {
+        AlertUtils alertUtils = new AlertUtils(this);
+        alertUtils.configureAlert(this, getString(R.string.salir_citas));
+    }
 }

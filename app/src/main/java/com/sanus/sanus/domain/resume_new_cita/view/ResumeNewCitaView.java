@@ -7,4 +7,8 @@ public interface ResumeNewCitaView {
     String setSpecialty(String especialidad);
     String setNameHospital(String nameHos);
     String setDirectionHospital(String direction);
+
+    void showExitoRegistro();
+    void goActivity();
+
 }

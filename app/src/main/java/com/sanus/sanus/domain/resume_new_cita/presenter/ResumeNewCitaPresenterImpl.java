@@ -58,4 +58,16 @@ public class ResumeNewCitaPresenterImpl implements ResumeNewCitaPresenter{
     public String setDirectionHospital(String direction) {
         return view.setDirectionHospital(direction);
     }
+
+    @Override
+    public void showExitoRegistro() {
+        view.showExitoRegistro();
+    }
+
+    @Override
+    public void goActivity() {
+        view.goActivity();
+    }
+
+
 }

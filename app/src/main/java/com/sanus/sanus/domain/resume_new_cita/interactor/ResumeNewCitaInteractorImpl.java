@@ -15,8 +15,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.sanus.sanus.data.repository.firebase.entity.user.AppointmentEntity;
 import com.sanus.sanus.domain.resume_new_cita.presenter.ResumeNewCitaPresenter;
+import com.sanus.sanus.utils.alert.CallbackAlert;
 
-public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor{
+public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor, CallbackAlert {
     private String TAG = this.getClass().getSimpleName();
     private ResumeNewCitaPresenter presenter;
     private AppointmentEntity appointmentEntity = new AppointmentEntity();
@@ -43,6 +44,7 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor{
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {
                 Log.d(TAG, "Se agrego con éxito");
+                presenter.showExitoRegistro();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -106,4 +108,13 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor{
         });
     }
 
+    @Override
+    public void acceptAlert() {
+        presenter.goActivity();
+    }
+
+    @Override
+    public void cancelAlert() {
+        presenter.goActivity();
+    }
 }

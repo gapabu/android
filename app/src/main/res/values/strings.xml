@@ -89,7 +89,10 @@
     <string name="inactivo">Inactivo</string>
 
 
-    <string name="guardar_cita">Deseas agendar esta cita</string>
+    <string name="guardar_cita">¿Estás seguro de crear la cita?</string>
+    <string name="cancelar_cita">¿Estás seguro de cancelar?</string>
+    <string name="salir_citas">¿Estás seguro de salir? </string>
+    <string name="cita_exitosa">Se ha registrado correctamente la cita</string>
     <string name="material_calendar_monday">L</string>
     <string name="material_calendar_tuesday">M</string>
     <string name="material_calendar_wednesday">M</string>

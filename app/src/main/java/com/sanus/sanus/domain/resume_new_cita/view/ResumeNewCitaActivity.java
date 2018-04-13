@@ -64,7 +64,7 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         cerrarCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               goActivity();
+                //goActivity();
             }
         });
 
@@ -73,17 +73,12 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
             public void onClick(View v) {
                 //presenter.addAppointment(idHospital, idDoctor, fecha, hour);
                 //goActivity();
-                showAlertLogout();
+                showSaveCita();
             }
         });
     }
 
-    public void goActivity(){
-        Intent intent = new Intent(ResumeNewCitaActivity.this, MainActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        finish();
-    }
+
 
     @Override
     public String setDate() {
@@ -121,19 +116,38 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         return String.valueOf(directionClinic);
     }
 
-    private void showAlertLogout() {
-        AlertUtils alertUtils = new AlertUtils(this);
-        alertUtils.configureAlert(getApplicationContext(), getString(R.string.guardar_cita));
-    }
-
 
     @Override
     public void acceptAlert() {
-
+        presenter.addAppointment(idHospital, idDoctor, fecha, hour);
+        //showExitoRegistro();
+        //goActivity();
     }
 
     @Override
     public void cancelAlert() {
-
+        goActivity();
     }
+
+
+    private void showSaveCita() {
+        AlertUtils alertUtils = new AlertUtils(this);
+        alertUtils.configureAlert(this, getString(R.string.guardar_cita));
+    }
+
+    public void showExitoRegistro() {
+        AlertUtils alertUtils = new AlertUtils(this);
+        alertUtils.configureAlert(this, getString(R.string.cita_exitosa));
+        goActivity();
+    }
+
+    @Override
+    public void goActivity() {
+        Intent intent = new Intent(ResumeNewCitaActivity.this, MainActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        finish();
+    }
+
+
 }
