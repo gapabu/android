@@ -25,12 +25,17 @@ public class SelectDayPresenterImpl implements SelectDayPresenter{
     }
 
     @Override
-    public void next() {
-        view.next();
+    public void next(String idDocument) {
+        view.next(idDocument);
     }
 
     @Override
     public void previous() {
         view.previous();
+    }
+
+    @Override
+    public void addAppointment(String idHospital, String idDoctor, String fecha) {
+        interactor.addAppointment(idHospital, idDoctor, fecha);
     }
 }

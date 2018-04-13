@@ -64,7 +64,8 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                next();
+                presenter.addAppointment(idHospital, idDoctor, fecha);
+                //next();
             }
         });
     }
@@ -82,12 +83,13 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
     }
 
     @Override
-    public void next() {
+    public void next(String idDocument) {
         Intent intent = new Intent(SelectDayActivity.this, SelectHourActivity.class);
         intent.putExtra("idDoctor", idDoctor);
         intent.putExtra("idHospital", idHospital);
         intent.putExtra("fecha", fecha);
         intent.putExtra("dia", dayMont);
+        intent.putExtra("idDocument", idDocument);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         startActivity(intent);
         finish();
