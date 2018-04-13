@@ -2,13 +2,10 @@ package com.sanus.sanus.domain.resume_new_cita.interactor;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
-
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,7 +26,7 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor, Cal
     }
 
     @Override
-    public void addAppointment(String idHospital, String idDoctor, String fecha, String hora) {
+    public void addAppointment(String idHospital, String idDoctor, String fecha, String hora, String idDocument) {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -40,18 +37,20 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor, Cal
         appointmentEntity.hora = hora;
         appointmentEntity.usuario = userIdNow;
 
-        mFirestore.collection("citas").add(appointmentEntity).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+
+        mFirestore.collection("citas").document(idDocument).set(appointmentEntity).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
-                Log.d(TAG, "Se agrego con éxito");
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "DocumentSnapshot successfully written!");
                 presenter.showExitoRegistro();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, " " + e);
+                Log.w(TAG, "Error writing document", e);
             }
         });
+
     }
 
     @Override
@@ -104,6 +103,22 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor, Cal
                 } else {
                     Log.d(TAG, "Current data: null");
                 }
+            }
+        });
+    }
+
+    @Override
+    public void deleteAppointment(String idDocument) {
+        mFirestore.collection("citas").document(idDocument).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                presenter.goActivity();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error deleting document", e);
             }
         });
     }

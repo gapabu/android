@@ -15,8 +15,8 @@ public class ResumeNewCitaPresenterImpl implements ResumeNewCitaPresenter{
     }
 
     @Override
-    public void addAppointment(String idHospital, String idDoctor, String fecha, String hora) {
-        interactor.addAppointment(idHospital, idDoctor, fecha, hora);
+    public void addAppointment(String idHospital, String idDoctor, String fecha, String hora, String idDocument) {
+        interactor.addAppointment(idHospital, idDoctor, fecha, hora, idDocument);
     }
 
     @Override
@@ -27,6 +27,11 @@ public class ResumeNewCitaPresenterImpl implements ResumeNewCitaPresenter{
     @Override
     public void viewDataHospital(String idHospital) {
         interactor.viewDataHospital(idHospital);
+    }
+
+    @Override
+    public void deleteAppointment(String idDocument) {
+        interactor.deleteAppointment(idDocument);
     }
 
     @Override

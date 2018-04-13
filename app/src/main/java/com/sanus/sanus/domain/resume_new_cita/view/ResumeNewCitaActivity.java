@@ -19,7 +19,7 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
     private final String TAG= this.getClass().getSimpleName();
     private ResumeNewCitaPresenter presenter;
     FloatingActionButton cerrarCita, guardarCita;
-    String idHospital, idDoctor, fecha, hour;
+    String idHospital, idDoctor, fecha, hour, idDocument;
     TextView nameClinic, directionClinic, nameDoctor, specialty, hora, date;
 
     @Override
@@ -43,7 +43,9 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         idDoctor = getIntent().getStringExtra("idDoctor");
         fecha = getIntent().getStringExtra("fecha");
         hour = getIntent().getStringExtra("hour");
-        Log.d(TAG, "idHospital=>" + idHospital + " " + "idDoctor=>" + idDoctor + " " + "fecha=>" +fecha + " " + "hora=>" + hour);
+        idDocument = getIntent().getStringExtra("idDocument");
+        Log.d(TAG, "idHospital=>" + idHospital + " " + "idDoctor=>" + idDoctor + " " + "fecha=>"
+                +fecha + " " + " hora=>" + hour + " idDocumet=> " + idDocument);
 
         presenter.viewDataDoctor(idDoctor);
         presenter.viewDataHospital(idHospital);
@@ -64,6 +66,7 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         cerrarCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                presenter.deleteAppointment(idDocument);
                 //goActivity();
             }
         });
@@ -119,14 +122,11 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
 
     @Override
     public void acceptAlert() {
-        presenter.addAppointment(idHospital, idDoctor, fecha, hour);
-        //showExitoRegistro();
-        //goActivity();
+        presenter.addAppointment(idHospital, idDoctor, fecha, hour, idDocument);
     }
 
     @Override
-    public void cancelAlert() {
-        goActivity();
+    public void cancelAlert() {goActivity();
     }
 
 

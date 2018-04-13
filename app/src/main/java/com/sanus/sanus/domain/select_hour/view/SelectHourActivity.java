@@ -25,7 +25,6 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
     private RecyclerView recyclerView;
     FloatingActionButton skip, next;
     private String idHospital, idDoctor, fecha, dia, idDocument;
-    private String hour;
 
     SelectHourAdapter adapter;
 
@@ -97,6 +96,7 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
         intent.putExtra("idHospital", idHospital);
         intent.putExtra("fecha", fecha);
         intent.putExtra("hour", value);
+        intent.putExtra("idDocument", idDocument);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         startActivity(intent);
         finish();
