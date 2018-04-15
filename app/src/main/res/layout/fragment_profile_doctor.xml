@@ -47,7 +47,7 @@
             android:numStars="5"
             android:progressTint="@color/colorPrimaryDark"
             android:stepSize="1"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatinIrComentarios"
@@ -69,10 +69,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ratingBar"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/padding_avg"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/btnround"
             android:orientation="vertical"
             android:id="@+id/linearLayout2">
@@ -87,16 +87,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/especialidad"/>
+                    android:text="@string/especialidad"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:id="@+id/tvEspecialidad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="3dp"
+                    android:layout_marginBottom="@dimen/padding_min"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:text="@string/especialidad" />
+                    android:text="@string/especialidad"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
 
@@ -105,13 +107,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="8dp"
-                android:layout_marginStart="@dimen/activity_horizontal_margin">
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/padding_small">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:text="@string/cedula" />
+                    android:text="@string/cedula"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:id="@+id/tvCedula"
@@ -121,7 +125,8 @@
                     android:layout_marginStart="60dp"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:text="@string/cedula" />
+                    android:text="@string/cedula"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
 
@@ -131,23 +136,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/linearLayout2"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="100dp"
             android:background="@drawable/btnround"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_below="@+id/linearLayout2"
+            android:layout_marginStart="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_vertical_margin">
             <TextView
                 android:id="@+id/tvCv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/padding_avg"
+                android:layout_marginLeft="@dimen/padding_avg"
+                android:layout_marginRight="@dimen/padding_avg"
                 android:layout_marginTop="16dp"
-                android:text="@string/cv" />
+                android:text="@string/cv"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
     </RelativeLayout>

@@ -77,7 +77,8 @@
                     android:id="@+id/nameClinic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/nombre_clinica" />
+                    android:text="@string/nombre_clinica"
+                    android:textColor="@color/black"/>
                 <TextView
                     android:id="@+id/directionClinic"
                     android:layout_width="match_parent"
@@ -114,7 +115,9 @@
                     android:layout_height="45dp"
                     android:layout_gravity="center"
                     android:contentDescription="@string/app_name"
-                    android:src="@drawable/user" />
+                    android:src="@drawable/user"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="2sp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -129,7 +132,8 @@
                     android:id="@+id/nameDoctor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/nameDoct" />
+                    android:text="@string/nameDoct"
+                    android:textColor="@color/black"/>
                 <TextView
                     android:id="@+id/specialty"
                     android:layout_width="match_parent"
@@ -181,7 +185,8 @@
                     android:id="@+id/fechaCite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/fecha_de_cita" />
+                    android:text="@string/fecha_de_cita"
+                    android:textColor="@color/black"/>
                 <TextView
                     android:id="@+id/dateCite"
                     android:layout_width="match_parent"
@@ -233,7 +238,8 @@
                 android:id="@+id/horaCite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/hora" />
+                android:text="@string/hora"
+                android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/hourCite"
                 android:layout_width="match_parent"

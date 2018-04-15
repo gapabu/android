@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@android:color/transparent"
     android:id="@+id/lyContentComentario">
@@ -38,7 +38,9 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:src="@drawable/user"
-                    tools:ignore="RtlHardcoded" />
+                    tools:ignore="RtlHardcoded"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/white"/>
 
 
                 <TextView
@@ -52,7 +54,8 @@
                     android:layout_toEndOf="@+id/avatar"
                     android:layout_toRightOf="@+id/avatar"
                     android:text="@string/usuario"
-                    tools:ignore="RtlHardcoded" />
+                    tools:ignore="RtlHardcoded"
+                    android:textColor="@color/black"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -100,7 +103,8 @@
                 android:id="@+id/tvComentario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title_comments" />
+                android:text="@string/title_comments"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
     </LinearLayout>
