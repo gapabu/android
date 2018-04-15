@@ -231,7 +231,7 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView{
     }
 
     public void setSctollbarChat(){
-        recyclerView.scrollToPosition(adapter.getItemCount() -1);
+        //recyclerView.scrollToPosition(adapter.getItemCount() -1);
     }
     @Override
     public String getMessages() {
