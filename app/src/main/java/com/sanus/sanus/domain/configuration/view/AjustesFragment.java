@@ -12,8 +12,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.domain.account.complete.view.CompleteRegisterActivity;
 import com.sanus.sanus.domain.splash.view.SplashActivity;
 import com.sanus.sanus.utils.alert.CallbackAlert;
@@ -21,6 +33,7 @@ import com.sanus.sanus.domain.configuration.presenter.AjustesPresenter;
 import com.sanus.sanus.domain.configuration.presenter.AjustesPresenterImpl;
 import com.sanus.sanus.R;
 import com.sanus.sanus.utils.alert.AlertUtils;
+import com.sanus.sanus.utils.glide.GlideApp;
 
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -32,7 +45,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
     private TextView tvNombre;
     private CircleImageView setupImage;
     private Button activo, inactivo;
-    private LinearLayout linearLayoutEdit;
+    private String idUser, image;
 
     @Nullable
     @Override
@@ -40,6 +53,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
         View view = inflater.inflate(R.layout.fragment_ajustes, container, false);
         setUpVariable();
         setUpView(view);
+        showImage();
         return view;
     }
 
@@ -61,6 +75,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
         tvNombre = view.findViewById(R.id.tvNombre);
         setupImage = view.findViewById(R.id.avatar);
         LinearLayout linearLayoutLogout = view.findViewById(R.id.logout);
+
         linearLayoutLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,8 +83,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
             }
         });
 
-        linearLayoutEdit = view.findViewById(R.id.editProfile);
-
+        LinearLayout linearLayoutEdit = view.findViewById(R.id.editProfile);
         linearLayoutEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,9 +156,41 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
     }
 
     @Override
-    public void showPhoto(Uri uri) {
-        //GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
-        //Picasso.with(getContext()).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
+    public void showPhoto(String photo) {
+
+        GlideApp.with(this).load(photo).transform(new RoundedCorners(500)).diskCacheStrategy(DiskCacheStrategy.ALL).into(setupImage);
+    }
+
+    private void showImage(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        if (user != null) {
+            idUser = user.getUid();
+        }
+
+        mFirestore.collection("usuarios").document(idUser).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+                String nombre = documentSnapshot.getString("nombre");
+                String apellido = documentSnapshot.getString("apellido");
+                image = documentSnapshot.getString("avatar");
+                String usuario = nombre + " " +apellido;
+                tvNombre.setText(usuario);
+                final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://sanus-27.appspot.com/avatar/");
+                storageReference.child(image).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        GlideApp.with(getActivity()).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(getContext(), "error al traer imagen", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 
     @Override

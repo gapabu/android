@@ -1,7 +1,5 @@
 package com.sanus.sanus.domain.configuration.presenter;
 
-import android.net.Uri;
-
 import com.sanus.sanus.domain.configuration.interactor.AjustesInteractor;
 import com.sanus.sanus.domain.configuration.interactor.AjustesInteractorImpl;
 import com.sanus.sanus.domain.configuration.view.AjustesView;
@@ -47,8 +45,8 @@ public class AjustesPresenterImpl implements AjustesPresenter{
     }
 
     @Override
-    public void showPhoto(Uri uri) {
-        view.showPhoto(uri);
+    public void showPhoto(String photo) {
+        view.showPhoto(photo);
     }
 
     @Override
