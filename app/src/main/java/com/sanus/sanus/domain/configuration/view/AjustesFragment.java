@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
@@ -41,6 +41,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AjustesFragment extends Fragment implements AjustesView, CallbackAlert {
 
     public static String IDENTIFIER = "CONFIG_FRAGMENT";
+    private String TAG = this.getClass().getSimpleName();
     private AjustesPresenter presenter;
     private TextView tvNombre;
     private CircleImageView setupImage;
@@ -171,11 +172,8 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
         mFirestore.collection("usuarios").document(idUser).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-                String nombre = documentSnapshot.getString("nombre");
-                String apellido = documentSnapshot.getString("apellido");
                 image = documentSnapshot.getString("avatar");
-                String usuario = nombre + " " +apellido;
-                tvNombre.setText(usuario);
+                tvNombre.setText(documentSnapshot.getString("nombre").concat(" " + documentSnapshot.getString("apellido") ));
                 final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://sanus-27.appspot.com/avatar/");
                 storageReference.child(image).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
@@ -186,7 +184,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         e.printStackTrace();
-                        Toast.makeText(getContext(), "error al traer imagen", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "error" + e);
                     }
                 });
             }

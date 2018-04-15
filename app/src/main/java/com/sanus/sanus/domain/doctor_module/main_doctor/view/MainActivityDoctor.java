@@ -8,9 +8,9 @@ import android.view.MenuItem;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.sanus.sanus.R;
+import com.sanus.sanus.domain.configuration.view.AjustesFragment;
 import com.sanus.sanus.domain.doctor_module.chat.view.ChatDoctorFragment;
 import com.sanus.sanus.domain.doctor_module.citas.view.CitasDoctorFragment;
-import com.sanus.sanus.domain.doctor_module.configuration.view.ConfigurationDoctorFragment;
 import com.sanus.sanus.domain.doctor_module.main_doctor.presenter.MainDoctorPresenter;
 import com.sanus.sanus.domain.doctor_module.main_doctor.presenter.MainDoctorPresenterImpl;
 import com.sanus.sanus.domain.doctor_module.profile.view.ProfileFragment;
@@ -103,13 +103,13 @@ public class MainActivityDoctor extends AppCompatActivity implements MainDoctorV
 
     }
     private void showConfigFragment() {
-        ConfigurationDoctorFragment ajustesFragment = (ConfigurationDoctorFragment) getSupportFragmentManager().findFragmentByTag(ConfigurationDoctorFragment.IDENTIFIER);
+        AjustesFragment ajustesFragment = (AjustesFragment) getSupportFragmentManager().findFragmentByTag(AjustesFragment.IDENTIFIER);
         if(ajustesFragment == null){
-            ajustesFragment = new ConfigurationDoctorFragment();
+            ajustesFragment = new AjustesFragment();
         }
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment, ajustesFragment, ConfigurationDoctorFragment.IDENTIFIER)
+                .replace(R.id.fragment, ajustesFragment, AjustesFragment.IDENTIFIER)
                 .commit();
     }
 }
