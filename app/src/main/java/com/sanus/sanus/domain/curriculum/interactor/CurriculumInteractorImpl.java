@@ -65,12 +65,12 @@ public class CurriculumInteractorImpl implements CurriculumInteractor{
     }
 
     @Override
-    public void showImage(String idImage, final CircleImageView image) {
+    public void showImage(String idImage) {
         final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://sanus-27.appspot.com/avatar/");
         storageReference.child(idImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                presenter.showPhoto(uri, image);
+                presenter.showPhoto(uri);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

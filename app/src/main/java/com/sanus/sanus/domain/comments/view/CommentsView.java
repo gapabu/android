@@ -18,4 +18,5 @@ public interface CommentsView {
 
     void goCurriculum();
     void goMainDoctor();
+    void viewSendComment();
 }

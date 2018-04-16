@@ -75,26 +75,8 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         if (user != null) {idUser = user.getUid();}
 
         linearLayoutComents = findViewById(R.id.llAddComment);
+        viewSendComment();
 
-
-        DocumentReference usuarios = db.collection("usuarios").document(idUser);
-        usuarios.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        String tipo = document.getString("tipo");
-                        if (tipo.equals("Medico")) {
-                            linearLayoutComents.setVisibility(View.INVISIBLE);
-                        }
-                        if (tipo.equals("Paciente")) {
-                            linearLayoutComents.setVisibility(View.VISIBLE);
-                        }
-                    }
-                }
-            }
-        });
         edNuevoComentario = findViewById(R.id.edComentario);
         FloatingActionButton guardarComentario = findViewById(R.id.btnGuardarComentario);
         ratingBar = findViewById(R.id.ratingBar);
@@ -186,6 +168,28 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         startActivity(new Intent(this, MainActivityDoctor.class));
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
+    }
+
+    @Override
+    public void viewSendComment() {
+        DocumentReference usuarios = db.collection("usuarios").document(idUser);
+        usuarios.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        String tipo = document.getString("tipo");
+                        if (tipo.equals("Medico")) {
+                            linearLayoutComents.setVisibility(View.INVISIBLE);
+                        }
+                        if (tipo.equals("Paciente")) {
+                            linearLayoutComents.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+            }
+        });
     }
 
 }

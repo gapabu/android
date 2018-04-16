@@ -130,7 +130,7 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                 image = documentSnapshot.getString("avatar");
 
-                presenter.showImage(image, setupImage);
+                presenter.showImage(image);
 
                 setSupportActionBar(toolbar);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -140,8 +140,8 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
     }
 
     @Override
-    public void showPhoto(Uri uri, CircleImageView avatar) {
-        GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
+    public void showPhoto(Uri uri) {
+        GlideApp.with(getApplicationContext()).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
     }
 
 

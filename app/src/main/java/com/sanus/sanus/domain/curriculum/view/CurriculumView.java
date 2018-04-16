@@ -8,5 +8,5 @@ public interface CurriculumView {
     void goComments();
     void goNewChat();
     void showDataDoctor();
-    void showPhoto(Uri photo, CircleImageView avatar);
+    void showPhoto(Uri uri);
 }

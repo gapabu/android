@@ -25,8 +25,8 @@ public class CurriculumPresenterImpl implements CurriculumPresenter {
     }
 
     @Override
-    public void showImage(String idImage,CircleImageView image) {
-        interactor.showImage(idImage, image);
+    public void showImage(String idImage) {
+        interactor.showImage(idImage);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class CurriculumPresenterImpl implements CurriculumPresenter {
     }
 
     @Override
-    public void showPhoto(Uri photo, CircleImageView avatar) {
-        view.showPhoto(photo, avatar);
+    public void showPhoto(Uri uri) {
+        view.showPhoto(uri);
     }
 }

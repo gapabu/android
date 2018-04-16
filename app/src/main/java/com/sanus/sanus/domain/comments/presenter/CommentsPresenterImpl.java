@@ -59,6 +59,11 @@ public class CommentsPresenterImpl implements  CommentsPresenter{
     }
 
     @Override
+    public void viewSendComment() {
+        view.viewSendComment();
+    }
+
+    @Override
     public void viewComents(String idDoc) {
         interactor.viewComents(idDoc);
     }
