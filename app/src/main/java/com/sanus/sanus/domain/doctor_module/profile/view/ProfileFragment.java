@@ -1,6 +1,7 @@
 package com.sanus.sanus.domain.doctor_module.profile.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -22,6 +23,8 @@ import com.sanus.sanus.R;
 import com.sanus.sanus.domain.comments.view.CommentsActivity;
 import com.sanus.sanus.domain.doctor_module.profile.presenter.ProfileDoctorPresenter;
 import com.sanus.sanus.domain.doctor_module.profile.presenter.ProfileDoctorPresenterImpl;
+import com.sanus.sanus.utils.glide.GlideApp;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -92,5 +95,11 @@ public class ProfileFragment extends Fragment implements ProfileFragmentView  {
         Intent intent = new Intent(getContext(), CommentsActivity.class);
         intent.putExtra("idDoctor", idDoct);
         startActivity(intent);
+    }
+
+    @Override
+    public void showPhoto(Uri uri) {
+        //GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
+        Picasso.with(getActivity()).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
     }
 }

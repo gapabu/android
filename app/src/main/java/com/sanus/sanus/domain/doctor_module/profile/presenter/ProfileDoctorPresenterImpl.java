@@ -1,6 +1,7 @@
 package com.sanus.sanus.domain.doctor_module.profile.presenter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -28,5 +29,10 @@ public class ProfileDoctorPresenterImpl implements ProfileDoctorPresenter {
     @Override
     public void showImage(String idImage, Context context, CircleImageView image) {
         interactor.showImage(idImage, context, image);
+    }
+
+    @Override
+    public void showPhoto(Uri uri) {
+        view.showPhoto(uri);
     }
 }

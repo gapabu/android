@@ -18,6 +18,7 @@ import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.doctor_module.profile.presenter.ProfileDoctorPresenter;
 import com.sanus.sanus.utils.glide.GlideApp;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -68,7 +69,9 @@ public class ProfileDoctorInteractorImpl implements ProfileDoctorInteractor {
         storageReference.child(idImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                GlideApp.with(context).load(uri.toString()).placeholder(R.drawable.user).into(image);
+                //GlideApp.with(context).load(uri.toString()).placeholder(R.drawable.user).into(image);
+                presenter.showPhoto(uri);
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

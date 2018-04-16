@@ -34,6 +34,7 @@ import com.sanus.sanus.domain.configuration.presenter.AjustesPresenterImpl;
 import com.sanus.sanus.R;
 import com.sanus.sanus.utils.alert.AlertUtils;
 import com.sanus.sanus.utils.glide.GlideApp;
+import com.squareup.picasso.Picasso;
 
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -178,7 +179,8 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
                 storageReference.child(image).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        GlideApp.with(getActivity()).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
+                        //GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
+                        Picasso.with(getActivity()).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
