@@ -20,7 +20,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.comments.view.CommentsActivity;
-import com.sanus.sanus.domain.doctor_module.all_comments.view.AllCommentsActivity;
 import com.sanus.sanus.domain.doctor_module.profile.presenter.ProfileDoctorPresenter;
 import com.sanus.sanus.domain.doctor_module.profile.presenter.ProfileDoctorPresenterImpl;
 
@@ -34,7 +33,7 @@ public class ProfileFragment extends Fragment implements ProfileFragmentView  {
     private String image;
     private String idDoct;
     private RatingBar ratingBar;
-    private FloatingActionButton goComments;
+    FloatingActionButton goComments;
 
     @Nullable
     @Override
@@ -86,9 +85,12 @@ public class ProfileFragment extends Fragment implements ProfileFragmentView  {
     }
 
     public void goComments() {
-        Intent intent = new Intent(getContext(), AllCommentsActivity.class);
+        /*Intent intent = new Intent(getContext(), AllCommentsActivity.class);
+        intent.putExtra("idDoctor", idDoct);
+        startActivity(intent);*/
+
+        Intent intent = new Intent(getContext(), CommentsActivity.class);
         intent.putExtra("idDoctor", idDoct);
         startActivity(intent);
-
     }
 }

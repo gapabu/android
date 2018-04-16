@@ -28,4 +28,6 @@ public interface CompleteRegisterView {
     void showImage(Bitmap bitmap);
 
     ProgressDialog getLoading();
+
+    void goMainDoctor();
 }

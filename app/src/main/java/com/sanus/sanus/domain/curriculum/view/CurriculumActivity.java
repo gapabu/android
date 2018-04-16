@@ -29,7 +29,6 @@ import com.sanus.sanus.utils.glide.GlideApp;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
 public class CurriculumActivity extends AppCompatActivity implements CurriculumView {
 
     private CurriculumPresenter presenter;
@@ -40,7 +39,7 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
     private String idDoct;
     private String idUser;
     private RatingBar ratingBar;
-    private FloatingActionButton newChat;
+    FloatingActionButton newChat;
     ImageView goComent;
 
     @Override
@@ -129,16 +128,13 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         mFirestore.collection("usuarios").document(idDoct).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-                String nombre = documentSnapshot.getString("nombre");
-                String apellido = documentSnapshot.getString("apellido");
                 image = documentSnapshot.getString("avatar");
 
                 presenter.showImage(image, setupImage);
 
-                String usuario = nombre.concat(" " + apellido);
                 setSupportActionBar(toolbar);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setTitle(usuario);
+                getSupportActionBar().setTitle(documentSnapshot.getString("nombre").concat(" " + documentSnapshot.getString("apellido")));
             }
         });
     }

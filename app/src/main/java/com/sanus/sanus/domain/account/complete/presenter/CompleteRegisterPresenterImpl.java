@@ -142,4 +142,9 @@ public class CompleteRegisterPresenterImpl implements CompleteRegisterPresenter 
     public ProgressDialog getLoading() {
         return view.getLoading();
     }
+
+    @Override
+    public void goMainDoctor() {
+        view.goMainDoctor();
+    }
 }

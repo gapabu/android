@@ -49,6 +49,16 @@ public class CommentsPresenterImpl implements  CommentsPresenter{
     }
 
     @Override
+    public void goCurriculum() {
+        view.goCurriculum();
+    }
+
+    @Override
+    public void goMainDoctor() {
+        view.goMainDoctor();
+    }
+
+    @Override
     public void viewComents(String idDoc) {
         interactor.viewComents(idDoc);
     }
