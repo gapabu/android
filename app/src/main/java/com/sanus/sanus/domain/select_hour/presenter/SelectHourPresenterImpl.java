@@ -28,6 +28,11 @@ public class SelectHourPresenterImpl implements SelectHourPresenter {
     }
 
     @Override
+    public void deleteAppointment(String idDocument) {
+        interactor.deleteAppointment(idDocument);
+    }
+
+    @Override
     public void enableButton() {
         view.enableButton();
     }

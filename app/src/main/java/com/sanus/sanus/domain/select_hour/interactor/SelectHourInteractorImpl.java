@@ -74,4 +74,20 @@ public class SelectHourInteractorImpl implements SelectHourInteractor {
         });
 
     }
+
+    @Override
+    public void deleteAppointment(String idDocument) {
+        mFirestore.collection("citas").document(idDocument).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                presenter.previous();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error deleting document", e);
+            }
+        });
+    }
 }

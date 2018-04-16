@@ -58,7 +58,7 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               previous();
+               presenter.deleteAppointment(idDocument);
             }
         });
         next.setOnClickListener(new View.OnClickListener() {
