@@ -23,9 +23,9 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
     private SelectHourPresenter presenter;
     private String TAG = this.getClass().getSimpleName();
     private RecyclerView recyclerView;
-    FloatingActionButton skip, next;
     private String idHospital, idDoctor, fecha, dia, idDocument;
-
+    private FloatingActionButton next;
+    FloatingActionButton previous;
     SelectHourAdapter adapter;
 
     @Override
@@ -52,20 +52,18 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
         Log.d(TAG, "idHospital=>" + idHospital + " " + "idDoctor=>" + idDoctor + " "
                 + "fecha=>" +fecha + " dia=>" + dia + " idDocumement=>" + idDocument);
 
-        skip = findViewById(R.id.btn_skip);
+        previous = findViewById(R.id.btn_skip);
         next = findViewById(R.id.btn_next);
         disableButton();
-        skip.setOnClickListener(new View.OnClickListener() {
+        previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                previous();
             }
         });
-
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //next();
             }
         });
 
@@ -108,6 +106,7 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
         intent.putExtra("idDoctor", idDoctor);
         intent.putExtra("idHospital", idHospital);
         intent.putExtra("fecha", fecha);
+        intent.putExtra("idDocument", idDocument);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         startActivity(intent);
         finish();
@@ -119,7 +118,5 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
         recyclerView.setAdapter(busquedaDoctorAdapteradapter);
         busquedaDoctorAdapteradapter.notifyDataSetChanged();
     }
-
-
 }
 

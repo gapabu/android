@@ -38,4 +38,9 @@ public class SelectDayPresenterImpl implements SelectDayPresenter{
     public void addAppointment(String idHospital, String idDoctor, String fecha) {
         interactor.addAppointment(idHospital, idDoctor, fecha);
     }
+
+    @Override
+    public void deleteAppointment(String idDocument) {
+        interactor.deleteAppointment(idDocument);
+    }
 }

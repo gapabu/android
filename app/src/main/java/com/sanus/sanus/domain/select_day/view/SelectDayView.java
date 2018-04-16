@@ -6,5 +6,4 @@ public interface SelectDayView {
     void disableButton();
     void next(String idDocument);
     void previous();
-
 }

@@ -26,7 +26,6 @@ public class SelectDayInteractorImpl implements SelectDayInteractor{
     @Override
     public void addAppointment(String idHospital, final String idDoctor, String fecha) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         if (user != null) {userIdNow = user.getUid();}
         appointmentEntity.hospital = idHospital;
         appointmentEntity.doctor = idDoctor;
@@ -36,7 +35,6 @@ public class SelectDayInteractorImpl implements SelectDayInteractor{
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         idDocument = documentReference.getId();
-                        Log.d(TAG, "ID: " + idDocument);
                         presenter.next(idDocument);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -46,5 +44,21 @@ public class SelectDayInteractorImpl implements SelectDayInteractor{
                     }
                 });
 
+    }
+
+    @Override
+    public void deleteAppointment(String idDocument) {
+       mFirestore.collection("citas").document(idDocument).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                presenter.previous();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error deleting document", e);
+            }
+        });
     }
 }

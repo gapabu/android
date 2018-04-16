@@ -21,12 +21,13 @@ import java.util.Calendar;
 public class SelectDayActivity extends AppCompatActivity implements SelectDayView, OnDayClickListener {
     private String TAG = this.getClass().getSimpleName();
     private SelectDayPresenter presenter;
-    FloatingActionButton skip, next;
-    String idHospital, idDoctor;
-    String fecha;
-    String monthYear = null;
-    String dayMont = null;
+    private String idHospital, idDoctor, idDocument, fecha;
+    private String monthYear = null;
+    private String dayMont = null;
+    private FloatingActionButton next;
+    FloatingActionButton previous;
     com.applandeo.materialcalendarview.CalendarView calendarView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +45,10 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
     private void setUpView() {
         idHospital = getIntent().getStringExtra("idHospital");
         idDoctor = getIntent().getStringExtra("idDoctor");
-        Log.d(TAG, "idHospital: " + idHospital + " " + "idDoctor: " + idDoctor);
+        idDocument = getIntent().getStringExtra("idDocument");
+        Log.d(TAG, "idHospital: " + idHospital + " " + "idDoctor: " + idDoctor + " idDocument " + idDocument);
 
-        skip = findViewById(R.id.btn_skip);
+        previous = findViewById(R.id.btn_skip);
         next = findViewById(R.id.btn_next);
         calendarView = findViewById(R.id.calendarView);
 
@@ -54,22 +56,19 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
        calendarView.setMinimumDate(Calendar.getInstance());
        disableButton();
 
-        skip.setOnClickListener(new View.OnClickListener() {
+        previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               previous();
+                presenter.deleteAppointment(idDocument);
             }
         });
-
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.addAppointment(idHospital, idDoctor, fecha);
-                //next();
             }
         });
     }
-
 
     @Override
     public void enableButton() {
@@ -103,10 +102,8 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         finish();
     }
 
-
     @Override
     public void onDayClick(EventDay eventDay) {
-
         Calendar calendar = eventDay.getCalendar();
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         int month = calendar.get(Calendar.MONTH);

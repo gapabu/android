@@ -19,7 +19,7 @@ import com.sanus.sanus.R;
 import com.sanus.sanus.domain.citas.presenter.CitasPresenter;
 import com.sanus.sanus.domain.citas.presenter.CitasPresenterImpl;
 import com.sanus.sanus.domain.hospital.view.HospitalActivity;
-import com.sanus.sanus.utils.glide.GlideApp;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -53,36 +53,29 @@ public class CitasFragment extends Fragment implements CitasView {
     }
 
     private void setUpVariable() {
-
         if (presenter == null) {
             presenter = new CitasPresenterImpl(this);
         }
-
     }
 
     private void setUpView(View view) {
-
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-
-
     }
 
 
     @Override
     public void setDataAdapter(List<Citas> busquedaDoctors) {
-
         CitasAdapter citasAdapter = new CitasAdapter(getContext(), busquedaDoctors, presenter);
         recyclerView.setAdapter(citasAdapter);
         citasAdapter.notifyDataSetChanged();
-
     }
 
     @Override
     public void showPhoto(Uri uri, CircleImageView avatar) {
-        GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
+        //GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
+        Picasso.with(getActivity()).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
     }
 }
