@@ -8,8 +8,6 @@ import com.sanus.sanus.domain.curriculum.interactor.CurriculumInteractor;
 import com.sanus.sanus.domain.curriculum.interactor.CurriculumInteractorImpl;
 import com.sanus.sanus.domain.curriculum.view.CurriculumView;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class CurriculumPresenterImpl implements CurriculumPresenter {
     private CurriculumView view;
     private CurriculumInteractor interactor;

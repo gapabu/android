@@ -1,7 +1,5 @@
 package com.sanus.sanus.domain.comments.presenter;
 
-import android.content.Context;
-
 import com.sanus.sanus.domain.comments.view.CommentsView;
 
 import de.hdodenhof.circleimageview.CircleImageView;

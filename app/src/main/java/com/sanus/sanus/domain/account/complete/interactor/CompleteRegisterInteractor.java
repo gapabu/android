@@ -17,6 +17,5 @@ public interface CompleteRegisterInteractor {
     void setUpSpinner();
 
     void onSuccess(UploadTask.TaskSnapshot taskSnapshot);
-    void onProgress(UploadTask.TaskSnapshot taskSnapshot);
     void onFailure();
 }

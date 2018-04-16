@@ -21,8 +21,6 @@ import com.sanus.sanus.domain.curriculum.presenter.CurriculumPresenter;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class CurriculumInteractorImpl implements CurriculumInteractor{
     private CurriculumPresenter presenter;
     private String TAG = getClass().getSimpleName();

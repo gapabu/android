@@ -1,7 +1,5 @@
 package com.sanus.sanus.domain.comments.interactor;
 
-import android.content.Context;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public interface CommentsInteractor {

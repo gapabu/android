@@ -23,7 +23,6 @@ import com.sanus.sanus.R;
 import com.sanus.sanus.domain.comments.view.CommentsActivity;
 import com.sanus.sanus.domain.doctor_module.profile.presenter.ProfileDoctorPresenter;
 import com.sanus.sanus.domain.doctor_module.profile.presenter.ProfileDoctorPresenterImpl;
-import com.sanus.sanus.utils.glide.GlideApp;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;

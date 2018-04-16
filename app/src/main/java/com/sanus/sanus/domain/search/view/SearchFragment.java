@@ -19,9 +19,7 @@ import com.sanus.sanus.domain.search.adapter.BusquedaDoctorAdapter;
 import com.sanus.sanus.domain.search.data.BusquedaDoctor;
 import com.sanus.sanus.domain.search.presenter.SearchPresenter;
 import com.sanus.sanus.domain.search.presenter.SearchPresenterImpl;
-//import com.sanus.sanus.utils.glide.GlideApp;
 import com.sanus.sanus.utils.glide.GlideApp;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

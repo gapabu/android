@@ -15,11 +15,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.sanus.sanus.R;
 import com.sanus.sanus.domain.doctor_module.profile.presenter.ProfileDoctorPresenter;
-import com.sanus.sanus.utils.glide.GlideApp;
-import com.squareup.picasso.Picasso;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileDoctorInteractorImpl implements ProfileDoctorInteractor {

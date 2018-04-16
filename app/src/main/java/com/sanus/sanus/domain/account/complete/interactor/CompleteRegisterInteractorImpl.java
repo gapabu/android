@@ -206,16 +206,7 @@ public class CompleteRegisterInteractorImpl implements CompleteRegisterInteracto
         cancelLoading();
         presenter.showMessage(R.string.upload_complete);
     }
-
-    @Override
-    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-        double progress = (100.0 * taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-        loading.setMessage(((int) progress)+ "% subiendo");
-
-        if (progress == 100){
-            cancelLoading();
-        }
-    }
+    
 
     @Override
     public void onFailure() {

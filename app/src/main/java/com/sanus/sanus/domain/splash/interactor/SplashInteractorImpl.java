@@ -4,20 +4,17 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.sanus.sanus.data.repository.firebase.entity.user.UserEntity;
 import com.sanus.sanus.domain.splash.presenter.SplashPresenter;
 
 public class SplashInteractorImpl implements SplashInteractor {
 
     private SplashPresenter presenter;
-    private static final long SPLASH_SCREEN_DELETE = 1000;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String TAG = this.getClass().getSimpleName();
 

@@ -33,10 +33,6 @@ public class CommentsDoctor {
         return cometario;
     }
 
-    public void setCometario(String cometario) {
-        this.cometario = cometario;
-    }
-
     public String getFecha() {
         return fecha;
     }
@@ -47,5 +43,4 @@ public class CommentsDoctor {
 
     public String getCalificacion() {return calificacion;}
 
-    public void setCalificacion(String calificacion) {this.calificacion = calificacion;}
 }

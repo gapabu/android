@@ -24,9 +24,6 @@ public class Messages {
         return autor;
     }
 
-    public void setAutor(String autor) {this.autor = autor;}
-
     public String getMensaje() {return mensaje;}
 
-    public void setMensaje(String mensaje) {this.mensaje = mensaje;}
 }

@@ -22,7 +22,6 @@ public class Citas {
         this.hora = hora;
     }
 
-
     public String getDoctor() {
         return doctor;
     }
