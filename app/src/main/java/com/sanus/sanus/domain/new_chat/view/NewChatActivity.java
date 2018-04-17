@@ -1,6 +1,7 @@
 package com.sanus.sanus.domain.new_chat.view;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -13,7 +14,6 @@ import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,10 +44,10 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView{
     private RecyclerView recyclerView;
     MessagesAdapter adapter;
     private int TEXT_LINES = 1;
+    private FloatingActionButton sendMessage;
 
     /*List<Messages> commentsDoctorList;
     MessagesAdapter commentsDoctorAdapter = new MessagesAdapter(this, commentsDoctorList, presenter);*/
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,26 +73,28 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView{
 
         edNewMessage.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Toast.makeText(NewChatActivity.this, "" + s, Toast.LENGTH_SHORT).show();
+                if (edNewMessage.getText().toString().isEmpty()){
+                    disableButton();
+                }else if (edNewMessage.getText().toString().equals(" ")){
+                    disableButton();
+                }else {enableButton();}
+
                 if (edNewMessage.getLayout().getLineCount() != TEXT_LINES){
                     //recyclerView.scrollToPosition(commentsDoctorAdapter.getItemCount() -1);
                     TEXT_LINES = edNewMessage.getLayout().getLineCount();
                     setSctollbarChat();
                 }
             }
-
             @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            public void afterTextChanged(Editable s) {}
         });
-        FloatingActionButton sendMessage = findViewById(R.id.btnSaveMessage);
+
+
+        sendMessage = findViewById(R.id.btnSaveMessage);
+        disableButton();
 
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,28 +113,24 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView{
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
-                    DocumentReference usuarios = db.collection("usuarios").document(idUser);
-                    usuarios.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                if (document.exists()) {
-                                    String tipo = document.getString("tipo");
-                                    if (tipo.equals("Medico")) {
-                                        goFramentChat();
-                                    }
-                                    if (tipo.equals("Paciente")) {
-                                        goCurriculum();
-                                    }
-                                }
+                DocumentReference usuarios = db.collection("usuarios").document(idUser);
+                usuarios.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                String tipo = document.getString("tipo");
+                                if (tipo.equals("Medico")) {goFramentChat();}
+                                if (tipo.equals("Paciente")) {goCurriculum();}
                             }
                         }
-                    });
+                    }
+                });
                 break;
-                }
-                return true;
         }
+        return true;
+    }
 
     @Override
     public void showDataDoctor() {
@@ -218,12 +216,8 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView{
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         String tipo = document.getString("tipo");
-                        if (tipo.equals("Medico")) {
-                            presenter.sendMessages(idUser, idUser, idDoct);
-                        }
-                        if (tipo.equals("Paciente")) {
-                            presenter.sendMessages(idUser, idDoct, idUser);
-                        }
+                        if (tipo.equals("Medico")) {presenter.sendMessages(idUser, idUser, idDoct);}
+                        if (tipo.equals("Paciente")) {presenter.sendMessages(idUser, idDoct, idUser);}
                     }
                 }
             }
@@ -236,5 +230,17 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView{
     @Override
     public String getMessages() {
         return edNewMessage.getText().toString();
+    }
+
+    @Override
+    public void enableButton() {
+        sendMessage.setEnabled(true);
+        sendMessage.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimaryDark)));
+    }
+
+    @Override
+    public void disableButton() {
+        sendMessage.setEnabled(false);
+        sendMessage.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorGrey500)));
     }
 }

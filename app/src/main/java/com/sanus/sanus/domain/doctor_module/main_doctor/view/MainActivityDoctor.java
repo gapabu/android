@@ -89,6 +89,15 @@ public class MainActivityDoctor extends AppCompatActivity implements MainDoctorV
                 .replace(R.id.fragment, citasFragment, CitasDoctorFragment.IDENTIFIER)
                 .commit();
 
+        /*CitasFragment citasFragment = (CitasFragment) getSupportFragmentManager().findFragmentByTag(CitasFragment.IDENTIFIER);
+        if(citasFragment == null){
+            citasFragment = new CitasFragment();
+        }
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment, citasFragment, CitasFragment.IDENTIFIER)
+                .commit();*/
+
     }
 
     private void showChatFragment() {

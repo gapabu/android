@@ -14,4 +14,7 @@ public interface NewChatView {
     void viewMessagesByTipe();
     void sendMessagesByType();
     String getMessages();
+
+    void enableButton();
+    void disableButton();
 }

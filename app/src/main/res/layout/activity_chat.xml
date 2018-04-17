@@ -45,7 +45,7 @@
         android:layout_marginTop="@dimen/margin_small"
         android:tint="@android:color/white"
         android:layout_marginEnd="@dimen/margin_small"
-        app:backgroundTint="@color/colorPrimaryDark"
+        app:backgroundTint="@color/colorGrey500"
         app:fabSize="mini"
         app:rippleColor="@android:color/white"
         app:srcCompat="@android:drawable/ic_menu_send"

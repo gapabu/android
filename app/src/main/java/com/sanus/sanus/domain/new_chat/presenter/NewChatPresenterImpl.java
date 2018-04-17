@@ -68,5 +68,15 @@ public class NewChatPresenterImpl implements NewChatPresenter{
         return view.getMessages();
     }
 
+    @Override
+    public void enableButton() {
+        view.enableButton();
+    }
+
+    @Override
+    public void disableButton() {
+        view.disableButton();
+    }
+
 
 }

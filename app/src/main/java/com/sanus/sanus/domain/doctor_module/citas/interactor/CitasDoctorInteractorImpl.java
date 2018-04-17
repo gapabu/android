@@ -46,6 +46,8 @@ public class CitasDoctorInteractorImpl implements CitasDoctorInteractor{
                             return;
                         }
                         List<String> mensages = new ArrayList<>();
+                        mensages.clear();
+                        commentsDoctorList.clear();
                         for (DocumentSnapshot doc : value) {
                             String dataMensage = String.valueOf(doc.getData());
                             mensages.add(dataMensage);

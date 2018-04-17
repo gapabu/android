@@ -48,6 +48,8 @@ public class CitasInteractorImpl implements CitasInteractor {
                 if (e != null) {Log.w(TAG, "Listen failed.", e);return;}
 
                 List<String> cities = new ArrayList<>();
+                cities.clear();
+                busquedaDoctors.clear();
                 for (DocumentSnapshot doc : value) {
                     String dataMensage = String.valueOf(doc.getData());
                     cities.add(dataMensage);
