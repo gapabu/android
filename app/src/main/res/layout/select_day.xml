@@ -79,7 +79,6 @@
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:datePicker="true"
         android:layout_marginStart="@dimen/activity_vertical_margin"
         android:layout_marginEnd="@dimen/activity_vertical_margin"
         android:layout_marginTop="@dimen/space_avg"
@@ -87,6 +86,8 @@
         app:headerLabelColor="@color/black"
         app:previousButtonSrc="@drawable/arrow_previous"
         app:forwardButtonSrc="@drawable/arrow_next"
-        app:selectionColor="@color/colorGrey500"/>
+        app:selectionColor="@color/colorPrimaryDark"
+        app:todayLabelColor="@color/btnfacebook"
+        app:type="range_picker"/>
 </LinearLayout>
 

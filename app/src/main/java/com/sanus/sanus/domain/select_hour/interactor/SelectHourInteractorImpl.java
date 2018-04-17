@@ -8,6 +8,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -17,7 +18,9 @@ import com.sanus.sanus.domain.select_hour.data.SelectHour;
 import com.sanus.sanus.domain.select_hour.presenter.SelectHourPresenter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SelectHourInteractorImpl implements SelectHourInteractor {
     private SelectHourPresenter presenter;
@@ -31,7 +34,6 @@ public class SelectHourInteractorImpl implements SelectHourInteractor {
 
     @Override
     public void viewSchedules(String idDoctor, String dia) {
-
         mFirestore.collection("horarios").document(idDoctor).collection(dia).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(final QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
@@ -87,6 +89,33 @@ public class SelectHourInteractorImpl implements SelectHourInteractor {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.w(TAG, "Error deleting document", e);
+            }
+        });
+    }
+
+    @Override
+    public void addDataCite(final String idDoctor, String fecha, String hora) {
+        Map<String, Object> dataFecha = new HashMap<>();
+        dataFecha.put("fecha", fecha);
+
+        final Map<String, Object> dataHora = new HashMap<>();
+        dataHora.put("hora", hora);
+
+        mFirestore.collection("citas-ocupadas").document(idDoctor).collection("fechas").add(dataFecha).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                mFirestore.collection("citas-ocupadas").document(idDoctor).collection("horas").add(dataHora).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error adding document", e);
             }
         });
     }

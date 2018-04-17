@@ -33,6 +33,11 @@ public class SelectHourPresenterImpl implements SelectHourPresenter {
     }
 
     @Override
+    public void addDataCite(String idDoctor, String  fecha, String hora) {
+        interactor.addDataCite(idDoctor, fecha, hora);
+    }
+
+    @Override
     public void enableButton() {
         view.enableButton();
     }
