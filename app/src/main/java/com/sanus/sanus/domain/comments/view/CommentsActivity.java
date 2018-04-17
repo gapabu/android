@@ -1,6 +1,7 @@
 package com.sanus.sanus.domain.comments.view;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -44,6 +47,7 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
     private String idDoct;
     private String idUser;
     private LinearLayout linearLayoutComents;
+    private FloatingActionButton saveComment;
     CommentsDoctorAdapter adapter;
 
 
@@ -78,10 +82,25 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
         viewSendComment();
 
         edNuevoComentario = findViewById(R.id.edComentario);
-        FloatingActionButton guardarComentario = findViewById(R.id.btnGuardarComentario);
+        saveComment = findViewById(R.id.btnGuardarComentario);
+        disableButton();
+        edNuevoComentario.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (edNuevoComentario.getText().toString().isEmpty()){
+                    disableButton();
+                }else if (edNuevoComentario.getText().toString().equals(" ")){
+                    disableButton();
+                }else {enableButton();}
+            }
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
         ratingBar = findViewById(R.id.ratingBar);
         ratingBar.getRating();
-        guardarComentario.setOnClickListener(new View.OnClickListener() {
+        saveComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.onClickSaveData();
@@ -190,6 +209,19 @@ public class CommentsActivity extends AppCompatActivity implements CommentsView{
                 }
             }
         });
+    }
+
+
+    @Override
+    public void enableButton() {
+        saveComment.setEnabled(true);
+        saveComment.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimaryDark)));
+    }
+
+    @Override
+    public void disableButton() {
+        saveComment.setEnabled(false);
+        saveComment.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorGrey500)));
     }
 
 }

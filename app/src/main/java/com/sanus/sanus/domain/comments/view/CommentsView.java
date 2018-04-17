@@ -15,8 +15,9 @@ public interface CommentsView {
     String getCalificacion();
     String getIdDoctor();
     void showPhoto(Uri photo, CircleImageView avatar);
-
     void goCurriculum();
     void goMainDoctor();
     void viewSendComment();
+    void enableButton();
+    void disableButton();
 }

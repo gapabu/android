@@ -13,8 +13,8 @@ public interface NewChatView {
     void goFramentChat();
     void viewMessagesByTipe();
     void sendMessagesByType();
-    String getMessages();
-
     void enableButton();
     void disableButton();
+    String getMessages();
+
 }

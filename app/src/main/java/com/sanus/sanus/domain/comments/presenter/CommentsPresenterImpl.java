@@ -64,6 +64,16 @@ public class CommentsPresenterImpl implements  CommentsPresenter{
     }
 
     @Override
+    public void enableButton() {
+        view.enableButton();
+    }
+
+    @Override
+    public void disableButton() {
+        view.disableButton();
+    }
+
+    @Override
     public void viewComents(String idDoc) {
         interactor.viewComents(idDoc);
     }
