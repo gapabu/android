@@ -62,4 +62,9 @@ public class SelectHourPresenterImpl implements SelectHourPresenter {
         view.setDataAdapter(busquedaDoctors);
     }
 
+    @Override
+    public void setDate(String idHora, String idFecha) {
+        view.setDate(idHora, idFecha);
+    }
+
 }

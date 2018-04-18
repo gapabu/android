@@ -24,7 +24,7 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
     private ResumeNewCitaPresenter presenter;
     CircleImageView avatar;
     FloatingActionButton cerrarCita, guardarCita;
-    String idHospital, idDoctor, fecha, hour, idDocument;
+    String idHospital, idDoctor, fecha, hour, idDocument, idFecha, idHora;
     TextView nameClinic, directionClinic, nameDoctor, specialty, hora, date;
 
     @Override
@@ -49,8 +49,11 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         fecha = getIntent().getStringExtra("fecha");
         hour = getIntent().getStringExtra("hour");
         idDocument = getIntent().getStringExtra("idDocument");
+        idFecha = getIntent().getStringExtra("idFecha");
+        idHora = getIntent().getStringExtra("idHora");
+
         Log.d(TAG, "idHospital=>" + idHospital + " " + "idDoctor=>" + idDoctor + " " + "fecha=>"
-                +fecha + " " + " hora=>" + hour + " idDocumet=> " + idDocument);
+                +fecha + " " + " hora=>" + hour + " idDocumet=> " + idDocument + " idFecha=>" + idFecha + " idHora=>" + idHora);
 
         presenter.viewDataDoctor(idDoctor);
         presenter.viewDataHospital(idHospital);
@@ -72,6 +75,7 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
             @Override
             public void onClick(View v) {
                 presenter.deleteAppointment(idDocument);
+                //presenter.deleteAppointmentOccupied(idDoctor, idFecha, idHora);
                 //goActivity();
             }
         });

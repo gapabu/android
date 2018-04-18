@@ -42,6 +42,11 @@ public class ResumeNewCitaPresenterImpl implements ResumeNewCitaPresenter{
     }
 
     @Override
+    public void deleteAppointmentOccupied(String idDoctor, String idFecha, String idHora) {
+        interactor.deleteAppointmentOccupied(idDoctor, idFecha, idHora);
+    }
+
+    @Override
     public String setDate() {
         return view.setDate();
     }

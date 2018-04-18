@@ -130,6 +130,27 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor, Cal
     }
 
     @Override
+    public void deleteAppointmentOccupied(final String idDoctor, final String idFecha, final String idHora) {
+        mFirestore.collection("citas-ocupadas").document(idDoctor).collection("fecha").document(idFecha).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                mFirestore.collection("citas-ocupadas").document(idDoctor).collection("fecha").document(idHora).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
+
+    @Override
     public void showImage(String idImage) {
         final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://sanus-27.appspot.com/avatar/");
         storageReference.child(idImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

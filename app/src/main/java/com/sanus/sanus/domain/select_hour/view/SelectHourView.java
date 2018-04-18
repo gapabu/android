@@ -10,4 +10,5 @@ public interface SelectHourView {
     void next(String value);
     void previous();
     void setDataAdapter(List<SelectHour> busquedaDoctors);
+    void setDate(String idHora, String idFecha);
 }

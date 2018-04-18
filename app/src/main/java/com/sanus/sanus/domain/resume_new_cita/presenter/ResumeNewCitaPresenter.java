@@ -8,4 +8,5 @@ public interface ResumeNewCitaPresenter extends ResumeNewCitaView {
     void viewDataHospital(String idHospital);
     void deleteAppointment(String idDocument);
     void showImage(String idImage);
+    void deleteAppointmentOccupied(String idDoctor, String idFecha, String idHora);
 }

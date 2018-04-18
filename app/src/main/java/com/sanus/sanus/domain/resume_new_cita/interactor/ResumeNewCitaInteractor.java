@@ -5,5 +5,6 @@ public interface ResumeNewCitaInteractor {
     void viewDataDoctor(String idDoctor);
     void viewDataHospital(String idHospital);
     void deleteAppointment(String idDocument);
+    void deleteAppointmentOccupied(String idDoctor, String idFecha, String idHora);
     void showImage(String idImage);
 }

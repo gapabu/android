@@ -3,12 +3,18 @@ package com.sanus.sanus.domain.select_hour.view;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.resume_new_cita.view.ResumeNewCitaActivity;
 import com.sanus.sanus.domain.select_day.view.SelectDayActivity;
@@ -17,7 +23,9 @@ import com.sanus.sanus.domain.select_hour.data.SelectHour;
 import com.sanus.sanus.domain.select_hour.presenter.SelectHourPresenter;
 import com.sanus.sanus.domain.select_hour.presenter.SelectHourPresenterImpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SelectHourActivity extends AppCompatActivity implements SelectHourView{
     private SelectHourPresenter presenter;
@@ -27,6 +35,7 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
     private FloatingActionButton next;
     FloatingActionButton previous;
     SelectHourAdapter adapter;
+    private String idFecha, idHora;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,15 +96,51 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
     }
 
     @Override
-    public void next(String value) {
+    public void next(final String value) {
+       //final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         presenter.addAppointment(idHospital, idDoctor, fecha, value, idDocument);
-        presenter.addDataCite(idDoctor, fecha, value);
+        //presenter.addDataCite(idDoctor, fecha, value);
+
+
+
         Intent intent = new Intent(SelectHourActivity.this, ResumeNewCitaActivity.class);
         intent.putExtra("idDoctor", idDoctor);
         intent.putExtra("idHospital", idHospital);
         intent.putExtra("fecha", fecha);
         intent.putExtra("hour", value);
         intent.putExtra("idDocument", idDocument);
+
+        /*Map<String, Object> dataFecha = new HashMap<>();
+        dataFecha.put("fecha", fecha);
+
+        final Map<String, Object> dataHora = new HashMap<>();
+        dataHora.put("hora", value);
+
+        mFirestore.collection("citas-ocupadas").document(idDoctor).collection("fecha").add(dataFecha).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d(TAG, "DocumentSnapshot written with IDFecha: " + documentReference.getId());
+                idFecha = documentReference.getId();
+                mFirestore.collection("citas-ocupadas").document(idDoctor).collection("hora").add(dataHora).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot written with IDHora: " + documentReference.getId());
+                        idHora = documentReference.getId();
+                        presenter.addAppointment(idHospital, idDoctor, fecha, value, idDocument);
+
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error adding document", e);
+            }
+        });*/
+        intent.putExtra("idFecha", idFecha);
+        intent.putExtra("idHora", idHora);
+        //intent.putExtra("idFecha", "fecha");
+        //intent.putExtra("idHora", "hora");
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         startActivity(intent);
         finish();
@@ -118,6 +163,16 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
         SelectHourAdapter busquedaDoctorAdapteradapter = new SelectHourAdapter(getApplicationContext(), busquedaDoctors, presenter);
         recyclerView.setAdapter(busquedaDoctorAdapteradapter);
         busquedaDoctorAdapteradapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setDate(String idHora, String idFecha) {
+        Intent intent = new Intent(SelectHourActivity.this, SelectHourActivity.class);
+        intent.putExtra("idFecha", idFecha);
+        intent.putExtra("idHora", idHora);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        startActivity(intent);
+        finish();
     }
 }
 

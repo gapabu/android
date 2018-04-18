@@ -3,18 +3,15 @@ package com.sanus.sanus.domain.select_day.view;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.applandeo.materialcalendarview.utils.DateUtils;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.select_day.presenter.SelectDayPresenter;
 import com.sanus.sanus.domain.select_day.presenter.SelectDayPresenterImpl;
@@ -23,9 +20,7 @@ import com.sanus.sanus.domain.select_hour.view.SelectHourActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SelectDayActivity extends AppCompatActivity implements SelectDayView, OnDayClickListener {
     private String TAG = this.getClass().getSimpleName();
@@ -35,7 +30,7 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
     private String dayMont = null;
     private FloatingActionButton next;
     FloatingActionButton previous;
-    com.applandeo.materialcalendarview.CalendarView calendarView;
+    CalendarView calendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,25 +55,30 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         previous = findViewById(R.id.btn_skip);
         next = findViewById(R.id.btn_next);
         calendarView = findViewById(R.id.calendarView);
+        calendarView.showCurrentMonthPage();
+        calendarView.setMinimumDate(Calendar.getInstance());
+        calendarView.setDisabledDays(getDisabledDays());
 
-       calendarView.setOnDayClickListener(this);
+        calendarView.setOnDayClickListener(this);
+
+
 
         List<EventDay> events = new ArrayList<>();
+
         Calendar calendar = Calendar.getInstance();
-        events.add(new EventDay(calendar, R.drawable.circle_accent));
+        events.add(new EventDay(calendar, R.drawable.circle_grey));
+
         Calendar calendar1 = Calendar.getInstance();
-        calendar1.add(Calendar.DAY_OF_MONTH, 2);
-        events.add(new EventDay(calendar1, R.drawable.circle_accent));
+        calendar1.add(Calendar.DAY_OF_MONTH, 3);
+        events.add(new EventDay(calendar1, R.drawable.circle_blue));
+
         Calendar calendar2 = Calendar.getInstance();
         calendar2.add(Calendar.DAY_OF_MONTH, 5);
-        events.add(new EventDay(calendar2, R.drawable.circle_accent));
-        Calendar min = Calendar.getInstance();
-        min.add(Calendar.MONTH, 0);
-        Calendar max = Calendar.getInstance();
-        max.add(Calendar.MONTH, 200);
-        calendarView.setMinimumDate(min);
-        calendarView.setMaximumDate(max);
+        events.add(new EventDay(calendar2, R.drawable.circle_green));
+
         calendarView.setEvents(events);
+
+
         disableButton();
 
         previous.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +93,23 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
                 presenter.addAppointment(idHospital, idDoctor, fecha);
             }
         });
+    }
+
+    private List<Calendar> getDisabledDays() {
+        Calendar firstDisabled = DateUtils.getCalendar();
+        firstDisabled.add(Calendar.DAY_OF_MONTH, 2);
+
+        Calendar secondDisabled = DateUtils.getCalendar();
+        secondDisabled.add(Calendar.DAY_OF_MONTH, 1);
+
+        Calendar thirdDisabled = DateUtils.getCalendar();
+        thirdDisabled.add(Calendar.DAY_OF_MONTH, 18);
+
+        List<Calendar> calendars = new ArrayList<>();
+        calendars.add(firstDisabled);
+        calendars.add(secondDisabled);
+        calendars.add(thirdDisabled);
+        return calendars;
     }
 
     @Override
@@ -208,5 +225,6 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
                 break;
         }
     }
+
 
 }
