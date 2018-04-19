@@ -95,7 +95,7 @@
              app:todayLabelColor="@color/colorGreen"
              app:daysLabelsColor="@color/black"
              app:disabledDaysLabelsColor="@color/btnGoogle"
-             app:datePicker="false"
+             app:datePicker="true"
                 app:previousButtonSrc="@drawable/arrow_previous"
                 app:forwardButtonSrc="@drawable/arrow_next"/>
 

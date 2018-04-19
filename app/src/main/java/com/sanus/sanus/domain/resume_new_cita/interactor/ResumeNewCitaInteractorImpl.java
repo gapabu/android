@@ -42,13 +42,13 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor {
         mFirestore.collection("citas").document(idDocument).set(appointmentEntity).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Log.d(TAG, "DocumentSnapshot successfully written!");
+                Log.d(TAG, "Escribiendo en citas exitosamente!");
                 presenter.alertSuccessAppoitment();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.w(TAG, "Error writing document", e);
+                Log.w(TAG, "Error al escribir en citas", e);
             }
         });
 
@@ -64,7 +64,7 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor {
                     return;
                 }
                 if (documentSnapshot != null && documentSnapshot.exists()) {
-                    Log.d(TAG, "Current data: " + documentSnapshot.getData());
+                    Log.d(TAG, "Coleccion usuarios: " + documentSnapshot.getData());
                     String name = documentSnapshot.getString("nombre").concat(" " + documentSnapshot.getString("apellido"));
                     String avatar = documentSnapshot.getString("avatar");
 
@@ -97,7 +97,7 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor {
                     return;
                 }
                 if (documentSnapshot != null && documentSnapshot.exists()) {
-                    Log.d(TAG, "Current data: " + documentSnapshot.getData());
+                    Log.d(TAG, "Coleccion hospitales: " + documentSnapshot.getData());
                     String name = documentSnapshot.getString("nombre");
                     String direction = documentSnapshot.getString("direccion");
                     presenter.setNameHospital(name);
@@ -114,7 +114,7 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor {
         mFirestore.collection("citas").document(idDocument).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                Log.d(TAG, "Borrando exitosamente en citas!");
                 presenter.goActivity();
             }
         }).addOnFailureListener(new OnFailureListener() {
