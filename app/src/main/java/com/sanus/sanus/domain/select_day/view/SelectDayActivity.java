@@ -21,16 +21,16 @@ import com.sanus.sanus.domain.select_hour.view.SelectHourActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class SelectDayActivity extends AppCompatActivity implements SelectDayView, OnDayClickListener {
     private String TAG = this.getClass().getSimpleName();
     private SelectDayPresenter presenter;
-    private String idHospital, idDoctor, idDocument, fecha;
+    private String idHospital, idDoctor,fecha;
     private String monthYear = null;
     private String dayMont = null;
     private FloatingActionButton next;
+    String idDocument;
     FloatingActionButton previous;
     CalendarView calendarView;
 
@@ -56,6 +56,8 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
 
         previous = findViewById(R.id.btn_skip);
         next = findViewById(R.id.btn_next);
+        disableButton();
+
         calendarView = findViewById(R.id.calendarView);
         calendarView.showCurrentMonthPage();
         calendarView.setMinimumDate(Calendar.getInstance());
@@ -63,30 +65,19 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
 
         calendarView.setOnDayClickListener(this);
 
-
-
         List<EventDay> events = new ArrayList<>();
-
         Calendar calendar = Calendar.getInstance();
         events.add(new EventDay(calendar, R.drawable.circle_green));
-
-        Calendar calendar1 = Calendar.getInstance();
-        calendar1.add(Calendar.DAY_OF_MONTH, 3);
-        events.add(new EventDay(calendar1, R.drawable.circle_blue));
-
         Calendar calendar2 = Calendar.getInstance();
         calendar2.add(Calendar.DAY_OF_MONTH, 5);
         events.add(new EventDay(calendar2, R.drawable.circle_red));
-
         calendarView.setEvents(events);
-
-
-        disableButton();
 
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.deleteAppointment(idDocument);
+                //presenter.deleteAppointment(idDocument);
+                previous();
             }
         });
         next.setOnClickListener(new View.OnClickListener() {
@@ -138,15 +129,12 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         Calendar ten = DateUtils.getCalendar();//nada
         ten.add(Calendar.ALL_STYLES, 1);
 
-        Calendar once = DateUtils.getCalendar();
-        once.add(Calendar.LONG_FORMAT, 1);
-
         List<Calendar> calendars = new ArrayList<>();
         //calendars.add(firstDisabled);
         //calendars.add(secondDisabled);
         //calendars.add(thirdDisabled);
         //calendars.add(four);
-        calendars.add(once);
+        calendars.add(ten);
 
         return calendars;
     }

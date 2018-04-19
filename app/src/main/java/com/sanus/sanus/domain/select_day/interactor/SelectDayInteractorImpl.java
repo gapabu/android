@@ -52,7 +52,7 @@ public class SelectDayInteractorImpl implements SelectDayInteractor{
             @Override
             public void onSuccess(Void aVoid) {
                 Log.d(TAG, "DocumentSnapshot successfully deleted!");
-                presenter.previous();
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
