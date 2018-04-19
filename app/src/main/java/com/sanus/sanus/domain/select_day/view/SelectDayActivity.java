@@ -1,5 +1,6 @@
 package com.sanus.sanus.domain.select_day.view;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.sanus.sanus.domain.select_hour.view.SelectHourActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class SelectDayActivity extends AppCompatActivity implements SelectDayView, OnDayClickListener {
@@ -66,7 +68,7 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         List<EventDay> events = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();
-        events.add(new EventDay(calendar, R.drawable.circle_grey));
+        events.add(new EventDay(calendar, R.drawable.circle_green));
 
         Calendar calendar1 = Calendar.getInstance();
         calendar1.add(Calendar.DAY_OF_MONTH, 3);
@@ -74,7 +76,7 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
 
         Calendar calendar2 = Calendar.getInstance();
         calendar2.add(Calendar.DAY_OF_MONTH, 5);
-        events.add(new EventDay(calendar2, R.drawable.circle_green));
+        events.add(new EventDay(calendar2, R.drawable.circle_red));
 
         calendarView.setEvents(events);
 
@@ -95,20 +97,57 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         });
     }
 
+    @SuppressLint("WrongConstant")
     private List<Calendar> getDisabledDays() {
+        //DIA
         Calendar firstDisabled = DateUtils.getCalendar();
-        firstDisabled.add(Calendar.DAY_OF_MONTH, 2);
+        firstDisabled.add(Calendar.DAY_OF_WEEK, 1);
 
+        //semana
         Calendar secondDisabled = DateUtils.getCalendar();
-        secondDisabled.add(Calendar.DAY_OF_MONTH, 1);
+        secondDisabled.add(Calendar.DAY_OF_WEEK_IN_MONTH, 1);
 
+        //dias
         Calendar thirdDisabled = DateUtils.getCalendar();
-        thirdDisabled.add(Calendar.DAY_OF_MONTH, 18);
+        thirdDisabled.add(Calendar.DAY_OF_MONTH, 8);
+
+        //dias
+        Calendar four = DateUtils.getCalendar();
+        four.add(Calendar.DATE, 2);
+
+        //mes
+        Calendar five = DateUtils.getCalendar();
+        five.add(Calendar.MONTH, 1);
+
+        //semana
+        Calendar six = DateUtils.getCalendar();
+        six.add(Calendar.WEEK_OF_MONTH, 1);
+
+        //semana
+        Calendar seven = DateUtils.getCalendar();
+        seven.add(Calendar.MAY, 1);
+
+        //dias
+        Calendar eight = DateUtils.getCalendar();
+        eight.add(Calendar.SATURDAY, 5);
+
+        //mes
+        Calendar nine = DateUtils.getCalendar();
+        nine.add(Calendar.LONG, 1);
+
+        Calendar ten = DateUtils.getCalendar();//nada
+        ten.add(Calendar.ALL_STYLES, 1);
+
+        Calendar once = DateUtils.getCalendar();
+        once.add(Calendar.LONG_FORMAT, 1);
 
         List<Calendar> calendars = new ArrayList<>();
-        calendars.add(firstDisabled);
-        calendars.add(secondDisabled);
-        calendars.add(thirdDisabled);
+        //calendars.add(firstDisabled);
+        //calendars.add(secondDisabled);
+        //calendars.add(thirdDisabled);
+        //calendars.add(four);
+        calendars.add(once);
+
         return calendars;
     }
 

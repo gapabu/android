@@ -10,8 +10,7 @@ public interface ResumeNewCitaView {
     String setNameHospital(String nameHos);
     String setDirectionHospital(String direction);
 
-    void showExitoRegistro();
     void goActivity();
-
+    void alertSuccessAppoitment();
     void showPhoto(Uri photo);
 }

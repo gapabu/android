@@ -90,9 +90,12 @@
 
 
     <string name="guardar_cita">¿Estás seguro de crear la cita?</string>
-    <string name="cancelar_cita">¿Estás seguro de cancelar?</string>
+    <string name="cancelar_cita">¿Estás seguro de cancelar la cita?</string>
     <string name="salir_citas">¿Estás seguro de salir? </string>
     <string name="cita_exitosa">Se ha registrado correctamente la cita</string>
+    <string name="dia_actual">Día actual</string>
+    <string name="dia_ocupado">Día ocupado</string>
+    <string name="dia_seleccionado">Día seleccionado</string>
     <string name="material_calendar_monday">L</string>
     <string name="material_calendar_tuesday">M</string>
     <string name="material_calendar_wednesday">M</string>
@@ -100,7 +103,6 @@
     <string name="material_calendar_friday">V</string>
     <string name="material_calendar_saturday">S</string>
     <string name="material_calendar_sunday">D</string>
-
     <string name="calendar_monday">Lunes</string>
     <string name="calendar_tuesday">Martes</string>
     <string name="calendar_wednesday">Miércoles</string>
@@ -108,7 +110,6 @@
     <string name="calendar_friday">Viernes</string>
     <string name="calendar_saturday">Sabado</string>
     <string name="calendar_sunday">Domingo</string>
-
     <string name="calendar_january">Enero</string>
     <string name="calendar_february">Febrero</string>
     <string name="calendar_march">Marzo</string>
@@ -121,7 +122,6 @@
     <string name="calendar_october">Octubre</string>
     <string name="calendar_november">Noviembre</string>
     <string name="calendar_december">Diciembre</string>
-
 
     <array name="material_calendar_months_array">
         <item>Enero</item>
@@ -137,9 +137,5 @@
         <item>Noviembre</item>
         <item>Diciembre</item>
     </array>
-
-    <string name="material_calendar_today_button">Today</string>
-    <string name="material_calendar_positive_button">OK</string>
-    <string name="material_calendar_negative_button">Cancel</string>
 
 </resources>

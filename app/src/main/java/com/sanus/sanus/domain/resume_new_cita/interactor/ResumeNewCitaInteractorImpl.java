@@ -15,14 +15,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.data.repository.firebase.entity.user.AppointmentEntity;
 import com.sanus.sanus.domain.resume_new_cita.presenter.ResumeNewCitaPresenter;
-import com.sanus.sanus.utils.alert.CallbackAlert;
 
-public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor, CallbackAlert {
+public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor {
     private String TAG = this.getClass().getSimpleName();
     private ResumeNewCitaPresenter presenter;
     private AppointmentEntity appointmentEntity = new AppointmentEntity();
     private String userIdNow;
     private FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     public ResumeNewCitaInteractorImpl (ResumeNewCitaPresenter presenter){
         this.presenter = presenter;
@@ -30,8 +30,6 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor, Cal
 
     @Override
     public void addAppointment(String idHospital, String idDoctor, String fecha, String hora, String idDocument) {
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {userIdNow = user.getUid();}
         appointmentEntity.hospital = idHospital;
@@ -45,7 +43,7 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor, Cal
             @Override
             public void onSuccess(Void aVoid) {
                 Log.d(TAG, "DocumentSnapshot successfully written!");
-                presenter.showExitoRegistro();
+                presenter.alertSuccessAppoitment();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -65,7 +63,6 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor, Cal
                     Log.w(TAG, "Listen failed.", e);
                     return;
                 }
-
                 if (documentSnapshot != null && documentSnapshot.exists()) {
                     Log.d(TAG, "Current data: " + documentSnapshot.getData());
                     String name = documentSnapshot.getString("nombre").concat(" " + documentSnapshot.getString("apellido"));
@@ -83,7 +80,6 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor, Cal
                             }
                         }
                     });
-
                 } else {
                     Log.d(TAG, "Current data: null");
                 }
@@ -167,13 +163,4 @@ public class ResumeNewCitaInteractorImpl implements ResumeNewCitaInteractor, Cal
         });
     }
 
-    @Override
-    public void acceptAlert() {
-        presenter.goActivity();
-    }
-
-    @Override
-    public void cancelAlert() {
-        presenter.goActivity();
-    }
 }

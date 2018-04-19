@@ -1,5 +1,7 @@
 package com.sanus.sanus.domain.resume_new_cita.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,16 +24,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNewCitaView, CallbackAlert {
     private final String TAG= this.getClass().getSimpleName();
     private ResumeNewCitaPresenter presenter;
-    CircleImageView avatar;
+    private CircleImageView avatar;
+    private String idHospital, idDoctor, fecha, hour, idDocument;
+    private TextView nameClinic, directionClinic, nameDoctor, specialty, hora, date;
+    String  idFecha, idHora;
     FloatingActionButton cerrarCita, guardarCita;
-    String idHospital, idDoctor, fecha, hour, idDocument, idFecha, idHora;
-    TextView nameClinic, directionClinic, nameDoctor, specialty, hora, date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resume_new_cita);
-
         setUpVariable();
         setUpView();
     }
@@ -43,7 +45,6 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
     }
 
     private void setUpView(){
-
         idHospital = getIntent().getStringExtra("idHospital");
         idDoctor = getIntent().getStringExtra("idDoctor");
         fecha = getIntent().getStringExtra("fecha");
@@ -51,7 +52,6 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         idDocument = getIntent().getStringExtra("idDocument");
         idFecha = getIntent().getStringExtra("idFecha");
         idHora = getIntent().getStringExtra("idHora");
-
         Log.d(TAG, "idHospital=>" + idHospital + " " + "idDoctor=>" + idDoctor + " " + "fecha=>"
                 +fecha + " " + " hora=>" + hour + " idDocumet=> " + idDocument + " idFecha=>" + idFecha + " idHora=>" + idHora);
 
@@ -74,23 +74,17 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         cerrarCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.deleteAppointment(idDocument);
-                //presenter.deleteAppointmentOccupied(idDoctor, idFecha, idHora);
-                //goActivity();
+                alertCancelAppointment();
             }
         });
 
         guardarCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //presenter.addAppointment(idHospital, idDoctor, fecha, hour);
-                //goActivity();
                 showSaveCita();
             }
         });
     }
-
-
 
     @Override
     public String setDate() {
@@ -128,26 +122,18 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
         return String.valueOf(directionClinic);
     }
 
-
     @Override
     public void acceptAlert() {
         presenter.addAppointment(idHospital, idDoctor, fecha, hour, idDocument);
     }
 
     @Override
-    public void cancelAlert() {goActivity();
-    }
+    public void cancelAlert() {}
 
 
     private void showSaveCita() {
         AlertUtils alertUtils = new AlertUtils(this);
         alertUtils.configureAlert(this, getString(R.string.guardar_cita));
-    }
-
-    public void showExitoRegistro() {
-        AlertUtils alertUtils = new AlertUtils(this);
-        alertUtils.configureAlert(this, getString(R.string.cita_exitosa));
-        goActivity();
     }
 
     @Override
@@ -159,9 +145,46 @@ public class ResumeNewCitaActivity extends AppCompatActivity implements ResumeNe
     }
 
     @Override
+    public void alertSuccessAppoitment() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setTitle(R.string.app_name);
+        builder.setCancelable(false);
+        builder.setMessage(R.string.cita_exitosa);
+
+        builder.setPositiveButton(R.string.button_accept, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                goActivity();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    @Override
     public void showPhoto(Uri uri) {
         GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
     }
 
+    public void alertCancelAppointment(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setTitle(R.string.app_name);
+        builder.setCancelable(false);
+        builder.setMessage(R.string.cancelar_cita);
 
+        builder.setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.setPositiveButton(R.string.button_accept, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                presenter.deleteAppointment(idDocument);
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }

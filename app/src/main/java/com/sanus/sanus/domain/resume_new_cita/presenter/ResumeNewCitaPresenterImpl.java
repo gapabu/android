@@ -77,13 +77,13 @@ public class ResumeNewCitaPresenterImpl implements ResumeNewCitaPresenter{
     }
 
     @Override
-    public void showExitoRegistro() {
-        view.showExitoRegistro();
+    public void goActivity() {
+        view.goActivity();
     }
 
     @Override
-    public void goActivity() {
-        view.goActivity();
+    public void alertSuccessAppoitment() {
+        view.alertSuccessAppoitment();
     }
 
     @Override

@@ -75,21 +75,99 @@
 
     </RelativeLayout>
 
-    <com.applandeo.materialcalendarview.CalendarView
-        android:id="@+id/calendarView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:layout_marginEnd="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/space_min"
-        app:headerColor="@color/white"
-        app:headerLabelColor="@color/black"
-        app:previousButtonSrc="@drawable/arrow_previous"
-        app:forwardButtonSrc="@drawable/arrow_next"
-        app:selectionColor="@color/colorPrimaryDark"
-        app:todayLabelColor="@color/colorGreen"
-        app:daysLabelsColor="@color/black"
-        app:disabledDaysLabelsColor="@color/btnGoogle"
-        app:datePicker="false" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_avg">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_vertical_margin">
+            <com.applandeo.materialcalendarview.CalendarView
+             android:id="@+id/calendarView"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_marginTop="@dimen/space_min"
+             app:headerColor="@color/white"
+             app:headerLabelColor="@color/black"
+             app:selectionColor="@color/colorPrimaryDark"
+             app:todayLabelColor="@color/colorGreen"
+             app:daysLabelsColor="@color/black"
+             app:disabledDaysLabelsColor="@color/btnGoogle"
+             app:datePicker="false"
+                app:previousButtonSrc="@drawable/arrow_previous"
+                app:forwardButtonSrc="@drawable/arrow_next"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/calendarView"
+                android:layout_marginTop="@dimen/space_avg"
+                android:background="@drawable/btnround"
+                android:paddingBottom="@dimen/space_small">
+
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/btnActual"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="@dimen/space_small"
+                    android:layout_marginTop="@dimen/padding_small"
+                    app:backgroundTint="@color/colorGreen" />
+
+                <TextView
+                    android:id="@+id/tvActual"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/btnActual"
+                    android:layout_marginStart="@dimen/space_small"
+                    android:layout_toEndOf="@+id/btnActual"
+                    android:text="@string/dia_actual" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/btnOcupado"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignTop="@+id/btnActual"
+                    android:layout_marginStart="52dp"
+                    android:layout_toEndOf="@+id/tvActual"
+                    app:backgroundTint="@color/btnGoogle" />
+
+                <TextView
+                    android:id="@+id/tvOcupado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/btnOcupado"
+                    android:layout_marginStart="@dimen/space_small"
+                    android:layout_toEndOf="@+id/btnOcupado"
+                    android:text="@string/dia_ocupado" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/btnSeleccionado"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignStart="@+id/btnActual"
+                    android:layout_below="@+id/btnActual"
+                    android:layout_marginTop="@dimen/space_avg"
+                    app:backgroundTint="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/tvSeleccionado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/tvActual"
+                    android:layout_alignTop="@+id/btnSeleccionado"
+                    android:text="@string/dia_seleccionado" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+
+
+    </ScrollView>
 </LinearLayout>
+
 
