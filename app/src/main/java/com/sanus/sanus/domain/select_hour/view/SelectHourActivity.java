@@ -97,50 +97,15 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
 
     @Override
     public void next(final String value) {
-       //final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         presenter.addAppointment(idHospital, idDoctor, fecha, value, idDocument);
-        //presenter.addDataCite(idDoctor, fecha, value);
-
-
-
         Intent intent = new Intent(SelectHourActivity.this, ResumeNewCitaActivity.class);
         intent.putExtra("idDoctor", idDoctor);
         intent.putExtra("idHospital", idHospital);
         intent.putExtra("fecha", fecha);
         intent.putExtra("hour", value);
         intent.putExtra("idDocument", idDocument);
-
-        /*Map<String, Object> dataFecha = new HashMap<>();
-        dataFecha.put("fecha", fecha);
-
-        final Map<String, Object> dataHora = new HashMap<>();
-        dataHora.put("hora", value);
-
-        mFirestore.collection("citas-ocupadas").document(idDoctor).collection("fecha").add(dataFecha).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Log.d(TAG, "DocumentSnapshot written with IDFecha: " + documentReference.getId());
-                idFecha = documentReference.getId();
-                mFirestore.collection("citas-ocupadas").document(idDoctor).collection("hora").add(dataHora).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot written with IDHora: " + documentReference.getId());
-                        idHora = documentReference.getId();
-                        presenter.addAppointment(idHospital, idDoctor, fecha, value, idDocument);
-
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w(TAG, "Error adding document", e);
-            }
-        });*/
         intent.putExtra("idFecha", idFecha);
         intent.putExtra("idHora", idHora);
-        //intent.putExtra("idFecha", "fecha");
-        //intent.putExtra("idHora", "hora");
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         startActivity(intent);
         finish();

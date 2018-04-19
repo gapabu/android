@@ -1,8 +1,5 @@
 package com.sanus.sanus.domain.select_hour.interactor;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -16,9 +13,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.sanus.sanus.R;
 import com.sanus.sanus.data.repository.firebase.entity.user.AppointmentEntity;
-import com.sanus.sanus.domain.resume_new_cita.view.ResumeNewCitaActivity;
 import com.sanus.sanus.domain.select_hour.data.SelectHour;
 import com.sanus.sanus.domain.select_hour.presenter.SelectHourPresenter;
 
@@ -34,6 +29,7 @@ public class SelectHourInteractorImpl implements SelectHourInteractor {
     private List<SelectHour> busquedaDoctors =  new ArrayList<>();
     private AppointmentEntity appointmentEntity = new AppointmentEntity();
     private String userIdNow;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     public SelectHourInteractorImpl(SelectHourPresenter presenter){this.presenter = presenter;}
 
@@ -59,7 +55,6 @@ public class SelectHourInteractorImpl implements SelectHourInteractor {
 
     @Override
     public void addAppointment(String idHospital, final String idDoctor, final String fecha, final String hora, String idDocument) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {userIdNow = user.getUid();}
         appointmentEntity.hospital = idHospital;
@@ -72,26 +67,7 @@ public class SelectHourInteractorImpl implements SelectHourInteractor {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.d(TAG, "agregando en coleccion cita");
-
-                Map<String, Object> dataFecha = new HashMap<>();
-                dataFecha.put("fecha", fecha);
-                final Map<String, Object> dataHora = new HashMap<>();
-                dataHora.put("hora", hora);
-                mFirestore.collection("citas-ocupadas").document(idDoctor).collection("fecha").add(dataFecha).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "Agregando en coleccion citas-ocupadas IDFecha: " + documentReference.getId());
-                        String idFecha = documentReference.getId();
-
-                        mFirestore.collection("citas-ocupadas").document(idDoctor).collection("hora").add(dataHora).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "Agregando en coleccion citas-ocupadas IDHora: " + documentReference.getId());
-                            }
-                        });
-                    }
-                });
-
+                addDataCite(idDoctor, fecha, hora);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -121,21 +97,17 @@ public class SelectHourInteractorImpl implements SelectHourInteractor {
     public void addDataCite(final String idDoctor, String fecha, String hora) {
         Map<String, Object> dataFecha = new HashMap<>();
         dataFecha.put("fecha", fecha);
-
         final Map<String, Object> dataHora = new HashMap<>();
         dataHora.put("hora", hora);
 
         mFirestore.collection("citas-ocupadas").document(idDoctor).collection("fecha").add(dataFecha).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-                Log.d(TAG, "DocumentSnapshot written with IDFecha: " + documentReference.getId());
-                final String idFecha = documentReference.getId();
+                Log.d(TAG, "Agregando en coleccion citas-ocupadas IDFecha: " + documentReference.getId());
                 mFirestore.collection("citas-ocupadas").document(idDoctor).collection("hora").add(dataHora).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot written with IDHora: " + documentReference.getId());
-                        String idHora = documentReference.getId();
-
+                        Log.d(TAG, "Agregando en coleccion citas-ocupadas IDHora: " + documentReference.getId());
                     }
                 });
             }
