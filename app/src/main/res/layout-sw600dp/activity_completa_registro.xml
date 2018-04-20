@@ -30,6 +30,7 @@
                 android:src="@drawable/hcompleteregister" />
         </LinearLayout>
 
+        <include layout="@layout/toolbar" />
 
         <ImageView
             android:id="@+id/imgProfile"
