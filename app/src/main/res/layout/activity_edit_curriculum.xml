@@ -41,7 +41,7 @@
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="165dp"
+            android:layout_marginTop="135dp"
             android:background="@drawable/backgroundround"
             android:orientation="vertical"
             android:padding="16dp">
@@ -50,17 +50,24 @@
             android:id="@+id/tvTitleObligatorio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
-            android:text="@string/edit_curriculum" />
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_min"
+            android:paddingTop="@dimen/margin_min"
+            android:paddingBottom="@dimen/margin_small"
+            android:textSize="@dimen/margin_avg"
+            android:textColor="@color/black"
+            android:text="@string/edit_curriculum"
+            tools:ignore="SpUsage" />
 
 
             <EditText
-                android:id="@+id/editMessage"
+                android:id="@+id/editCV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_small"
                 android:background="@drawable/btnround"
-                android:hint="@string/type_a_message"
+                android:hint="@string/editar_curriculum"
                 android:padding="@dimen/padding_small" />
 
             <Button
@@ -69,7 +76,7 @@
                 android:layout_width="150dp"
                 android:layout_height="43dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/space_small"
                 android:background="@drawable/btnazul"
                 android:enabled="false"
                 android:text="@string/button_save"

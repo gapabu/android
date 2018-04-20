@@ -12,4 +12,44 @@ public class EditCurriculumPresenterImpl implements EditCurriculumPresenter {
         this.view = view;
         interactor = new EditCurriculumInteractorImpl(this);
     }
+
+    @Override
+    public String getCurriculum() {
+        return view.getCurriculum();
+    }
+
+    @Override
+    public String setCurriculum(String value) {
+        return view.setCurriculum(value);
+    }
+
+    @Override
+    public void enableButton() {
+        view.enableButton();
+    }
+
+    @Override
+    public void disableButton() {
+        view.disableButton();
+    }
+
+    @Override
+    public void goMain() {
+        view.goMain();
+    }
+
+    @Override
+    public void validateButtonEnable() {
+        interactor.validateButtonEnable();
+    }
+
+    @Override
+    public void saveCurriculum() {
+        interactor.saveCurriculum();
+    }
+
+    @Override
+    public void getDataCurriculum() {
+        interactor.getDataCurriculum();
+    }
 }
