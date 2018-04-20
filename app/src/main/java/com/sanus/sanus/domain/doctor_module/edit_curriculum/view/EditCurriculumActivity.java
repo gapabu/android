@@ -1,5 +1,7 @@
 package com.sanus.sanus.domain.doctor_module.edit_curriculum.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -99,5 +101,22 @@ public class EditCurriculumActivity extends AppCompatActivity implements EditCur
         startActivity(new Intent(this, MainActivityDoctor.class));
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
+    }
+
+    @Override
+    public void alertSuccessUpdate() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setTitle(R.string.app_name);
+        builder.setCancelable(false);
+        builder.setMessage(R.string.update_curriculum);
+
+        builder.setPositiveButton(R.string.button_accept, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+               goMain();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

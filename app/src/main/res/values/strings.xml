@@ -124,6 +124,7 @@
     <string name="calendar_december">Diciembre</string>
     <string name="editar_curriculum">Editar curriculum</string>
     <string name="edit_curriculum">Escribe acerca de tu experiencia laboral</string>
+    <string name="update_curriculum">Se ha actualizado el curriculum exitosamente</string>
 
     <array name="material_calendar_months_array">
         <item>Enero</item>

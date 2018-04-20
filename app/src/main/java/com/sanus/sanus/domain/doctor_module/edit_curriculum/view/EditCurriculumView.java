@@ -6,4 +6,6 @@ public interface EditCurriculumView {
     void enableButton();
     void disableButton();
     void goMain();
+    void alertSuccessUpdate();
+
 }

@@ -64,7 +64,7 @@ public class EditCurriculumInteractorImpl implements EditCurriculumInteractor {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Log.d(TAG, "DocumentSnapshot successfully written!");
-                            presenter.goMain();
+                            presenter.alertSuccessUpdate();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override

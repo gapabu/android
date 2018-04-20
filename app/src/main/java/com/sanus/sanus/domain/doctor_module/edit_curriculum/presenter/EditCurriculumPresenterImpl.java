@@ -39,6 +39,11 @@ public class EditCurriculumPresenterImpl implements EditCurriculumPresenter {
     }
 
     @Override
+    public void alertSuccessUpdate() {
+        view.alertSuccessUpdate();
+    }
+
+    @Override
     public void validateButtonEnable() {
         interactor.validateButtonEnable();
     }
