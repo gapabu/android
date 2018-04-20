@@ -75,7 +75,6 @@ public class CitasFragment extends Fragment implements CitasView {
 
     @Override
     public void showPhoto(Uri uri, CircleImageView avatar) {
-        //GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
-        Picasso.with(getActivity()).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
+        Picasso.get().load(uri.toString()).placeholder(R.drawable.user).into(avatar);
     }
 }

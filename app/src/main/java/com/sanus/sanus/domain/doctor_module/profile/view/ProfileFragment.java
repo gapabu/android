@@ -30,7 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileFragment extends Fragment implements ProfileFragmentView  {
     public static String IDENTIFIER = "PROFILE_FRAGMENT";
     private ProfileDoctorPresenter presenter;
-    TextView cedula, especialidad, cv;
+    private TextView cedula, especialidad, cv;
     private CircleImageView setupImage;
     private String image;
     private String idDoct;
@@ -87,10 +87,6 @@ public class ProfileFragment extends Fragment implements ProfileFragmentView  {
     }
 
     public void goComments() {
-        /*Intent intent = new Intent(getContext(), AllCommentsActivity.class);
-        intent.putExtra("idDoctor", idDoct);
-        startActivity(intent);*/
-
         Intent intent = new Intent(getContext(), CommentsActivity.class);
         intent.putExtra("idDoctor", idDoct);
         startActivity(intent);
@@ -98,7 +94,6 @@ public class ProfileFragment extends Fragment implements ProfileFragmentView  {
 
     @Override
     public void showPhoto(Uri uri) {
-        //GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
-        Picasso.with(getActivity()).load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
+        Picasso.get().load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
     }
 }

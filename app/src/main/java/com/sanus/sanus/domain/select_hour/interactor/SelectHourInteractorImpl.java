@@ -4,15 +4,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -37,58 +34,8 @@ public class SelectHourInteractorImpl implements SelectHourInteractor {
 
     public SelectHourInteractorImpl(SelectHourPresenter presenter){this.presenter = presenter;}
 
-    /*String hora = doc.getDocument().getString("hora");
-                       busquedaDoctors.add(new SelectHour(hora));
-                       presenter.setDataAdapter(busquedaDoctors);*/
     @Override
     public void viewSchedules(final String idDoctor,final String dia) {
-        /*mFirestore.collection("horarios").document(idDoctor).collection(dia).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(final QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                if (e != null) {
-                    Log.d(TAG, "Error: " + e.getMessage());
-                }
-                for (final DocumentChange doc : documentSnapshots.getDocumentChanges()) {
-                    if (doc.getType() == DocumentChange.Type.ADDED) {
-                        final String horarios = String.valueOf(doc.getDocument().getData());
-                        Log.d(TAG, "coleccion horarios: " + horarios);
-                        final String hora = doc.getDocument().getString("hora");
-                       /*busquedaDoctors.add(new SelectHour(hora));
-                        presenter.setDataAdapter(busquedaDoctors);*/
-
-                        /*mFirestore.collection("citas-ocupadas").document(idDoctor).collection("hora").addSnapshotListener(new EventListener<QuerySnapshot>() {
-                            @Override
-                            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                                if (e != null) {
-                                    Log.d(TAG, "Error: " + e.getMessage());
-                                }
-                                for (final DocumentChange doc : documentSnapshots.getDocumentChanges()) {
-                                    if (doc.getType() == DocumentChange.Type.ADDED) {
-                                        String horasOcupadas = String.valueOf(doc.getDocument().getData());
-                                        Log.d(TAG, "coleccion citas-ocupadas: " + horasOcupadas);
-
-                                        if (doc == null){
-                                            if (hora.equals(horasOcupadas)){
-                                            Log.d(TAG, "no hay horario");
-                                                busquedaDoctors.add(new SelectHour(hora));
-                                                presenter.setDataAdapter(busquedaDoctors);
-
-                                        }else {
-                                            busquedaDoctors.add(new SelectHour(hora));
-                                            presenter.setDataAdapter(busquedaDoctors);
-                                        }
-                                    }else {
-                                            busquedaDoctors.add(new SelectHour(hora));
-                                            presenter.setDataAdapter(busquedaDoctors);
-                                        }
-                                    }
-                                }
-                            }
-                        });
-                    }
-                }
-            }
-        });*/
         mFirestore.collection("horarios").document(idDoctor).collection(dia) .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable final FirebaseFirestoreException e) {
@@ -96,15 +43,15 @@ public class SelectHourInteractorImpl implements SelectHourInteractor {
                     Log.w(TAG, "listen:error", e);
                     return;
                 }
-
+                List<String> shedules= new ArrayList<>();
+                shedules.clear();
+                busquedaDoctors.clear();
                 for (DocumentChange dc : snapshots.getDocumentChanges()) {
                     if (dc.getType() == DocumentChange.Type.ADDED) {
-                        Log.d(TAG, "horarios: " + dc.getDocument().getData());
-                        String valHours = String.valueOf(dc.getDocument().getData());
-
+                        String dataShedules = String.valueOf(dc.getDocument().getData());
+                        shedules.add(dataShedules);
+                        Log.d(TAG, "horarios: " + shedules);
                         final String itemHour = dc.getDocument().getString("hora");
-
-
                         mFirestore.collection("citas-ocupadas").document(idDoctor).collection("hora").addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
@@ -116,40 +63,30 @@ public class SelectHourInteractorImpl implements SelectHourInteractor {
                                         busquedaDoctors.add(new SelectHour(itemHour));
                                         presenter.setDataAdapter(busquedaDoctors);
                                     }else {
+                                        List<String> shedulesOccupied = new ArrayList<>();
+                                        shedulesOccupied.clear();
+                                        busquedaDoctors.clear();
                                         for (DocumentChange dc : snapshots.getDocumentChanges()) {
                                             if (dc.getType() == DocumentChange.Type.ADDED) {
-                                                String valSchedules = String.valueOf(dc.getDocument().getData());
+                                                String dataShedulesOccupied = String.valueOf(dc.getDocument().getData());
+                                                shedulesOccupied.add(dataShedulesOccupied);
+                                                Log.d(TAG, "citas-ocupadas: " + shedulesOccupied);
                                                 String itemSchedules = dc.getDocument().getString("hora");
-
                                                 if (!itemHour.equals(itemSchedules)){
                                                     busquedaDoctors.add(new SelectHour(itemHour));
                                                     presenter.setDataAdapter(busquedaDoctors);
-                                                }else{
+                                                }else {
                                                     busquedaDoctors.clear();
                                                     presenter.setDataAdapter(busquedaDoctors);
                                                 }
-
                                             }
                                         }
                                     }
                                 }
-
-                                /*for (DocumentChange dc : snapshots.getDocumentChanges()) {
-                                    if (dc.getType() == DocumentChange.Type.ADDED) {
-                                        Log.d(TAG, "New city: " + dc.getDocument().getData());
-                                    }else {
-                                        Log.d(TAG, "No document");
-                                    }
-                                }*/
-
                             }
                         });
-
-
-
                     }
                 }
-
             }
         });
     }
