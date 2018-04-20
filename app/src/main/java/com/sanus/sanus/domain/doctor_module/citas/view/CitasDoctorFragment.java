@@ -16,7 +16,7 @@ import com.sanus.sanus.domain.doctor_module.citas.adapter.AppointmentAdapter;
 import com.sanus.sanus.domain.doctor_module.citas.data.Appointment;
 import com.sanus.sanus.domain.doctor_module.citas.presenter.CitasDoctorPresenter;
 import com.sanus.sanus.domain.doctor_module.citas.presenter.CitasDoctorPresenterImpl;
-import com.sanus.sanus.utils.glide.GlideApp;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -60,6 +60,7 @@ public class CitasDoctorFragment extends Fragment implements CitasDoctorFragment
 
     @Override
     public void showPhoto(Uri uri, CircleImageView avatar) {
-        GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
+        //GlideApp.with(this).load(uri.toString()).placeholder(R.drawable.user).into(avatar);
+        Picasso.get().load(uri.toString()).placeholder(R.drawable.user).into(avatar);
     }
 }
