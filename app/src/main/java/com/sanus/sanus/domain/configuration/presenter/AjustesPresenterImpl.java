@@ -59,10 +59,4 @@ public class AjustesPresenterImpl implements AjustesPresenter{
         view.selectInactive();
     }
 
-    @Override
-    public void goEditCurriculum() {
-        view.goEditCurriculum();
-    }
-
-
 }

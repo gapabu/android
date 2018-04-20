@@ -143,25 +143,6 @@
                     android:textColor="@color/black"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/editCurriculum"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/logout"
-                android:layout_marginTop="@dimen/space_avg"
-                android:background="@drawable/btnround"
-                android:padding="@dimen/space_small"
-                android:visibility="invisible">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:text="@string/editar_curriculum"
-                    android:gravity="center"
-                    android:textColor="@color/black"/>
-
-            </LinearLayout>
-
         </RelativeLayout>
 
     </RelativeLayout>

@@ -53,7 +53,6 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
     private Button activo, inactivo;
     private String idUser, image;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    LinearLayout editCurriculum;
 
     @Nullable
     @Override
@@ -99,14 +98,7 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
             }
         });
 
-        editCurriculum = view.findViewById(R.id.editCurriculum);
-        viewEditCurriculum();
-        editCurriculum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goEditCurriculum();
-            }
-        });
+
 
         activo = view.findViewById(R.id.btnActivo);
         inactivo = view.findViewById(R.id.btnInactivo);
@@ -225,33 +217,5 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
         presenter.onClickActive("0");
     }
 
-    @Override
-    public void goEditCurriculum() {
-        Intent intent = new Intent(getActivity(), EditCurriculumActivity.class);
-        startActivity(intent);
-    }
 
-    public void viewEditCurriculum(){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {idUser = user.getUid();}
-        DocumentReference usuarios = db.collection("usuarios").document(idUser);
-        usuarios.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        String tipo = document.getString("tipo");
-                        if (tipo.equals("Medico")) {
-                           editCurriculum.setVisibility(View.VISIBLE);
-                        }
-                        if (tipo.equals("Paciente")) {
-                            editCurriculum.setVisibility(View.INVISIBLE);
-                        }
-                    }
-                }
-            }
-        });
-
-    }
 }

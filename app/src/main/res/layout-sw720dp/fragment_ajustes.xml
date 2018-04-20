@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_ajustes"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="360dp"
-            android:paddingEnd="60dp"
-            android:paddingStart="60dp">
+            android:paddingEnd="90dp"
+            android:paddingStart="90dp">
 
             <LinearLayout
                 android:id="@+id/profile"
@@ -59,7 +60,67 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/app_name"
-                    android:textSize="25sp"/>
+                    android:textSize="30sp"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/editProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/btnround"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_small">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:text="@string/editar_perfil"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/actividad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editProfile"
+                android:padding="@dimen/padding_small"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/btnround">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent"
+                    android:padding="@dimen/margin_avg">
+
+                    <Button
+                        android:id="@+id/btnActivo"
+                        style="?android:textAppearanceSmall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="50"
+                        android:background="@android:color/black"
+                        android:text="@string/activo"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"/>
+
+                    <Button
+                        android:id="@+id/btnInactivo"
+                        style="?android:textAppearanceSmall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="50"
+                        android:background="@color/white"
+                        android:text="@string/inactivo"
+                        android:textSize="30sp"/>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -67,15 +128,15 @@
                 android:id="@+id/logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/profile"
+                android:layout_below="@+id/actividad"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/btnround"
                 android:orientation="horizontal"
                 android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/ic_cerrar" />
 
@@ -85,7 +146,8 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/logout_text"
-                    android:textSize="25sp"/>
+                    android:textSize="30sp"
+                    android:textColor="@color/black"/>
             </LinearLayout>
 
         </RelativeLayout>
