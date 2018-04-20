@@ -9,5 +9,6 @@ public interface AjustesView {
     void showPhoto(String photo);
     void selectActive();
     void selectInactive();
+    void goEditCurriculum();
 
 }

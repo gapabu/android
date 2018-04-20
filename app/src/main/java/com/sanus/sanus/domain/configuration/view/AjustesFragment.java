@@ -16,10 +16,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.domain.account.complete.view.CompleteRegisterActivity;
+import com.sanus.sanus.domain.doctor_module.edit_curriculum.view.EditCurriculumActivity;
 import com.sanus.sanus.domain.splash.view.SplashActivity;
 import com.sanus.sanus.utils.alert.CallbackAlert;
 import com.sanus.sanus.domain.configuration.presenter.AjustesPresenter;
@@ -48,6 +52,8 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
     private CircleImageView setupImage;
     private Button activo, inactivo;
     private String idUser, image;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    LinearLayout editCurriculum;
 
     @Nullable
     @Override
@@ -90,6 +96,15 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), CompleteRegisterActivity.class));
+            }
+        });
+
+        editCurriculum = view.findViewById(R.id.editCurriculum);
+        viewEditCurriculum();
+        editCurriculum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goEditCurriculum();
             }
         });
 
@@ -208,5 +223,35 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
         activo.setBackgroundColor(getResources().getColor(R.color.white));
         activo.setTextColor(getResources().getColor(R.color.black));
         presenter.onClickActive("0");
+    }
+
+    @Override
+    public void goEditCurriculum() {
+        Intent intent = new Intent(getActivity(), EditCurriculumActivity.class);
+        startActivity(intent);
+    }
+
+    public void viewEditCurriculum(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {idUser = user.getUid();}
+        DocumentReference usuarios = db.collection("usuarios").document(idUser);
+        usuarios.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        String tipo = document.getString("tipo");
+                        if (tipo.equals("Medico")) {
+                           editCurriculum.setVisibility(View.VISIBLE);
+                        }
+                        if (tipo.equals("Paciente")) {
+                            editCurriculum.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                }
+            }
+        });
+
     }
 }
