@@ -10,9 +10,10 @@
 
     <include layout="@layout/toolbar" />
 
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/setup_image"
@@ -24,6 +25,7 @@
             android:src="@drawable/user"
             app:civ_border_width="2dp"
             app:civ_border_color="@color/white"/>
+
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -39,8 +41,8 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatinIrComentarios"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignTop="@+id/setup_image"
             android:layout_marginLeft="24dp"
             android:layout_marginStart="24dp"
@@ -54,8 +56,8 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/imgNewChat"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignStart="@+id/floatinIrComentarios"
             android:layout_below="@+id/floatinIrComentarios"
             android:layout_marginTop="15dp"
@@ -63,11 +65,20 @@
             android:src="@drawable/ic_close_white"
             app:backgroundTint="@color/btnCrea" />
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ratingBar"
+            android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ratingBar"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
@@ -152,7 +163,13 @@
                 android:textColor="@color/black"/>
         </LinearLayout>
 
+        </RelativeLayout>
+        </ScrollView>
+
+
 
     </RelativeLayout>
+
+
 
 </LinearLayout>
