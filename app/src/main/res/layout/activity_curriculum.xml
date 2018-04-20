@@ -1,30 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_profile_doctor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:orientation="vertical">
-
-    <include layout="@layout/toolbar" />
-
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/margin_avg"
+    tools:context="com.sanus.sanus.domain.doctor_module.profile.view.ProfileFragment">
 
     <RelativeLayout
+        android:id="@+id/rlHeader"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/imgHead"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:src="@drawable/hcompleteregister"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/setup_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp"
-            android:src="@drawable/user"
-            app:civ_border_width="2dp"
-            app:civ_border_color="@color/white"/>
+            android:layout_marginTop="90dp"
+            app:civ_border_width="10dp"
+            app:civ_border_color="@color/white"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/user" />
+
+        <include layout="@layout/toolbar" />
 
 
         <RatingBar
@@ -37,27 +51,27 @@
             android:numStars="5"
             android:progressTint="@color/colorPrimaryDark"
             android:stepSize="1"
-            android:layout_marginTop="@dimen/space_small" />
+            android:layout_marginTop="5dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatinIrComentarios"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignTop="@+id/setup_image"
-            android:layout_marginLeft="24dp"
-            android:layout_marginStart="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="74dp"
             android:layout_toEndOf="@+id/setup_image"
-            android:layout_toRightOf="@+id/setup_image"
             android:clickable="true"
             android:focusable="true"
             app:backgroundTint="@color/colorPrimaryDark"
             app:srcCompat="@drawable/ic_book"
-            tools:ignore="RtlHardcoded" />
+            tools:ignore="RtlHardcoded"
+            tools:layout_width="wrap_content" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/imgNewChat"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignStart="@+id/floatinIrComentarios"
             android:layout_below="@+id/floatinIrComentarios"
             android:layout_marginTop="15dp"
@@ -65,33 +79,26 @@
             android:src="@drawable/ic_close_white"
             app:backgroundTint="@color/btnCrea" />
 
-        <ScrollView
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ratingBar"
-            android:layout_marginBottom="10dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/padding_avg"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/space_avg"
+            android:layout_marginTop="10dp"
             android:background="@drawable/btnround"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/linearLayout2">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal"
                 android:layout_marginTop="8dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="@dimen/activity_horizontal_margin">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -103,9 +110,9 @@
                     android:id="@+id/tvEspecialidad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="3dp"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginBottom="@dimen/padding_min"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:text="@string/especialidad"
                     android:textColor="@color/black"/>
 
@@ -114,9 +121,10 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal"
                 android:layout_marginTop="8dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/padding_small">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -130,10 +138,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
                     android:layout_marginStart="60dp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:text="@string/cedula"
                     android:textColor="@color/black"/>
+
             </LinearLayout>
 
 
@@ -143,33 +153,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/space_small"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/space_avg"
             android:background="@drawable/btnround"
             android:orientation="vertical"
-            android:layout_below="@+id/linearLayout2">
-
+            android:layout_below="@+id/linearLayout2"
+            android:layout_marginStart="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_vertical_margin">
             <TextView
                 android:id="@+id/tvCv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/padding_avg"
+                android:layout_marginLeft="@dimen/padding_avg"
+                android:layout_marginRight="@dimen/padding_avg"
                 android:layout_marginTop="16dp"
                 android:text="@string/cv"
                 android:textColor="@color/black"/>
         </LinearLayout>
 
-        </RelativeLayout>
-        </ScrollView>
-
-
-
     </RelativeLayout>
 
-
-
-</LinearLayout>
+</ScrollView>
