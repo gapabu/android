@@ -75,7 +75,7 @@ public class SelectHourInteractorImpl implements SelectHourInteractor {
                                                 if (!itemHour.equals(itemSchedules)){
                                                     busquedaDoctors.add(new SelectHour(itemHour));
                                                     presenter.setDataAdapter(busquedaDoctors);
-                                                }else {
+                                                }if (itemHour.equals(itemSchedules)){
                                                     busquedaDoctors.clear();
                                                     presenter.setDataAdapter(busquedaDoctors);
                                                 }
