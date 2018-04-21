@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.comments.view.CommentsActivity;
+import com.sanus.sanus.domain.doctor_module.edit_curriculum.view.EditCurriculumActivity;
 import com.sanus.sanus.domain.doctor_module.profile.presenter.ProfileDoctorPresenter;
 import com.sanus.sanus.domain.doctor_module.profile.presenter.ProfileDoctorPresenterImpl;
 import com.squareup.picasso.Picasso;
@@ -35,7 +36,7 @@ public class ProfileFragment extends Fragment implements ProfileFragmentView  {
     private String image;
     private String idDoct;
     private RatingBar ratingBar;
-    FloatingActionButton goComments;
+    FloatingActionButton goComments, editCurriculum;
 
     @Nullable
     @Override
@@ -65,11 +66,19 @@ public class ProfileFragment extends Fragment implements ProfileFragmentView  {
         ratingBar = view.findViewById(R.id.ratingBar);
         ratingBar.getRating();
         goComments = view.findViewById(R.id.floatinIrComentarios);
+        editCurriculum = view.findViewById(R.id.editCurriculum);
 
         goComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goComments();
+            }
+        });
+
+        editCurriculum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goEditCurriculum();
             }
         });
     }
@@ -95,5 +104,11 @@ public class ProfileFragment extends Fragment implements ProfileFragmentView  {
     @Override
     public void showPhoto(Uri uri) {
         Picasso.get().load(uri.toString()).placeholder(R.drawable.user).into(setupImage);
+    }
+
+    @Override
+    public void goEditCurriculum() {
+        Intent intent = new Intent(getContext(), EditCurriculumActivity.class);
+        startActivity(intent);
     }
 }

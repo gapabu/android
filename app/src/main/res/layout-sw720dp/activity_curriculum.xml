@@ -32,13 +32,14 @@
             android:layout_width="230dp"
             android:layout_height="230dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="260dp"
+            android:layout_marginTop="250dp"
             app:civ_border_width="10dp"
             app:civ_border_color="@color/white"
             android:layout_alignParentTop="true"
             android:src="@drawable/user" />
 
         <include layout="@layout/toolbar" />
+
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -77,11 +78,32 @@
             android:src="@drawable/ic_close_white"
             app:backgroundTint="@color/btnCrea" />
 
+        <LinearLayout
+            android:id="@+id/nameDoctor"
+            android:layout_below="@+id/ratingBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"
+            android:background="@drawable/btnround"
+            android:layout_marginTop="@dimen/padding_small">
+            <TextView
+                android:id="@+id/nameDocto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:padding="@dimen/padding_small"
+                android:textSize="18sp"/>
+        </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ratingBar"
+            android:layout_below="@+id/nameDoctor"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/padding_avg"
             android:layout_marginTop="10dp"
@@ -96,13 +118,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="8dp"
-                android:layout_marginStart="@dimen/activity_horizontal_margin">
+                android:padding="@dimen/padding_small">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/especialidad"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/tvEspecialidad"
@@ -112,7 +135,8 @@
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:text="@string/especialidad"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="18sp"/>
 
             </LinearLayout>
 
@@ -120,8 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:padding="@dimen/padding_small"
                 android:layout_marginBottom="@dimen/padding_small">
 
                 <TextView
@@ -129,7 +152,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:text="@string/cedula"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/tvCedula"
@@ -140,7 +164,8 @@
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:text="@string/cedula"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="18sp"/>
 
             </LinearLayout>
 
@@ -165,7 +190,8 @@
                 android:layout_marginRight="@dimen/padding_avg"
                 android:layout_marginTop="16dp"
                 android:text="@string/cv"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
         </LinearLayout>
 
     </RelativeLayout>

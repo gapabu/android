@@ -66,6 +66,17 @@
             tools:ignore="RtlHardcoded"
             tools:layout_width="wrap_content" />
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/editCurriculum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/floatinIrComentarios"
+            android:layout_below="@+id/floatinIrComentarios"
+            android:layout_marginTop="15dp"
+            android:rotation="45"
+            android:src="@drawable/ic_close_white"
+            app:backgroundTint="@color/btnCrea" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -33,7 +33,7 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
 
     private CurriculumPresenter presenter;
     private Toolbar toolbar;
-    private TextView cedula, especialidad, cv;
+    private TextView cedula, especialidad, cv, name;
     private CircleImageView setupImage;
     private String image;
     private String idDoct;
@@ -69,6 +69,7 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         cedula = findViewById(R.id.tvCedula);
         especialidad = findViewById(R.id.tvEspecialidad);
         cv = findViewById(R.id.tvCv);
+        name = findViewById(R.id.nameDocto);
         setupImage = findViewById(R.id.setup_image);
         goComent = findViewById(R.id.floatinIrComentarios);
         ratingBar = findViewById(R.id.ratingBar);
@@ -131,10 +132,11 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
                 image = documentSnapshot.getString("avatar");
 
                 presenter.showImage(image);
+                name.setText(documentSnapshot.getString("nombre").concat(" " + documentSnapshot.getString("apellido")));
 
                 setSupportActionBar(toolbar);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setTitle(documentSnapshot.getString("nombre").concat(" " + documentSnapshot.getString("apellido")));
+                getSupportActionBar().setTitle(" ");
             }
         });
     }

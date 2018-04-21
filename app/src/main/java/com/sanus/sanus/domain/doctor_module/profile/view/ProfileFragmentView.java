@@ -4,4 +4,5 @@ import android.net.Uri;
 
 public interface ProfileFragmentView {
     void showPhoto(Uri uri);
+    void goEditCurriculum();
 }

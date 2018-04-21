@@ -35,4 +35,9 @@ public class ProfileDoctorPresenterImpl implements ProfileDoctorPresenter {
     public void showPhoto(Uri uri) {
         view.showPhoto(uri);
     }
+
+    @Override
+    public void goEditCurriculum() {
+        view.goEditCurriculum();
+    }
 }
