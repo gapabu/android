@@ -1,11 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/lyContent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
     <RelativeLayout
         android:id="@+id/rlHeader"
@@ -19,53 +19,61 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imgHead"
+                android:id="@+id/imgHeader"
                 android:layout_width="match_parent"
                 android:layout_height="330dp"
                 android:layout_gravity="center_horizontal"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/app_name"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/hcitas" />
+                android:src="@drawable/hcitas"
+                android:contentDescription="@string/title_chat"/>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/lySearch"
+            android:id="@+id/lyTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/margin_15"
-            android:layout_marginEnd="80dp"
             android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="200dp"
             android:background="@drawable/btnround"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="3">
 
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center"
+                android:layout_height="50dp"
                 android:textSize="20sp"
-                android:text="@string/my_history_quotes"/>
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:text="@string/select_hour" />
         </LinearLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="290dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="300dp"
             android:orientation="horizontal">
-
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/newCita"
+                android:id="@+id/btn_skip"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:rotation="45"
-                android:src="@drawable/ic_close_white"
-                app:backgroundTint="@color/btnCrea"
-                android:layout_marginEnd="80dp"
-                android:layout_alignParentEnd="true"/>
+                android:src="@drawable/ic_arrow_white"
+                android:rotation="180"
+                app:backgroundTint="@color/btnGoogle"
+                android:layout_marginStart="80dp"/>
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btn_next"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_arrow_white"
+                app:backgroundTint="@color/colorGrey500"
+                android:layout_marginEnd="@dimen/activity_vertical_margin"
+                android:layout_alignParentEnd="true"
+                android:visibility="invisible"/>
         </RelativeLayout>
     </RelativeLayout>
 
@@ -73,9 +81,9 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="45dp"
+        android:layout_marginTop="@dimen/padding_avg"
         android:layout_marginEnd="60dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="@dimen/padding_small"/>
-
+        android:layout_marginStart="60dp">
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>
+

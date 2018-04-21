@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/lyContent"
+    android:id="@+id/lyConten"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/lyHeader"
+            android:id="@+id/lyHead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -29,6 +30,7 @@
                 app:srcCompat="@drawable/hcitas" />
         </LinearLayout>
 
+
         <LinearLayout
             android:id="@+id/lySearch"
             android:layout_width="match_parent"
@@ -41,41 +43,59 @@
             android:background="@drawable/btnround"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvTitle"
+            <EditText
+                android:id="@+id/edbuscador"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:background="@drawable/btnround"
                 android:gravity="center"
-                android:textSize="20sp"
-                android:text="@string/my_history_quotes"/>
+                android:hint="@string/search_hospital"
+                android:imeActionId="6"
+                android:imeOptions="actionUnspecified"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="20sp" />
         </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="290dp"
-            android:orientation="horizontal">
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/newCita"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rotation="45"
-                android:src="@drawable/ic_close_white"
-                app:backgroundTint="@color/btnCrea"
-                android:layout_marginEnd="80dp"
-                android:layout_alignParentEnd="true"/>
-
-        </RelativeLayout>
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="-25dp"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_close"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_close_white"
+            app:backgroundTint="@color/btnGoogle"
+            android:layout_marginStart="60dp"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_arrow_white"
+            app:backgroundTint="@color/colorGrey500"
+            android:layout_marginEnd="60dp"
+            android:layout_alignParentEnd="true"
+            style="?android:textAppearanceSmall"
+            android:clickable="false"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="45dp"
-        android:layout_marginEnd="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="@dimen/padding_small"/>
+        android:layout_marginEnd="60dp">
+    </android.support.v7.widget.RecyclerView>
+
 
 </LinearLayout>
