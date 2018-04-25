@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.applandeo.materialcalendarview.utils.DateUtils;
 import com.sanus.sanus.R;
@@ -21,6 +22,8 @@ import com.sanus.sanus.domain.select_hour.view.SelectHourActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class SelectDayActivity extends AppCompatActivity implements SelectDayView, OnDayClickListener {
@@ -31,8 +34,7 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
     private String dayMont = null;
     private FloatingActionButton next;
     String idDocument;
-    FloatingActionButton previous;
-    CalendarView calendarView;
+    int dayOfMonth, month, year, day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,20 +56,41 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         idDocument = getIntent().getStringExtra("idDocument");
         Log.d(TAG, "idHospital: " + idHospital + " " + "idDoctor: " + idDoctor + " idDocument " + idDocument);
 
-        previous = findViewById(R.id.btn_skip);
+        FloatingActionButton previous = findViewById(R.id.btn_skip);
         next = findViewById(R.id.btn_next);
         disableButton();
 
-        calendarView = findViewById(R.id.calendarView);
+        CalendarView calendarView = findViewById(R.id.calendarView);
         calendarView.showCurrentMonthPage();
         calendarView.setMinimumDate(Calendar.getInstance());
         calendarView.setDisabledDays(getDisabledDays());
 
+
+        Calendar calendar = new GregorianCalendar();
+        Date trialTime = new Date();
+        calendar.setTime(trialTime);
+
+        int year = calendar.get(Calendar.YEAR);
+        int mes = calendar.get(Calendar.MONTH);
+        int mont = mes+1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int dayt = day+1;
+        Log.d(TAG, "mes " + mont);
+
+        Calendar calendarToday = Calendar.getInstance();
+        calendarToday.set(year, mes, dayt);
+
+        try {
+            calendarView.setDate(calendarToday);
+        } catch (OutOfDateRangeException e) {
+            e.printStackTrace();
+        }
+
         calendarView.setOnDayClickListener(this);
 
         List<EventDay> events = new ArrayList<>();
-        Calendar calendar = Calendar.getInstance();
-        events.add(new EventDay(calendar, R.drawable.circle_green));
+        Calendar calendarj = Calendar.getInstance();
+        events.add(new EventDay(calendarj, R.drawable.circle_green));
         Calendar calendar2 = Calendar.getInstance();
         calendar2.add(Calendar.DAY_OF_MONTH, 5);
         events.add(new EventDay(calendar2, R.drawable.circle_red));
@@ -76,7 +99,6 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //presenter.deleteAppointment(idDocument);
                 previous();
             }
         });
@@ -156,14 +178,12 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
     @Override
     public void onDayClick(EventDay eventDay) {
         Calendar calendar = eventDay.getCalendar();
-        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-        int month = calendar.get(Calendar.MONTH);
-        int year = calendar.get(Calendar.YEAR);
-        int day = calendar.get(Calendar.DAY_OF_WEEK);
-
+         dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+         month = calendar.get(Calendar.MONTH);
+         year = calendar.get(Calendar.YEAR);
+         day = calendar.get(Calendar.DAY_OF_WEEK);
         getMonthOfYear(month);
         getDayWeek(day);
-
         fecha = dayOfMonth + " " + monthYear + " " + year;
         Log.d(TAG, " " + fecha);
         enableButton();
@@ -234,6 +254,5 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
                 break;
         }
     }
-
 
 }

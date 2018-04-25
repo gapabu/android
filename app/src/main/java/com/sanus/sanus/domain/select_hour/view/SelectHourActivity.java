@@ -35,7 +35,7 @@ public class SelectHourActivity extends AppCompatActivity implements SelectHourV
     private FloatingActionButton next;
     FloatingActionButton previous;
     SelectHourAdapter adapter;
-    private String idFecha, idHora;
+    String idFecha, idHora;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -16,13 +16,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,7 +27,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.sanus.sanus.domain.account.complete.view.CompleteRegisterActivity;
-import com.sanus.sanus.domain.doctor_module.edit_curriculum.view.EditCurriculumActivity;
 import com.sanus.sanus.domain.splash.view.SplashActivity;
 import com.sanus.sanus.utils.alert.CallbackAlert;
 import com.sanus.sanus.domain.configuration.presenter.AjustesPresenter;
@@ -52,7 +48,6 @@ public class AjustesFragment extends Fragment implements AjustesView, CallbackAl
     private CircleImageView setupImage;
     private Button activo, inactivo;
     private String idUser, image;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Nullable
     @Override

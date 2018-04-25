@@ -97,8 +97,6 @@ public class SearchInteractorImpl implements SearchInteractor{
         storageReference.child(idImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                //presenter.showPhoto(uri, context,image);
-                //Picasso.with(context).load(uri.toString()).placeholder(R.drawable.user).into(holder.avatar);
                 GlideApp.with(context).load(uri.toString()).placeholder(R.drawable.user).into(image);
             }
         }).addOnFailureListener(new OnFailureListener() {
