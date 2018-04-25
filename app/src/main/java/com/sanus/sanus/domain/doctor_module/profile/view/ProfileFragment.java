@@ -36,7 +36,6 @@ public class ProfileFragment extends Fragment implements ProfileFragmentView  {
     private String image;
     private String idDoct;
     private RatingBar ratingBar;
-    FloatingActionButton goComments, editCurriculum;
 
     @Nullable
     @Override
@@ -65,8 +64,8 @@ public class ProfileFragment extends Fragment implements ProfileFragmentView  {
         setupImage = view.findViewById(R.id.setup_image);
         ratingBar = view.findViewById(R.id.ratingBar);
         ratingBar.getRating();
-        goComments = view.findViewById(R.id.floatinIrComentarios);
-        editCurriculum = view.findViewById(R.id.editCurriculum);
+        FloatingActionButton goComments = view.findViewById(R.id.floatinIrComentarios);
+        FloatingActionButton editCurriculum = view.findViewById(R.id.editCurriculum);
 
         goComments.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -65,7 +65,6 @@ public class ProfileDoctorInteractorImpl implements ProfileDoctorInteractor {
         storageReference.child(idImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                //GlideApp.with(context).load(uri.toString()).placeholder(R.drawable.user).into(image);
                 presenter.showPhoto(uri);
 
             }

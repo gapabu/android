@@ -60,11 +60,7 @@ public class SplashInteractorImpl implements SplashInteractor {
         presenter.goLogin();
 
     }
-    // };
 
-    //    Timer timer = new Timer();
-    //  timer.schedule(timerTask, SPLASH_SCREEN_DELETE);
-    // }
 
     @Override
     public void acceptAlert() {

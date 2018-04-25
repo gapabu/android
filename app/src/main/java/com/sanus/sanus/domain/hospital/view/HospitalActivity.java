@@ -28,8 +28,9 @@ import java.util.List;
 public class HospitalActivity extends AppCompatActivity implements HospitalView, CallbackAlert {
     private HospitalPresenter presenter;
     private RecyclerView recyclerView;
+    private FloatingActionButton next;
     HospitalAdapter adapter;
-    FloatingActionButton close, next;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class HospitalActivity extends AppCompatActivity implements HospitalView,
         //final SharedPreferences preferences = getSharedPreferences("hospital", Context.MODE_PRIVATE);
 
         next = findViewById(R.id.btn_next);
-        close = findViewById(R.id.btn_close);
+        FloatingActionButton close = findViewById(R.id.btn_close);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);

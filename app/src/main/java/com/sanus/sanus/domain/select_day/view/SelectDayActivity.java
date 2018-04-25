@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.applandeo.materialcalendarview.utils.DateUtils;
 import com.sanus.sanus.R;
@@ -21,6 +22,8 @@ import com.sanus.sanus.domain.select_hour.view.SelectHourActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class SelectDayActivity extends AppCompatActivity implements SelectDayView, OnDayClickListener {
@@ -31,8 +34,6 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
     private String dayMont = null;
     private FloatingActionButton next;
     String idDocument;
-    FloatingActionButton previous;
-    CalendarView calendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,19 +55,38 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         idDocument = getIntent().getStringExtra("idDocument");
         Log.d(TAG, "idHospital: " + idHospital + " " + "idDoctor: " + idDoctor + " idDocument " + idDocument);
 
-        previous = findViewById(R.id.btn_skip);
+        FloatingActionButton previous = findViewById(R.id.btn_skip);
         next = findViewById(R.id.btn_next);
         disableButton();
 
-        calendarView = findViewById(R.id.calendarView);
-        calendarView.showCurrentMonthPage();
-        calendarView.setMinimumDate(Calendar.getInstance());
+        CalendarView calendarView = findViewById(R.id.calendarView);
+        //calendarView.showCurrentMonthPage();
+        //calendarView.setMinimumDate(Calendar.getInstance());
         calendarView.setDisabledDays(getDisabledDays());
+
+        Calendar calendar = new GregorianCalendar();
+        Date trialTime = new Date();
+        calendar.setTime(trialTime);
+
+        int year = calendar.get(Calendar.YEAR);
+        int mes = calendar.get(Calendar.MONTH);
+        int mont = mes;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        Log.d(TAG, "mes " + mont);
+
+        Calendar calendarToday = Calendar.getInstance();
+        calendarToday.set(year, 4, day);
+
+        try {
+            calendarView.setDate(calendarToday);
+        } catch (OutOfDateRangeException e) {
+            e.printStackTrace();
+        }
 
         calendarView.setOnDayClickListener(this);
 
         List<EventDay> events = new ArrayList<>();
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendarJ = Calendar.getInstance();
         events.add(new EventDay(calendar, R.drawable.circle_green));
         Calendar calendar2 = Calendar.getInstance();
         calendar2.add(Calendar.DAY_OF_MONTH, 5);

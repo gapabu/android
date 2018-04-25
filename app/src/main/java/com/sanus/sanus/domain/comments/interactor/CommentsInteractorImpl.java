@@ -33,12 +33,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CommentsInteractorImpl implements CommentsInteractor {
     private final String TAG = this.getClass().getSimpleName();
-    private CommentsPresenter presenter;
-    private String idUser;
     private CommentEntity commentEntity = new CommentEntity();
     private DoctorEntity doctorEntity = new DoctorEntity();
+    private CommentsPresenter presenter;
+    private String idUser;
     private String hour;
     private String date;
+
+
 
     private List<CommentsDoctor> commentsDoctorList = new ArrayList<>();
 

@@ -26,7 +26,6 @@ public class AjustesInteractorImpl implements AjustesInteractor {
     private String idUser;
     private UserEntity userEntity = new UserEntity();
 
-
     public AjustesInteractorImpl(AjustesPresenter presenter) {
         this.presenter = presenter;
     }

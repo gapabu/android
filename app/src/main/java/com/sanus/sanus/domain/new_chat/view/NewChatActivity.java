@@ -46,9 +46,6 @@ public class NewChatActivity extends AppCompatActivity implements NewChatView{
     private int TEXT_LINES = 1;
     private FloatingActionButton sendMessage;
 
-    /*List<Messages> commentsDoctorList;
-    MessagesAdapter commentsDoctorAdapter = new MessagesAdapter(this, commentsDoctorList, presenter);*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

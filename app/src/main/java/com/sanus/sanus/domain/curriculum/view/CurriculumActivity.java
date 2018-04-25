@@ -39,8 +39,6 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
     private String idDoct;
     private String idUser;
     private RatingBar ratingBar;
-    FloatingActionButton newChat;
-    ImageView goComent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +69,11 @@ public class CurriculumActivity extends AppCompatActivity implements CurriculumV
         cv = findViewById(R.id.tvCv);
         name = findViewById(R.id.nameDocto);
         setupImage = findViewById(R.id.setup_image);
-        goComent = findViewById(R.id.floatinIrComentarios);
+        FloatingActionButton goComent = findViewById(R.id.floatinIrComentarios);
         ratingBar = findViewById(R.id.ratingBar);
         ratingBar.getRating();
 
-        newChat = findViewById(R.id.imgNewChat);
+        FloatingActionButton newChat = findViewById(R.id.imgNewChat);
 
         newChat.setOnClickListener(new View.OnClickListener() {
             @Override
