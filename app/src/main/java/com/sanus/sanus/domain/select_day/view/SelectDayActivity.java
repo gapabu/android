@@ -34,6 +34,7 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
     private String dayMont = null;
     private FloatingActionButton next;
     String idDocument;
+    int dayOfMonth, month, year, day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +61,10 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         disableButton();
 
         CalendarView calendarView = findViewById(R.id.calendarView);
-        //calendarView.showCurrentMonthPage();
-        //calendarView.setMinimumDate(Calendar.getInstance());
+        calendarView.showCurrentMonthPage();
+        calendarView.setMinimumDate(Calendar.getInstance());
         calendarView.setDisabledDays(getDisabledDays());
+
 
         Calendar calendar = new GregorianCalendar();
         Date trialTime = new Date();
@@ -70,12 +72,13 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
 
         int year = calendar.get(Calendar.YEAR);
         int mes = calendar.get(Calendar.MONTH);
-        int mont = mes;
+        int mont = mes+1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int dayt = day+1;
         Log.d(TAG, "mes " + mont);
 
         Calendar calendarToday = Calendar.getInstance();
-        calendarToday.set(year, 4, day);
+        calendarToday.set(year, mes, dayt);
 
         try {
             calendarView.setDate(calendarToday);
@@ -86,8 +89,8 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         calendarView.setOnDayClickListener(this);
 
         List<EventDay> events = new ArrayList<>();
-        Calendar calendarJ = Calendar.getInstance();
-        events.add(new EventDay(calendar, R.drawable.circle_green));
+        Calendar calendarj = Calendar.getInstance();
+        events.add(new EventDay(calendarj, R.drawable.circle_green));
         Calendar calendar2 = Calendar.getInstance();
         calendar2.add(Calendar.DAY_OF_MONTH, 5);
         events.add(new EventDay(calendar2, R.drawable.circle_red));
@@ -96,7 +99,6 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //presenter.deleteAppointment(idDocument);
                 previous();
             }
         });
@@ -194,14 +196,12 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
     @Override
     public void onDayClick(EventDay eventDay) {
         Calendar calendar = eventDay.getCalendar();
-        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-        int month = calendar.get(Calendar.MONTH);
-        int year = calendar.get(Calendar.YEAR);
-        int day = calendar.get(Calendar.DAY_OF_WEEK);
-
+         dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+         month = calendar.get(Calendar.MONTH);
+         year = calendar.get(Calendar.YEAR);
+         day = calendar.get(Calendar.DAY_OF_WEEK);
         getMonthOfYear(month);
         getDayWeek(day);
-
         fecha = dayOfMonth + " " + monthYear + " " + year;
         Log.d(TAG, " " + fecha);
         enableButton();
@@ -272,6 +272,5 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
                 break;
         }
     }
-
 
 }
