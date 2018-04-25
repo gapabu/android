@@ -94,47 +94,29 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         Calendar firstDisabled = DateUtils.getCalendar();
         firstDisabled.add(Calendar.DAY_OF_WEEK, 1);
 
-        //semana
+        //dias
         Calendar secondDisabled = DateUtils.getCalendar();
-        secondDisabled.add(Calendar.DAY_OF_WEEK_IN_MONTH, 1);
+        secondDisabled.add(Calendar.DAY_OF_MONTH, 8);
 
-        //dias
-        Calendar thirdDisabled = DateUtils.getCalendar();
-        thirdDisabled.add(Calendar.DAY_OF_MONTH, 8);
+        Calendar tres = DateUtils.getCalendar();
+        tres.add(Calendar.DAY_OF_WEEK, 15);
 
-        //dias
-        Calendar four = DateUtils.getCalendar();
-        four.add(Calendar.DATE, 2);
+        Calendar cuatro = DateUtils.getCalendar();
+        cuatro.add(Calendar.DAY_OF_WEEK, 22);
 
-        //mes
-        Calendar five = DateUtils.getCalendar();
-        five.add(Calendar.MONTH, 1);
+        Calendar cinco = DateUtils.getCalendar();
+        cinco.add(Calendar.DAY_OF_WEEK, 29);
 
-        //semana
-        Calendar six = DateUtils.getCalendar();
-        six.add(Calendar.WEEK_OF_MONTH, 1);
-
-        //semana
-        Calendar seven = DateUtils.getCalendar();
-        seven.add(Calendar.MAY, 1);
-
-        //dias
-        Calendar eight = DateUtils.getCalendar();
-        eight.add(Calendar.SATURDAY, 5);
-
-        //mes
-        Calendar nine = DateUtils.getCalendar();
-        nine.add(Calendar.LONG, 1);
-
-        Calendar ten = DateUtils.getCalendar();//nada
-        ten.add(Calendar.ALL_STYLES, 1);
+        Calendar seis = DateUtils.getCalendar();
+        seis.add(Calendar.DAY_OF_WEEK, 36);
 
         List<Calendar> calendars = new ArrayList<>();
-        //calendars.add(firstDisabled);
-        //calendars.add(secondDisabled);
-        //calendars.add(thirdDisabled);
-        //calendars.add(four);
-        calendars.add(ten);
+        calendars.add(firstDisabled);
+        calendars.add(secondDisabled);
+        calendars.add(tres);
+        calendars.add(cuatro);
+        calendars.add(cinco);
+        calendars.add(seis);
 
         return calendars;
     }

@@ -94,7 +94,6 @@ public class NewChatInteractorImpl implements NewChatInteractor{
                 Log.d(TAG, "Data:  " + mensages);
             }
         });
-
     }
 
     @Override

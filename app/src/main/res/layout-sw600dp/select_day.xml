@@ -97,6 +97,7 @@
                 app:daysLabelsColor="@color/black"
                 app:disabledDaysLabelsColor="@color/btnGoogle"
                 app:datePicker="true"
+                app:type="one_day_picker"
                 app:previousButtonSrc="@drawable/arrow_previous"
                 app:forwardButtonSrc="@drawable/arrow_next"/>
 
@@ -164,9 +165,6 @@
                     android:text="@string/dia_seleccionado" />
             </RelativeLayout>
         </RelativeLayout>
-
-
-
 
     </ScrollView>
 </LinearLayout>
