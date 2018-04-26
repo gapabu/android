@@ -1,4 +1,5 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_ajustes"
@@ -28,13 +29,13 @@
                 android:contentDescription="@string/app_name"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/hajustes" />
-
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="280dp"
+            android:layout_below="@+id/lyHeader"
+            android:layout_marginTop="-45dp"
             android:paddingEnd="80dp"
             android:paddingStart="80dp">
 
@@ -44,11 +45,11 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/btnround"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/padding_small">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/avatar"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/user"
                     app:civ_border_width="2dp"
@@ -59,8 +60,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:textSize="20sp"
                     android:text="@string/app_name"
-                    android:textSize="25sp"
                     android:textColor="@color/black"/>
             </LinearLayout>
 
@@ -75,12 +76,12 @@
                 android:padding="@dimen/padding_small">
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="35dp"
                     android:text="@string/editar_perfil"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="25sp"/>
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
             </LinearLayout>
 
             <LinearLayout
@@ -94,10 +95,9 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="35dp"
                     android:orientation="horizontal"
-                    tools:ignore="UselessParent"
-                    android:padding="@dimen/margin_avg">
+                    tools:ignore="UselessParent">
 
                     <Button
                         android:id="@+id/btnActivo"
@@ -108,7 +108,7 @@
                         android:background="@android:color/black"
                         android:text="@string/activo"
                         android:textColor="@color/white"
-                        android:textSize="30sp"/>
+                        android:textSize="20sp"/>
 
                     <Button
                         android:id="@+id/btnInactivo"
@@ -118,7 +118,7 @@
                         android:layout_weight="50"
                         android:background="@color/white"
                         android:text="@string/inactivo"
-                        android:textSize="30sp"/>
+                        android:textSize="20sp"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -131,22 +131,22 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/btnround"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/padding_small">
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/ic_cerrar" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/logout_text"
-                    android:textSize="25sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="20sp"/>
             </LinearLayout>
 
         </RelativeLayout>
