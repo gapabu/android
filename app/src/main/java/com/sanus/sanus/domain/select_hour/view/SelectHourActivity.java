@@ -3,18 +3,12 @@ package com.sanus.sanus.domain.select_hour.view;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.sanus.sanus.R;
 import com.sanus.sanus.domain.resume_new_cita.view.ResumeNewCitaActivity;
 import com.sanus.sanus.domain.select_day.view.SelectDayActivity;
@@ -22,10 +16,7 @@ import com.sanus.sanus.domain.select_hour.adapter.SelectHourAdapter;
 import com.sanus.sanus.domain.select_hour.data.SelectHour;
 import com.sanus.sanus.domain.select_hour.presenter.SelectHourPresenter;
 import com.sanus.sanus.domain.select_hour.presenter.SelectHourPresenterImpl;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SelectHourActivity extends AppCompatActivity implements SelectHourView{
     private SelectHourPresenter presenter;

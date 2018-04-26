@@ -190,6 +190,7 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         Intent intent = new Intent(SelectDayActivity.this, SelectDoctorActivity.class);
         intent.putExtra("idHospital", idHospital);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        startActivity(intent);
         finish();
     }
 

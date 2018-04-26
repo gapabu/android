@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import com.sanus.sanus.R;
@@ -18,6 +19,7 @@ import com.sanus.sanus.domain.select_doctor.adapter.SelectDoctorAdapter;
 import com.sanus.sanus.domain.select_doctor.data.SelectDoctor;
 import com.sanus.sanus.domain.select_doctor.presenter.SelectDoctorPresenter;
 import com.sanus.sanus.domain.select_doctor.presenter.SelectDoctorPresenterImpl;
+import com.sanus.sanus.utils.keyboard.KeyboardUtil;
 
 import java.util.List;
 
@@ -124,6 +126,12 @@ public class SelectDoctorActivity extends AppCompatActivity implements SelectDoc
         startActivity(new Intent(SelectDoctorActivity.this, HospitalActivity.class));
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        KeyboardUtil.hide(this);
+        return true;
     }
 
 }

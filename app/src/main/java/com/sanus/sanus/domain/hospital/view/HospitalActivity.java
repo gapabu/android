@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
@@ -22,6 +23,7 @@ import com.sanus.sanus.domain.main.view.MainActivity;
 import com.sanus.sanus.domain.select_doctor.view.SelectDoctorActivity;
 import com.sanus.sanus.utils.alert.AlertUtils;
 import com.sanus.sanus.utils.alert.CallbackAlert;
+import com.sanus.sanus.utils.keyboard.KeyboardUtil;
 
 import java.util.List;
 
@@ -121,11 +123,6 @@ public class HospitalActivity extends AppCompatActivity implements HospitalView,
         intent.putExtra("idHospital", value);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         startActivity(intent);
-
-        /*SharedPreferences preferences = getSharedPreferences("hospital", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("idHospital", value);
-        editor.clear();*/
     }
 
     @Override
@@ -142,8 +139,12 @@ public class HospitalActivity extends AppCompatActivity implements HospitalView,
     }
 
     @Override
-    public void cancelAlert() {
+    public void cancelAlert() {}
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        KeyboardUtil.hide(this);
+        return true;
     }
 
     private void showAlertCancel() {
