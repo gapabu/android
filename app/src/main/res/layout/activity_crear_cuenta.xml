@@ -1,82 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lyContent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_customer"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:id="@+id/rlHeader"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/creacuenta"
-        android:contentDescription="@string/app_name" />
-
-    <LinearLayout
-        android:id="@+id/email_login_form"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingEnd="40dp"
-        android:paddingStart="40dp"
-        android:paddingTop="20dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/action_crea_cuenta"
-            android:textColor="@android:color/background_dark"
-            android:textSize="30sp" />
+        tools:ignore="UselessParent">
 
         <LinearLayout
+            android:id="@+id/lyHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <AutoCompleteTextView
-                android:id="@+id/edCorreoE"
+            <ImageView
+                android:id="@+id/imgHeader"
                 android:layout_width="match_parent"
-                android:layout_height="43dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/btnround"
-                android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:paddingEnd="15dp"
-                android:paddingStart="15dp"
-                android:singleLine="true" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitXY"
+                android:src="@drawable/creacuenta" />
+        </LinearLayout>
+
+        <include layout="@layout/toolbar" />
+
+        <LinearLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="40dp"
+            android:paddingStart="40dp"
+            android:paddingTop="25dp"
+            android:layout_below="@+id/lyHeader">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/action_crea_cuenta"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/btnround"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/edContrasenia"
-                    android:layout_width="0dp"
+                <AutoCompleteTextView
+                    android:id="@+id/edCorreoE"
+                    android:layout_width="match_parent"
                     android:layout_height="43dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btnsquare_no_line"
-                    android:hint="@string/prompt_password"
-                    android:imeActionId="6"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="textPassword"
-                    android:labelFor="@id/edContrasenia"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/btnround"
+                    android:hint="@string/prompt_email"
+                    android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:paddingEnd="15dp"
                     android:paddingStart="15dp"
                     android:singleLine="true" />
 
-                <TextView
-                    android:id="@+id/showPassword"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="7dp"
-                    android:textColor="@color/btnfacebook"
-                    android:text="@string/show_password" />
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/btnround"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edContrasenia"
+                        android:layout_width="0dp"
+                        android:layout_height="43dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btnsquare_no_line"
+                        android:hint="@string/prompt_password"
+                        android:imeActionId="6"
+                        android:imeOptions="actionUnspecified"
+                        android:inputType="textPassword"
+                        android:labelFor="@id/edContrasenia"
+                        android:maxLines="1"
+                        android:paddingEnd="15dp"
+                        android:paddingStart="15dp"
+                        android:singleLine="true" />
+
+                    <TextView
+                        android:id="@+id/showPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="7dp"
+                        android:textColor="@color/btnfacebook"
+                        android:text="@string/show_password" />
+                </LinearLayout>
             </LinearLayout>
 
             <Button
@@ -91,8 +115,8 @@
                 android:enabled="false"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold" />
-
         </LinearLayout>
-    </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -29,12 +29,15 @@ import java.util.List;
 public class SelectDayActivity extends AppCompatActivity implements SelectDayView, OnDayClickListener {
     private String TAG = this.getClass().getSimpleName();
     private SelectDayPresenter presenter;
-    private String idHospital, idDoctor,fecha;
+    private String idHospital, idDoctor, fecha;
     private String monthYear = null;
     private String dayMont = null;
     private FloatingActionButton next;
+    private int month;
+    private int year;
+    private int day;
+    private CalendarView calendarView;
     String idDocument;
-    int dayOfMonth, month, year, day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,41 +63,11 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         next = findViewById(R.id.btn_next);
         disableButton();
 
-        CalendarView calendarView = findViewById(R.id.calendarView);
-        calendarView.showCurrentMonthPage();
-        calendarView.setMinimumDate(Calendar.getInstance());
-        calendarView.setDisabledDays(getDisabledDays());
-
-
-        Calendar calendar = new GregorianCalendar();
-        Date trialTime = new Date();
-        calendar.setTime(trialTime);
-
-        int year = calendar.get(Calendar.YEAR);
-        int mes = calendar.get(Calendar.MONTH);
-        int mont = mes+1;
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int dayt = day+1;
-        Log.d(TAG, "mes " + mont);
-
-        Calendar calendarToday = Calendar.getInstance();
-        calendarToday.set(year, mes, dayt);
-
-        try {
-            calendarView.setDate(calendarToday);
-        } catch (OutOfDateRangeException e) {
-            e.printStackTrace();
-        }
-
+        calendarView = findViewById(R.id.calendarView);
+        setToday();
         calendarView.setOnDayClickListener(this);
-
-        List<EventDay> events = new ArrayList<>();
-        Calendar calendarj = Calendar.getInstance();
-        events.add(new EventDay(calendarj, R.drawable.circle_green));
-        Calendar calendar2 = Calendar.getInstance();
-        calendar2.add(Calendar.DAY_OF_MONTH, 5);
-        events.add(new EventDay(calendar2, R.drawable.circle_red));
-        calendarView.setEvents(events);
+        calendarView.setDisabledDays(getDisabledDays());
+        setEventCalendar();
 
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,26 +85,18 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
 
     @SuppressLint("WrongConstant")
     private List<Calendar> getDisabledDays() {
-        //DIA
         Calendar firstDisabled = DateUtils.getCalendar();
-        firstDisabled.add(Calendar.DAY_OF_WEEK, 1);
-
-        //dias
+        firstDisabled.add(Calendar.DAY_OF_WEEK, 2);
         Calendar secondDisabled = DateUtils.getCalendar();
         secondDisabled.add(Calendar.DAY_OF_MONTH, 8);
-
         Calendar tres = DateUtils.getCalendar();
         tres.add(Calendar.DAY_OF_WEEK, 15);
-
         Calendar cuatro = DateUtils.getCalendar();
         cuatro.add(Calendar.DAY_OF_WEEK, 22);
-
         Calendar cinco = DateUtils.getCalendar();
         cinco.add(Calendar.DAY_OF_WEEK, 29);
-
         Calendar seis = DateUtils.getCalendar();
         seis.add(Calendar.DAY_OF_WEEK, 36);
-
         List<Calendar> calendars = new ArrayList<>();
         calendars.add(firstDisabled);
         calendars.add(secondDisabled);
@@ -139,7 +104,6 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         calendars.add(cuatro);
         calendars.add(cinco);
         calendars.add(seis);
-
         return calendars;
     }
 
@@ -172,16 +136,17 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
         Intent intent = new Intent(SelectDayActivity.this, SelectDoctorActivity.class);
         intent.putExtra("idHospital", idHospital);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        startActivity(intent);
         finish();
     }
 
     @Override
     public void onDayClick(EventDay eventDay) {
         Calendar calendar = eventDay.getCalendar();
-         dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-         month = calendar.get(Calendar.MONTH);
-         year = calendar.get(Calendar.YEAR);
-         day = calendar.get(Calendar.DAY_OF_WEEK);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        month = calendar.get(Calendar.MONTH);
+        year = calendar.get(Calendar.YEAR);
+        day = calendar.get(Calendar.DAY_OF_WEEK);
         getMonthOfYear(month);
         getDayWeek(day);
         fecha = dayOfMonth + " " + monthYear + " " + year;
@@ -253,6 +218,36 @@ public class SelectDayActivity extends AppCompatActivity implements SelectDayVie
                 dayMont = (getResources().getString(R.string.calendar_saturday));
                 break;
         }
+    }
+    public void setToday(){
+        calendarView.showCurrentMonthPage();
+        calendarView.setMinimumDate(Calendar.getInstance());
+
+        Calendar calendar = new GregorianCalendar();
+        Date trialTime = new Date();
+        calendar.setTime(trialTime);
+
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        int dayt = day + 1;
+
+        Calendar calendarToday = Calendar.getInstance();
+        calendarToday.set(year, month, dayt);
+        try {
+            calendarView.setDate(calendarToday);
+        } catch (OutOfDateRangeException e) {
+            e.printStackTrace();
+        }
+    }
+    public void setEventCalendar(){
+        List<EventDay> events = new ArrayList<>();
+        Calendar calendarj = Calendar.getInstance();
+        events.add(new EventDay(calendarj, R.drawable.circle_green));
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.add(Calendar.DAY_OF_MONTH, 5);
+        events.add(new EventDay(calendar2, R.drawable.circle_red));
+        calendarView.setEvents(events);
     }
 
 }
