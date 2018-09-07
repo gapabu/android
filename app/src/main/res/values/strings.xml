@@ -10,6 +10,8 @@
     <string name="title_foro">Foro</string>
     <string name="title_ajustes">Ajustes</string>
     <string name="title_perfil">Mi perfil</string>
+    <string name="title_hospitales">Hospitales</string>
+    <string name="title_Doctores">Doctores</string>
     <string name="serch_speciality">Busca por especialidad</string>
     <string name="my_history_quotes">Mi historial de citas</string>
     <string name="bienvenido">Bienvenido</string>
@@ -25,6 +27,7 @@
     <string name="button_exit">Salir</string>
     <string name="button_continue">Continuar</string>
     <string name="button_save">Guardar</string>
+    <string name="button_add_cita">Agregar cita</string>
     <string name="gender_male">Masculino</string>
     <string name="gender_female">Femenino</string>
     <string name="age_select">Selecciona una edad</string>

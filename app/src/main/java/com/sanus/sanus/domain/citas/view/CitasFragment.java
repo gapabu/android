@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.sanus.sanus.domain.citas.adapter.CitasAdapter;
 import com.sanus.sanus.domain.citas.data.Citas;
@@ -30,7 +31,7 @@ public class CitasFragment extends Fragment implements CitasView {
     private CitasPresenter presenter;
     private RecyclerView recyclerView;
     public static String IDENTIFIER = "CITAS_FRAGMENT";
-    FloatingActionButton newCita;
+    Button newCita;
 
     @Nullable
     @Override

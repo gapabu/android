@@ -19,32 +19,30 @@
         <ImageView
             android:id="@+id/imgHead"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="185dp"
             android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"
             android:contentDescription="@string/app_name"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/hcitas" />
 
-    <LinearLayout
-        android:id="@+id/lySearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/margin_15"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/btnround"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvTitle"
+        <LinearLayout
+            android:id="@+id/lyTitulo"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:text="@string/my_history_quotes"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="150dp"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="@string/my_history_quotes"
+                android:textColor="@color/white" />
+        </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
